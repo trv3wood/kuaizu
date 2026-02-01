@@ -3,9 +3,7 @@
     "pages/home/home",
     "pages/talent/talent",
     "pages/publish/publish",
-    "pages/profile/profile",
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/profile/profile"
   ],
   "window": {
     "navigationBarTextStyle": "black",

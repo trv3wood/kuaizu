@@ -2,7 +2,6 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "noImplicitAny": true,
-    "module": "CommonJS",
     "target": "ES2020",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
@@ -24,7 +23,10 @@
     "paths": {
       "@vant/weapp/*": ["./miniprogram/node_modules/@vant/weapp/dist/*"]
     },
-    "lib": ["ES6"]
+    "lib": ["ES6"],
+    "module": "ESNext", 
+    "moduleResolution": "Bundler",
+    "noUncheckedIndexedAccess": true
   },
   "include": [
     "./**/*.ts"
