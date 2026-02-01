@@ -1,0 +1,48 @@
+<!-- pages/login/login.wxml -->
+<view class="login-container">
+    <!-- 顶部装饰 -->
+    <view class="login-header">
+        <view class="logo-wrapper">
+            <view class="logo-circle">
+                <text class="logo-text">快组</text>
+            </view>
+        </view>
+        <text class="app-name">快组校园</text>
+        <text class="app-slogan">大学生组队与人才匹配平台</text>
+    </view>
+    <!-- 中间内容区 -->
+    <view class="login-content">
+        <view class="feature-list">
+            <view class="feature-item">
+                <van-icon name="friends-o" size="24px" color="#667eea" />
+                <text class="feature-text">发现优秀人才</text>
+            </view>
+            <view class="feature-item">
+                <van-icon name="records-o" size="24px" color="#667eea" />
+                <text class="feature-text">快速组建团队</text>
+            </view>
+            <view class="feature-item">
+                <van-icon name="star-o" size="24px" color="#667eea" />
+                <text class="feature-text">展示个人技能</text>
+            </view>
+        </view>
+    </view>
+    <!-- 底部登录区 -->
+    <view class="login-footer">
+        <button class="login-btn wechat-btn" loading="{{loading}}" disabled="{{loading}}" bindtap="handleWechatLogin">
+            <van-icon wx:if="{{!loading}}" name="wechat" size="20px" color="#fff" />
+            <text class="btn-text">{{loading ? '登录中...' : '微信一键登录'}}</text>
+        </button>
+        <view class="skip-link" bindtap="handleSkip">
+            <text>暂不登录，先看看</text>
+        </view>
+        <view class="agreement">
+            <text class="agreement-text">
+                登录即表示同意
+                <text class="link">《用户协议》</text>
+                和
+                <text class="link">《隐私政策》</text>
+            </text>
+        </view>
+    </view>
+</view>

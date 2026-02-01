@@ -1,9 +1,13 @@
-import api from "./api/index"
-
 // app.ts
+import { userStore } from './stores/index'
+
 App<IAppOption>({
   globalData: {},
   async onLaunch() {
-    console.log(await api.user.getCurrentUser())
+    // 初始化用户状态
+    await userStore.init()
+    if (!userStore.isLoggedIn) {
+      wx.navigateTo({ url: "/pages/login/login"})
+    }
   },
 })

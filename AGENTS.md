@@ -32,3 +32,21 @@
 
 ## shell
 using Powershell
+
+## 测试阶段
+默认为id=1的测试用户
+
+## 依赖
+```
+  "dependencies": {
+    "@vant/weapp": "^1.11.7", // UI库！
+    "miniprogram-request": "^5.3.0",
+    "mobx-miniprogram": "^6.12.3",
+    "mobx-miniprogram-bindings": "^5.1.1"
+  },
+  "devDependencies": {
+    "miniprogram-api-typings": "^4.1.3",
+    "openapi-typescript": "^7.10.1",
+    "typescript": "^5.9.3"
+  }
+```

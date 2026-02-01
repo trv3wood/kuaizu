@@ -1,5 +1,5 @@
 // pages/profile/profile.ts
-Component({
+Page({
     options: {
         styleIsolation: 'apply-shared'
     },
@@ -9,13 +9,11 @@ Component({
     methods: {
 
     },
-    pageLifetimes: {
-        show() {
-            if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-                this.getTabBar().setData({
-                    active: 3
-                })
-            }
+    onShow() {
+        if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+            this.getTabBar().setData({
+                active: 3
+            })
         }
     }
 })
