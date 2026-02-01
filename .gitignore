@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+miniprogram_npm/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Build / test output
+dist/
+coverage/
+
+# WeChat DevTools (per-developer)
+project.private.config.json
