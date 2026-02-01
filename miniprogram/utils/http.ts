@@ -27,8 +27,27 @@ REQUEST.Defaults.transformSend = (options) => {
     return transformRequestSendDefault(options)
 }
 
+// 日志记录：打印请求参数
+REQUEST.Listeners.onSend.push((options) => {
+    console.log(`[HTTP/REQ] ${options.method || 'GET'} ${options.url}`, {
+        data: options.data,
+        headers: options.headers,
+        params: options.params
+    })
+})
+
+// 日志记录：打印请求结果
+REQUEST.Listeners.onResponse.push((response, options) => {
+    console.log(`[HTTP/RES] ${options.method || 'GET'} ${options.url}`, {
+        status: response.statusCode,
+        data: response.data
+    })
+})
+
 // 响应处理：处理 401 等业务错误
-REQUEST.Listeners.onRejected.push((reason, _options) => {
+REQUEST.Listeners.onRejected.push((reason, options) => {
+    console.error(`[HTTP/ERR] ${options.method || 'GET'} ${options.url}`, reason)
+
     // 检查是否为请求响应错误
     if (reason && typeof reason === 'object' && 'statusCode' in reason) {
         const res = reason as { statusCode: number; data?: any }
@@ -53,17 +72,4 @@ REQUEST.Listeners.onRejected.push((reason, _options) => {
     return Promise.reject(reason)
 })
 
-/**
- * 封装 http 对象以支持泛型调用
- * miniprogram-request 已内置 PATCH 支持 (通过 X-HTTP-Method-Override)
- */
-const http = {
-    get: <T = any>(url: string, data?: any) => REQUEST.get<T>(url, data),
-    post: <T = any>(url: string, data?: any) => REQUEST.post<T>(url, data),
-    put: <T = any>(url: string, data?: any) => REQUEST.put<T>(url, data),
-    delete: <T = any>(url: string, data?: any) => REQUEST.delete<T>(url, data),
-    patch: <T = any>(url: string, data?: any) => REQUEST.patch<T>(url, data),
-    request: <T = any>(options: any) => REQUEST.request<T>(options)
-}
-
-export default http
+export default REQUEST
