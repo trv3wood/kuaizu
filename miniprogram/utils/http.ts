@@ -36,8 +36,8 @@ REQUEST.Listeners.onRejected.push((reason, _options) => {
         // Token 失效，处理 401
         if (res.statusCode === 401) {
             wx.removeStorageSync('token')
-            // TODO: 根据需要决定是否强制跳转登录页
-            // wx.navigateTo({ url: '/pages/login/login' })
+            // 跳转登录页
+            wx.navigateTo({ url: '/pages/login/login' })
             return Promise.reject(new Error('登录已过期，请重新登录'))
         }
 
