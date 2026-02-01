@@ -1,0 +1,52 @@
+/* components/custom-tabbar/custom-tabbar.wxss */
+.custom-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+/* 中间占位区域保持透明 */
+.center-placeholder {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+/* 中间凸起按钮容器 */
+.center-button {
+  position: absolute;
+  left: 50%;
+  bottom: 20rpx;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1001;
+}
+
+/* 凸起按钮主体 */
+.center-button-inner {
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 20rpx rgba(102, 126, 234, 0.4);
+  margin-bottom: 4rpx;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.center-button-inner:active {
+  transform: scale(0.95);
+  box-shadow: 0 2rpx 10rpx rgba(102, 126, 234, 0.3);
+}
+
+/* 发布文字 */
+.center-button-text {
+  font-size: 20rpx;
+  color: #7d7e80;
+  margin-top: 2rpx;
+}

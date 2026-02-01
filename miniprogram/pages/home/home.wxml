@@ -1,0 +1,9 @@
+<!--pages/home/home.wxml-->
+<view class="page-container">
+  <view class="page-header">
+    <text class="page-title">首页</text>
+  </view>
+  <view class="page-content">
+    <text>欢迎来到快组！</text>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+<!--pages/talent/talent.wxml-->
+<view class="page-container">
+  <view class="page-header">
+    <text class="page-title">人才</text>
+  </view>
+  <view class="page-content">
+    <text>发现优秀人才</text>
+  </view>
+</view>

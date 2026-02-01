@@ -1,12 +1,43 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/talent/talent",
+    "pages/publish/publish",
+    "pages/profile/profile",
     "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "快组",
     "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#7d7e80",
+    "selectedColor": "#1989fa",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/talent/talent",
+        "text": "人才"
+      },
+      {
+        "pagePath": "pages/publish/publish",
+        "text": "发布"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "custom-tabbar": "/components/custom-tabbar/custom-tabbar"
   },
   "componentFramework": "glass-easel",
   "lazyCodeLoading": "requiredComponents"
