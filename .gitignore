@@ -21,3 +21,4 @@ coverage/
 
 # WeChat DevTools (per-developer)
 project.private.config.json
+schema.d.ts

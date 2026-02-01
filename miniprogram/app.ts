@@ -1,6 +1,9 @@
+import api from "./api/index"
+
 // app.ts
 App<IAppOption>({
   globalData: {},
-  onLaunch() {
+  async onLaunch() {
+    console.log(await api.user.getCurrentUser())
   },
 })
