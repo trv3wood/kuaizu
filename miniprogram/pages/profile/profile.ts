@@ -1,19 +1,96 @@
 // pages/profile/profile.ts
+import { createStoreBindings } from 'mobx-miniprogram-bindings'
+import { userStore } from '../../stores/index'
+
 Page({
-    options: {
-        styleIsolation: 'apply-shared'
-    },
     data: {
-
+        // 菜单列表
+        menuList: [
+            { icon: 'orders-o', title: '我的项目', url: '/pages/my-projects/my-projects' },
+            { icon: 'friends-o', title: '我的申请', url: '/pages/my-applications/my-applications' },
+            { icon: 'envelop-o', title: '收到的邀请', url: '/pages/my-invitations/my-invitations' },
+            { icon: 'certificate', title: '学生认证', url: '/pages/certification/certification' },
+            { icon: 'setting-o', title: '设置', url: '/pages/settings/settings' }
+        ]
     },
-    methods: {
 
+    storeBindings: null as any,
+
+    onLoad() {
+        // 绑定 userStore
+        this.storeBindings = createStoreBindings(this, {
+            store: userStore,
+            fields: ['user', 'isLoggedIn', 'isVerified', 'displayName', 'avatarUrl', 'oliveBranchCount'],
+            actions: ['fetchUser', 'clearUser']
+        })
     },
+
     onShow() {
+        // 更新 tabBar 状态
         if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-            this.getTabBar().setData({
-                active: 3
-            })
+            this.getTabBar().setData({ active: 3 })
         }
+        // 刷新用户信息
+        if (userStore.isLoggedIn) {
+            userStore.fetchUser()
+        }
+    },
+
+    onUnload() {
+        // 清理绑定
+        this.storeBindings?.destroyStoreBindings()
+    },
+
+    /**
+     * 获取认证状态文本
+     */
+    getAuthStatusText(): string {
+        const status = userStore.user?.authStatus
+        switch (status) {
+            case 0: return '未认证'
+            case 1: return '已认证'
+            case 2: return '认证失败'
+            default: return '未认证'
+        }
+    },
+
+    /**
+     * 跳转到编辑资料页
+     */
+    handleEditProfile() {
+        wx.navigateTo({ url: '/pages/edit-profile/edit-profile' })
+    },
+
+    /**
+     * 菜单项点击
+     */
+    handleMenuTap(e: WechatMiniprogram.TouchEvent) {
+        const { url } = e.currentTarget.dataset
+        if (url) {
+            wx.navigateTo({ url })
+        }
+    },
+
+    /**
+     * 跳转登录
+     */
+    handleLogin() {
+        wx.navigateTo({ url: '/pages/login/login' })
+    },
+
+    /**
+     * 退出登录
+     */
+    handleLogout() {
+        wx.showModal({
+            title: '提示',
+            content: '确定要退出登录吗？',
+            success: (res) => {
+                if (res.confirm) {
+                    userStore.clearUser()
+                    wx.showToast({ title: '已退出登录', icon: 'success' })
+                }
+            }
+        })
     }
 })

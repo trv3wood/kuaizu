@@ -4,7 +4,8 @@
     "pages/talent/talent",
     "pages/publish/publish",
     "pages/profile/profile",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/edit-profile/edit-profile"
   ],
   "window": {
     "navigationBarTextStyle": "black",

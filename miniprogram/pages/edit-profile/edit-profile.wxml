@@ -1,0 +1,79 @@
+<!-- pages/edit-profile/edit-profile.wxml -->
+<view class="edit-profile-container">
+    <!-- 头像区域 -->
+    <view class="avatar-section" bindtap="handleChooseAvatar">
+        <view class="avatar-wrapper">
+            <image class="avatar" src="{{form.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+            <view class="avatar-mask" wx:if="{{uploading}}">
+                <van-loading size="24px" color="#fff" />
+            </view>
+            <view class="avatar-edit-icon">
+                <van-icon name="edit" size="14px" color="#fff" />
+            </view>
+        </view>
+        <text class="avatar-hint">点击更换头像</text>
+    </view>
+    <!-- 表单区域 -->
+    <van-cell-group inset title="基本信息">
+        <van-field label="昵称" placeholder="请输入昵称" value="{{form.nickname}}" data-field="nickname" bind:input="handleInput" required />
+        <van-field label="手机号" placeholder="请输入手机号" value="{{form.phone}}" data-field="phone" type="number" bind:input="handleInput" />
+        <van-field label="邮箱" placeholder="请输入邮箱" value="{{form.email}}" data-field="email" bind:input="handleInput" />
+    </van-cell-group>
+    <van-cell-group inset title="学业信息" custom-style="margin-top: 24rpx;">
+        <van-cell title="学校" value="{{schoolName || '请选择'}}" is-link bindtap="handleShowSchoolPicker" />
+        <van-cell title="专业" value="{{majorName || '请选择'}}" is-link bindtap="handleShowMajorPicker" />
+        <van-cell title="入学年份">
+            <picker mode="selector" range="{{gradeOptions}}" value="{{gradeIndex}}" bindchange="handleGradeChange">
+                <view class="picker-value">
+                    {{gradeIndex >= 0 ? gradeOptions[gradeIndex] + '级' : '请选择'}}
+                </view>
+            </picker>
+        </van-cell>
+    </van-cell-group>
+    <!-- 保存按钮 -->
+    <view class="save-section">
+        <button class="save-btn" loading="{{loading}}" disabled="{{loading}}" bindtap="handleSave">
+            保存
+        </button>
+    </view>
+</view>
+<!-- 学校选择弹出层 -->
+<van-popup show="{{showSchoolPicker}}" position="bottom" round closeable bind:close="handleCloseSchoolPicker" custom-style="height: 70vh;">
+    <view class="picker-popup">
+        <view class="picker-header">
+            <text class="picker-title">选择学校</text>
+        </view>
+        <view class="picker-search">
+            <van-search value="{{schoolSearchKeyword}}" placeholder="搜索学校" bind:change="handleSchoolSearch" />
+        </view>
+        <scroll-view class="picker-list" scroll-y>
+            <view class="picker-item" wx:for="{{schools}}" wx:key="id" data-school="{{item}}" bindtap="handleSelectSchool">
+                <text>{{item.schoolName}}</text>
+                <van-icon wx:if="{{item.id === form.schoolId}}" name="success" color="#667eea" />
+            </view>
+            <view class="picker-empty" wx:if="{{schools.length === 0}}">
+                <text>暂无匹配的学校</text>
+            </view>
+        </scroll-view>
+    </view>
+</van-popup>
+<!-- 专业选择弹出层 -->
+<van-popup show="{{showMajorPicker}}" position="bottom" round closeable bind:close="handleCloseMajorPicker" custom-style="height: 70vh;">
+    <view class="picker-popup">
+        <view class="picker-header">
+            <text class="picker-title">选择专业</text>
+        </view>
+        <scroll-view class="picker-list" scroll-y>
+            <block wx:for="{{majorClasses}}" wx:key="id" wx:for-item="mc">
+                <view class="picker-group-title">{{mc.className}}</view>
+                <view class="picker-item" wx:for="{{mc.majors}}" wx:key="id" data-major="{{item}}" bindtap="handleSelectMajor">
+                    <text>{{item.majorName}}</text>
+                    <van-icon wx:if="{{item.id === form.majorId}}" name="success" color="#667eea" />
+                </view>
+            </block>
+            <view class="picker-empty" wx:if="{{majorClasses.length === 0}}">
+                <text>暂无专业数据</text>
+            </view>
+        </scroll-view>
+    </view>
+</van-popup>

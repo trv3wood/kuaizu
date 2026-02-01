@@ -1,4 +1,9 @@
 {
-    "component": true,
-    "usingComponents": {}
+    "usingComponents": {
+        "van-icon": "@vant/weapp/icon/index",
+        "van-tag": "@vant/weapp/tag/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index"
+    },
+    "navigationBarTitleText": "我的"
 }
