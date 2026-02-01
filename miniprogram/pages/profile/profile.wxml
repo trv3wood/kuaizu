@@ -1,0 +1,9 @@
+<!--pages/profile/profile.wxml-->
+<view class="page-container">
+  <view class="page-header">
+    <text class="page-title">我的</text>
+  </view>
+  <view class="page-content">
+    <text>个人中心</text>
+  </view>
+</view>

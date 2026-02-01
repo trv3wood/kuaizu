@@ -1,0 +1,23 @@
+/* custom-tab-bar/index.wxss */
+/* 发布按钮图标容器 */
+.publish-icon-wrapper {
+  width: 40rpx;
+  height: 40rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 10rpx rgba(102, 126, 234, 0.4);
+  /* 调整位置使其凸起 */
+  position: relative;
+  z-index: 100;
+  border: 6rpx solid #fff; /* 增加白边，使其与底部栏分隔更自然 */
+}
+
+/* 激活状态 */
+.publish-icon-wrapper.active {
+  background: linear-gradient(135deg, #1989fa 0%, #39b54a 100%); /* 激活时颜色变化，可选 */
+  transform: scale(1.05);
+  box-shadow: 0 6rpx 12rpx rgba(25, 137, 250, 0.4);
+}

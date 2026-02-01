@@ -24,8 +24,11 @@
 
 ## Testing Guidelines
 - No automated test runner is configured in this repo.
-- Before opening a PR: run `npx tsc -p tsconfig.json --noEmit` and smoke-test in WeChat DevTools (simulator + real device if UI/permissions change).
+- smoke-test in WeChat DevTools (simulator + real device if UI/permissions change).
 
 ## Security & Configuration Tips
 - Treat `project.private.config.json` as developer-local; avoid committing machine-specific paths or credentials.
 - Do not hardcode secrets in `miniprogram/`; prefer server-side config and Mini Program secure storage patterns.
+
+## shell
+using Powershell

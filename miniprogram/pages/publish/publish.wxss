@@ -1,0 +1,22 @@
+/* pages/publish/publish.wxss */
+.page-container {
+  padding: 20rpx;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 120rpx;
+}
+
+.page-header {
+  padding: 40rpx 0;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.page-content {
+  padding: 20rpx 0;
+  color: #666;
+}
