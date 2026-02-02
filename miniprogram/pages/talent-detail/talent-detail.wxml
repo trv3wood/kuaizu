@@ -1,0 +1,62 @@
+<!-- pages/talent-detail/talent-detail.wxml -->
+<view class="talent-detail-container">
+    <!-- 加载中 -->
+    <view class="loading-container" wx:if="{{loading}}">
+        <van-loading size="24px">加载中...</van-loading>
+    </view>
+    <block wx:elif="{{profile}}">
+        <!-- 头部卡片 -->
+        <view class="profile-header">
+            <image class="avatar" src="{{profile.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+            <view class="info">
+                <text class="name">{{profile.nickname || '匿名用户'}}</text>
+                <text class="school">{{profile.schoolName || '未知学校'}}</text>
+                <text class="major">{{profile.majorName || '未知专业'}}</text>
+            </view>
+            <van-tag wx:if="{{profile.mbti}}" type="primary" size="large">{{profile.mbti}}</van-tag>
+        </view>
+        <!-- 技能标签 -->
+        <view class="section" wx:if="{{profile.skills && profile.skills.length > 0}}">
+            <text class="section-title">技能标签</text>
+            <view class="skills">
+                <van-tag wx:for="{{profile.skills}}" wx:key="*this" type="default" plain size="medium" custom-class="skill-tag">
+                    {{item}}
+                </van-tag>
+            </view>
+        </view>
+        <!-- 个人简介 -->
+        <view class="section" wx:if="{{profile.intro}}">
+            <text class="section-title">个人简介</text>
+            <text class="section-content">{{profile.intro}}</text>
+        </view>
+        <!-- 自我评价 -->
+        <view class="section" wx:if="{{profile.selfEvaluation}}">
+            <text class="section-title">自我评价</text>
+            <text class="section-content">{{profile.selfEvaluation}}</text>
+        </view>
+        <!-- 项目经历 -->
+        <view class="section" wx:if="{{profile.projectExperience}}">
+            <text class="section-title">项目经历</text>
+            <text class="section-content">{{profile.projectExperience}}</text>
+        </view>
+        <!-- 联系方式（已建立联系时显示） -->
+        <view class="section contact-section" wx:if="{{profile.contact}}">
+            <text class="section-title">联系方式</text>
+            <view class="contact-row">
+                <text class="contact-text">{{profile.contact}}</text>
+                <button class="copy-btn" bindtap="handleCopyContact">复制</button>
+            </view>
+        </view>
+        <!-- 底部操作栏 -->
+        <view class="action-bar">
+            <button class="send-btn" loading="{{sending}}" disabled="{{sending}}" bindtap="handleSendOliveBranch">
+                <van-icon name="like-o" size="18px" color="#fff" custom-style="margin-right: 8rpx;" />
+                发送橄榄枝
+            </button>
+        </view>
+    </block>
+    <!-- 空状态 -->
+    <view class="empty-container" wx:else>
+        <van-empty description="人才信息不存在" />
+    </view>
+</view>

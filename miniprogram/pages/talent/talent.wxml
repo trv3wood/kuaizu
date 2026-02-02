@@ -1,9 +1,137 @@
-<!--pages/talent/talent.wxml-->
-<view class="page-container">
-  <view class="page-header">
-    <text class="page-title">人才</text>
+<!-- pages/talent/talent.wxml -->
+<view class="talent-container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <van-search value="{{keyword}}" placeholder="搜索人才" bind:search="handleSearch" bind:cancel="handleSearchCancel" use-action-slot>
+      <view slot="action" bindtap="showFilter">
+        <van-icon name="filter-o" size="20px" color="#666" />
+      </view>
+    </van-search>
   </view>
-  <view class="page-content">
-    <text>发现优秀人才</text>
+  <!-- 加载中 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <van-loading size="24px">加载中...</van-loading>
   </view>
+  <!-- 人才列表 -->
+  <view class="talent-list" wx:elif="{{talents.length > 0}}">
+    <view class="talent-card" wx:for="{{talents}}" wx:key="id" data-id="{{item.id}}" bindtap="handleTalentTap">
+      <!-- 头像和基本信息 -->
+      <view class="card-header">
+        <image class="avatar" src="{{item.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+        <view class="info">
+          <text class="name">{{item.nickname || '匿名用户'}}</text>
+          <text class="school">{{item.schoolName || '未知学校'}} · {{item.majorName || '未知专业'}}</text>
+        </view>
+        <van-tag wx:if="{{item.mbti}}" type="primary" plain size="medium">{{item.mbti}}</van-tag>
+      </view>
+      <!-- 技能标签 -->
+      <view class="skills" wx:if="{{item.skills && item.skills.length > 0}}">
+        <van-tag wx:for="{{item.skills}}" wx:for-item="skill" wx:key="*this" type="default" plain size="medium" custom-class="skill-tag">
+          {{skill}}
+        </van-tag>
+      </view>
+      <!-- 简介 -->
+      <view class="intro" wx:if="{{item.intro}}">
+        <text>{{item.intro}}</text>
+      </view>
+    </view>
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{loadingMore}}">
+      <van-loading size="20px">加载中...</van-loading>
+    </view>
+    <view class="no-more" wx:elif="{{!hasMore}}">
+      <text>没有更多了</text>
+    </view>
+  </view>
+  <!-- 空状态 -->
+  <view class="empty-container" wx:else>
+    <van-empty description="暂无人才" />
+  </view>
+  <!-- 筛选弹出层 -->
+  <van-popup show="{{showFilterPopup}}" position="right" custom-style="width: 75%; height: 100%;" bind:close="closeFilter">
+    <view class="filter-panel">
+      <view class="filter-header">
+        <text class="filter-title">筛选</text>
+        <van-icon name="cross" size="20px" bindtap="closeFilter" />
+      </view>
+      <view class="filter-content">
+        <!-- 学校筛选 -->
+        <view class="filter-section">
+          <text class="section-title">学校</text>
+          <view class="picker-value" bindtap="handleShowSchoolFilter">
+            {{selectedSchoolName || '全部学校'}}
+            <van-icon name="arrow" size="14px" color="#999" />
+          </view>
+        </view>
+        <!-- 专业筛选 -->
+        <view class="filter-section">
+          <text class="section-title">专业</text>
+          <view class="picker-value" bindtap="handleShowMajorFilter">
+            {{selectedMajorName || '全部专业'}}
+            <van-icon name="arrow" size="14px" color="#999" />
+          </view>
+        </view>
+      </view>
+      <!-- 筛选操作 -->
+      <view class="filter-actions">
+        <button class="reset-btn" bindtap="resetFilter">重置</button>
+        <button class="apply-btn" bindtap="closeFilter">确定</button>
+      </view>
+    </view>
+  </van-popup>
+  <!-- 学校搜索弹出层 -->
+  <van-popup show="{{showSchoolPicker}}" position="bottom" round closeable bind:close="closeSchoolPicker" custom-style="height: 70vh;">
+    <view class="picker-popup">
+      <view class="picker-header">
+        <text class="picker-title">选择学校</text>
+      </view>
+      <view class="picker-search">
+        <van-search value="{{schoolSearchKeyword}}" placeholder="搜索学校" bind:change="handleSchoolSearch" />
+      </view>
+      <scroll-view class="picker-list" scroll-y>
+        <view class="picker-item" wx:for="{{schools}}" wx:key="id" data-school="{{item}}" bindtap="handleSelectSchoolFilter">
+          <text>{{item.schoolName}}</text>
+          <van-icon wx:if="{{item.id === filters.schoolId}}" name="success" color="#667eea" />
+        </view>
+        <view class="picker-empty" wx:if="{{schools.length === 0}}">
+          <text>暂无匹配的学校</text>
+        </view>
+      </scroll-view>
+    </view>
+  </van-popup>
+  <!-- 专业搜索弹出层 -->
+  <van-popup show="{{showMajorPicker}}" position="bottom" round closeable bind:close="closeMajorPicker" custom-style="height: 70vh;">
+    <view class="picker-popup">
+      <view class="picker-header">
+        <text class="picker-title">选择专业</text>
+      </view>
+      <view class="picker-search">
+        <van-search value="{{majorSearchKeyword}}" placeholder="搜索专业" bind:change="handleMajorSearch" />
+      </view>
+      <scroll-view class="picker-list" scroll-y>
+        <view class="picker-loading" wx:if="{{majorLoading}}">
+          <van-loading size="20px">加载中...</van-loading>
+        </view>
+        <block wx:elif="{{majorClasses.length > 0}}">
+          <block wx:for="{{majorClasses}}" wx:key="id" wx:for-item="mc">
+            <!-- 大类标题 -->
+            <view class="picker-group-title" data-class-id="{{mc.id}}" bindtap="handleExpandClass">
+              <text>{{mc.className}}</text>
+              <van-icon name="{{expandedClassId === mc.id ? 'arrow-up' : 'arrow-down'}}" size="14px" color="#999" />
+            </view>
+            <!-- 专业列表 -->
+            <block wx:if="{{expandedClassId === mc.id}}">
+              <view class="picker-item picker-item-indent" wx:for="{{mc.majors}}" wx:key="id" data-major="{{item}}" data-major-class="{{mc}}" bindtap="handleSelectMajor">
+                <text>{{item.majorName}}</text>
+                <van-icon wx:if="{{item.id === filters.majorId}}" name="success" color="#667eea" />
+              </view>
+            </block>
+          </block>
+        </block>
+        <view class="picker-empty" wx:else>
+          <text>暂无专业数据</text>
+        </view>
+      </scroll-view>
+    </view>
+  </van-popup>
 </view>
