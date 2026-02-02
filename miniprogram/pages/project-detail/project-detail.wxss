@@ -1,0 +1,148 @@
+/* pages/project-detail/project-detail.wxss */
+.project-detail-container {
+    min-height: 100vh;
+    background: #f5f6fa;
+    padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
+}
+
+/* 加载中 */
+.loading-container {
+    padding: 100rpx 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* 头部卡片 */
+.project-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 40rpx 32rpx;
+    margin: 24rpx;
+    border-radius: 20rpx;
+}
+
+.header-content {
+    color: #fff;
+}
+
+.project-name {
+    display: block;
+    font-size: 40rpx;
+    font-weight: bold;
+    margin-bottom: 16rpx;
+}
+
+.status-row {
+    display: flex;
+    gap: 12rpx;
+}
+
+/* 内容区块 */
+.section {
+    background: #fff;
+    border-radius: 16rpx;
+    padding: 24rpx;
+    margin: 0 24rpx 24rpx;
+}
+
+.section-title {
+    display: block;
+    font-size: 28rpx;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 16rpx;
+}
+
+.section-content {
+    font-size: 28rpx;
+    color: #666;
+    line-height: 1.8;
+    white-space: pre-wrap;
+}
+
+/* 信息行 */
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 12rpx;
+    margin-bottom: 16rpx;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-text {
+    font-size: 28rpx;
+    color: #666;
+}
+
+/* 发起人信息 */
+.creator-info {
+    display: flex;
+    align-items: center;
+    gap: 20rpx;
+}
+
+.creator-avatar {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    background: #f5f6fa;
+}
+
+.creator-detail {
+    flex: 1;
+}
+
+.creator-name {
+    display: block;
+    font-size: 30rpx;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6rpx;
+}
+
+.creator-school {
+    display: block;
+    font-size: 26rpx;
+    color: #999;
+}
+
+/* 底部操作栏 */
+.action-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24rpx 32rpx;
+    padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+    background: #fff;
+    box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.apply-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 96rpx;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    font-size: 32rpx;
+    font-weight: 500;
+    border-radius: 48rpx;
+    border: none;
+}
+
+.apply-btn::after {
+    border: none;
+}
+
+.apply-btn[disabled] {
+    opacity: 0.7;
+}
+
+/* 空状态 */
+.empty-container {
+    padding: 100rpx 0;
+}

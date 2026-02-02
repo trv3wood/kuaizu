@@ -1,0 +1,68 @@
+<!-- pages/project-detail/project-detail.wxml -->
+<view class="project-detail-container">
+    <!-- 加载中 -->
+    <view class="loading-container" wx:if="{{loading}}">
+        <van-loading size="24px">加载中...</van-loading>
+    </view>
+    <block wx:elif="{{project}}">
+        <!-- 头部卡片 -->
+        <view class="project-header">
+            <view class="header-content">
+                <text class="project-name">{{project.name}}</text>
+                <view class="status-row">
+                    <van-tag wx:if="{{project.status === 0}}" type="default" plain>审核中</van-tag>
+                    <van-tag wx:elif="{{project.status === 1}}" type="success" plain>进行中</van-tag>
+                    <van-tag wx:elif="{{project.status === 2}}" type="danger" plain>已驳回</van-tag>
+                    <van-tag wx:else type="default" plain>已关闭</van-tag>
+                    <van-tag type="primary" plain>{{getDirectionText(project.direction)}}</van-tag>
+                </view>
+            </view>
+        </view>
+        <!-- 基本信息 -->
+        <view class="section">
+            <view class="info-row">
+                <van-icon name="location-o" size="16px" color="#999" />
+                <text class="info-text">{{project.schoolName || '未知学校'}}</text>
+            </view>
+            <view class="info-row">
+                <van-icon name="friends-o" size="16px" color="#999" />
+                <text class="info-text">团队规模：{{project.memberCount || 0}} 人</text>
+            </view>
+            <view class="info-row">
+                <van-icon name="eye-o" size="16px" color="#999" />
+                <text class="info-text">浏览量：{{project.viewCount || 0}}</text>
+            </view>
+            <view class="info-row" wx:if="{{project.applicationCount !== undefined}}">
+                <van-icon name="records" size="16px" color="#999" />
+                <text class="info-text">申请数：{{project.applicationCount}}</text>
+            </view>
+        </view>
+        <!-- 项目描述 -->
+        <view class="section">
+            <text class="section-title">项目简介</text>
+            <text class="section-content">{{project.description || '暂无描述'}}</text>
+        </view>
+        <!-- 发起人信息 -->
+        <view class="section" wx:if="{{project.creator}}">
+            <text class="section-title">发起人</text>
+            <view class="creator-info">
+                <image class="creator-avatar" src="{{project.creator.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+                <view class="creator-detail">
+                    <text class="creator-name">{{project.creator.nickname || '匿名用户'}}</text>
+                    <text class="creator-school">{{project.creator.schoolName || '未知学校'}}</text>
+                </view>
+            </view>
+        </view>
+        <!-- 底部操作栏 -->
+        <view class="action-bar" wx:if="{{project.status === 1}}">
+            <button class="apply-btn" loading="{{applying}}" disabled="{{applying}}" bindtap="handleApply">
+                <van-icon name="plus" size="18px" color="#fff" custom-style="margin-right: 8rpx;" />
+                申请加入
+            </button>
+        </view>
+    </block>
+    <!-- 空状态 -->
+    <view class="empty-container" wx:else>
+        <van-empty description="项目不存在" />
+    </view>
+</view>

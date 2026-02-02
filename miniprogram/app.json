@@ -8,7 +8,8 @@
     "pages/edit-profile/edit-profile",
     "pages/my-orders/my-orders",
     "pages/talent-card/talent-card",
-    "pages/talent-detail/talent-detail"
+    "pages/talent-detail/talent-detail",
+    "pages/project-detail/project-detail"
   ],
   "window": {
     "navigationBarTextStyle": "black",
