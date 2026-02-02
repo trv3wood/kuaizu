@@ -1,9 +1,45 @@
-<!--pages/publish/publish.wxml-->
-<view class="page-container">
-  <view class="page-header">
-    <text class="page-title">发布</text>
+<!-- pages/publish/publish.wxml -->
+<view class="service-container">
+  <!-- 快捷数据卡片 -->
+  <view class="quick-stats" wx:if="{{isLoggedIn}}">
+    <view class="stat-card" bindtap="handleMenuTap" data-url="/pages/my-orders/my-orders">
+      <view class="stat-icon">
+        <van-icon name="bill-o" size="32px" color="#667eea" />
+        <van-tag wx:if="{{stats.pendingOrders > 0}}" type="danger" round>
+          {{stats.pendingOrders}}
+        </van-tag>
+      </view>
+      <text class="stat-title">待支付订单</text>
+    </view>
+    <view class="stat-card" bindtap="handleMenuTap" data-url="/pages/certification/certification">
+      <view class="stat-icon">
+        <van-icon name="certificate" size="32px" color="{{stats.certificationStatus === 1 ? '#07c160' : '#ff976a'}}" />
+      </view>
+      <text class="stat-title">{{stats.certificationStatus === 1 ? '已认证' : '去认证'}}</text>
+    </view>
+    <view class="stat-card" bindtap="handleMenuTap" data-url="/pages/talent-card/talent-card">
+      <view class="stat-icon">
+        <van-icon name="contact" size="32px" color="{{stats.talentCardStatus === 1 ? '#07c160' : '#ff976a'}}" />
+      </view>
+      <text class="stat-title">{{stats.talentCardStatus === 1 ? '人才名片' : '去完善'}}</text>
+    </view>
   </view>
-  <view class="page-content">
-    <text>发布您的内容</text>
+  <!-- 未登录提示 -->
+  <view class="login-hint" wx:else bindtap="handleMenuTap" data-url="/pages/login/login">
+    <van-icon name="info-o" size="48px" color="#999" />
+    <text class="hint-text">登录后查看更多服务</text>
+  </view>
+  <!-- 功能菜单 -->
+  <view class="menu-sections">
+    <block wx:for="{{serviceMenus}}" wx:key="title" wx:for-item="section">
+      <van-cell-group inset title="{{section.title}}">
+        <van-cell wx:for="{{section.items}}" wx:key="title" wx:for-item="item" title="{{item.title}}" value="{{item.extra}}" is-link data-url="{{item.url}}" bindtap="handleMenuTap">
+          <van-icon slot="icon" name="{{item.icon}}" size="20px" color="#667eea" custom-style="margin-right: 12px;" />
+          <van-tag wx:if="{{item.badge > 0}}" slot="right-icon" type="danger" round>
+            {{item.badge}}
+          </van-tag>
+        </van-cell>
+      </van-cell-group>
+    </block>
   </view>
 </view>
