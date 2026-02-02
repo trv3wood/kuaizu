@@ -5,7 +5,9 @@
     "pages/publish/publish",
     "pages/profile/profile",
     "pages/login/login",
-    "pages/edit-profile/edit-profile"
+    "pages/edit-profile/edit-profile",
+    "pages/my-orders/my-orders",
+    "pages/talent-card/talent-card"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -28,7 +30,7 @@
       },
       {
         "pagePath": "pages/publish/publish",
-        "text": "发布"
+        "text": "服务"
       },
       {
         "pagePath": "pages/profile/profile",

@@ -6,10 +6,8 @@ Page({
     data: {
         // 菜单列表
         menuList: [
-            { icon: 'orders-o', title: '我的项目', url: '/pages/my-projects/my-projects' },
-            { icon: 'friends-o', title: '我的申请', url: '/pages/my-applications/my-applications' },
-            { icon: 'envelop-o', title: '收到的邀请', url: '/pages/my-invitations/my-invitations' },
-            { icon: 'certificate', title: '学生认证', url: '/pages/certification/certification' },
+            { icon: 'service-o', title: '联系客服', url: '/pages/contact/contact' },
+            { icon: 'info-o', title: '了解我们', url: '/pages/about/about' },
             { icon: 'setting-o', title: '设置', url: '/pages/settings/settings' }
         ]
     },

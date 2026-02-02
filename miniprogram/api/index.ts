@@ -268,6 +268,20 @@ export const orderApi = {
         return http.post<Schemas['BaseResponse'] & { data: Schemas['WechatPaymentParams'] }>(
             `/orders/${id}/pay`
         )
+    },
+
+    /**
+     * 查询我的订单
+     */
+    listMyOrder(params?: {
+        page?: number,
+        size?: number,
+        status?: number,
+    }) {
+        return http.get<Schemas['BaseResponse'] & { data: { list: Schemas['OrderVO'][], pageInfo: Schemas['PageInfo'] } }>(
+            `/orders/me`,
+            params
+        )
     }
 }
 
