@@ -40,9 +40,6 @@
       }
     ]
   },
-  "usingComponents": {
-    "custom-tabbar": "/components/custom-tabbar/custom-tabbar"
-  },
   "componentFramework": "glass-easel",
   "lazyCodeLoading": "requiredComponents"
 }
