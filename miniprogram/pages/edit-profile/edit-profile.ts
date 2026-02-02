@@ -2,6 +2,7 @@
 import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { userStore } from '../../stores/index'
 import { dictionaryApi, commonApi } from '../../api/index'
+import { schoolPickerBehavior } from '../../behaviors/schoolPicker'
 import type { components } from '../../api/schema'
 
 type SchoolVO = components['schemas']['SchoolVO']
@@ -9,6 +10,7 @@ type MajorClassVO = components['schemas']['MajorClassVO']
 type MajorVO = components['schemas']['MajorVO']
 
 Page({
+    behaviors: [schoolPickerBehavior],
     data: {
         // 表单数据
         form: {
@@ -21,19 +23,15 @@ Page({
             grade: undefined as number | undefined
         },
         // 显示用的文本
-        schoolName: '',
         majorName: '',
         // 选择器数据
-        schools: [] as SchoolVO[],
         majorClasses: [] as MajorClassVO[],
         majors: [] as MajorVO[],
         // 年级选项
         gradeOptions: ['2020', '2021', '2022', '2023', '2024', '2025', '2026'],
         gradeIndex: -1,
         // 弹出层控制
-        showSchoolPicker: false,
         showMajorPicker: false,
-        schoolSearchKeyword: '',
         // 状态
         loading: false,
         uploading: false
@@ -51,8 +49,8 @@ Page({
 
         // 初始化表单
         this.initForm()
-        // 加载字典数据
-        this.loadSchools()
+            // 加载字典数据
+            ; (this as any).loadSchools()
         this.loadMajors()
     },
 
@@ -79,22 +77,20 @@ Page({
                 majorId: user.major?.id,
                 grade: user.grade
             },
-            schoolName: user.school?.schoolName || '',
+            selectedSchoolId: user.school?.id,
+            selectedSchoolName: user.school?.schoolName || '',
             majorName: user.major?.majorName || '',
             gradeIndex
         })
     },
 
     /**
-     * 加载学校列表
+     * 学校选择回调
      */
-    async loadSchools(keyword?: string) {
-        try {
-            const res = await dictionaryApi.listSchools(keyword)
-            this.setData({ schools: res.data || [] })
-        } catch (error) {
-            console.error('加载学校失败:', error)
-        }
+    onSchoolSelected(school: SchoolVO) {
+        this.setData({
+            'form.schoolId': school.id
+        })
     },
 
     /**
@@ -164,37 +160,17 @@ Page({
      * 显示学校选择器
      */
     handleShowSchoolPicker() {
-        this.setData({ showSchoolPicker: true })
+        (this as any).showSchoolPicker()
     },
 
     /**
      * 关闭学校选择器
      */
     handleCloseSchoolPicker() {
-        this.setData({ showSchoolPicker: false, schoolSearchKeyword: '' })
+        (this as any).closeSchoolPicker()
     },
 
-    /**
-     * 搜索学校
-     */
-    handleSchoolSearch(e: any) {
-        const keyword = e.detail
-        this.setData({ schoolSearchKeyword: keyword })
-        this.loadSchools(keyword)
-    },
 
-    /**
-     * 选择学校
-     */
-    handleSelectSchool(e: WechatMiniprogram.TouchEvent) {
-        const { school } = e.currentTarget.dataset as { school: SchoolVO }
-        this.setData({
-            'form.schoolId': school.id,
-            schoolName: school.schoolName || '',
-            showSchoolPicker: false,
-            schoolSearchKeyword: ''
-        })
-    },
 
     /**
      * 显示专业选择器

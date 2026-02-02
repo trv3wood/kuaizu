@@ -20,7 +20,7 @@
         <van-field label="邮箱" placeholder="请输入邮箱" value="{{form.email}}" data-field="email" bind:input="handleInput" />
     </van-cell-group>
     <van-cell-group inset title="学业信息" custom-style="margin-top: 24rpx;">
-        <van-cell title="学校" value="{{schoolName || '请选择'}}" is-link bindtap="handleShowSchoolPicker" />
+        <van-cell title="学校" value="{{selectedSchoolName || '请选择'}}" is-link bindtap="handleShowSchoolPicker" />
         <van-cell title="专业" value="{{majorName || '请选择'}}" is-link bindtap="handleShowMajorPicker" />
         <van-cell title="入学年份">
             <picker mode="selector" range="{{gradeOptions}}" value="{{gradeIndex}}" bindchange="handleGradeChange">
