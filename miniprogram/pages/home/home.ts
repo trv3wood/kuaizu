@@ -223,7 +223,7 @@ Page({
   /**
    * 发布项目
    */
-  handlePublish() {
+  handleService() {
     // TODO: 检查登录状态
     wx.navigateTo({ url: '/pages/create-project/create-project' })
   },

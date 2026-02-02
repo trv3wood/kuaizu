@@ -19,7 +19,7 @@ Component({
             {
                 icon: 'add-o',
                 text: '发布',
-                url: '/pages/publish/publish',
+                url: '/pages/service/service',
                 isCenter: true
             },
             {
@@ -68,7 +68,7 @@ Component({
 
         onCenterClick() {
             wx.switchTab({
-                url: '/pages/publish/publish'
+                url: '/pages/service/service'
             })
         }
     }

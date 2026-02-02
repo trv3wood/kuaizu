@@ -15,8 +15,8 @@ Component({
                 text: "人才"
             },
             {
-                pagePath: "/pages/publish/publish",
-                text: "发布"
+                pagePath: "/pages/service/service",
+                text: "服务"
             },
             {
                 pagePath: "/pages/profile/profile",
@@ -32,9 +32,11 @@ Component({
 
             this.setData({ active: index })
 
-            wx.switchTab({
-                url: item.pagePath
-            })
+            if (item) {
+                wx.switchTab({
+                    url: item.pagePath
+                })
+            }
         }
     }
 })

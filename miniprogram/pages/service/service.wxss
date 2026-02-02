@@ -1,4 +1,4 @@
-/* pages/publish/publish.wxss */
+/* pages/service/service.wxss */
 .service-container {
   min-height: 100vh;
   background: #f5f6fa;
