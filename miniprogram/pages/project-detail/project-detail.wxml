@@ -14,7 +14,7 @@
                     <van-tag wx:elif="{{project.status === 1}}" type="success" plain>进行中</van-tag>
                     <van-tag wx:elif="{{project.status === 2}}" type="danger" plain>已驳回</van-tag>
                     <van-tag wx:else type="default" plain>已关闭</van-tag>
-                    <van-tag type="primary" plain>{{getDirectionText(project.direction)}}</van-tag>
+                    <van-tag type="primary" plain>{{project.directionText}}</van-tag>
                 </view>
             </view>
         </view>

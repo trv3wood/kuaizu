@@ -27,26 +27,41 @@
 
 /* 凸起按钮主体 */
 .center-button-inner {
-  width: 100rpx;
-  height: 100rpx;
+  width: 108rpx;
+  height: 108rpx;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 50%;
+  border: 4rpx solid #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4rpx 20rpx rgba(102, 126, 234, 0.4);
-  margin-bottom: 4rpx;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.45);
+  margin-bottom: 6rpx;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: bounce 3s ease-in-out infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8rpx);
+  }
 }
 
 .center-button-inner:active {
-  transform: scale(0.95);
-  box-shadow: 0 2rpx 10rpx rgba(102, 126, 234, 0.3);
+  transform: scale(0.9) translateY(0);
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
 }
 
-/* 发布文字 */
+/* 服务文字 */
 .center-button-text {
-  font-size: 20rpx;
-  color: #7d7e80;
-  margin-top: 2rpx;
+  font-size: 22rpx;
+  color: #667eea;
+  font-weight: 500;
+  margin-top: 4rpx;
 }
