@@ -17,8 +17,8 @@ Component({
                 url: '/pages/talent/talent'
             },
             {
-                icon: 'add-o',
-                text: '发布',
+                icon: 'apps-o',
+                text: '服务',
                 url: '/pages/service/service',
                 isCenter: true
             },
@@ -47,10 +47,12 @@ Component({
             const pages = getCurrentPages()
             if (pages.length > 0) {
                 const currentPage = pages[pages.length - 1]
+                if (!currentPage) return
                 const route = '/' + currentPage.route
                 const list = this.data.list
                 for (let i = 0; i < list.length; i++) {
-                    if (list[i].url === route) {
+                    const item = list[i]
+                    if (item && item.url === route) {
                         this.setData({ active: i })
                         break
                     }
@@ -61,9 +63,11 @@ Component({
         onChange(event: WechatMiniprogram.CustomEvent) {
             const index = event.detail as unknown as number
             const item = this.data.list[index]
-            wx.switchTab({
-                url: item.url
-            })
+            if (item && item.url) {
+                wx.switchTab({
+                    url: item.url
+                })
+            }
         },
 
         onCenterClick() {

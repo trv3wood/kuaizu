@@ -228,30 +228,7 @@ Page({
     wx.navigateTo({ url: '/pages/create-project/create-project' })
   },
 
-  /**
-   * 获取状态文本
-   */
-  getStatusText(status?: ProjectStatus): string {
-    const statusMap: Record<number, string> = {
-      0: '审核中',
-      1: '进行中',
-      2: '已驳回',
-      3: '已关闭'
-    }
-    return statusMap[status || 0] || '未知'
-  },
 
-  /**
-   * 获取方向文本
-   */
-  getDirectionText(direction?: Direction): string {
-    const directionMap: Record<number, string> = {
-      1: '创业类',
-      2: '科研类',
-      3: '实践类'
-    }
-    return directionMap[direction || 0] || '其他'
-  },
 
   /**
    * 显示学校筛选搜索

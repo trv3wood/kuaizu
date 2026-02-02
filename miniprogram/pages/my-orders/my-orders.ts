@@ -1,5 +1,6 @@
 // pages/my-orders/my-orders.ts
 import { orderApi } from '../../api/index'
+import { getOrderStatusText } from '../../utils/util'
 import type { components } from '../../api/schema'
 
 type OrderVO = components['schemas']['OrderVO']
@@ -126,13 +127,7 @@ Page({
     },
 
     _getStatusText(status?: number) {
-        const statusMap: Record<number, string> = {
-            0: '待支付',
-            1: '已完成',
-            2: '已取消',
-            3: '已退款'
-        }
-        return statusMap[status || 0] || '未知'
+        return getOrderStatusText(status)
     },
 
     _formatPrice(price?: number) {

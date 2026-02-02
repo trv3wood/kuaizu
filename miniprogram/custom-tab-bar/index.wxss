@@ -1,8 +1,8 @@
 /* custom-tab-bar/index.wxss */
 /* 发布按钮图标容器 */
 .service-icon-wrapper {
-  width: 40rpx;
-  height: 40rpx;
+  width: 48rpx;
+  height: 48rpx;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 50%;
   display: flex;
@@ -12,8 +12,21 @@
   /* 调整位置使其凸起 */
   position: relative;
   z-index: 100;
-  border: 6rpx solid #fff;
+  border: 4rpx solid #fff;
   /* 增加白边，使其与底部栏分隔更自然 */
+  animation: bounce-small 3s ease-in-out infinite;
+}
+
+@keyframes bounce-small {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4rpx);
+  }
 }
 
 /* 激活状态 */

@@ -4,13 +4,13 @@
   <van-tabbar-item icon="wap-home-o">首页</van-tabbar-item>
   <!-- 人才 -->
   <van-tabbar-item icon="friends-o">人才</van-tabbar-item>
-  <!-- 发布 -->
+  <!-- 服务 -->
   <van-tabbar-item class="service-tab-item">
     <view slot="icon" class="service-icon-wrapper">
-      <van-icon name="plus" size="22px" color="#fff" />
+      <van-icon name="diamond-o" size="24px" color="#fff" />
     </view>
     <view slot="icon-active" class="service-icon-wrapper active">
-      <van-icon name="plus" size="22px" color="#fff" />
+      <van-icon name="diamond-o" size="24px" color="#fff" />
     </view>
     服务
   </van-tabbar-item>

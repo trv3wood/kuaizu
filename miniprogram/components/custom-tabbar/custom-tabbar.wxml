@@ -1,26 +1,22 @@
-<!--components/custom-tabbar/custom-tabbar.wxml-->
+<!-- components/custom-tabbar/custom-tabbar.wxml -->
 <view class="custom-tabbar">
   <van-tabbar active="{{ active }}" bind:change="onChange" active-color="#1989fa" inactive-color="#7d7e80">
     <!-- 首页 -->
     <van-tabbar-item icon="wap-home-o">首页</van-tabbar-item>
-    
     <!-- 人才 -->
     <van-tabbar-item icon="friends-o">人才</van-tabbar-item>
-    
     <!-- 发布 - 中间凸起按钮占位 -->
     <van-tabbar-item>
       <view class="center-placeholder"></view>
     </van-tabbar-item>
-    
     <!-- 我的 -->
     <van-tabbar-item icon="user-o">我的</van-tabbar-item>
   </van-tabbar>
-  
-  <!-- 中间凸起的发布按钮 -->
+  <!-- 中间凸起的服务按钮 -->
   <view class="center-button" bind:tap="onCenterClick">
     <view class="center-button-inner">
-      <van-icon name="plus" size="28px" color="#fff" />
+      <van-icon name="diamond-o" size="30px" color="#fff" />
     </view>
-    <text class="center-button-text">发布</text>
+    <text class="center-button-text">服务</text>
   </view>
 </view>

@@ -1,5 +1,6 @@
 // pages/project-detail/project-detail.ts
 import { projectApi, applicationApi } from '../../api/index'
+import { getProjectDirectionText, getProjectStatusText } from '../../utils/util'
 import type { components } from '../../api/schema'
 
 type ProjectDetailVO = components['schemas']['ProjectDetailVO']
@@ -31,8 +32,14 @@ Page({
 
         try {
             const res = await projectApi.getProject(id)
+            const project = res.data
+            if (project) {
+                // 预格式化显示文本
+                ; (project as any).statusText = getProjectStatusText(project.status)
+                    ; (project as any).directionText = getProjectDirectionText(project.direction)
+            }
             this.setData({
-                project: res.data || null,
+                project: project || null,
                 loading: false
             })
         } catch (error) {
@@ -78,28 +85,5 @@ Page({
         }
     },
 
-    /**
-     * 获取方向文本
-     */
-    getDirectionText(direction?: number): string {
-        const directionMap: Record<number, string> = {
-            1: '创业类',
-            2: '科研类',
-            3: '实践类'
-        }
-        return direction !== undefined ? directionMap[direction] || '未知' : '未知'
-    },
 
-    /**
-     * 获取状态文本
-     */
-    getStatusText(status?: number): string {
-        const statusMap: Record<number, string> = {
-            0: '审核中',
-            1: '进行中',
-            2: '已驳回',
-            3: '已关闭'
-        }
-        return status !== undefined ? statusMap[status] || '未知' : '未知'
-    }
 })
