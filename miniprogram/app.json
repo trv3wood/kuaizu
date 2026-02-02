@@ -2,7 +2,7 @@
   "pages": [
     "pages/home/home",
     "pages/talent/talent",
-    "pages/publish/publish",
+    "pages/service/service",
     "pages/profile/profile",
     "pages/login/login",
     "pages/edit-profile/edit-profile",
@@ -29,7 +29,7 @@
         "text": "人才"
       },
       {
-        "pagePath": "pages/publish/publish",
+        "pagePath": "pages/service/service",
         "text": "服务"
       },
       {

@@ -50,12 +50,12 @@ Page({
         try {
             const { tabs, activeTab, size } = this.data
             const status = tabs[activeTab]?.status
+            let params: any = { page: 1, size }
+            if (status !== undefined) {
+                params.status = status
+            }
 
-            const res = await orderApi.listMyOrder({
-                page: 1,
-                size,
-                status
-            })
+            const res = await orderApi.listMyOrder(params)
 
             const list = res.data?.list || []
             const orders = this._processOrders(list)

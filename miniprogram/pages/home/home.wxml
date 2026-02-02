@@ -56,7 +56,7 @@
     <van-empty description="暂无项目" />
   </view>
   <!-- 悬浮按钮 -->
-  <view class="fab" bindtap="handlePublish">
+  <view class="fab" bindtap="handleService">
     <van-icon name="plus" size="24px" color="#fff" />
   </view>
   <!-- 筛选弹出层 -->

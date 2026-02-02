@@ -1,4 +1,4 @@
-<!-- pages/publish/publish.wxml -->
+<!-- pages/service/service.wxml -->
 <view class="service-container">
   <!-- 快捷数据卡片 -->
   <view class="quick-stats" wx:if="{{isLoggedIn}}">

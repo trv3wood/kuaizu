@@ -1,4 +1,4 @@
-// pages/publish/publish.ts
+// pages/service/service.ts
 import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { userStore } from '../../stores/index'
 import { orderApi, talentApi } from '../../api/index'
