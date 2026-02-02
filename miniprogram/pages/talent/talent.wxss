@@ -1,22 +1,266 @@
 /* pages/talent/talent.wxss */
-.page-container {
-  padding: 20rpx;
+.talent-container {
   min-height: 100vh;
-  box-sizing: border-box;
-  padding-bottom: 120rpx;
+  background: #f5f6fa;
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
 }
 
-.page-header {
-  padding: 40rpx 0;
+/* 搜索栏 */
+.search-bar {
+  background: #fff;
+  padding: 16rpx 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
 }
 
-.page-title {
-  font-size: 48rpx;
+/* 加载中 */
+.loading-container {
+  padding: 100rpx 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* 人才列表 */
+.talent-list {
+  padding: 24rpx;
+}
+
+.talent-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s;
+}
+
+.talent-card:active {
+  transform: scale(0.98);
+}
+
+/* 卡片头部 */
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.avatar {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  background: #f5f6fa;
+}
+
+.info {
+  flex: 1;
+}
+
+.name {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+
+.school {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 技能标签 */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.skill-tag {
+  margin: 0 !important;
+}
+
+/* 简介 */
+.intro {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 加载更多 */
+.load-more,
+.no-more {
+  padding: 32rpx;
+  text-align: center;
+}
+
+.no-more text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 空状态 */
+.empty-container {
+  padding: 100rpx 0;
+}
+
+/* 筛选面板 */
+.filter-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx 24rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.filter-title {
+  font-size: 32rpx;
   font-weight: bold;
   color: #333;
 }
 
-.page-content {
-  padding: 20rpx 0;
+.filter-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24rpx;
+}
+
+.filter-section {
+  margin-bottom: 48rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.picker-value {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  background: #f5f6fa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 筛选操作 */
+.filter-actions {
+  display: flex;
+  gap: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 12vh;
+  border-top: 1rpx solid #eee;
+}
+
+.reset-btn,
+.apply-btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 28rpx;
+  border-radius: 44rpx;
+  border: none;
+}
+
+.reset-btn {
+  background: #f5f6fa;
   color: #666;
+}
+
+.apply-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+}
+
+.reset-btn::after,
+.apply-btn::after {
+  border: none;
+}
+
+/* 学校搜索弹出层 */
+.picker-popup {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.picker-header {
+  padding: 32rpx 24rpx;
+  text-align: center;
+  border-bottom: 1rpx solid #eee;
+}
+
+.picker-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.picker-search {
+  padding: 16rpx 0;
+}
+
+.picker-list {
+  flex: 1;
+  height: 0;
+}
+
+.picker-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid #f5f6fa;
+}
+
+.picker-item:active {
+  background: #f5f6fa;
+}
+
+.picker-empty {
+  padding: 60rpx;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 专业选择器扩展样式 */
+.picker-loading {
+  padding: 60rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.picker-group-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  background: #f5f6fa;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.picker-item-indent {
+  padding-left: 48rpx;
 }
