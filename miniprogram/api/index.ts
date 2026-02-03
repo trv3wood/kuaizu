@@ -279,7 +279,7 @@ export const orderApi = {
         status?: number,
     }) {
         return http.get<Schemas['BaseResponse'] & { data: { list: Schemas['OrderVO'][], pageInfo: Schemas['PageInfo'] } }>(
-            `/orders/me`,
+            `/orders/my`,
             params
         )
     }
