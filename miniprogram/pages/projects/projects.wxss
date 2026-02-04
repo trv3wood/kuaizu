@@ -1,0 +1,281 @@
+/* pages/projects/projects.wxss */
+.projects-container {
+  min-height: 100vh;
+  background: #f5f6fa;
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+}
+
+/* 搜索栏 */
+.search-bar {
+  background: #fff;
+  padding: 16rpx 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 加载中 */
+.loading-container {
+  padding: 100rpx 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* 项目列表 */
+.project-list {
+  padding: 24rpx;
+}
+
+.project-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s;
+}
+
+.project-card:active {
+  transform: scale(0.98);
+}
+
+/* 卡片头部 */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.project-name {
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-right: 16rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 卡片描述 */
+.card-description {
+  margin-bottom: 20rpx;
+}
+
+.description-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 卡片底部信息 */
+.card-footer {
+  display: flex;
+  gap: 32rpx;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.info-text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 加载更多 */
+.load-more,
+.no-more {
+  padding: 32rpx;
+  text-align: center;
+}
+
+.no-more text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 空状态 */
+.empty-container {
+  padding: 100rpx 0;
+}
+
+/* 悬浮按钮 */
+.fab {
+  position: fixed;
+  right: 32rpx;
+  bottom: calc(120rpx + env(safe-area-inset-bottom));
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: transform 0.2s;
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+/* 筛选面板 */
+.filter-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx 24rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.filter-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.filter-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24rpx;
+}
+
+.filter-section {
+  margin-bottom: 48rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.picker-value {
+  padding: 20rpx 24rpx;
+  background: #f5f6fa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.option-item {
+  padding: 16rpx 32rpx;
+  background: #f5f6fa;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.option-item.active {
+  background: #667eea;
+  color: #fff;
+}
+
+/* 筛选操作 */
+.filter-actions {
+  display: flex;
+  gap: 16rpx;
+  padding: 24rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  border-top: 1rpx solid #eee;
+}
+
+.reset-btn,
+.apply-btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 28rpx;
+  border-radius: 44rpx;
+  border: none;
+}
+
+.reset-btn {
+  background: #f5f6fa;
+  color: #666;
+}
+
+.apply-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+}
+
+.reset-btn::after,
+.apply-btn::after {
+  border: none;
+}
+
+/* 学校搜索弹出层 */
+.picker-popup {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.picker-header {
+  padding: 32rpx 24rpx;
+  text-align: center;
+  border-bottom: 1rpx solid #eee;
+}
+
+.picker-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.picker-search {
+  padding: 16rpx 0;
+}
+
+.picker-list {
+  flex: 1;
+  height: 0;
+}
+
+.picker-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid #f5f6fa;
+}
+
+.picker-item:active {
+  background: #f5f6fa;
+}
+
+.picker-empty {
+  padding: 60rpx;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}

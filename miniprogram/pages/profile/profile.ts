@@ -6,6 +6,7 @@ Page({
     data: {
         // 菜单列表
         menuList: [
+            { icon: 'gem-o', title: '服务中心', url: '/pages/service/service' },
             { icon: 'service-o', title: '联系客服', url: '/pages/contact/contact' },
             { icon: 'info-o', title: '了解我们', url: '/pages/about/about' },
             { icon: 'setting-o', title: '设置', url: '/pages/settings/settings' }
@@ -24,9 +25,9 @@ Page({
     },
 
     onShow() {
-        // 更新 tabBar 状态
+        // 更新 tabBar 状态 (profile is now at visual index 2)
         if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-            this.getTabBar().setData({ active: 3 })
+            this.getTabBar().setData({ active: 2 })
         }
         // 刷新用户信息
         if (userStore.isLoggedIn) {

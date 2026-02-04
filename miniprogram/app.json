@@ -1,9 +1,10 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/profile/profile",
+    "pages/projects/projects",
     "pages/talent/talent",
     "pages/service/service",
-    "pages/profile/profile",
     "pages/login/login",
     "pages/edit-profile/edit-profile",
     "pages/my-orders/my-orders",
@@ -24,24 +25,13 @@
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/talent/talent",
-        "text": "人才"
-      },
-      {
-        "pagePath": "pages/service/service",
-        "text": "服务"
+        "text": "导览"
       },
       {
         "pagePath": "pages/profile/profile",
         "text": "我的"
       }
     ]
-  },
-  "usingComponents": {
-    "custom-tabbar": "/components/custom-tabbar/custom-tabbar"
   },
   "componentFramework": "glass-easel",
   "lazyCodeLoading": "requiredComponents"
