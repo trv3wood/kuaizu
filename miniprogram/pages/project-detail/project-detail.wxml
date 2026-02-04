@@ -46,10 +46,10 @@
         <view class="section" wx:if="{{project.creator}}">
             <text class="section-title">发起人</text>
             <view class="creator-info">
-                <image class="creator-avatar" src="{{project.creator.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+                <image class="creator-avatar" src="{{project.creator.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
                 <view class="creator-detail">
                     <text class="creator-name">{{project.creator.nickname || '匿名用户'}}</text>
-                    <text class="creator-school">{{project.creator.schoolName || '未知学校'}}</text>
+                    <text class="creator-uid">UID: {{project.creator.id || '未知'}}</text>
                 </view>
             </view>
         </view>

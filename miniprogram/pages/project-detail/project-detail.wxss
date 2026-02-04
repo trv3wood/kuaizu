@@ -102,7 +102,7 @@
     margin-bottom: 6rpx;
 }
 
-.creator-school {
+.creator-uid {
     display: block;
     font-size: 26rpx;
     color: #999;

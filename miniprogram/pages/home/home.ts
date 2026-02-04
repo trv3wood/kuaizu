@@ -85,13 +85,10 @@ Page({
       // 构建参数对象，只包含有效值
       const params: any = {
         page: 1,
-        size
+        size,
+        ...filters
       }
       if (keyword) params.keyword = keyword
-      if (filters.schoolId !== undefined) params.schoolId = filters.schoolId
-      if (filters.status !== undefined) params.status = filters.status
-      if (filters.direction !== undefined) params.direction = filters.direction
-      console.log(params)
 
       const res = await projectApi.listProjects(params)
 
@@ -127,12 +124,10 @@ Page({
       // 构建参数对象，只包含有效值
       const params: any = {
         page: nextPage,
-        size
+        size,
+        filters
       }
       if (keyword) params.keyword = keyword
-      if (filters.schoolId !== undefined) params.schoolId = filters.schoolId
-      if (filters.status !== undefined) params.status = filters.status
-      if (filters.direction !== undefined) params.direction = filters.direction
 
       const res = await projectApi.listProjects(params)
 

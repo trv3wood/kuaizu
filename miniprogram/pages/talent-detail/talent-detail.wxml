@@ -7,7 +7,7 @@
     <block wx:elif="{{profile}}">
         <!-- 头部卡片 -->
         <view class="profile-header">
-            <image class="avatar" src="{{profile.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+            <image class="avatar" src="{{profile.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
             <view class="info">
                 <text class="name">{{profile.nickname || '匿名用户'}}</text>
                 <text class="school">{{profile.schoolName || '未知学校'}}</text>
@@ -40,13 +40,13 @@
             <text class="section-content">{{profile.projectExperience}}</text>
         </view>
         <!-- 联系方式（已建立联系时显示） -->
-        <view class="section contact-section" wx:if="{{profile.contact}}">
+        <!-- <view class="section contact-section" wx:if="{{profile.contact}}">
             <text class="section-title">联系方式</text>
             <view class="contact-row">
                 <text class="contact-text">{{profile.contact}}</text>
                 <button class="copy-btn" bindtap="handleCopyContact">复制</button>
             </view>
-        </view>
+        </view> -->
         <!-- 底部操作栏 -->
         <view class="action-bar">
             <button class="send-btn" loading="{{sending}}" disabled="{{sending}}" bindtap="handleSendOliveBranch">

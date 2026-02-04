@@ -33,7 +33,7 @@
   </view>
   <!-- 未登录状态 -->
   <view class="login-card" wx:else bindtap="handleLogin">
-    <image class="avatar-placeholder" src="/assets/default-avatar.png" mode="aspectFill" />
+    <image class="avatar-placeholder" src="https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg" mode="aspectFill" />
     <view class="login-hint">
       <text class="login-title">点击登录</text>
       <text class="login-desc">登录后体验更多功能</text>

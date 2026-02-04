@@ -9,7 +9,7 @@
         <view class="view-mode" wx:if="{{!isEditing && profile}}">
             <!-- 头部卡片 -->
             <view class="profile-header">
-                <image class="avatar" src="{{avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+                <image class="avatar" src="{{avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
                 <view class="info">
                     <text class="name">{{displayName}}</text>
                     <text class="school">

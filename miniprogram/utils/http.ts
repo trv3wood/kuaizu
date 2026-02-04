@@ -23,6 +23,10 @@ REQUEST.Defaults.transformSend = (options) => {
             }
         }
     }
+    // 去除 undefined 属性导致的服务器解析错误
+    if (options.data) {
+      options.data = JSON.parse(JSON.stringify(options.data))
+    }
     // 调用默认的 transformSend 以正确构建 URL (包括 baseURL)
     return transformRequestSendDefault(options)
 }
