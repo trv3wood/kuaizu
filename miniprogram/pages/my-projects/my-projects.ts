@@ -1,5 +1,5 @@
 // pages/my-projects/my-projects.ts
-import { applicationApi } from '../../api/index'
+import { applicationApi, projectApi } from '../../api/index'
 import type { components } from '../../api/schema'
 
 type ProjectVO = components['schemas']['ProjectVO']
@@ -16,7 +16,7 @@ Page({
         size: 10,
 
         // 展开的项目ID
-        expandedProjectId: undefined as number | undefined,
+        expandedProjectId: null as number | null,
         applications: [] as ProjectApplicationVO[],
         applicationsLoading: false,
 
@@ -107,7 +107,7 @@ Page({
         if (currentExpanded === id) {
             // 收起
             this.setData({
-                expandedProjectId: undefined,
+                expandedProjectId: null,
                 applications: []
             })
         } else {
@@ -215,6 +215,46 @@ Page({
             console.error('审核失败:', error)
             wx.showToast({ title: '操作失败', icon: 'none' })
         }
+    },
+
+    /**
+     * 删除/下架项目
+     */
+    handleDeleteProject(e: WechatMiniprogram.TouchEvent) {
+        const { id, name } = e.currentTarget.dataset
+
+        wx.showModal({
+            title: '确认下架',
+            content: `确定要下架项目"${name}"吗？下架后将不再展示在项目大厅中。`,
+            confirmText: '确认下架',
+            confirmColor: '#ee0a24',
+            success: async (res) => {
+                if (res.confirm) {
+                    try {
+                        await projectApi.deleteProject(id)
+                        wx.showToast({
+                            title: '已下架',
+                            icon: 'success'
+                        })
+                        // 重新加载项目列表
+                        this.loadMyProjects()
+                    } catch (error) {
+                        console.error('下架项目失败:', error)
+                        wx.showToast({ title: '下架失败', icon: 'none' })
+                    }
+                }
+            }
+        })
+    },
+
+    /**
+     * 编辑项目
+     */
+    handleEditProject(e: WechatMiniprogram.TouchEvent) {
+        const { id } = e.currentTarget.dataset
+        wx.navigateTo({
+            url: `/pages/edit-project/edit-project?id=${id}`
+        })
     },
 
     /**

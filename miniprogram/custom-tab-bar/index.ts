@@ -69,7 +69,7 @@ Component({
             this.setData({ showPublishPopup: false })
 
             if (name === '发布项目') {
-                wx.navigateTo({ url: '/pages/create-project/create-project' })
+                wx.navigateTo({ url: '/pages/edit-project/edit-project' })
             } else if (name === '我是人才') {
                 wx.navigateTo({ url: '/pages/talent-card/talent-card' })
             }

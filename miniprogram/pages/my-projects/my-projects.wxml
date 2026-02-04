@@ -17,6 +17,8 @@
                     </view>
                 </view>
                 <view class="header-right">
+                    <van-icon name="edit" size="18px" color="#667eea" class="edit-icon" catchtap="handleEditProject" data-id="{{item.id}}" />
+                    <van-icon name="delete-o" size="18px" color="#ee0a24" class="delete-icon" catchtap="handleDeleteProject" data-id="{{item.id}}" data-name="{{item.name}}" />
                     <van-tag wx:if="{{item.status === 0}}" type="default" plain>待审核</van-tag>
                     <van-tag wx:elif="{{item.status === 1}}" type="success" plain>进行中</van-tag>
                     <van-tag wx:elif="{{item.status === 2}}" type="danger" plain>已驳回</van-tag>

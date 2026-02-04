@@ -1,0 +1,64 @@
+<!-- pages/edit-project/edit-project.wxml -->
+<view class="edit-project-container">
+    <!-- 表单内容 -->
+    <view class="form-section">
+        <!-- 项目名称 -->
+        <view class="form-group">
+            <view class="form-label required">项目名称</view>
+            <van-field value="{{form.name}}" placeholder="输入项目名称，不超过200字" maxlength="200" show-word-limit bind:change="onNameInput" />
+        </view>
+        <!-- 项目描述 -->
+        <view class="form-group">
+            <view class="form-label required">项目描述</view>
+            <van-field value="{{form.description}}" type="textarea" placeholder="描述你的项目，包括项目背景、目标和需要的人才类型..." autosize="{{ { minHeight: 120 } }}" maxlength="2000" show-word-limit bind:change="onDescriptionInput" />
+        </view>
+        <!-- 团队人数 -->
+        <view class="form-group">
+            <view class="form-label required">团队人数</view>
+            <view class="stepper-wrapper">
+                <text class="stepper-hint">预计需要的团队成员数量</text>
+                <van-stepper value="{{form.memberCount}}" min="1" max="50" bind:change="onMemberCountChange" />
+            </view>
+        </view>
+        <!-- 项目方向 -->
+        <view class="form-group">
+            <view class="form-label">项目类型</view>
+            <view class="direction-options">
+                <view wx:for="{{directions}}" wx:key="value" class="direction-item {{form.direction === item.value ? 'active' : ''}}" bindtap="onDirectionSelect" data-value="{{item.value}}">
+                    <view class="direction-label">{{item.label}}</view>
+                    <view class="direction-desc">{{item.desc}}</view>
+                </view>
+            </view>
+        </view>
+        <!-- 所属学校 -->
+        <view class="form-group" wx:if="{{!isEdit}}">
+            <view class="form-label">所属学校</view>
+            <van-cell title="{{selectedSchoolName || '选择学校（可选）'}}" is-link bindtap="showSchoolPicker" title-class="{{selectedSchoolName ? '' : 'placeholder'}}" />
+        </view>
+    </view>
+    <!-- 提交按钮 -->
+    <view class="submit-section">
+        <van-button type="primary" block round loading="{{submitting}}" loading-text="提交中..." bindtap="handleSubmit">
+            {{isEdit ? '保存修改' : '发布项目'}}
+        </van-button>
+        <text class="submit-hint" wx:if="{{!isEdit}}">发布后将进入审核，审核通过后在项目大厅展示</text>
+    </view>
+</view>
+<!-- 学校选择器 Popup -->
+<van-popup show="{{showSchoolPicker}}" position="bottom" round closeable bind:close="closeSchoolPicker" custom-style="height: 60%">
+    <view class="school-picker">
+        <view class="picker-header">
+            <text class="picker-title">选择学校</text>
+        </view>
+        <van-search value="{{schoolSearchKeyword}}" placeholder="搜索学校" bind:search="handleSchoolSearch" bind:change="handleSchoolSearch" />
+        <scroll-view class="school-list" scroll-y>
+            <view wx:for="{{schools}}" wx:key="id" class="school-item {{selectedSchoolId === item.id ? 'active' : ''}}" bindtap="handleSelectSchool" data-school="{{item}}">
+                <text class="school-name">{{item.schoolName}}</text>
+                <van-icon wx:if="{{selectedSchoolId === item.id}}" name="success" color="#667eea" />
+            </view>
+            <view wx:if="{{schools.length === 0}}" class="no-schools">
+                <text>没有找到学校</text>
+            </view>
+        </scroll-view>
+    </view>
+</van-popup>

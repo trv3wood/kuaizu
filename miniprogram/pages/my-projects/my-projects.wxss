@@ -69,6 +69,17 @@
     gap: 12rpx;
 }
 
+.delete-icon,
+.edit-icon {
+    padding: 8rpx;
+    transition: transform 0.2s;
+}
+
+.delete-icon:active,
+.edit-icon:active {
+    transform: scale(0.9);
+}
+
 /* Applications Section */
 .applications-section {
     background: #fafafa;
