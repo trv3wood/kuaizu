@@ -124,6 +124,19 @@ export const projectApi = {
 // ==================== 项目申请模块 ====================
 export const applicationApi = {
     /**
+     * 查看我创建的项目
+     */
+    listMyProjects(params?: {
+        page?: number
+        size?: number
+        status?: Schemas['ProjectStatus']
+    }) {
+        return http.get<Schemas['BaseResponse'] & { data: Schemas['ProjectPageResponse'] }>(
+            '/projects/my',
+            params
+        )
+    },
+    /**
      * 查看某项目的申请列表
      */
     listProjectApplications(

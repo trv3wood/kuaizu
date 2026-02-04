@@ -1,0 +1,110 @@
+<!-- pages/my-projects/my-projects.wxml -->
+<view class="my-projects-container">
+    <!-- Loading State -->
+    <view class="loading-container" wx:if="{{loading}}">
+        <van-loading size="24px">加载中...</van-loading>
+    </view>
+    <!-- Project List -->
+    <scroll-view class="project-list" scroll-y wx:elif="{{projects.length > 0}}">
+        <view class="project-card" wx:for="{{projects}}" wx:key="id">
+            <!-- Project Header -->
+            <view class="project-header" bindtap="toggleApplications" data-id="{{item.id}}">
+                <view class="header-left">
+                    <text class="project-name">{{item.name}}</text>
+                    <view class="project-meta">
+                        <text class="meta-item">{{item.schoolName || '未知学校'}}</text>
+                        <text class="meta-item">{{item.memberCount}}人团队</text>
+                    </view>
+                </view>
+                <view class="header-right">
+                    <van-tag wx:if="{{item.status === 0}}" type="default" plain>待审核</van-tag>
+                    <van-tag wx:elif="{{item.status === 1}}" type="success" plain>进行中</van-tag>
+                    <van-tag wx:elif="{{item.status === 2}}" type="danger" plain>已驳回</van-tag>
+                    <van-tag wx:else type="default" plain>已关闭</van-tag>
+                    <van-icon name="{{expandedProjectId === item.id ? 'arrow-up' : 'arrow-down'}}" size="16px" color="#999" />
+                </view>
+            </view>
+            <!-- Applications Section (Expandable) -->
+            <view wx:if="{{expandedProjectId === item.id}}" class="applications-section">
+                <!-- Loading Applications -->
+                <view wx:if="{{applicationsLoading}}" class="applications-loading">
+                    <van-loading size="20px">加载申请中...</van-loading>
+                </view>
+                <!-- Applications List -->
+                <view wx:elif="{{applications.length > 0}}" class="applications-list">
+                    <view class="application-item" wx:for="{{applications}}" wx:for-item="app" wx:key="id">
+                        <!-- Applicant Info -->
+                        <view class="applicant-header">
+                            <image class="avatar" src="{{app.applicant.avatarUrl}}" mode="aspectFill" />
+                            <view class="applicant-info">
+                                <text class="applicant-name">{{app.applicant.nickname}}</text>
+                                <view class="applicant-meta">
+                                    <text wx:if="{{app.applicant.school}}">
+                                        {{app.applicant.school.schoolName}}
+                                    </text>
+                                    <text wx:if="{{app.applicant.major}}">
+                                        · {{app.applicant.major.majorName}}
+                                    </text>
+                                </view>
+                            </view>
+                            <!-- Status Badge -->
+                            <view class="application-status">
+                                <van-tag wx:if="{{app.status === 0}}" type="warning" plain>
+                                    待审核
+                                </van-tag>
+                                <van-tag wx:elif="{{app.status === 1}}" type="success">已通过</van-tag>
+                                <van-tag wx:else type="danger">已拒绝</van-tag>
+                            </view>
+                        </view>
+                        <!-- Application Details -->
+                        <view class="application-details">
+                            <view wx:if="{{app.applyReason}}" class="detail-row">
+                                <text class="detail-label">申请理由:</text>
+                                <text class="detail-value">{{app.applyReason}}</text>
+                            </view>
+                            <view wx:if="{{app.contact}}" class="detail-row">
+                                <text class="detail-label">联系方式:</text>
+                                <text class="detail-value">{{app.contact}}</text>
+                            </view>
+                            <view wx:if="{{app.replyMsg}}" class="detail-row">
+                                <text class="detail-label">回复:</text>
+                                <text class="detail-value reply">{{app.replyMsg}}</text>
+                            </view>
+                        </view>
+                        <!-- Action Buttons (only for pending applications) -->
+                        <view wx:if="{{app.status === 0}}" class="application-actions">
+                            <van-button size="small" type="danger" plain bindtap="handleReject" data-app="{{app}}">
+                                拒绝
+                            </van-button>
+                            <van-button size="small" type="primary" bindtap="handleApprove" data-app="{{app}}">
+                                通过
+                            </van-button>
+                        </view>
+                    </view>
+                </view>
+                <!-- Empty State -->
+                <view wx:else class="applications-empty">
+                    <van-empty description="暂无申请" />
+                </view>
+            </view>
+        </view>
+        <!-- Load More -->
+        <view class="load-more" wx:if="{{loadingMore}}">
+            <van-loading size="20px">加载更多...</van-loading>
+        </view>
+        <view class="no-more" wx:elif="{{!hasMore && projects.length > 0}}">
+            <text>没有更多了</text>
+        </view>
+    </scroll-view>
+    <!-- Empty State -->
+    <view class="empty-container" wx:else>
+        <van-empty description="暂无项目" />
+    </view>
+</view>
+<!-- Review Dialog -->
+<van-dialog show="{{reviewDialogVisible}}" title="{{reviewAction === 1 ? '通过申请' : '拒绝申请'}}" show-cancel-button confirm-button-text="确定" cancel-button-text="取消" bind:confirm="submitReview" bind:cancel="closeReviewDialog">
+    <view class="dialog-content">
+        <text class="dialog-hint">{{reviewAction === 1 ? '是否通过该申请者？' : '是否拒绝该申请者？'}}</text>
+        <van-field value="{{replyMsg}}" label="回复消息" type="textarea" placeholder="选填：给申请者一些回复" autosize maxlength="200" show-word-limit bind:change="onReplyInput" />
+    </view>
+</van-dialog>

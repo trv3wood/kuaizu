@@ -5,6 +5,7 @@
     "pages/projects/projects",
     "pages/talent/talent",
     "pages/service/service",
+    "pages/my-projects/my-projects",
     "pages/login/login",
     "pages/edit-profile/edit-profile",
     "pages/my-orders/my-orders",

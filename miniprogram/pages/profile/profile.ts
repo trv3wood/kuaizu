@@ -7,6 +7,7 @@ Page({
         // 菜单列表
         menuList: [
             { icon: 'gem-o', title: '服务中心', url: '/pages/service/service' },
+            { icon: 'orders-o', title: '我的项目', url: '/pages/my-projects/my-projects' },
             { icon: 'service-o', title: '联系客服', url: '/pages/contact/contact' },
             { icon: 'info-o', title: '了解我们', url: '/pages/about/about' },
             { icon: 'setting-o', title: '设置', url: '/pages/settings/settings' }
