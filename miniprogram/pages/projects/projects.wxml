@@ -9,7 +9,7 @@
         </van-search>
     </view>
     <!-- 加载中 -->
-    <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading-container" wx:if="{{listLoading}}">
         <van-loading size="24px">加载中...</van-loading>
     </view>
     <!-- 项目列表 -->
@@ -44,10 +44,10 @@
             </view>
         </view>
         <!-- 加载更多 -->
-        <view class="load-more" wx:if="{{loadingMore}}">
+        <view class="load-more" wx:if="{{listLoadingMore}}">
             <van-loading size="20px">加载中...</van-loading>
         </view>
-        <view class="no-more" wx:elif="{{!hasMore}}">
+        <view class="no-more" wx:elif="{{!listHasMore}}">
             <text>没有更多了</text>
         </view>
     </view>

@@ -1,5 +1,6 @@
 // pages/my-projects/my-projects.ts
 import { applicationApi, projectApi } from '../../api/index'
+import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
 
 type ProjectVO = components['schemas']['ProjectVO']
@@ -7,13 +8,11 @@ type ProjectApplicationVO = components['schemas']['ProjectApplicationVO']
 type ApplicationStatus = components['schemas']['ApplicationStatus']
 
 Page({
+    behaviors: [listPaginationBehavior],
+
     data: {
+        // 项目列表（由behavior管理）
         projects: [] as ProjectVO[],
-        loading: true,
-        loadingMore: false,
-        hasMore: true,
-        page: 1,
-        size: 10,
 
         // 展开的项目ID
         expandedProjectId: null as number | null,
@@ -28,72 +27,22 @@ Page({
     },
 
     onLoad() {
-        this.loadMyProjects()
+        ; (this as any).initListConfig({ listKey: 'projects', pageSize: 10 })
+            ; (this as any).loadList()
     },
 
     onReachBottom() {
-        if (this.data.hasMore && !this.data.loadingMore) {
-            this.loadMoreProjects()
-        }
+        ; (this as any).loadMoreList()
     },
 
     /**
-     * 加载我的项目列表
+     * 实现数据获取方法（behavior要求）
      */
-    async loadMyProjects() {
-        this.setData({ loading: true })
-
-        try {
-            const res = await applicationApi.listMyProjects({
-                page: 1,
-                size: this.data.size
-            })
-
-            const projects = res.data?.list || []
-            const pageInfo = res.data?.pageInfo
-            const hasMore = pageInfo ? (pageInfo.page || 1) < (pageInfo.totalPages || 1) : false
-
-            this.setData({
-                projects,
-                page: 1,
-                hasMore,
-                loading: false
-            })
-        } catch (error) {
-            console.error('加载项目列表失败:', error)
-            this.setData({ loading: false })
-            wx.showToast({ title: '加载失败', icon: 'none' })
-        }
-    },
-
-    /**
-     * 加载更多项目
-     */
-    async loadMoreProjects() {
-        if (!this.data.hasMore || this.data.loadingMore) return
-
-        this.setData({ loadingMore: true })
-
-        try {
-            const nextPage = this.data.page + 1
-            const res = await applicationApi.listMyProjects({
-                page: nextPage,
-                size: this.data.size
-            })
-
-            const newProjects = res.data?.list || []
-            const pageInfo = res.data?.pageInfo
-            const hasMore = pageInfo ? (pageInfo.page || 1) < (pageInfo.totalPages || 1) : false
-
-            this.setData({
-                projects: [...this.data.projects, ...newProjects],
-                page: nextPage,
-                hasMore,
-                loadingMore: false
-            })
-        } catch (error) {
-            console.error('加载更多失败:', error)
-            this.setData({ loadingMore: false })
+    async fetchListData(params: { page: number, size: number }): Promise<ListResponse<ProjectVO>> {
+        const res = await applicationApi.listMyProjects(params)
+        return {
+            list: res.data?.list || [],
+            pageInfo: res.data?.pageInfo
         }
     },
 
@@ -236,8 +185,8 @@ Page({
                             title: '已下架',
                             icon: 'success'
                         })
-                        // 重新加载项目列表
-                        this.loadMyProjects()
+                            // 重新加载项目列表
+                            ; (this as any).loadList()
                     } catch (error) {
                         console.error('下架项目失败:', error)
                         wx.showToast({ title: '下架失败', icon: 'none' })
@@ -255,30 +204,5 @@ Page({
         wx.navigateTo({
             url: `/pages/edit-project/edit-project?id=${id}`
         })
-    },
-
-    /**
-     * 获取项目状态文本
-     */
-    getProjectStatusText(status?: number): string {
-        switch (status) {
-            case 0: return '待审核'
-            case 1: return '进行中'
-            case 2: return '已驳回'
-            case 3: return '已关闭'
-            default: return '未知'
-        }
-    },
-
-    /**
-     * 获取申请状态文本
-     */
-    getApplicationStatusText(status?: number): string {
-        switch (status) {
-            case 0: return '待审核'
-            case 1: return '已通过'
-            case 2: return '已拒绝'
-            default: return '未知'
-        }
     }
 })

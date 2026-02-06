@@ -1,7 +1,7 @@
 <!-- pages/my-projects/my-projects.wxml -->
 <view class="my-projects-container">
     <!-- Loading State -->
-    <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading-container" wx:if="{{listLoading}}">
         <van-loading size="24px">加载中...</van-loading>
     </view>
     <!-- Project List -->
@@ -91,10 +91,10 @@
             </view>
         </view>
         <!-- Load More -->
-        <view class="load-more" wx:if="{{loadingMore}}">
+        <view class="load-more" wx:if="{{listLoadingMore}}">
             <van-loading size="20px">加载更多...</van-loading>
         </view>
-        <view class="no-more" wx:elif="{{!hasMore && projects.length > 0}}">
+        <view class="no-more" wx:elif="{{!listHasMore && projects.length > 0}}">
             <text>没有更多了</text>
         </view>
     </scroll-view>

@@ -1,6 +1,7 @@
 // pages/projects/projects.ts
 import { projectApi } from '../../api/index'
 import { schoolPickerBehavior } from '../../behaviors/schoolPicker'
+import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
 
 type ProjectVO = components['schemas']['ProjectVO']
@@ -8,7 +9,7 @@ type ProjectStatus = components['schemas']['ProjectStatus']
 type Direction = components['schemas']['Direction']
 
 Page({
-    behaviors: [schoolPickerBehavior],
+    behaviors: [schoolPickerBehavior, listPaginationBehavior],
     options: {
         styleIsolation: 'apply-shared'
     },
@@ -25,13 +26,8 @@ Page({
         },
         showFilterPopup: false,
 
-        // 项目列表
+        // 项目列表（由behavior管理）
         projects: [] as ProjectVO[],
-        loading: true,
-        loadingMore: false,
-        hasMore: true,
-        page: 1,
-        size: 10,
 
         // 筛选器选项
         directions: [
@@ -48,95 +44,38 @@ Page({
     },
 
     onLoad() {
-        ; (this as any).loadSchools()
-        this.loadProjects()
+        ; (this as any).initListConfig({ listKey: 'projects', pageSize: 10 })
+            ; (this as any).loadSchools()
+            ; (this as any).loadList()
     },
 
     onPullDownRefresh() {
-        this.setData({ page: 1, hasMore: true })
-        this.loadProjects().then(() => {
-            wx.stopPullDownRefresh()
-        })
+        ; (this as any).refreshList()
     },
 
     onReachBottom() {
-        if (this.data.hasMore && !this.data.loadingMore) {
-            this.loadMoreProjects()
+        ; (this as any).loadMoreList()
+    },
+
+    /**
+     * 实现数据获取方法（behavior要求）
+     */
+    async fetchListData(params: { page: number, size: number }): Promise<ListResponse<ProjectVO>> {
+        const res = await projectApi.listProjects(params)
+        return {
+            list: res.data?.list || [],
+            pageInfo: res.data?.pageInfo
         }
     },
 
     /**
-     * 加载项目列表
+     * 提供筛选参数（behavior可选）
      */
-    async loadProjects() {
-        this.setData({ loading: true })
-
-        try {
-            const { keyword, filters, size } = this.data
-
-            // 构建参数对象，只包含有效值
-            const params: any = {
-                page: 1,
-                size,
-                ...filters
-            }
-            if (keyword) params.keyword = keyword
-
-            const res = await projectApi.listProjects(params)
-
-            const projects = res.data?.list || []
-            const pageInfo = res.data?.pageInfo
-            const hasMore = pageInfo ? (pageInfo.page || 1) < (pageInfo.totalPages || 1) : false
-
-            this.setData({
-                projects,
-                page: 1,
-                hasMore,
-                loading: false
-            })
-        } catch (error) {
-            console.error('加载项目列表失败:', error)
-            this.setData({ loading: false })
-            wx.showToast({ title: '加载失败', icon: 'none' })
-        }
-    },
-
-    /**
-     * 加载更多项目
-     */
-    async loadMoreProjects() {
-        if (!this.data.hasMore || this.data.loadingMore) return
-
-        this.setData({ loadingMore: true })
-
-        try {
-            const { keyword, filters, page, size, projects } = this.data
-            const nextPage = page + 1
-
-            // 构建参数对象，只包含有效值
-            const params: any = {
-                page: nextPage,
-                size,
-                filters
-            }
-            if (keyword) params.keyword = keyword
-
-            const res = await projectApi.listProjects(params)
-
-            const newProjects = res.data?.list || []
-            const pageInfo = res.data?.pageInfo
-            const hasMore = pageInfo ? (pageInfo.page || 1) < (pageInfo.totalPages || 1) : false
-
-            this.setData({
-                projects: [...projects, ...newProjects],
-                page: nextPage,
-                hasMore,
-                loadingMore: false
-            })
-        } catch (error) {
-            console.error('加载更多失败:', error)
-            this.setData({ loadingMore: false })
-        }
+    getListParams() {
+        const { keyword, filters } = this.data
+        const params: any = { ...filters }
+        if (keyword) params.keyword = keyword
+        return params
     },
 
     /**
@@ -144,7 +83,7 @@ Page({
      */
     handleSearch(e: any) {
         this.setData({ keyword: e.detail })
-        this.loadProjects()
+            ; (this as any).loadList()
     },
 
     /**
@@ -152,7 +91,7 @@ Page({
      */
     handleSearchCancel() {
         this.setData({ keyword: '' })
-        this.loadProjects()
+            ; (this as any).loadList()
     },
 
     /**
@@ -167,7 +106,7 @@ Page({
      */
     closeFilter() {
         this.setData({ showFilterPopup: false })
-        this.loadProjects()
+            ; (this as any).loadList()
     },
 
     /**
@@ -181,7 +120,7 @@ Page({
             'filters.direction': direction,
             showFilterPopup: false
         })
-        this.loadProjects()
+            ; (this as any).loadList()
     },
 
     /**
@@ -194,7 +133,7 @@ Page({
             'filters.direction': undefined,
             showFilterPopup: false
         })
-        this.loadProjects()
+            ; (this as any).loadList()
     },
 
     /**
@@ -211,7 +150,7 @@ Page({
      * 发布项目
      */
     handlePublish() {
-        wx.navigateTo({ url: '/pages/create-project/create-project' })
+        wx.navigateTo({ url: '/pages/edit-project/edit-project' })
     },
 
     /**
