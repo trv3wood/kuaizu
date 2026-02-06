@@ -20,7 +20,7 @@
     </view>
     <!-- 数据统计 -->
     <view class="stats-row">
-      <view class="stat-item">
+      <view class="stat-item" bindtap="handleOliveBranchTap">
         <text class="stat-value">{{oliveBranchCount || 0}}</text>
         <text class="stat-label">橄榄枝</text>
       </view>

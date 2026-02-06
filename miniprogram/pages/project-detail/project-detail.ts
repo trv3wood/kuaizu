@@ -10,11 +10,13 @@ Page({
         id: 0,
         project: null as ProjectDetailVO | null,
         loading: true,
-        applying: false
+        applying: false,
+        isPublicContact: false
     },
 
     onLoad(options) {
         const id = Number(options.id)
+        this.setData({ isPublicContact: options.contact === 'true' })
         if (id) {
             this.setData({ id })
             this.loadProject(id)

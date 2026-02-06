@@ -8,6 +8,7 @@ Page({
         menuList: [
             { icon: 'gem-o', title: '服务中心', url: '/pages/service/service' },
             { icon: 'orders-o', title: '我的项目', url: '/pages/my-projects/my-projects' },
+            { icon: 'envelop-o', title: '收到的橄榄枝', url: '/pages/olive-branches/olive-branches' },
             { icon: 'service-o', title: '联系客服', url: '/pages/contact/contact' },
             { icon: 'info-o', title: '了解我们', url: '/pages/about/about' },
             { icon: 'setting-o', title: '设置', url: '/pages/settings/settings' }
@@ -92,5 +93,12 @@ Page({
                 }
             }
         })
+    },
+
+    /**
+     * 跳转橄榄枝页面
+     */
+    handleOliveBranchTap() {
+        wx.navigateTo({ url: '/pages/olive-branches/olive-branches' })
     }
 })
