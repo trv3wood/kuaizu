@@ -238,6 +238,20 @@ export const oliveBranchApi = {
      */
     handleOliveBranch(id: number, action: 'ACCEPT' | 'REJECT') {
         return http.patch<Schemas['BaseResponse']>(`/olive-branches/${id}`, { action })
+    },
+
+    /**
+     * 查看我发出的橄榄枝邀请
+     */
+    getMySentOliveBranches(params?: {
+        page?: number
+        size?: number
+        status?: Schemas['OliveBranchStatus']
+    }) {
+        return http.get<Schemas['BaseResponse'] & { data: Schemas['OliveBranchPageResponse'] }>(
+            '/users/me/sent-olive-branches',
+            params
+        )
     }
 }
 

@@ -13,6 +13,9 @@ Page({
         // 橄榄枝列表（由behavior管理）
         branches: [] as OliveBranchVO[],
 
+        // 当前视图模式: 'received' | 'sent'
+        viewMode: 'received' as 'received' | 'sent',
+
         // 当前筛选状态
         currentStatus: null as OliveBranchStatus | null,
 
@@ -28,7 +31,13 @@ Page({
         processingId: null as number | null
     },
 
-    onLoad() {
+    onLoad(options) {
+        // 支持通过参数指定初始视图模式
+        const mode = options.mode as 'received' | 'sent' | undefined
+        if (mode === 'sent') {
+            this.setData({ viewMode: 'sent' })
+            wx.setNavigationBarTitle({ title: '发出的橄榄枝' })
+        }
         ; (this as any).initListConfig({ listKey: 'branches', pageSize: 10 })
             ; (this as any).loadList()
     },
@@ -45,7 +54,19 @@ Page({
      * 实现数据获取方法（behavior要求）
      */
     async fetchListData(params: { page: number, size: number }): Promise<ListResponse<OliveBranchVO>> {
-        const res = await userApi.getMyReceivedOliveBranches(params)
+        const { viewMode, currentStatus } = this.data
+        const queryParams = {
+            ...params,
+            ...(currentStatus !== null ? { status: currentStatus } : {})
+        }
+
+        let res
+        if (viewMode === 'sent') {
+            res = await oliveBranchApi.getMySentOliveBranches(queryParams)
+        } else {
+            res = await userApi.getMyReceivedOliveBranches(queryParams)
+        }
+
         return {
             list: res.data?.list || [],
             pageInfo: res.data?.pageInfo
@@ -58,6 +79,22 @@ Page({
     getListParams() {
         const { currentStatus } = this.data
         return currentStatus !== null ? { status: currentStatus } : {}
+    },
+
+    /**
+     * 切换视图模式
+     */
+    handleViewModeChange(e: WechatMiniprogram.TouchEvent) {
+        const { mode } = e.currentTarget.dataset as { mode: 'received' | 'sent' }
+        if (mode === this.data.viewMode) return
+
+        this.setData({
+            viewMode: mode,
+            currentStatus: null,
+            branches: []
+        })
+        wx.setNavigationBarTitle({ title: mode === 'sent' ? '发出的橄榄枝' : '收到的橄榄枝' })
+            ; (this as any).loadList()
     },
 
     /**
@@ -130,36 +167,22 @@ Page({
     },
 
     /**
-     * 获取状态文本
-     */
-    getStatusText(status?: number): string {
-        switch (status) {
-            case 0: return '待处理'
-            case 1: return '已接受'
-            case 2: return '已拒绝'
-            case 3: return '已忽略'
-            default: return '未知'
-        }
-    },
-
-    /**
-     * 获取类型文本
-     */
-    getTypeText(type?: number): string {
-        switch (type) {
-            case 1: return '人才互联'
-            case 2: return '项目邀请'
-            default: return '邀请'
-        }
-    },
-
-    /**
      * 查看发送者详情
      */
     handleViewSender(e: WechatMiniprogram.TouchEvent) {
         const { sender } = e.currentTarget.dataset as { sender: OliveBranchVO['sender'] }
         if (sender?.id) {
             // 如果有人才卡片可以跳转，这里暂时用提示代替
+            wx.showToast({ title: '查看用户资料', icon: 'none' })
+        }
+    },
+
+    /**
+     * 查看接收者详情（发出视图）
+     */
+    handleViewReceiver(e: WechatMiniprogram.TouchEvent) {
+        const { receiver } = e.currentTarget.dataset as { receiver: OliveBranchVO['receiver'] }
+        if (receiver?.id) {
             wx.showToast({ title: '查看用户资料', icon: 'none' })
         }
     },

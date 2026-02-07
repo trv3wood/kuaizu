@@ -8,7 +8,7 @@ Page({
         menuList: [
             { icon: 'gem-o', title: '服务中心', url: '/pages/service/service' },
             { icon: 'orders-o', title: '我的项目', url: '/pages/my-projects/my-projects' },
-            { icon: 'envelop-o', title: '收到的橄榄枝', url: '/pages/olive-branches/olive-branches' },
+            { icon: 'envelop-o', title: '我的橄榄枝', url: '/pages/olive-branches/olive-branches' },
             { icon: 'service-o', title: '联系客服', url: '/pages/contact/contact' },
             { icon: 'info-o', title: '了解我们', url: '/pages/about/about' },
             { icon: 'setting-o', title: '设置', url: '/pages/settings/settings' }
@@ -42,18 +42,6 @@ Page({
         this.storeBindings?.destroyStoreBindings()
     },
 
-    /**
-     * 获取认证状态文本
-     */
-    getAuthStatusText(): string {
-        const status = userStore.user?.authStatus
-        switch (status) {
-            case 0: return '未认证'
-            case 1: return '已认证'
-            case 2: return '认证失败'
-            default: return '未认证'
-        }
-    },
 
     /**
      * 跳转到编辑资料页

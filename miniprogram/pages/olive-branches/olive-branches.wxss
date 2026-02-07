@@ -4,6 +4,41 @@
     background: linear-gradient(180deg, #f6f7fb 0%, #eef1f8 100%);
 }
 
+/* 视图切换标签 */
+.view-tabs {
+    display: flex;
+    background: #fff;
+    padding: 24rpx 48rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.view-tab {
+    flex: 1;
+    text-align: center;
+    padding: 20rpx 0;
+    font-size: 30rpx;
+    color: #666;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.view-tab.active {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.view-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64rpx;
+    height: 6rpx;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 3rpx;
+}
+
 /* 状态筛选标签 */
 .status-tabs {
     display: flex;
