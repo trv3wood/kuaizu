@@ -1,0 +1,65 @@
+<!-- pages/payment-test/payment-test.wxml -->
+<view class="payment-test-container">
+    <!-- 标题 -->
+    <view class="section-title">
+        <text class="title">微信支付测试</text>
+        <text class="subtitle">选择商品并完成支付</text>
+    </view>
+    <!-- 加载中 -->
+    <view class="loading-container" wx:if="{{loading}}">
+        <van-loading size="24px">加载商品中...</van-loading>
+    </view>
+    <!-- 商品列表 -->
+    <view class="product-list" wx:elif="{{products.length > 0}}">
+        <view class="product-card {{selectedProduct.id === item.id ? 'selected' : ''}}" wx:for="{{products}}" wx:key="id" data-product="{{item}}" bindtap="handleSelectProduct">
+            <view class="product-info">
+                <text class="product-name">{{item.name}}</text>
+                <text class="product-desc">{{item.description || '暂无描述'}}</text>
+            </view>
+            <view class="product-price">
+                <text class="price">¥{{item.price}}</text>
+                <van-icon wx:if="{{selectedProduct.id === item.id}}" name="success" color="#667eea" size="20px" />
+            </view>
+        </view>
+    </view>
+    <!-- 空状态 -->
+    <view class="empty-container" wx:else>
+        <van-empty description="暂无商品" />
+    </view>
+    <!-- 当前订单信息 -->
+    <view class="order-info" wx:if="{{currentOrder}}">
+        <view class="info-title">订单信息</view>
+        <view class="info-row">
+            <text class="label">订单ID:</text>
+            <text class="value">{{currentOrder.id}}</text>
+        </view>
+        <view class="info-row">
+            <text class="label">商品:</text>
+            <text class="value">{{currentOrder.productName}}</text>
+        </view>
+        <view class="info-row">
+            <text class="label">金额:</text>
+            <text class="value price">¥{{currentOrder.actualPaid}}</text>
+        </view>
+        <view class="info-row">
+            <text class="label">状态:</text>
+            <van-tag wx:if="{{currentOrder.status === 0}}" type="warning">待支付</van-tag>
+            <van-tag wx:elif="{{currentOrder.status === 1}}" type="success">已支付</van-tag>
+            <van-tag wx:elif="{{currentOrder.status === 2}}" type="danger">已取消</van-tag>
+            <van-tag wx:else type="default">未知</van-tag>
+        </view>
+    </view>
+    <!-- 支付按钮 -->
+    <view class="pay-section">
+        <view class="selected-info" wx:if="{{selectedProduct}}">
+            <text class="selected-name">{{selectedProduct.name}}</text>
+            <text class="selected-price">¥{{selectedProduct.price}}</text>
+        </view>
+        <view class="no-selection" wx:else>
+            <text>请选择商品</text>
+        </view>
+        <van-button type="primary" block round disabled="{{!selectedProduct}}" loading="{{ordering}}" loading-text="处理中..." bindtap="handlePay">
+            立即支付
+        </van-button>
+    </view>
+</view>

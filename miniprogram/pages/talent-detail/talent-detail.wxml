@@ -39,14 +39,6 @@
             <text class="section-title">项目经历</text>
             <text class="section-content">{{profile.projectExperience}}</text>
         </view>
-        <!-- 联系方式（已建立联系时显示） -->
-        <!-- <view class="section contact-section" wx:if="{{profile.contact}}">
-            <text class="section-title">联系方式</text>
-            <view class="contact-row">
-                <text class="contact-text">{{profile.contact}}</text>
-                <button class="copy-btn" bindtap="handleCopyContact">复制</button>
-            </view>
-        </view> -->
         <!-- 底部操作栏 -->
         <view class="action-bar">
             <button class="send-btn" loading="{{sending}}" disabled="{{sending}}" bindtap="handleSendOliveBranch">
@@ -59,4 +51,36 @@
     <view class="empty-container" wx:else>
         <van-empty description="人才信息不存在" />
     </view>
+    <!-- 购买橄榄枝弹窗 -->
+    <van-popup show="{{showPurchasePopup}}" position="bottom" round bind:close="handleClosePurchase" custom-style="max-height: 60vh;">
+        <view class="purchase-popup">
+            <view class="popup-header">
+                <text class="popup-title">购买橄榄枝</text>
+                <van-icon name="cross" size="20px" color="#999" bindtap="handleClosePurchase" />
+            </view>
+            <!-- 商品信息 -->
+            <view class="product-info">
+                <view class="product-icon">🫒</view>
+                <view class="product-detail">
+                    <text class="product-name">橄榄枝额度</text>
+                    <text class="product-desc">用于向心仪人才发送邀请</text>
+                </view>
+                <text class="product-price">¥{{unitPrice}}/个</text>
+            </view>
+            <!-- 数量选择 -->
+            <view class="quantity-section">
+                <text class="quantity-label">购买数量</text>
+                <van-stepper value="{{quantity}}" min="1" max="99" bind:change="handleQuantityChange" button-size="28px" input-width="50px" />
+            </view>
+            <!-- 总价 -->
+            <view class="total-section">
+                <text class="total-label">合计</text>
+                <text class="total-price">¥{{quantity * unitPrice}}</text>
+            </view>
+            <!-- 购买按钮 -->
+            <van-button type="primary" block round loading="{{purchasing}}" loading-text="处理中..." custom-class="purchase-btn" bindtap="handlePurchase">
+                立即购买
+            </van-button>
+        </view>
+    </van-popup>
 </view>

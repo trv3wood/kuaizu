@@ -153,3 +153,100 @@
 .empty-container {
     padding: 100rpx 0;
 }
+
+/* ==================== 购买弹窗 ==================== */
+.purchase-popup {
+    padding: 32rpx;
+    padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32rpx;
+}
+
+.popup-title {
+    font-size: 36rpx;
+    font-weight: 600;
+    color: #333;
+}
+
+/* 商品信息 */
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 24rpx;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+    padding: 32rpx;
+    border-radius: 20rpx;
+    margin-bottom: 32rpx;
+}
+
+.product-icon {
+    font-size: 48rpx;
+}
+
+.product-detail {
+    flex: 1;
+}
+
+.product-name {
+    display: block;
+    font-size: 32rpx;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8rpx;
+}
+
+.product-desc {
+    font-size: 26rpx;
+    color: #999;
+}
+
+.product-price {
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #667eea;
+}
+
+/* 数量选择 */
+.quantity-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24rpx 0;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.quantity-label {
+    font-size: 30rpx;
+    color: #333;
+}
+
+/* 总价 */
+.total-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32rpx 0;
+}
+
+.total-label {
+    font-size: 30rpx;
+    color: #333;
+}
+
+.total-price {
+    font-size: 44rpx;
+    font-weight: 700;
+    color: #ee0a24;
+}
+
+/* 购买按钮 */
+.purchase-btn {
+    margin-top: 16rpx;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border: none !important;
+}

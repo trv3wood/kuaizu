@@ -13,7 +13,8 @@
     "pages/talent-card/talent-card",
     "pages/talent-detail/talent-detail",
     "pages/project-detail/project-detail",
-    "pages/olive-branches/olive-branches"
+    "pages/olive-branches/olive-branches",
+    "pages/payment-test/payment-test"
   ],
   "window": {
     "navigationBarTextStyle": "black",

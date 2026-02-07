@@ -250,6 +250,15 @@ export const productApi = {
         return http.get<Schemas['BaseResponse'] & { data: Schemas['ProductVO'][] }>(
             '/products'
         )
+    },
+
+    /**
+     * 获取商品详情
+     */
+    getProductDetail(id: number) {
+        return http.get<Schemas['BaseResponse'] & { data: Schemas['ProductVO'] }>(
+            `/products/${id}`
+        )
     }
 }
 
@@ -258,10 +267,10 @@ export const orderApi = {
     /**
      * 创建订单
      */
-    createOrder(productId: number) {
+    createOrder(body: Array<Schemas['CreateOrderDTO']>) {
         return http.post<Schemas['BaseResponse'] & { data: Schemas['OrderVO'] }>(
             '/orders',
-            { productId }
+            body
         )
     },
 
