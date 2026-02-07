@@ -14,6 +14,7 @@
     "pages/talent-detail/talent-detail",
     "pages/project-detail/project-detail",
     "pages/olive-branches/olive-branches",
+    "pages/my-applications/my-applications",
     "pages/payment-test/payment-test"
   ],
   "window": {

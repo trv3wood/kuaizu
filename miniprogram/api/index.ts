@@ -180,6 +180,20 @@ export const applicationApi = {
         }
     ) {
         return http.patch<Schemas['BaseResponse']>(`/project-applications/${id}`, data)
+    },
+
+    /**
+     * 获取我的申请
+     */
+    listMyApplications(params?: {
+        page?: number
+        size?: number
+        status?: Schemas['ApplicationStatus']
+    }) {
+        return http.get<Schemas['BaseResponse'] & { data: Schemas['ApplicationPageResponse'] }>(
+            '/project-applications/my',
+            params
+        )
     }
 }
 
