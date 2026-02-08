@@ -17,6 +17,10 @@
                     </view>
                 </view>
                 <view class="header-right">
+                    <view class="promote-container" catchtap="handlePromoteProject" data-id="{{item.id}}">
+                        <van-icon name="fire-o" size="24px" color="#ee0a24" class="promote-icon" />
+                        <text class="promote-text">推广</text>
+                    </view>
                     <van-icon name="edit" size="18px" color="#667eea" class="edit-icon" catchtap="handleEditProject" data-id="{{item.id}}" />
                     <van-icon name="delete-o" size="18px" color="#ee0a24" class="delete-icon" catchtap="handleDeleteProject" data-id="{{item.id}}" data-name="{{item.name}}" />
                     <van-tag wx:if="{{item.status === 0}}" type="default" plain>待审核</van-tag>
@@ -108,5 +112,28 @@
     <view class="dialog-content">
         <text class="dialog-hint">{{reviewAction === 1 ? '是否通过该申请者？' : '是否拒绝该申请者？'}}</text>
         <van-field value="{{replyMsg}}" label="回复消息" type="textarea" placeholder="选填：给申请者一些回复" autosize maxlength="200" show-word-limit bind:change="onReplyInput" />
+    </view>
+</van-dialog>
+<!-- Promotion Dialog -->
+<van-dialog use-slot show="{{promotionDialogVisible}}" title="项目推广" show-cancel-button confirm-button-text="确认支付" cancel-button-text="取消" bind:confirm="submitPromotion" bind:cancel="closePromotionDialog">
+    <view class="dialog-content" style="padding: 20px;">
+        <view style="margin-bottom: 15px; font-size: 14px; color: #666;">通过邮件推广，让更多人看到你的项目。</view>
+        <view style="margin-bottom: 10px;">
+            <!-- Product Info -->
+            <view wx:if="{{promotionProduct}}" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <text>单价</text>
+                <text style="color: #ee0a24; font-weight: bold;">
+                    ¥{{promotionProduct.price}} / 人
+                </text>
+            </view>
+        </view>
+        <van-field value="{{promotionQuantity}}" label="推广人数" type="number" placeholder="输入人数" border="{{ true }}" bind:change="onPromotionQuantityChange" />
+        <view style="margin-top: 15px; text-align: right; border-top: 1px solid #f5f5f5; padding-top: 15px;">
+            <text style="font-size: 14px; margin-right: 5px;">总计:</text>
+            <text style="color: #ee0a24; font-size: 18px; font-weight: bold;" wx:if="{{promotionProduct}}">
+                ¥{{(promotionProduct.price * promotionQuantity) || 0}}
+            </text>
+            <text wx:else>计算中...</text>
+        </view>
     </view>
 </van-dialog>

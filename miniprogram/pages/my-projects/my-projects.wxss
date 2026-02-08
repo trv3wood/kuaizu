@@ -80,6 +80,49 @@
     transform: scale(0.9);
 }
 
+/* Promote Container */
+.promote-container {
+    display: flex;
+    align-items: center;
+    padding: 8rpx 16rpx;
+    background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+    border: 1rpx solid #ffcccc;
+    border-radius: 20rpx;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2rpx 8rpx rgba(238, 10, 36, 0.1);
+}
+
+.promote-container:active {
+    background: linear-gradient(135deg, #ffe6e6, #ffcccc);
+    transform: scale(0.95);
+    box-shadow: 0 4rpx 12rpx rgba(238, 10, 36, 0.2);
+}
+
+.promote-icon {
+    margin-right: 8rpx;
+    animation: firePulse 2s infinite;
+}
+
+.promote-text {
+    font-size: 24rpx;
+    font-weight: bold;
+    color: #ee0a24;
+    text-shadow: 0 1rpx 2rpx rgba(255, 255, 255, 0.8);
+}
+
+@keyframes firePulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 /* Applications Section */
 .applications-section {
     background: #fafafa;

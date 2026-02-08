@@ -173,6 +173,10 @@ Page({
                 })
 
                 wx.showToast({ title: '保存成功', icon: 'success' })
+                // 返回上一页
+                setTimeout(() => {
+                    wx.navigateBack()
+                }, 1500)
             } else {
                 // 创建项目
                 await projectApi.createProject({
@@ -184,12 +188,11 @@ Page({
                 })
 
                 wx.showToast({ title: '发布成功', icon: 'success' })
+                wx.navigateTo({
+                    url: '/pages/my-projects/my-projects'
+                })
             }
 
-            // 返回上一页
-            setTimeout(() => {
-                wx.navigateBack()
-            }, 1500)
         } catch (error) {
             console.error('提交失败:', error)
             wx.showToast({ title: '提交失败', icon: 'none' })
