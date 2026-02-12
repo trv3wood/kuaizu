@@ -40,5 +40,14 @@ export const talentApi = {
         return http.get<Schemas['BaseResponse'] & { data: Schemas['TalentProfileDetailVO'] }>(
             `/talent-profiles/${id}`
         )
+    },
+
+    /**
+     * 查看个人人才卡片
+     */
+    getMyTalentProfile() {
+        return http.get<Schemas['BaseResponse'] & { data: Schemas['TalentProfileDetailVO'] }>(
+            '/talent-profiles/my'
+        )
     }
 }

@@ -1,2 +1,2 @@
 # kuaizu
-[API Document](https://github.com/trv3wood/kuaizu-server/blob/main/api/openapi.yaml)
+[API Document](https://github.com/trv3wood/kuaizu-server/blob/main/api/service.yaml)

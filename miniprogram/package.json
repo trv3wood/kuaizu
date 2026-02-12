@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "generate": "npx openapi-typescript openapi.yaml -o api/schema.d.ts"
+    "generate": "npx openapi-typescript service.yaml -o api/schema.d.ts"
   },
   "keywords": [],
   "author": "",
