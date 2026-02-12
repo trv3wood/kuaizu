@@ -49,5 +49,12 @@ export const talentApi = {
         return http.get<Schemas['BaseResponse'] & { data: Schemas['TalentProfileDetailVO'] }>(
             '/talent-profiles/my'
         )
+    },
+
+    /**
+     * 删除我的人才卡片
+     */
+    deleteMyTalentProfile() {
+        return http.delete<Schemas['BaseResponse']>('/talent-profiles/my')
     }
 }

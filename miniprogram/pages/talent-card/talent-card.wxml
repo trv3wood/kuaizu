@@ -46,8 +46,11 @@
                 <view class="section-title">项目经历</view>
                 <text class="section-content">{{profile.projectExperience}}</text>
             </view>
-            <!-- 编辑按钮 -->
-            <view class="action-bar">
+            <!-- 操作按钮 -->
+            <view class="action-bar view-actions">
+                <button class="unpublish-btn" bindtap="handleUnpublish" wx:if="{{profile.status === 1}}">
+                    下架名片
+                </button>
                 <button class="edit-btn" bindtap="handleEdit">编辑名片</button>
             </view>
         </view>

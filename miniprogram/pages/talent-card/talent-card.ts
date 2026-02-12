@@ -123,6 +123,24 @@ Page({
             }
         })
     },
+    handleUnpublish() {
+        wx.showModal({
+            title: '提示',
+            content: '确定要下架名片吗？',
+            success: async (res) => {
+                if (res.confirm) {
+                    try {
+                        await talentApi.deleteMyTalentProfile()
+                        wx.showToast({ title: '下架成功', icon: 'success' })
+                        this.loadProfile()
+                    } catch (error) {
+                        console.error('下架失败:', error)
+                        wx.showToast({ title: '下架失败', icon: 'none' })
+                    }
+                }
+            }
+        })
+    },
 
     handleCancel() {
         if (this.data.profile) {
