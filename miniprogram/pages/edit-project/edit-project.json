@@ -1,0 +1,12 @@
+{
+    "navigationBarTitleText": "发布项目",
+    "usingComponents": {
+        "van-field": "@vant/weapp/field/index",
+        "van-stepper": "@vant/weapp/stepper/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-search": "@vant/weapp/search/index",
+        "van-icon": "@vant/weapp/icon/index"
+    }
+}

@@ -1,0 +1,93 @@
+<!-- pages/olive-branches/olive-branches.wxml -->
+<view class="olive-branches-container">
+    <!-- 视图切换标签 -->
+    <view class="view-tabs">
+        <view class="view-tab {{viewMode === 'received' ? 'active' : ''}}" data-mode="received" bindtap="handleViewModeChange">
+            收到的
+        </view>
+        <view class="view-tab {{viewMode === 'sent' ? 'active' : ''}}" data-mode="sent" bindtap="handleViewModeChange">
+            发出的
+        </view>
+    </view>
+    <!-- 状态筛选标签 -->
+    <view class="status-tabs">
+        <view wx:for="{{statusTabs}}" wx:key="value" class="tab-item {{currentStatus === item.value ? 'active' : ''}}" data-value="{{item.value}}" bindtap="handleStatusChange">
+            {{item.label}}
+        </view>
+    </view>
+    <!-- 加载中 -->
+    <view class="loading-container" wx:if="{{listLoading}}">
+        <van-loading size="24px">加载中...</van-loading>
+    </view>
+    <!-- 邀请列表 -->
+    <view class="branch-list" wx:elif="{{branches.length > 0}}">
+        <view class="branch-card" wx:for="{{branches}}" wx:key="id">
+            <!-- 卡片头部 - 收到视图 -->
+            <view class="card-header" wx:if="{{viewMode === 'received'}}">
+                <view class="sender-info" data-sender="{{item.sender}}" bindtap="handleViewSender">
+                    <image class="avatar" src="{{item.sender.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
+                    <view class="info">
+                        <text class="name">{{item.sender.nickname || '匿名用户'}}</text>
+                        <text class="type">{{item.type === 2 ? '项目邀请' : '人才互联'}}</text>
+                    </view>
+                </view>
+                <view class="status-badge">
+                    <van-tag wx:if="{{item.status === 0}}" type="warning" plain>待处理</van-tag>
+                    <van-tag wx:elif="{{item.status === 1}}" type="success">已接受</van-tag>
+                    <van-tag wx:elif="{{item.status === 2}}" type="danger">已拒绝</van-tag>
+                    <van-tag wx:else type="default">已忽略</van-tag>
+                </view>
+            </view>
+            <!-- 卡片头部 - 发出视图 -->
+            <view class="card-header" wx:else>
+                <view class="sender-info" data-receiver="{{item.receiver}}" bindtap="handleViewReceiver">
+                    <image class="avatar" src="{{item.receiver.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
+                    <view class="info">
+                        <text class="name">{{item.receiver.nickname || '匿名用户'}}</text>
+                        <text class="type">{{item.type === 2 ? '项目邀请' : '人才互联'}}</text>
+                    </view>
+                </view>
+                <view class="status-badge">
+                    <van-tag wx:if="{{item.status === 0}}" type="warning" plain>待回复</van-tag>
+                    <van-tag wx:elif="{{item.status === 1}}" type="success">已接受</van-tag>
+                    <van-tag wx:elif="{{item.status === 2}}" type="danger">已拒绝</van-tag>
+                    <van-tag wx:else type="default">已忽略</van-tag>
+                </view>
+            </view>
+            <!-- 项目信息（如有） -->
+            <view class="project-info" wx:if="{{item.relatedProjectId && item.projectName}}" data-project-id="{{item.relatedProjectId}}" bindtap="handleViewProject">
+                <van-icon name="orders-o" size="14px" color="#667eea" />
+                <text class="project-name">{{item.projectName}}</text>
+                <van-icon name="arrow" size="12px" color="#999" />
+            </view>
+            <!-- 邀请消息 -->
+            <view class="message" wx:if="{{item.message}}">
+                <text>"{{item.message}}"</text>
+            </view>
+            <!-- 时间 -->
+            <view class="time">
+                <text>{{item.createdAt}}</text>
+            </view>
+            <!-- 操作按钮（仅收到视图的待处理状态显示） -->
+            <view class="actions" wx:if="{{viewMode === 'received' && item.status === 0}}">
+                <van-button size="small" type="danger" plain loading="{{processingId === item.id}}" disabled="{{processingId !== null}}" data-id="{{item.id}}" bindtap="handleReject">
+                    拒绝
+                </van-button>
+                <van-button size="small" type="primary" loading="{{processingId === item.id}}" disabled="{{processingId !== null}}" data-id="{{item.id}}" bindtap="handleAccept">
+                    接受
+                </van-button>
+            </view>
+        </view>
+        <!-- 加载更多 -->
+        <view class="load-more" wx:if="{{listLoadingMore}}">
+            <van-loading size="20px">加载中...</van-loading>
+        </view>
+        <view class="no-more" wx:elif="{{!listHasMore}}">
+            <text>没有更多了</text>
+        </view>
+    </view>
+    <!-- 空状态 -->
+    <view class="empty-container" wx:else>
+        <van-empty description="{{viewMode === 'sent' ? '暂无发出的橄榄枝' : '暂无收到的橄榄枝'}}" />
+    </view>
+</view>

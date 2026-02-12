@@ -1,0 +1,257 @@
+/* pages/my-projects/my-projects.wxss */
+.my-projects-container {
+    min-height: 100vh;
+    background: #f5f6fa;
+    padding-bottom: calc(40rpx + env(safe-area-inset-bottom));
+}
+
+/* Loading */
+.loading-container {
+    padding: 100rpx 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* Project List */
+.project-list {
+    height: 100vh;
+    padding: 24rpx;
+}
+
+.project-card {
+    background: #fff;
+    border-radius: 16rpx;
+    margin-bottom: 24rpx;
+    overflow: hidden;
+    box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+/* Project Header */
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+    transition: background 0.2s;
+}
+
+.project-header:active {
+    background: #f8f9fa;
+}
+
+.header-left {
+    flex: 1;
+    margin-right: 16rpx;
+}
+
+.project-name {
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 12rpx;
+}
+
+.project-meta {
+    display: flex;
+    gap: 16rpx;
+}
+
+.meta-item {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12rpx;
+}
+
+.delete-icon,
+.edit-icon {
+    padding: 8rpx;
+    transition: transform 0.2s;
+}
+
+.delete-icon:active,
+.edit-icon:active {
+    transform: scale(0.9);
+}
+
+/* Promote Container */
+.promote-container {
+    display: flex;
+    align-items: center;
+    padding: 8rpx 16rpx;
+    background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+    border: 1rpx solid #ffcccc;
+    border-radius: 20rpx;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2rpx 8rpx rgba(238, 10, 36, 0.1);
+}
+
+.promote-container:active {
+    background: linear-gradient(135deg, #ffe6e6, #ffcccc);
+    transform: scale(0.95);
+    box-shadow: 0 4rpx 12rpx rgba(238, 10, 36, 0.2);
+}
+
+.promote-icon {
+    margin-right: 8rpx;
+    animation: firePulse 2s infinite;
+}
+
+.promote-text {
+    font-size: 24rpx;
+    font-weight: bold;
+    color: #ee0a24;
+    text-shadow: 0 1rpx 2rpx rgba(255, 255, 255, 0.8);
+}
+
+@keyframes firePulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Applications Section */
+.applications-section {
+    background: #fafafa;
+}
+
+.applications-loading {
+    padding: 60rpx;
+    display: flex;
+    justify-content: center;
+}
+
+.applications-list {
+    padding: 16rpx 0;
+}
+
+.application-item {
+    background: #fff;
+    margin: 0 16rpx 16rpx;
+    padding: 20rpx;
+    border-radius: 12rpx;
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+/* Applicant Header */
+.applicant-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16rpx;
+}
+
+.avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    margin-right: 16rpx;
+    flex-shrink: 0;
+}
+
+.applicant-info {
+    flex: 1;
+}
+
+.applicant-name {
+    font-size: 28rpx;
+    font-weight: 500;
+    color: #333;
+    display: block;
+    margin-bottom: 8rpx;
+}
+
+.applicant-meta {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.application-status {
+    flex-shrink: 0;
+}
+
+/* Application Details */
+.application-details {
+    margin-bottom: 16rpx;
+}
+
+.detail-row {
+    margin-bottom: 12rpx;
+    display: flex;
+    gap: 8rpx;
+}
+
+.detail-row:last-child {
+    margin-bottom: 0;
+}
+
+.detail-label {
+    font-size: 26rpx;
+    color: #666;
+    flex-shrink: 0;
+}
+
+.detail-value {
+    font-size: 26rpx;
+    color: #333;
+    flex: 1;
+    word-break: break-all;
+}
+
+.detail-value.reply {
+    color: #667eea;
+}
+
+/* Action Buttons */
+.application-actions {
+    display: flex;
+    gap: 16rpx;
+    justify-content: flex-end;
+    padding-top: 16rpx;
+    border-top: 1rpx solid #f0f0f0;
+}
+
+/* Empty States */
+.applications-empty {
+    padding: 40rpx 0;
+}
+
+.empty-container {
+    padding: 100rpx 0;
+}
+
+/* Load More */
+.load-more,
+.no-more {
+    padding: 32rpx;
+    text-align: center;
+}
+
+.no-more text {
+    font-size: 24rpx;
+    color: #999;
+}
+
+/* Dialog Content */
+.dialog-content {
+    padding: 24rpx;
+}
+
+.dialog-hint {
+    display: block;
+    font-size: 28rpx;
+    color: #666;
+    margin-bottom: 20rpx;
+}

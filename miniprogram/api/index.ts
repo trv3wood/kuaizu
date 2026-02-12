@@ -124,6 +124,19 @@ export const projectApi = {
 // ==================== 项目申请模块 ====================
 export const applicationApi = {
     /**
+     * 查看我创建的项目
+     */
+    listMyProjects(params?: {
+        page?: number
+        size?: number
+        status?: Schemas['ProjectStatus']
+    }) {
+        return http.get<Schemas['BaseResponse'] & { data: Schemas['ProjectPageResponse'] }>(
+            '/projects/my',
+            params
+        )
+    },
+    /**
      * 查看某项目的申请列表
      */
     listProjectApplications(
@@ -167,6 +180,20 @@ export const applicationApi = {
         }
     ) {
         return http.patch<Schemas['BaseResponse']>(`/project-applications/${id}`, data)
+    },
+
+    /**
+     * 获取我的申请
+     */
+    listMyApplications(params?: {
+        page?: number
+        size?: number
+        status?: Schemas['ApplicationStatus']
+    }) {
+        return http.get<Schemas['BaseResponse'] & { data: Schemas['ApplicationPageResponse'] }>(
+            '/project-applications/my',
+            params
+        )
     }
 }
 
@@ -225,6 +252,20 @@ export const oliveBranchApi = {
      */
     handleOliveBranch(id: number, action: 'ACCEPT' | 'REJECT') {
         return http.patch<Schemas['BaseResponse']>(`/olive-branches/${id}`, { action })
+    },
+
+    /**
+     * 查看我发出的橄榄枝邀请
+     */
+    getMySentOliveBranches(params?: {
+        page?: number
+        size?: number
+        status?: Schemas['OliveBranchStatus']
+    }) {
+        return http.get<Schemas['BaseResponse'] & { data: Schemas['OliveBranchPageResponse'] }>(
+            '/users/me/sent-olive-branches',
+            params
+        )
     }
 }
 
@@ -237,6 +278,15 @@ export const productApi = {
         return http.get<Schemas['BaseResponse'] & { data: Schemas['ProductVO'][] }>(
             '/products'
         )
+    },
+
+    /**
+     * 获取商品详情
+     */
+    getProductDetail(id: number) {
+        return http.get<Schemas['BaseResponse'] & { data: Schemas['ProductVO'] }>(
+            `/products/${id}`
+        )
     }
 }
 
@@ -245,10 +295,10 @@ export const orderApi = {
     /**
      * 创建订单
      */
-    createOrder(productId: number) {
+    createOrder(body: Array<Schemas['CreateOrderDTO']>) {
         return http.post<Schemas['BaseResponse'] & { data: Schemas['OrderVO'] }>(
             '/orders',
-            { productId }
+            body
         )
     },
 
@@ -279,7 +329,7 @@ export const orderApi = {
         status?: number,
     }) {
         return http.get<Schemas['BaseResponse'] & { data: { list: Schemas['OrderVO'][], pageInfo: Schemas['PageInfo'] } }>(
-            `/orders/me`,
+            `/orders/my`,
             params
         )
     }
@@ -325,6 +375,35 @@ export const commonApi = {
     }
 }
 
+// ==================== 邮件推广模块 ====================
+export const emailPromotionApi = {
+    /**
+     * 邮件退订
+     */
+    emailUnsubscribe(token: string) {
+        return http.get<string>('/email/unsubscribe', { token })
+    },
+
+    /**
+     * 触发邮件推广
+     */
+    triggerEmailPromotion(data: Schemas['TriggerEmailPromotionDTO']) {
+        return http.post<Schemas['BaseResponse'] & { data: Schemas['TriggerEmailPromotionResponse'] }>(
+            '/email/promotion/trigger',
+            data
+        )
+    },
+
+    /**
+     * 我的推广记录列表
+     */
+    listMyEmailPromotions() {
+        return http.get<Schemas['BaseResponse'] & { data: { list: Schemas['EmailPromotionVO'][], total: number } }>(
+            '/email/promotions/my'
+        )
+    }
+}
+
 // 导出所有 API
 export default {
     auth: authApi,
@@ -336,5 +415,6 @@ export default {
     product: productApi,
     order: orderApi,
     dictionary: dictionaryApi,
-    common: commonApi
+    common: commonApi,
+    emailPromotion: emailPromotionApi
 }

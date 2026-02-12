@@ -46,15 +46,16 @@
         <view class="section" wx:if="{{project.creator}}">
             <text class="section-title">发起人</text>
             <view class="creator-info">
-                <image class="creator-avatar" src="{{project.creator.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+                <image class="creator-avatar" src="{{project.creator.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
                 <view class="creator-detail">
                     <text class="creator-name">{{project.creator.nickname || '匿名用户'}}</text>
-                    <text class="creator-school">{{project.creator.schoolName || '未知学校'}}</text>
+                    <text class="creator-uid">UID: {{project.creator.id || '未知'}}</text>
+                    <text class="creator-contact" wx:if="{{isPublicContact}}">联系电话：{{project.creator.phone || '未知'}}</text>
                 </view>
             </view>
         </view>
         <!-- 底部操作栏 -->
-        <view class="action-bar" wx:if="{{project.status === 1}}">
+        <view class="action-bar" wx:if="{{project.status === 1 && !isPublicContact}}">
             <button class="apply-btn" loading="{{applying}}" disabled="{{applying}}" bindtap="handleApply">
                 <van-icon name="plus" size="18px" color="#fff" custom-style="margin-right: 8rpx;" />
                 申请加入

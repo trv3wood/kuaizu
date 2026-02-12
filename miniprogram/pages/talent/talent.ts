@@ -2,12 +2,13 @@
 import { talentApi } from '../../api/index'
 import { schoolPickerBehavior } from '../../behaviors/schoolPicker'
 import { majorPickerBehavior } from '../../behaviors/majorPicker'
+import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
 
 type TalentProfileVO = components['schemas']['TalentProfileVO']
 
 Page({
-    behaviors: [schoolPickerBehavior, majorPickerBehavior],
+    behaviors: [schoolPickerBehavior, majorPickerBehavior, listPaginationBehavior],
 
     options: {
         styleIsolation: 'apply-shared'
@@ -24,19 +25,15 @@ Page({
         },
         showFilterPopup: false,
 
-        // 人才列表
-        talents: [] as TalentProfileVO[],
-        loading: true,
-        loadingMore: false,
-        hasMore: true,
-        page: 1,
-        size: 10
+        // 人才列表（由behavior管理）
+        talents: [] as TalentProfileVO[]
     },
 
     onLoad() {
-        ; (this as any).loadSchools()
+        ; (this as any).initListConfig({ listKey: 'talents', pageSize: 10 })
+            ; (this as any).loadSchools()
             ; (this as any).loadMajors()
-        this.loadTalents()
+            ; (this as any).loadList()
     },
 
     onShow() {
@@ -46,84 +43,34 @@ Page({
     },
 
     onPullDownRefresh() {
-        this.setData({ page: 1, hasMore: true })
-        this.loadTalents().then(() => {
-            wx.stopPullDownRefresh()
-        })
+        ; (this as any).refreshList()
     },
 
     onReachBottom() {
-        if (this.data.hasMore && !this.data.loadingMore) {
-            this.loadMoreTalents()
+        ; (this as any).loadMoreList()
+    },
+
+    /**
+     * 实现数据获取方法（behavior要求）
+     */
+    async fetchListData(params: { page: number, size: number }): Promise<ListResponse<TalentProfileVO>> {
+        const res = await talentApi.listTalentProfiles(params)
+        return {
+            list: res.data?.list || [],
+            pageInfo: res.data?.pageInfo
         }
     },
 
     /**
-     * 加载人才列表
+     * 提供筛选参数（behavior可选）
      */
-    async loadTalents() {
-        this.setData({ loading: true })
-
-        try {
-            const { keyword, filters, size } = this.data
-
-            const params: any = { page: 1, size }
-            if (keyword) params.keyword = keyword
-            if (filters.schoolId !== undefined) params.schoolId = filters.schoolId
-            if (filters.majorId !== undefined) params.majorId = filters.majorId
-
-            const res = await talentApi.listTalentProfiles(params)
-
-            const talents = res.data?.list || []
-            const pageInfo = res.data?.pageInfo
-            const hasMore = pageInfo ? (pageInfo.page || 1) < (pageInfo.totalPages || 1) : false
-
-            this.setData({
-                talents,
-                page: 1,
-                hasMore,
-                loading: false
-            })
-        } catch (error) {
-            console.error('加载人才列表失败:', error)
-            this.setData({ loading: false })
-            wx.showToast({ title: '加载失败', icon: 'none' })
-        }
-    },
-
-    /**
-     * 加载更多人才
-     */
-    async loadMoreTalents() {
-        if (!this.data.hasMore || this.data.loadingMore) return
-
-        this.setData({ loadingMore: true })
-
-        try {
-            const { keyword, filters, page, size, talents } = this.data
-            const nextPage = page + 1
-
-            const params: any = { page: nextPage, size }
-            if (keyword) params.keyword = keyword
-            if (filters.schoolId !== undefined) params.schoolId = filters.schoolId
-            if (filters.majorId !== undefined) params.majorId = filters.majorId
-
-            const res = await talentApi.listTalentProfiles(params)
-
-            const newTalents = res.data?.list || []
-            const pageInfo = res.data?.pageInfo
-            const hasMore = pageInfo ? (pageInfo.page || 1) < (pageInfo.totalPages || 1) : false
-
-            this.setData({
-                talents: [...talents, ...newTalents],
-                page: nextPage,
-                hasMore,
-                loadingMore: false
-            })
-        } catch (error) {
-            console.error('加载更多失败:', error)
-            this.setData({ loadingMore: false })
-        }
+    getListParams() {
+        const { keyword, filters } = this.data
+        const params: any = {}
+        if (keyword) params.keyword = keyword
+        if (filters.schoolId !== undefined) params.schoolId = filters.schoolId
+        if (filters.majorId !== undefined) params.majorId = filters.majorId
+        return params
     },
 
     /**
@@ -131,7 +78,7 @@ Page({
      */
     handleSearch(e: any) {
         this.setData({ keyword: e.detail })
-        this.loadTalents()
+            ; (this as any).loadList()
     },
 
     /**
@@ -139,7 +86,7 @@ Page({
      */
     handleSearchCancel() {
         this.setData({ keyword: '' })
-        this.loadTalents()
+            ; (this as any).loadList()
     },
 
     /**
@@ -154,7 +101,7 @@ Page({
      */
     closeFilter() {
         this.setData({ showFilterPopup: false })
-        this.loadTalents()
+            ; (this as any).loadList()
     },
 
     /**
@@ -168,7 +115,7 @@ Page({
             selectedMajorName: '',
             showFilterPopup: false
         })
-        this.loadTalents()
+            ; (this as any).loadList()
     },
 
     /**

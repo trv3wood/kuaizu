@@ -1,15 +1,21 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/profile/profile",
+    "pages/projects/projects",
     "pages/talent/talent",
     "pages/service/service",
-    "pages/profile/profile",
+    "pages/my-projects/my-projects",
+    "pages/edit-project/edit-project",
     "pages/login/login",
     "pages/edit-profile/edit-profile",
     "pages/my-orders/my-orders",
     "pages/talent-card/talent-card",
     "pages/talent-detail/talent-detail",
-    "pages/project-detail/project-detail"
+    "pages/project-detail/project-detail",
+    "pages/olive-branches/olive-branches",
+    "pages/my-applications/my-applications",
+    "pages/payment-test/payment-test"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -24,15 +30,7 @@
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/talent/talent",
-        "text": "人才"
-      },
-      {
-        "pagePath": "pages/service/service",
-        "text": "服务"
+        "text": "导览"
       },
       {
         "pagePath": "pages/profile/profile",

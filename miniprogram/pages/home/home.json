@@ -1,12 +1,6 @@
 {
   "usingComponents": {
-    "van-search": "@vant/weapp/search/index",
-    "van-icon": "@vant/weapp/icon/index",
-    "van-tag": "@vant/weapp/tag/index",
-    "van-empty": "@vant/weapp/empty/index",
-    "van-loading": "@vant/weapp/loading/index",
-    "van-popup": "@vant/weapp/popup/index"
+    "van-icon": "@vant/weapp/icon/index"
   },
-  "navigationBarTitleText": "项目库",
-  "enablePullDownRefresh": true
+  "navigationBarTitleText": "导览"
 }

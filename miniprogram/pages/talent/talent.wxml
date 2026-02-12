@@ -9,7 +9,7 @@
     </van-search>
   </view>
   <!-- 加载中 -->
-  <view class="loading-container" wx:if="{{loading}}">
+  <view class="loading-container" wx:if="{{listLoading}}">
     <van-loading size="24px">加载中...</van-loading>
   </view>
   <!-- 人才列表 -->
@@ -17,7 +17,7 @@
     <view class="talent-card" wx:for="{{talents}}" wx:key="id" data-id="{{item.id}}" bindtap="handleTalentTap">
       <!-- 头像和基本信息 -->
       <view class="card-header">
-        <image class="avatar" src="{{item.avatarUrl || '/assets/default-avatar.png'}}" mode="aspectFill" />
+        <image class="avatar" src="{{item.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
         <view class="info">
           <text class="name">{{item.nickname || '匿名用户'}}</text>
           <text class="school">{{item.schoolName || '未知学校'}} · {{item.majorName || '未知专业'}}</text>
@@ -36,10 +36,10 @@
       </view>
     </view>
     <!-- 加载更多 -->
-    <view class="load-more" wx:if="{{loadingMore}}">
+    <view class="load-more" wx:if="{{listLoadingMore}}">
       <van-loading size="20px">加载中...</van-loading>
     </view>
-    <view class="no-more" wx:elif="{{!hasMore}}">
+    <view class="no-more" wx:elif="{{!listHasMore}}">
       <text>没有更多了</text>
     </view>
   </view>

@@ -6,6 +6,10 @@ Page({
     data: {
         // 菜单列表
         menuList: [
+            { icon: 'gem-o', title: '服务中心', url: '/pages/service/service' },
+            { icon: 'orders-o', title: '我的项目', url: '/pages/my-projects/my-projects' },
+            { icon: 'records', title: '我的申请', url: '/pages/my-applications/my-applications' },
+            { icon: 'envelop-o', title: '我的橄榄枝', url: '/pages/olive-branches/olive-branches' },
             { icon: 'service-o', title: '联系客服', url: '/pages/contact/contact' },
             { icon: 'info-o', title: '了解我们', url: '/pages/about/about' },
             { icon: 'setting-o', title: '设置', url: '/pages/settings/settings' }
@@ -24,9 +28,9 @@ Page({
     },
 
     onShow() {
-        // 更新 tabBar 状态
+        // 更新 tabBar 状态 (profile is now at visual index 2)
         if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-            this.getTabBar().setData({ active: 3 })
+            this.getTabBar().setData({ active: 2 })
         }
         // 刷新用户信息
         if (userStore.isLoggedIn) {
@@ -39,18 +43,6 @@ Page({
         this.storeBindings?.destroyStoreBindings()
     },
 
-    /**
-     * 获取认证状态文本
-     */
-    getAuthStatusText(): string {
-        const status = userStore.user?.authStatus
-        switch (status) {
-            case 0: return '未认证'
-            case 1: return '已认证'
-            case 2: return '认证失败'
-            default: return '未认证'
-        }
-    },
 
     /**
      * 跳转到编辑资料页
@@ -90,5 +82,12 @@ Page({
                 }
             }
         })
+    },
+
+    /**
+     * 跳转橄榄枝页面
+     */
+    handleOliveBranchTap() {
+        wx.navigateTo({ url: '/pages/olive-branches/olive-branches' })
     }
 })

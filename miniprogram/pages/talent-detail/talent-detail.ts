@@ -1,15 +1,24 @@
 // pages/talent-detail/talent-detail.ts
-import { talentApi, oliveBranchApi } from '../../api/index'
+import { talentApi, oliveBranchApi, orderApi, productApi } from '../../api/index'
 import type { components } from '../../api/schema'
 
 type TalentProfileDetailVO = components['schemas']['TalentProfileDetailVO']
+
+// 橄榄枝商品ID固定为1
+const OLIVE_BRANCH_PRODUCT_ID = 1
 
 Page({
     data: {
         id: 0,
         profile: null as TalentProfileDetailVO | null,
         loading: true,
-        sending: false
+        sending: false,
+
+        // 购买相关
+        showPurchasePopup: false,
+        quantity: 1,
+        purchasing: false,
+        unitPrice: 1.00 // 单价，可从后端获取
     },
 
     onLoad(options) {
@@ -73,9 +82,125 @@ Page({
         } catch (error: any) {
             console.error('发送橄榄枝失败:', error)
             const msg = error?.data?.message || '发送失败'
-            wx.showToast({ title: msg, icon: 'none' })
+
+            if (error?.data?.code === 4002) {
+                // 额度不足，询问是否购买
+                const { confirm } = await wx.showModal({
+                    title: '额度不足',
+                    content: '您的橄榄枝额度不足，是否购买更多？',
+                    confirmText: '去购买',
+                    confirmColor: '#667eea'
+                })
+
+                if (confirm) {
+                    this.openPurchasePopup()
+                }
+            } else {
+                wx.showToast({ title: msg, icon: 'none' })
+            }
         } finally {
             this.setData({ sending: false })
+        }
+    },
+
+    /**
+     * 打开购买弹窗并加载商品价格
+     */
+    async openPurchasePopup() {
+        this.setData({ showPurchasePopup: true, quantity: 1 })
+
+        try {
+            const res = await productApi.getProductDetail(OLIVE_BRANCH_PRODUCT_ID)
+            if (res.data?.price) {
+                this.setData({ unitPrice: res.data.price })
+            }
+        } catch (error) {
+            console.error('获取商品价格失败:', error)
+            // 使用默认价格
+        }
+    },
+
+    /**
+     * 关闭购买弹窗
+     */
+    handleClosePurchase() {
+        this.setData({ showPurchasePopup: false })
+    },
+
+    /**
+     * 数量变化
+     */
+    handleQuantityChange(e: any) {
+        this.setData({ quantity: e.detail })
+    },
+
+    /**
+     * 计算总价
+     */
+    getTotalPrice(): string {
+        const { quantity, unitPrice } = this.data
+        return (quantity * unitPrice).toFixed(2)
+    },
+
+    /**
+     * 购买橄榄枝
+     */
+    async handlePurchase() {
+        const { quantity, purchasing } = this.data
+        if (purchasing) return
+
+        this.setData({ purchasing: true })
+
+        try {
+            // 1. 创建订单
+            wx.showLoading({ title: '创建订单...' })
+            const orderRes = await orderApi.createOrder([{
+                productId: OLIVE_BRANCH_PRODUCT_ID,
+                quantity
+            }])
+
+            const order = orderRes.data
+            if (!order?.id) {
+                throw new Error('创建订单失败')
+            }
+
+            // 2. 发起支付
+            wx.showLoading({ title: '发起支付...' })
+            const payRes = await orderApi.initiatePayment(order.id)
+            const payParams = payRes.data
+
+            if (!payParams) {
+                throw new Error('获取支付参数失败')
+            }
+
+            wx.hideLoading()
+
+            // 3. 调用微信支付
+            wx.requestPayment({
+                timeStamp: payParams.timeStamp!,
+                nonceStr: payParams.nonceStr!,
+                package: payParams.package!,
+                signType: payParams.signType as 'MD5' | 'HMAC-SHA256' | 'RSA',
+                paySign: payParams.paySign!,
+                success: () => {
+                    wx.showToast({ title: '购买成功！', icon: 'success' })
+                    this.setData({ showPurchasePopup: false })
+                },
+                fail: (err) => {
+                    console.error('支付失败:', err)
+                    if (err.errMsg.includes('cancel')) {
+                        wx.showToast({ title: '已取消支付', icon: 'none' })
+                    } else {
+                        wx.showToast({ title: '支付失败', icon: 'none' })
+                    }
+                }
+            })
+        } catch (error) {
+            console.error('购买失败:', error)
+            wx.hideLoading()
+            wx.showToast({ title: '操作失败', icon: 'none' })
+        } finally {
+            this.setData({ purchasing: false })
         }
     },
 

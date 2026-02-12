@@ -1,4 +1,5 @@
 import { REQUEST, transformRequestResponseOkData, transformRequestSendDefault } from 'miniprogram-request'
+import config from '../config'
 
 /**
  * 网络请求配置与封装
@@ -6,7 +7,7 @@ import { REQUEST, transformRequestResponseOkData, transformRequestSendDefault } 
  */
 
 // 配置基础请求路径
-REQUEST.Defaults.baseURL = 'http://127.0.0.1:8080/api/v2' // TODO: 替换为实际的后端基础路径
+REQUEST.Defaults.baseURL = config.BASE_URL 
 
 // 自动提取返回值为 2xx 时的 response.data
 REQUEST.Defaults.transformResponse = transformRequestResponseOkData
@@ -22,6 +23,10 @@ REQUEST.Defaults.transformSend = (options) => {
                 'Authorization': `Bearer ${token}`
             }
         }
+    }
+    // 去除 undefined 属性导致的服务器解析错误
+    if (options.data) {
+      options.data = JSON.parse(JSON.stringify(options.data))
     }
     // 调用默认的 transformSend 以正确构建 URL (包括 baseURL)
     return transformRequestSendDefault(options)

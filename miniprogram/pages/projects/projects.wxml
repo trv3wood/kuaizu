@@ -1,0 +1,124 @@
+<!-- pages/projects/projects.wxml -->
+<view class="projects-container">
+    <!-- 搜索栏 -->
+    <view class="search-bar">
+        <van-search value="{{keyword}}" placeholder="搜索项目" bind:search="handleSearch" bind:cancel="handleSearchCancel" use-action-slot>
+            <view slot="action" bindtap="showFilter">
+                <van-icon name="filter-o" size="20px" color="#666" />
+            </view>
+        </van-search>
+    </view>
+    <!-- 加载中 -->
+    <view class="loading-container" wx:if="{{listLoading}}">
+        <van-loading size="24px">加载中...</van-loading>
+    </view>
+    <!-- 项目列表 -->
+    <view class="project-list" wx:elif="{{projects.length > 0}}">
+        <view class="project-card" wx:for="{{projects}}" wx:key="id" data-id="{{item.id}}" bindtap="handleProjectTap">
+            <!-- 项目头部 -->
+            <view class="card-header">
+                <text class="project-name">{{item.name}}</text>
+                <van-tag wx:if="{{item.status === 0}}" type="default" plain>审核中</van-tag>
+                <van-tag wx:elif="{{item.status === 1}}" type="success" plain>进行中</van-tag>
+                <van-tag wx:elif="{{item.status === 2}}" type="danger" plain>已驳回</van-tag>
+                <van-tag wx:else type="default" plain>已关闭</van-tag>
+            </view>
+            <!-- 项目描述 -->
+            <view class="card-description">
+                <text class="description-text">{{item.description || '暂无描述'}}</text>
+            </view>
+            <!-- 项目信息 -->
+            <view class="card-footer">
+                <view class="info-item">
+                    <van-icon name="location-o" size="14px" color="#999" />
+                    <text class="info-text">{{item.schoolName || '未知学校'}}</text>
+                </view>
+                <view class="info-item">
+                    <van-icon name="eye-o" size="14px" color="#999" />
+                    <text class="info-text">{{item.viewCount || 0}} 浏览</text>
+                </view>
+                <view class="info-item">
+                    <van-icon name="friends-o" size="14px" color="#999" />
+                    <text class="info-text">{{item.memberCount || 0}} 人</text>
+                </view>
+            </view>
+        </view>
+        <!-- 加载更多 -->
+        <view class="load-more" wx:if="{{listLoadingMore}}">
+            <van-loading size="20px">加载中...</van-loading>
+        </view>
+        <view class="no-more" wx:elif="{{!listHasMore}}">
+            <text>没有更多了</text>
+        </view>
+    </view>
+    <!-- 空状态 -->
+    <view class="empty-container" wx:else>
+        <van-empty description="暂无项目" />
+    </view>
+    <!-- 悬浮按钮 -->
+    <view class="fab" bindtap="handlePublish">
+        <van-icon name="plus" size="24px" color="#fff" />
+    </view>
+    <!-- 筛选弹出层 -->
+    <van-popup show="{{showFilterPopup}}" position="right" custom-style="width: 75%; height: 100%;" bind:close="closeFilter">
+        <view class="filter-panel">
+            <view class="filter-header">
+                <text class="filter-title">筛选</text>
+                <van-icon name="cross" size="20px" bindtap="closeFilter" />
+            </view>
+            <view class="filter-content">
+                <!-- 学校筛选 -->
+                <view class="filter-section">
+                    <text class="section-title">学校</text>
+                    <view class="picker-value" bindtap="handleShowSchoolFilter">
+                        {{selectedSchoolName || '全部学校'}}
+                        <van-icon name="arrow" size="14px" color="#999" />
+                    </view>
+                </view>
+                <!-- 项目方向 -->
+                <view class="filter-section">
+                    <text class="section-title">项目方向</text>
+                    <view class="filter-options">
+                        <view class="option-item {{filters.direction === item.value ? 'active' : ''}}" wx:for="{{directions}}" wx:key="value" data-value="{{item.value}}" bindtap="handleDirectionChange">
+                            {{item.label}}
+                        </view>
+                    </view>
+                </view>
+                <!-- 项目状态 -->
+                <view class="filter-section">
+                    <text class="section-title">项目状态</text>
+                    <view class="filter-options">
+                        <view class="option-item {{filters.status === item.value ? 'active' : ''}}" wx:for="{{statuses}}" wx:key="value" data-value="{{item.value}}" bindtap="handleStatusChange">
+                            {{item.label}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 筛选操作 -->
+            <view class="filter-actions">
+                <button class="reset-btn" bindtap="resetFilter">重置</button>
+                <button class="apply-btn" bindtap="closeFilter">确定</button>
+            </view>
+        </view>
+    </van-popup>
+    <!-- 学校搜索弹出层 -->
+    <van-popup show="{{showSchoolPicker}}" position="bottom" round closeable bind:close="closeSchoolPicker" custom-style="height: 70vh;">
+        <view class="picker-popup">
+            <view class="picker-header">
+                <text class="picker-title">选择学校</text>
+            </view>
+            <view class="picker-search">
+                <van-search value="{{schoolSearchKeyword}}" placeholder="搜索学校" bind:change="handleSchoolSearch" />
+            </view>
+            <scroll-view class="picker-list" scroll-y>
+                <view class="picker-item" wx:for="{{schools}}" wx:key="id" data-school="{{item}}" bindtap="handleSelectSchoolFilter">
+                    <text>{{item.schoolName}}</text>
+                    <van-icon wx:if="{{item.id === filters.schoolId}}" name="success" color="#667eea" />
+                </view>
+                <view class="picker-empty" wx:if="{{schools.length === 0}}">
+                    <text>暂无匹配的学校</text>
+                </view>
+            </scroll-view>
+        </view>
+    </van-popup>
+</view>
