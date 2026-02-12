@@ -151,7 +151,7 @@ Page({
     handleInput(e: WechatMiniprogram.Input) {
         const { field } = e.currentTarget.dataset
         this.setData({
-            [`form.${field}`]: e.detail.value
+            [`form.${field}`]: e.detail
         })
     },
 
