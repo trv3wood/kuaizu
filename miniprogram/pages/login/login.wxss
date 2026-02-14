@@ -3,8 +3,8 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(180deg, #f8f9fe 0%, #ffffff 100%);
-    padding: 0 60rpx;
+    background: linear-gradient(180deg, var(--color-bg-base) 0%, var(--color-bg-card) 100%);
+    padding: 0 var(--spacing-xl);
     box-sizing: border-box;
 }
 
@@ -19,36 +19,36 @@
 }
 
 .logo-wrapper {
-    margin-bottom: 40rpx;
+    margin-bottom: var(--spacing-lg);
 }
 
 .logo-circle {
     width: 180rpx;
     height: 180rpx;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 20rpx 60rpx rgba(102, 126, 234, 0.3);
+    box-shadow: var(--shadow-float);
 }
 
 .logo-text {
     font-size: 48rpx;
     font-weight: bold;
-    color: #fff;
+    color: var(--color-text-inverse);
 }
 
 .app-name {
     font-size: 48rpx;
     font-weight: bold;
-    color: #333;
-    margin-bottom: 16rpx;
+    color: var(--color-text-main);
+    margin-bottom: var(--spacing-xs);
 }
 
 .app-slogan {
     font-size: 28rpx;
-    color: #999;
+    color: var(--color-text-tertiary);
 }
 
 /* 中间内容区 */
@@ -59,22 +59,22 @@
 .feature-list {
     display: flex;
     flex-direction: column;
-    gap: 32rpx;
+    gap: var(--spacing-md);
 }
 
 .feature-item {
     display: flex;
     align-items: center;
     gap: 20rpx;
-    padding: 24rpx 32rpx;
-    background: #fff;
-    border-radius: 16rpx;
-    box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
 }
 
 .feature-text {
     font-size: 30rpx;
-    color: #333;
+    color: var(--color-text-main);
 }
 
 /* 底部登录区 */
@@ -88,7 +88,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16rpx;
+    gap: var(--spacing-xs);
     border-radius: 48rpx;
     font-size: 32rpx;
     font-weight: 500;
@@ -96,18 +96,18 @@
 }
 
 .wechat-btn {
-    background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
-    color: #fff;
-    box-shadow: 0 8rpx 30rpx rgba(7, 193, 96, 0.3);
+    background: var(--color-success);
+    color: var(--color-text-inverse);
+    box-shadow: var(--shadow-lg);
 }
 
 .wechat-btn[disabled] {
-    background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
+    background: var(--color-success);
     opacity: 0.7;
 }
 
 .btn-text {
-    color: #fff;
+    color: var(--color-text-inverse);
 }
 
 .skip-link {
@@ -117,7 +117,7 @@
 
 .skip-link text {
     font-size: 28rpx;
-    color: #999;
+    color: var(--color-text-tertiary);
 }
 
 .agreement {
@@ -126,10 +126,10 @@
 
 .agreement-text {
     font-size: 24rpx;
-    color: #999;
+    color: var(--color-text-tertiary);
     line-height: 1.6;
 }
 
 .agreement .link {
-    color: #667eea;
+    color: var(--color-primary);
 }

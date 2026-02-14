@@ -1,7 +1,7 @@
 /* pages/home/home.wxss */
 .guide-container {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f8f9fe 0%, #f0f2f8 100%);
+  background: var(--color-bg-base);
   padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
 }
 
@@ -14,13 +14,13 @@
 .welcome-header {
   display: flex;
   flex-direction: column;
-  gap: 16rpx;
+  gap: var(--spacing-xs);
 }
 
 .welcome-title {
   font-size: 56rpx;
   font-weight: bold;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--color-text-main);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -28,26 +28,26 @@
 
 .welcome-subtitle {
   font-size: 30rpx;
-  color: #888;
+  color: var(--color-text-tertiary);
   letter-spacing: 2rpx;
 }
 
 /* 导航卡片区域 */
 .nav-cards {
-  padding: 0 32rpx;
+  padding: 0 var(--spacing-md);
   display: flex;
   flex-direction: column;
-  gap: 32rpx;
+  gap: var(--spacing-md);
 }
 
 .nav-card {
-  background: #fff;
-  border-radius: 24rpx;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
   padding: 40rpx;
   display: flex;
   align-items: center;
-  gap: 32rpx;
-  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.06);
+  gap: var(--spacing-md);
+  box-shadow: var(--shadow-md);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -60,20 +60,20 @@
   left: 0;
   right: 0;
   height: 6rpx;
-  border-radius: 24rpx 24rpx 0 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .projects-card::before {
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: var(--color-primary-light);
 }
 
 .talent-card::before {
-  background: linear-gradient(90deg, #764ba2 0%, #f093fb 100%);
+  background: var(--color-primary-light);
 }
 
 .nav-card:active {
   transform: scale(0.98);
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
 }
 
 /* 图标容器 */
@@ -88,11 +88,11 @@
 }
 
 .projects-icon {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--color-primary);
 }
 
 .talent-icon {
-  background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+  background: var(--color-primary);
 }
 
 /* 卡片内容 */
@@ -100,19 +100,19 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8rpx;
+  gap: var(--spacing-xxs);
 }
 
 .card-title {
   font-size: 36rpx;
   font-weight: bold;
-  color: #333;
-  margin-bottom: 8rpx;
+  color: var(--color-text-main);
+  margin-bottom: var(--spacing-xxs);
 }
 
 .card-desc {
   font-size: 26rpx;
-  color: #888;
+  color: var(--color-text-tertiary);
   line-height: 1.5;
 }
 
@@ -129,5 +129,5 @@
 
 .footer-text {
   font-size: 26rpx;
-  color: #aaa;
+  color: var(--color-text-tertiary);
 }

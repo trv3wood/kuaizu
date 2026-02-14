@@ -1,15 +1,15 @@
 /* pages/projects/projects.wxss */
 .projects-container {
   min-height: 100vh;
-  background: #f5f6fa;
+  background: var(--color-bg-base);
   padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
 }
 
 /* 搜索栏 */
 .search-bar {
-  background: #fff;
+  background: var(--color-bg-card);
   padding: 16rpx 24rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 /* 加载中 */
@@ -21,15 +21,15 @@
 
 /* 项目列表 */
 .project-list {
-  padding: 24rpx;
+  padding: var(--spacing-sm);
 }
 
 .project-card {
-  background: #fff;
-  border-radius: 16rpx;
-  padding: 24rpx;
-  margin-bottom: 24rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  box-shadow: var(--shadow-sm);
   transition: transform 0.2s;
 }
 
@@ -42,15 +42,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16rpx;
+  margin-bottom: var(--spacing-xs);
 }
 
 .project-name {
   flex: 1;
   font-size: 32rpx;
   font-weight: bold;
-  color: #333;
-  margin-right: 16rpx;
+  color: var(--color-text-main);
+  margin-right: var(--spacing-xs);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -63,7 +63,7 @@
 
 .description-text {
   font-size: 26rpx;
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 1.6;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -76,30 +76,30 @@
 /* 卡片底部信息 */
 .card-footer {
   display: flex;
-  gap: 32rpx;
+  gap: var(--spacing-md);
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  gap: 8rpx;
+  gap: var(--spacing-xxs);
 }
 
 .info-text {
   font-size: 24rpx;
-  color: #999;
+  color: var(--color-text-tertiary);
 }
 
 /* 加载更多 */
 .load-more,
 .no-more {
-  padding: 32rpx;
+  padding: var(--spacing-md);
   text-align: center;
 }
 
 .no-more text {
   font-size: 24rpx;
-  color: #999;
+  color: var(--color-text-tertiary);
 }
 
 /* 空状态 */
@@ -115,8 +115,8 @@
   width: 112rpx;
   height: 112rpx;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
+  box-shadow: var(--shadow-float);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,27 +133,27 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--color-bg-card);
 }
 
 .filter-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 32rpx 24rpx;
-  border-bottom: 1rpx solid #eee;
+  padding: var(--spacing-md) var(--spacing-sm);
+  border-bottom: 1rpx solid var(--color-border);
 }
 
 .filter-title {
   font-size: 32rpx;
   font-weight: bold;
-  color: #333;
+  color: var(--color-text-main);
 }
 
 .filter-content {
   flex: 1;
   overflow-y: auto;
-  padding: 24rpx;
+  padding: var(--spacing-sm);
 }
 
 .filter-section {
@@ -164,16 +164,16 @@
   display: block;
   font-size: 28rpx;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-main);
   margin-bottom: 20rpx;
 }
 
 .picker-value {
   padding: 20rpx 24rpx;
-  background: #f5f6fa;
+  background: var(--color-bg-base);
   border-radius: 12rpx;
   font-size: 28rpx;
-  color: #333;
+  color: var(--color-text-main);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -182,30 +182,30 @@
 .filter-options {
   display: flex;
   flex-wrap: wrap;
-  gap: 16rpx;
+  gap: var(--spacing-xs);
 }
 
 .option-item {
   padding: 16rpx 32rpx;
-  background: #f5f6fa;
+  background: var(--color-bg-base);
   border-radius: 32rpx;
   font-size: 26rpx;
-  color: #666;
+  color: var(--color-text-secondary);
   transition: all 0.2s;
 }
 
 .option-item.active {
-  background: #667eea;
+  background: var(--color-primary);
   color: #fff;
 }
 
 /* 筛选操作 */
 .filter-actions {
   display: flex;
-  gap: 16rpx;
-  padding: 24rpx;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
   padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
-  border-top: 1rpx solid #eee;
+  border-top: 1rpx solid var(--color-border);
 }
 
 .reset-btn,
@@ -219,12 +219,12 @@
 }
 
 .reset-btn {
-  background: #f5f6fa;
-  color: #666;
+  background: var(--color-bg-base);
+  color: var(--color-text-secondary);
 }
 
 .apply-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
   color: #fff;
 }
 
@@ -241,15 +241,15 @@
 }
 
 .picker-header {
-  padding: 32rpx 24rpx;
+  padding: var(--spacing-md) var(--spacing-sm);
   text-align: center;
-  border-bottom: 1rpx solid #eee;
+  border-bottom: 1rpx solid var(--color-border);
 }
 
 .picker-title {
   font-size: 32rpx;
   font-weight: bold;
-  color: #333;
+  color: var(--color-text-main);
 }
 
 .picker-search {
@@ -265,17 +265,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24rpx 32rpx;
-  border-bottom: 1rpx solid #f5f6fa;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1rpx solid var(--color-divider);
 }
 
 .picker-item:active {
-  background: #f5f6fa;
+  background: var(--color-bg-base);
 }
 
 .picker-empty {
   padding: 60rpx;
   text-align: center;
-  color: #999;
+  color: var(--color-text-tertiary);
   font-size: 28rpx;
 }

@@ -1,7 +1,7 @@
 /* pages/my-projects/my-projects.wxss */
 .my-projects-container {
     min-height: 100vh;
-    background: #f5f6fa;
+    background: var(--color-bg-base);
     padding-bottom: calc(40rpx + env(safe-area-inset-bottom));
 }
 
@@ -15,15 +15,15 @@
 /* Project List */
 .project-list {
     height: 100vh;
-    padding: 24rpx;
+    padding: var(--spacing-sm);
 }
 
 .project-card {
-    background: #fff;
-    border-radius: 16rpx;
-    margin-bottom: 24rpx;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
     overflow: hidden;
-    box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-sm);
 }
 
 /* Project Header */
@@ -31,36 +31,36 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24rpx;
-    border-bottom: 1rpx solid #f0f0f0;
+    padding: var(--spacing-sm);
+    border-bottom: 1rpx solid var(--color-border);
     transition: background 0.2s;
 }
 
 .project-header:active {
-    background: #f8f9fa;
+    background: var(--color-bg-base);
 }
 
 .header-left {
     flex: 1;
-    margin-right: 16rpx;
+    margin-right: var(--spacing-xs);
 }
 
 .project-name {
     font-size: 32rpx;
     font-weight: bold;
-    color: #333;
+    color: var(--color-text-main);
     display: block;
     margin-bottom: 12rpx;
 }
 
 .project-meta {
     display: flex;
-    gap: 16rpx;
+    gap: var(--spacing-xs);
 }
 
 .meta-item {
     font-size: 24rpx;
-    color: #999;
+    color: var(--color-text-tertiary);
 }
 
 .header-right {
@@ -100,14 +100,14 @@
 }
 
 .promote-icon {
-    margin-right: 8rpx;
+    margin-right: var(--spacing-xxs);
     animation: firePulse 2s infinite;
 }
 
 .promote-text {
     font-size: 24rpx;
     font-weight: bold;
-    color: #ee0a24;
+    color: var(--color-danger);
     text-shadow: 0 1rpx 2rpx rgba(255, 255, 255, 0.8);
 }
 
@@ -115,9 +115,11 @@
     0% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.1);
     }
+
     100% {
         transform: scale(1);
     }
@@ -125,7 +127,7 @@
 
 /* Applications Section */
 .applications-section {
-    background: #fafafa;
+    background: var(--color-bg-base);
 }
 
 .applications-loading {
@@ -135,29 +137,29 @@
 }
 
 .applications-list {
-    padding: 16rpx 0;
+    padding: var(--spacing-xs) 0;
 }
 
 .application-item {
-    background: #fff;
+    background: var(--color-bg-card);
     margin: 0 16rpx 16rpx;
     padding: 20rpx;
     border-radius: 12rpx;
-    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-sm);
 }
 
 /* Applicant Header */
 .applicant-header {
     display: flex;
     align-items: center;
-    margin-bottom: 16rpx;
+    margin-bottom: var(--spacing-xs);
 }
 
 .avatar {
     width: 80rpx;
     height: 80rpx;
     border-radius: 50%;
-    margin-right: 16rpx;
+    margin-right: var(--spacing-xs);
     flex-shrink: 0;
 }
 
@@ -168,14 +170,14 @@
 .applicant-name {
     font-size: 28rpx;
     font-weight: 500;
-    color: #333;
+    color: var(--color-text-main);
     display: block;
-    margin-bottom: 8rpx;
+    margin-bottom: var(--spacing-xxs);
 }
 
 .applicant-meta {
     font-size: 24rpx;
-    color: #999;
+    color: var(--color-text-tertiary);
 }
 
 .application-status {
@@ -184,13 +186,13 @@
 
 /* Application Details */
 .application-details {
-    margin-bottom: 16rpx;
+    margin-bottom: var(--spacing-xs);
 }
 
 .detail-row {
     margin-bottom: 12rpx;
     display: flex;
-    gap: 8rpx;
+    gap: var(--spacing-xxs);
 }
 
 .detail-row:last-child {
@@ -199,28 +201,28 @@
 
 .detail-label {
     font-size: 26rpx;
-    color: #666;
+    color: var(--color-text-secondary);
     flex-shrink: 0;
 }
 
 .detail-value {
     font-size: 26rpx;
-    color: #333;
+    color: var(--color-text-main);
     flex: 1;
     word-break: break-all;
 }
 
 .detail-value.reply {
-    color: #667eea;
+    color: var(--color-primary);
 }
 
 /* Action Buttons */
 .application-actions {
     display: flex;
-    gap: 16rpx;
+    gap: var(--spacing-xs);
     justify-content: flex-end;
-    padding-top: 16rpx;
-    border-top: 1rpx solid #f0f0f0;
+    padding-top: var(--spacing-xs);
+    border-top: 1rpx solid var(--color-border);
 }
 
 /* Empty States */
@@ -235,18 +237,18 @@
 /* Load More */
 .load-more,
 .no-more {
-    padding: 32rpx;
+    padding: var(--spacing-md);
     text-align: center;
 }
 
 .no-more text {
     font-size: 24rpx;
-    color: #999;
+    color: var(--color-text-tertiary);
 }
 
 /* Dialog Content */
 .dialog-content {
-    padding: 24rpx;
+    padding: var(--spacing-sm);
 }
 
 .dialog-hint {
