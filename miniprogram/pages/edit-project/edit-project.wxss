@@ -1,34 +1,34 @@
 /* pages/edit-project/edit-project.wxss */
 .edit-project-container {
     min-height: 100vh;
-    background: #f5f6fa;
+    background: var(--color-bg-base);
     padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
 }
 
 /* 表单区域 */
 .form-section {
-    padding: 24rpx;
+    padding: var(--spacing-sm);
 }
 
 .form-group {
-    background: #fff;
-    border-radius: 16rpx;
-    padding: 24rpx;
-    margin-bottom: 24rpx;
-    box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+    background: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    box-shadow: var(--shadow-sm);
 }
 
 .form-label {
     font-size: 28rpx;
     font-weight: 500;
-    color: #333;
-    margin-bottom: 16rpx;
+    color: var(--color-text-main);
+    margin-bottom: var(--spacing-xs);
     display: block;
 }
 
 .form-label.required::after {
     content: ' *';
-    color: #ee0a24;
+    color: var(--color-danger);
 }
 
 /* Stepper */
@@ -40,18 +40,18 @@
 
 .stepper-hint {
     font-size: 26rpx;
-    color: #999;
+    color: var(--color-text-tertiary);
 }
 
 /* 方向选择 */
 .direction-options {
     display: flex;
-    gap: 16rpx;
+    gap: var(--spacing-xs);
 }
 
 .direction-item {
     flex: 1;
-    background: #f8f9fa;
+    background: var(--color-bg-base);
     border: 2rpx solid transparent;
     border-radius: 12rpx;
     padding: 20rpx 16rpx;
@@ -61,32 +61,32 @@
 
 .direction-item.active {
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    border-color: #667eea;
+    border-color: var(--color-primary);
 }
 
 .direction-label {
     font-size: 28rpx;
     font-weight: 500;
-    color: #333;
+    color: var(--color-text-main);
     margin-bottom: 8rpx;
 }
 
 .direction-item.active .direction-label {
-    color: #667eea;
+    color: var(--color-primary);
 }
 
 .direction-desc {
     font-size: 22rpx;
-    color: #999;
+    color: var(--color-text-tertiary);
 }
 
 .direction-item.active .direction-desc {
-    color: #764ba2;
+    color: var(--color-primary-dark);
 }
 
 /* Placeholder样式 */
 .placeholder {
-    color: #c8c9cc !important;
+    color: var(--color-text-tertiary) !important;
 }
 
 /* 提交区域 */
@@ -95,8 +95,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: #fff;
-    padding: 24rpx 32rpx;
+    background: var(--color-bg-card);
+    padding: var(--spacing-sm) var(--spacing-md);
     padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
     box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.06);
 }
@@ -105,8 +105,8 @@
     display: block;
     text-align: center;
     font-size: 24rpx;
-    color: #999;
-    margin-top: 16rpx;
+    color: var(--color-text-tertiary);
+    margin-top: var(--spacing-xs);
 }
 
 /* 学校选择器 */
@@ -124,12 +124,12 @@
 .picker-title {
     font-size: 32rpx;
     font-weight: bold;
-    color: #333;
+    color: var(--color-text-main);
 }
 
 .school-list {
     flex: 1;
-    padding: 0 24rpx;
+    padding: 0 var(--spacing-sm);
 }
 
 .school-item {
@@ -137,11 +137,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 24rpx 16rpx;
-    border-bottom: 1rpx solid #f0f0f0;
+    border-bottom: 1rpx solid var(--color-divider);
 }
 
 .school-item:active {
-    background: #f8f9fa;
+    background: var(--color-bg-base);
 }
 
 .school-item.active {
@@ -150,17 +150,17 @@
 
 .school-name {
     font-size: 28rpx;
-    color: #333;
+    color: var(--color-text-main);
 }
 
 .school-item.active .school-name {
-    color: #667eea;
+    color: var(--color-primary);
     font-weight: 500;
 }
 
 .no-schools {
     padding: 60rpx;
     text-align: center;
-    color: #999;
+    color: var(--color-text-tertiary);
     font-size: 28rpx;
 }

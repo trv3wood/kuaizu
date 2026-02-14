@@ -1,10 +1,105 @@
 /**app.wxss**/
+page {
+  /* 
+   * 校园组队应用全局样式系统 
+   * Theme System for Campus Team Up App
+   */
+
+  /* --- 品牌色 Brand Colors --- */
+  /* 主色调：活力蓝 - 代表连接与科技 */
+  /* --color-primary: #20a0f1; */
+  --color-primary: dodgerblue;
+  --color-primary-light: lightblue;
+  --color-primary-dark: blue;
+
+  /* 辅助色：能量橙 - 代表热情与行动 */
+  --color-secondary: #F59E0B;
+  --color-danger: #EF4444;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+
+  /* --- 布局背景 Surfaces --- */
+  --color-bg-base: #F3F4F6;
+  /* 应用底色 */
+  --color-bg-card: #FFFFFF;
+  /* 卡片背景 */
+  --color-bg-float: #FFFFFF;
+  /* 浮层背景 */
+  --color-bg-input: #F9FAFB;
+  /* 输入框背景 */
+
+  /* --- 文字排版 Typography Colors --- */
+  --color-text-main: #111827;
+  /* 主要文字 */
+  --color-text-secondary: #4B5563;
+  /* 次要文字 */
+  --color-text-tertiary: #9CA3AF;
+  /* 辅助文字/占位符 */
+  --color-text-inverse: #FFFFFF;
+  /* 反白文字 */
+
+  /* --- 边框与分割 Borders --- */
+  --color-border: #E5E7EB;
+  --color-divider: #F3F4F6;
+
+  /* --- 间距系统 Spacing (Responsive via rpx) --- */
+  /* 基础网格单位 8rpx */
+  --spacing-xxs: 8rpx;
+  --spacing-xs: 16rpx;
+  --spacing-sm: 24rpx;
+  --spacing-md: 32rpx;
+  /* 标准间距 */
+  --spacing-lg: 48rpx;
+  --spacing-xl: 64rpx;
+  --spacing-xxl: 96rpx;
+
+  /* --- 圆角 Radius --- */
+  --radius-sm: 8rpx;
+  --radius-md: 16rpx;
+  /* 标准卡片圆角 */
+  --radius-lg: 24rpx;
+  --radius-full: 9999rpx;
+
+  /* --- 阴影 Shadows --- */
+  --shadow-sm: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4rpx 6rpx -1rpx rgba(0, 0, 0, 0.1), 0 2rpx 4rpx -1rpx rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10rpx 15rpx -3rpx rgba(0, 0, 0, 0.1), 0 4rpx 6rpx -2rpx rgba(0, 0, 0, 0.05);
+  --shadow-float: 0 20rpx 25rpx -5rpx rgba(0, 0, 0, 0.1), 0 10rpx 10rpx -5rpx rgba(0, 0, 0, 0.04);
+}
+
+/* 全局应用基础样式 */
+page {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-main);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+  font-size: 28rpx;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+/* 通用容器类 - 使用响应式间距变量 */
 .container {
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
+  padding: var(--spacing-md);
   box-sizing: border-box;
-} 
+}
+
+/* 通用卡片样式 helper */
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-md);
+  transition: box-shadow 0.2s ease;
+}
+
+.card:active {
+  background-color: var(--color-bg-input);
+}
+
+@import "./app-wxa-auto-dark.wxss";
