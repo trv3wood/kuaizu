@@ -1,7 +1,7 @@
 /* pages/talent-card/talent-card.wxss */
 .talent-card-container {
     min-height: 100vh;
-    background: #f5f6fa;
+    background: var(--color-bg-base);
     padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
 }
 
@@ -14,15 +14,15 @@
 
 /* 查看模式 */
 .view-mode {
-    padding: 24rpx;
+    padding: var(--spacing-sm);
 }
 
 .profile-header {
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 20rpx;
-    padding: 32rpx;
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
     margin-bottom: 24rpx;
 }
 
@@ -35,13 +35,13 @@
 
 .info {
     flex: 1;
-    margin-left: 24rpx;
+    margin-left: var(--spacing-sm);
 }
 
 .name {
     font-size: 36rpx;
     font-weight: bold;
-    color: #fff;
+    color: var(--color-text-inverse);
     display: block;
 }
 
@@ -52,22 +52,22 @@
 }
 
 .section {
-    background: #fff;
-    border-radius: 16rpx;
-    padding: 24rpx;
-    margin-bottom: 24rpx;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
 }
 
 .section-title {
     font-size: 28rpx;
     font-weight: 500;
-    color: #333;
-    margin-bottom: 16rpx;
+    color: var(--color-text-main);
+    margin-bottom: var(--spacing-xs);
 }
 
 .section-content {
     font-size: 28rpx;
-    color: #666;
+    color: var(--color-text-secondary);
     line-height: 1.6;
 }
 
@@ -79,16 +79,16 @@
 
 .empty-hint {
     font-size: 26rpx;
-    color: #999;
+    color: var(--color-text-tertiary);
 }
 
 /* 编辑模式 */
 .edit-mode {
-    padding-top: 24rpx;
+    padding-top: var(--spacing-sm);
 }
 
 .skills-edit {
-    padding: 24rpx;
+    padding: var(--spacing-sm);
 }
 
 .skills-tags {
@@ -100,15 +100,15 @@
 
 .skill-input-row {
     display: flex;
-    gap: 16rpx;
+    gap: var(--spacing-xs);
 }
 
 .skill-input {
     flex: 1;
     height: 72rpx;
-    background: #f5f6fa;
+    background: var(--color-bg-base);
     border-radius: 12rpx;
-    padding: 0 24rpx;
+    padding: 0 var(--spacing-sm);
     font-size: 28rpx;
 }
 
@@ -116,8 +116,8 @@
     width: 120rpx;
     height: 72rpx;
     line-height: 72rpx;
-    background: #667eea;
-    color: #fff;
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
     font-size: 26rpx;
     border-radius: 12rpx;
     padding: 0;
@@ -129,7 +129,7 @@
 }
 
 .picker-value {
-    color: #323233;
+    color: var(--color-text-main);
 }
 
 /* 操作按钮 */
@@ -138,9 +138,9 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 24rpx 32rpx;
+    padding: var(--spacing-sm) var(--spacing-md);
     padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
-    background: #fff;
+    background: var(--color-bg-card);
     box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
 }
 
@@ -149,8 +149,8 @@
     flex: 2;
     height: 96rpx;
     line-height: 96rpx;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #fff;
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-text-inverse);
     font-size: 32rpx;
     font-weight: 500;
     border-radius: 48rpx;
@@ -165,7 +165,7 @@
 .view-actions,
 .edit-actions {
     display: flex;
-    gap: 24rpx;
+    gap: var(--spacing-sm);
 }
 
 .unpublish-btn,
@@ -173,8 +173,8 @@
     flex: 1;
     height: 96rpx;
     line-height: 96rpx;
-    background: #f5f6fa;
-    color: #666;
+    background: var(--color-bg-base);
+    color: var(--color-text-secondary);
     font-size: 32rpx;
     border-radius: 48rpx;
     border: none;
