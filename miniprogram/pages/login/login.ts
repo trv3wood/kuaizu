@@ -16,17 +16,22 @@ Page({
         this.setData({ loading: true })
 
         try {
-            // 1. 获取微信登录 code
+            // 获取微信登录 code
             const { code } = await wx.login()
 
-            // 2. 调用后端登录接口
+            // 调用后端登录接口
             const res = await authApi.loginWithWechat(code)
+            
+            // 需要提供手机号
+            if (res.code == 202) {
+
+            }
 
             if (res.data?.token) {
-                // 3. 保存 token
+                // 保存 token
                 wx.setStorageSync('token', res.data.token)
 
-                // 4. 更新用户状态
+                // 更新用户状态
                 if (res.data.user) {
                     userStore.setUser(res.data.user)
                 } else {
@@ -34,7 +39,7 @@ Page({
                     await userStore.fetchUser()
                 }
 
-                // 5. 提示并跳转
+                // 提示并跳转
                 wx.showToast({
                     title: res.data.isNewUser ? '欢迎新用户！' : '登录成功',
                     icon: 'success'
