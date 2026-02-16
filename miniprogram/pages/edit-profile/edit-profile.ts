@@ -1,16 +1,15 @@
 // pages/edit-profile/edit-profile.ts
 import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { userStore } from '../../stores/index'
-import { dictionaryApi, commonApi } from '../../api/index'
+import { commonApi } from '../../api/index'
 import { schoolPickerBehavior } from '../../behaviors/schoolPicker'
 import type { components } from '../../api/schema'
+import { majorPickerBehavior } from '../../behaviors/majorPicker'
 
 type SchoolVO = components['schemas']['SchoolVO']
-type MajorClassVO = components['schemas']['MajorClassVO']
-type MajorVO = components['schemas']['MajorVO']
 
 Page({
-    behaviors: [schoolPickerBehavior],
+    behaviors: [schoolPickerBehavior, majorPickerBehavior],
     data: {
         // 表单数据
         form: {
@@ -24,14 +23,9 @@ Page({
         },
         // 显示用的文本
         majorName: '',
-        // 选择器数据
-        majorClasses: [] as MajorClassVO[],
-        majors: [] as MajorVO[],
         // 年级选项
         gradeOptions: ['2020', '2021', '2022', '2023', '2024', '2025', '2026'],
         gradeIndex: -1,
-        // 弹出层控制
-        showMajorPicker: false,
         // 状态
         loading: false,
         uploading: false
@@ -51,7 +45,7 @@ Page({
         this.initForm()
             // 加载字典数据
             ; (this as any).loadSchools()
-        this.loadMajors()
+            ; (this as any).loadMajors()
     },
 
     onUnload() {
@@ -91,26 +85,6 @@ Page({
         this.setData({
             'form.schoolId': school.id
         })
-    },
-
-    /**
-     * 加载专业列表
-     */
-    async loadMajors() {
-        try {
-            const res = await dictionaryApi.listMajors()
-            const majorClasses = res.data || []
-            // 展平所有专业
-            const majors: MajorVO[] = []
-            majorClasses.forEach(mc => {
-                if (mc.majors) {
-                    majors.push(...mc.majors)
-                }
-            })
-            this.setData({ majorClasses, majors })
-        } catch (error) {
-            console.error('加载专业失败:', error)
-        }
     },
 
     /**
@@ -170,34 +144,6 @@ Page({
         (this as any).closeSchoolPicker()
     },
 
-
-
-    /**
-     * 显示专业选择器
-     */
-    handleShowMajorPicker() {
-        this.setData({ showMajorPicker: true })
-    },
-
-    /**
-     * 关闭专业选择器
-     */
-    handleCloseMajorPicker() {
-        this.setData({ showMajorPicker: false })
-    },
-
-    /**
-     * 选择专业
-     */
-    handleSelectMajor(e: WechatMiniprogram.TouchEvent) {
-        const { major } = e.currentTarget.dataset as { major: MajorVO }
-        this.setData({
-            'form.majorId': major.id,
-            majorName: major.majorName || '',
-            showMajorPicker: false
-        })
-    },
-
     /**
      * 选择年级
      */
@@ -207,6 +153,16 @@ Page({
         this.setData({
             gradeIndex: index,
             'form.grade': grade
+        })
+    },
+
+    /**
+     * 专业选择回调
+     */
+    onMajorSelected(major: any) {
+        this.setData({
+            'form.majorId': major?.id,
+            majorName: major?.majorName || ''
         })
     },
 
