@@ -1,28 +1,28 @@
 /* pages/my-orders/my-orders.wxss */
 .orders-container {
     min-height: 100vh;
-    background: var(--color-bg-base);
+    background: var(--md-sys-color-background);
 }
 
 /* 标签栏 */
 .tabs {
     display: flex;
-    background: #fff;
+    background: var(--md-sys-color-surface-container-lowest);
     padding: 0 var(--spacing-md);
-    border-bottom: 1rpx solid var(--color-border);
+    border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
 }
 
 .tab-item {
     flex: 1;
     text-align: center;
     padding: 28rpx 0;
-    font-size: 28rpx;
-    color: var(--color-text-secondary);
+    font-size: var(--md-sys-typescale-label-large);
+    color: var(--md-sys-color-on-surface-variant);
     position: relative;
 }
 
 .tab-item.active {
-    color: var(--color-primary);
+    color: var(--md-sys-color-primary);
     font-weight: 500;
 }
 
@@ -34,7 +34,7 @@
     transform: translateX(-50%);
     width: 48rpx;
     height: 4rpx;
-    background: var(--color-primary);
+    background: var(--md-sys-color-primary);
     border-radius: 2rpx;
 }
 
@@ -51,11 +51,11 @@
 }
 
 .order-card {
-    background: var(--color-bg-card);
-    border-radius: var(--radius-md);
+    background: var(--md-sys-color-surface-container-lowest);
+    border-radius: var(--md-sys-shape-corner-medium);
     padding: var(--spacing-sm);
     margin-bottom: var(--spacing-sm);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--md-sys-elevation-1);
 }
 
 .order-header {
@@ -63,34 +63,35 @@
     justify-content: space-between;
     align-items: center;
     padding-bottom: 20rpx;
-    border-bottom: 1rpx solid var(--color-divider);
+    border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
 }
 
 .order-time {
-    font-size: 24rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-outline);
 }
 
 .order-status {
-    font-size: 24rpx;
+    font-size: var(--md-sys-typescale-label-medium);
     padding: 4rpx 12rpx;
-    border-radius: var(--radius-sm);
+    border-radius: var(--md-sys-shape-corner-small);
 }
 
 .order-status.status-0 {
-    color: var(--color-warning);
-    background: rgba(255, 151, 106, 0.1);
+    color: var(--md-sys-color-tertiary);
+    background: var(--md-sys-color-tertiary-container);
 }
 
 .order-status.status-1 {
-    color: var(--color-success);
-    background: rgba(7, 193, 96, 0.1);
+    color: #10B981;
+    /* Success Green */
+    background: #d1fae5;
 }
 
 .order-status.status-2,
 .order-status.status-3 {
-    color: var(--color-text-tertiary);
-    background: var(--color-bg-base);
+    color: var(--md-sys-color-outline);
+    background: var(--md-sys-color-surface-container);
 }
 
 .order-body {
@@ -105,8 +106,8 @@
 }
 
 .product-name {
-    font-size: 28rpx;
-    color: var(--color-text-main);
+    font-size: var(--md-sys-typescale-title-medium);
+    color: var(--md-sys-color-on-surface);
     font-weight: 500;
 }
 
@@ -115,25 +116,26 @@
 }
 
 .price {
-    font-size: 32rpx;
-    color: var(--color-text-main);
+    font-size: var(--md-sys-typescale-headline-small);
+    color: var(--md-sys-color-on-surface);
     font-weight: bold;
 }
 
 .order-footer {
     padding-top: 20rpx;
-    border-top: 1rpx solid #f5f5f5;
+    border-top: 1rpx solid var(--md-sys-color-outline-variant);
     display: flex;
     justify-content: flex-end;
 }
 
 .pay-btn {
-    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
-    color: var(--color-text-inverse);
-    font-size: 26rpx;
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    font-size: var(--md-sys-typescale-label-large);
     padding: 12rpx 32rpx;
     border-radius: 32rpx;
     border: none;
+    box-shadow: var(--md-sys-elevation-1);
 }
 
 .pay-btn::after {
@@ -148,8 +150,8 @@
 }
 
 .no-more text {
-    font-size: 24rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-medium);
+    color: var(--md-sys-color-outline);
 }
 
 /* 空状态 */
@@ -158,13 +160,14 @@
 }
 
 .empty-btn {
-    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
-    color: var(--color-text-inverse);
-    font-size: 28rpx;
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    font-size: var(--md-sys-typescale-label-large);
     padding: 20rpx 48rpx;
     border-radius: 40rpx;
     border: none;
     margin-top: var(--spacing-md);
+    box-shadow: var(--md-sys-elevation-1);
 }
 
 .empty-btn::after {

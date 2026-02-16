@@ -3,7 +3,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(180deg, var(--color-bg-base) 0%, var(--color-bg-card) 100%);
+    background: linear-gradient(180deg, var(--md-sys-color-background) 0%, var(--md-sys-color-surface-container) 100%);
     padding: 0 var(--spacing-xl);
     box-sizing: border-box;
 }
@@ -25,30 +25,30 @@
 .logo-circle {
     width: 180rpx;
     height: 180rpx;
-    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
+    background: var(--md-sys-color-primary-container);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-float);
+    box-shadow: var(--md-sys-elevation-3);
 }
 
 .logo-text {
     font-size: 48rpx;
     font-weight: bold;
-    color: var(--color-text-inverse);
+    color: var(--md-sys-color-on-primary-container);
 }
 
 .app-name {
-    font-size: 48rpx;
+    font-size: var(--md-sys-typescale-headline-medium);
     font-weight: bold;
-    color: var(--color-text-main);
+    color: var(--md-sys-color-on-background);
     margin-bottom: var(--spacing-xs);
 }
 
 .app-slogan {
-    font-size: 28rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-large);
+    color: var(--md-sys-color-on-surface-variant);
 }
 
 /* 中间内容区 */
@@ -67,14 +67,14 @@
     align-items: center;
     gap: 20rpx;
     padding: var(--spacing-sm) var(--spacing-md);
-    background: var(--color-bg-card);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
+    background: var(--md-sys-color-surface-container-lowest);
+    border-radius: var(--md-sys-shape-corner-medium);
+    box-shadow: var(--md-sys-elevation-1);
 }
 
 .feature-text {
-    font-size: 30rpx;
-    color: var(--color-text-main);
+    font-size: var(--md-sys-typescale-body-large);
+    color: var(--md-sys-color-on-surface);
 }
 
 /* 底部登录区 */
@@ -90,24 +90,25 @@
     justify-content: center;
     gap: var(--spacing-xs);
     border-radius: 48rpx;
-    font-size: 32rpx;
+    font-size: var(--md-sys-typescale-label-large);
     font-weight: 500;
     border: none;
 }
 
 .wechat-btn {
-    background: var(--color-success);
-    color: var(--color-text-inverse);
-    box-shadow: var(--shadow-lg);
+    background: #07c160;
+    /* WeChat Green standard, keeping specific brand color */
+    color: #ffffff;
+    box-shadow: var(--md-sys-elevation-2);
 }
 
 .wechat-btn[disabled] {
-    background: var(--color-success);
+    background: #07c160;
     opacity: 0.7;
 }
 
 .btn-text {
-    color: var(--color-text-inverse);
+    color: #ffffff;
 }
 
 .skip-link {
@@ -116,8 +117,8 @@
 }
 
 .skip-link text {
-    font-size: 28rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-medium);
+    color: var(--md-sys-color-outline);
 }
 
 .agreement {
@@ -125,11 +126,11 @@
 }
 
 .agreement-text {
-    font-size: 24rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-outline);
     line-height: 1.6;
 }
 
 .agreement .link {
-    color: var(--color-primary);
+    color: var(--md-sys-color-primary);
 }
