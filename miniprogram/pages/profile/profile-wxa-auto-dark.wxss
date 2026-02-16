@@ -1,22 +1,19 @@
 /* 
-此文件为开发者工具生成，生成时间: 2026/2/14下午10:38:02
-使用方法：
-在 profile.wxss 文件末尾引入样式
-```
-@import "./profile-wxa-auto-dark.wxss";
-```
- */
-
+此文件为开发者工具生成，已弃用。
+样式由 app.wxss 和 profile.wxss 中的 Material Design Tokens 统一管理。
+*/
+/* 
 @media (prefers-color-scheme: dark) {
     .user-meta {
-        color: rgba(17, 17, 17, 0.8);
+        color: var(--md-sys-color-on-primary);
     }
 
     .stat-label {
-        color: rgba(17, 17, 17, 0.8);
+        color: var(--md-sys-color-on-surface-variant);
     }
 
     .stat-divider {
-        background: rgba(17, 17, 17, 0.3);
+        background: var(--md-sys-color-outline-variant);
     }
 }
+*/

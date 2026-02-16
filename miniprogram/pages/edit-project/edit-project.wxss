@@ -1,7 +1,7 @@
 /* pages/edit-project/edit-project.wxss */
 .edit-project-container {
     min-height: 100vh;
-    background: var(--color-bg-base);
+    background: var(--md-sys-color-background);
     padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
 }
 
@@ -11,24 +11,24 @@
 }
 
 .form-group {
-    background: var(--color-bg-card);
-    border-radius: var(--radius-md);
+    background: var(--md-sys-color-surface-container-lowest);
+    border-radius: var(--md-sys-shape-corner-medium);
     padding: var(--spacing-sm);
     margin-bottom: var(--spacing-sm);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--md-sys-elevation-1);
 }
 
 .form-label {
-    font-size: 28rpx;
+    font-size: var(--md-sys-typescale-label-large);
     font-weight: 500;
-    color: var(--color-text-main);
+    color: var(--md-sys-color-on-surface);
     margin-bottom: var(--spacing-xs);
     display: block;
 }
 
 .form-label.required::after {
     content: ' *';
-    color: var(--color-danger);
+    color: var(--md-sys-color-error);
 }
 
 /* Stepper */
@@ -39,8 +39,8 @@
 }
 
 .stepper-hint {
-    font-size: 26rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-outline);
 }
 
 /* 方向选择 */
@@ -51,42 +51,42 @@
 
 .direction-item {
     flex: 1;
-    background: var(--color-bg-base);
+    background: var(--md-sys-color-surface);
     border: 2rpx solid transparent;
-    border-radius: 12rpx;
+    border-radius: var(--md-sys-shape-corner-medium);
     padding: 20rpx 16rpx;
     text-align: center;
     transition: all 0.3s;
 }
 
 .direction-item.active {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    border-color: var(--color-primary);
+    background: var(--md-sys-color-secondary-container);
+    border-color: var(--md-sys-color-secondary);
 }
 
 .direction-label {
-    font-size: 28rpx;
+    font-size: var(--md-sys-typescale-label-large);
     font-weight: 500;
-    color: var(--color-text-main);
+    color: var(--md-sys-color-on-surface);
     margin-bottom: 8rpx;
 }
 
 .direction-item.active .direction-label {
-    color: var(--color-primary);
+    color: var(--md-sys-color-on-secondary-container);
 }
 
 .direction-desc {
-    font-size: 22rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-outline);
 }
 
 .direction-item.active .direction-desc {
-    color: var(--color-primary-dark);
+    color: var(--md-sys-color-on-secondary-container);
 }
 
 /* Placeholder样式 */
 .placeholder {
-    color: var(--color-text-tertiary) !important;
+    color: var(--md-sys-color-outline) !important;
 }
 
 /* 提交区域 */
@@ -95,17 +95,17 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--color-bg-card);
+    background: var(--md-sys-color-surface-container-lowest);
     padding: var(--spacing-sm) var(--spacing-md);
     padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
-    box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.06);
+    box-shadow: var(--md-sys-elevation-2);
 }
 
 .submit-hint {
     display: block;
     text-align: center;
-    font-size: 24rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-outline);
     margin-top: var(--spacing-xs);
 }
 
@@ -114,6 +114,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    background: var(--md-sys-color-surface);
 }
 
 .picker-header {
@@ -122,9 +123,9 @@
 }
 
 .picker-title {
-    font-size: 32rpx;
+    font-size: var(--md-sys-typescale-title-medium);
     font-weight: bold;
-    color: var(--color-text-main);
+    color: var(--md-sys-color-on-surface);
 }
 
 .school-list {
@@ -137,30 +138,30 @@
     justify-content: space-between;
     align-items: center;
     padding: 24rpx 16rpx;
-    border-bottom: 1rpx solid var(--color-divider);
+    border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
 }
 
 .school-item:active {
-    background: var(--color-bg-base);
+    background: var(--md-sys-color-surface-container-high);
 }
 
 .school-item.active {
-    background: rgba(102, 126, 234, 0.05);
+    background: var(--md-sys-color-secondary-container);
 }
 
 .school-name {
-    font-size: 28rpx;
-    color: var(--color-text-main);
+    font-size: var(--md-sys-typescale-body-large);
+    color: var(--md-sys-color-on-surface);
 }
 
 .school-item.active .school-name {
-    color: var(--color-primary);
+    color: var(--md-sys-color-on-secondary-container);
     font-weight: 500;
 }
 
 .no-schools {
     padding: 60rpx;
     text-align: center;
-    color: var(--color-text-tertiary);
-    font-size: 28rpx;
+    color: var(--md-sys-color-outline);
+    font-size: var(--md-sys-typescale-body-medium);
 }

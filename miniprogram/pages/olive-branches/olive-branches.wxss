@@ -1,29 +1,29 @@
 /* pages/olive-branches/olive-branches.wxss */
 .olive-branches-container {
     min-height: 100vh;
-    background: var(--color-bg-base);
+    background: var(--md-sys-color-background);
 }
 
 /* 视图切换标签 */
 .view-tabs {
     display: flex;
-    background: var(--color-bg-card);
+    background: var(--md-sys-color-surface-container-lowest);
     padding: 24rpx 48rpx;
-    border-bottom: 1rpx solid var(--color-border);
+    border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
 }
 
 .view-tab {
     flex: 1;
     text-align: center;
     padding: 20rpx 0;
-    font-size: 30rpx;
-    color: var(--color-text-secondary);
+    font-size: var(--md-sys-typescale-title-small);
+    color: var(--md-sys-color-on-surface-variant);
     position: relative;
     transition: all 0.3s ease;
 }
 
 .view-tab.active {
-    color: var(--color-primary);
+    color: var(--md-sys-color-primary);
     font-weight: 600;
 }
 
@@ -35,36 +35,36 @@
     transform: translateX(-50%);
     width: 64rpx;
     height: 6rpx;
-    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
+    background: var(--md-sys-color-primary);
     border-radius: 3rpx;
 }
 
 /* 状态筛选标签 */
 .status-tabs {
     display: flex;
-    background: var(--color-bg-card);
+    background: var(--md-sys-color-surface-container-lowest);
     padding: 20rpx var(--spacing-sm);
     gap: var(--spacing-xs);
     position: sticky;
     top: 0;
     z-index: 10;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--md-sys-elevation-1);
 }
 
 .tab-item {
     flex: 1;
     text-align: center;
     padding: 16rpx 0;
-    font-size: 28rpx;
-    color: var(--color-text-secondary);
-    background: var(--color-bg-base);
+    font-size: var(--md-sys-typescale-label-large);
+    color: var(--md-sys-color-on-surface-variant);
+    background: var(--md-sys-color-surface);
     border-radius: 40rpx;
     transition: all 0.3s ease;
 }
 
 .tab-item.active {
-    color: var(--color-text-inverse);
-    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
+    color: var(--md-sys-color-on-primary);
+    background: var(--md-sys-color-primary);
     font-weight: 500;
 }
 
@@ -82,11 +82,11 @@
 }
 
 .branch-card {
-    background: var(--color-bg-card);
-    border-radius: var(--radius-lg);
+    background: var(--md-sys-color-surface-container-lowest);
+    border-radius: var(--md-sys-shape-corner-large);
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-sm);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--md-sys-elevation-1);
 }
 
 /* 卡片头部 */
@@ -107,7 +107,7 @@
     width: 88rpx;
     height: 88rpx;
     border-radius: 50%;
-    border: 4rpx solid var(--color-bg-base);
+    border: 4rpx solid var(--md-sys-color-surface-container);
 }
 
 .info {
@@ -117,17 +117,17 @@
 }
 
 .name {
-    font-size: 32rpx;
+    font-size: var(--md-sys-typescale-title-medium);
     font-weight: 600;
-    color: var(--color-text-main);
+    color: var(--md-sys-color-on-surface);
 }
 
 .type {
-    font-size: 24rpx;
-    color: var(--color-primary);
-    background: rgba(79, 70, 229, 0.1);
+    font-size: var(--md-sys-typescale-label-small);
+    color: var(--md-sys-color-primary);
+    background: var(--md-sys-color-primary-container);
     padding: 4rpx 12rpx;
-    border-radius: 8rpx;
+    border-radius: var(--md-sys-shape-corner-small);
 }
 
 /* 项目信息 */
@@ -135,31 +135,31 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
-    background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(55, 48, 163, 0.08) 100%);
+    background: var(--md-sys-color-surface-container);
     padding: 20rpx 24rpx;
-    border-radius: var(--radius-md);
+    border-radius: var(--md-sys-shape-corner-medium);
     margin-bottom: 20rpx;
 }
 
 .project-name {
     flex: 1;
-    font-size: 28rpx;
-    color: var(--color-text-main);
+    font-size: var(--md-sys-typescale-body-large);
+    color: var(--md-sys-color-on-surface);
     font-weight: 500;
 }
 
 /* 邀请消息 */
 .message {
-    background: var(--color-bg-base);
+    background: var(--md-sys-color-surface-container-low);
     padding: 24rpx;
-    border-radius: var(--radius-md);
+    border-radius: var(--md-sys-shape-corner-medium);
     margin-bottom: 20rpx;
-    border-left: 4rpx solid var(--color-primary);
+    border-left: 4rpx solid var(--md-sys-color-primary);
 }
 
 .message text {
-    font-size: 28rpx;
-    color: var(--color-text-secondary);
+    font-size: var(--md-sys-typescale-body-medium);
+    color: var(--md-sys-color-on-surface-variant);
     font-style: italic;
     line-height: 1.6;
 }
@@ -170,8 +170,8 @@
 }
 
 .time text {
-    font-size: 24rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-outline);
 }
 
 /* 操作按钮 */
@@ -180,7 +180,7 @@
     justify-content: flex-end;
     gap: 20rpx;
     padding-top: 20rpx;
-    border-top: 1rpx solid var(--color-border);
+    border-top: 1rpx solid var(--md-sys-color-outline-variant);
 }
 
 /* 加载更多 */
@@ -192,8 +192,8 @@
 }
 
 .no-more text {
-    font-size: 26rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-medium);
+    color: var(--md-sys-color-outline);
 }
 
 /* 空状态 */

@@ -1,15 +1,15 @@
 /* pages/projects/projects.wxss */
 .projects-container {
   min-height: 100vh;
-  background: var(--color-bg-base);
+  background: var(--md-sys-color-background);
   padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
 }
 
 /* 搜索栏 */
 .search-bar {
-  background: var(--color-bg-card);
+  background: var(--md-sys-color-surface-container-lowest);
   padding: 16rpx 24rpx;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--md-sys-elevation-1);
 }
 
 /* 加载中 */
@@ -25,11 +25,11 @@
 }
 
 .project-card {
-  background: var(--color-bg-card);
-  border-radius: var(--radius-md);
+  background: var(--md-sys-color-surface-container-lowest);
+  border-radius: var(--md-sys-shape-corner-medium);
   padding: var(--spacing-sm);
   margin-bottom: var(--spacing-sm);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--md-sys-elevation-1);
   transition: transform 0.2s;
 }
 
@@ -47,9 +47,9 @@
 
 .project-name {
   flex: 1;
-  font-size: 32rpx;
+  font-size: var(--md-sys-typescale-title-medium);
   font-weight: bold;
-  color: var(--color-text-main);
+  color: var(--md-sys-color-on-surface);
   margin-right: var(--spacing-xs);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -62,8 +62,8 @@
 }
 
 .description-text {
-  font-size: 26rpx;
-  color: var(--color-text-secondary);
+  font-size: var(--md-sys-typescale-body-medium);
+  color: var(--md-sys-color-on-surface-variant);
   line-height: 1.6;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -86,8 +86,8 @@
 }
 
 .info-text {
-  font-size: 24rpx;
-  color: var(--color-text-tertiary);
+  font-size: var(--md-sys-typescale-body-small);
+  color: var(--md-sys-color-outline);
 }
 
 /* 加载更多 */
@@ -98,8 +98,8 @@
 }
 
 .no-more text {
-  font-size: 24rpx;
-  color: var(--color-text-tertiary);
+  font-size: var(--md-sys-typescale-body-small);
+  color: var(--md-sys-color-outline);
 }
 
 /* 空状态 */
@@ -115,8 +115,9 @@
   width: 112rpx;
   height: 112rpx;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
-  box-shadow: var(--shadow-float);
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  box-shadow: var(--md-sys-elevation-3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,6 +127,7 @@
 
 .fab:active {
   transform: scale(0.95);
+  box-shadow: var(--md-sys-elevation-1);
 }
 
 /* 筛选面板 */
@@ -133,7 +135,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--color-bg-card);
+  background: var(--md-sys-color-surface);
 }
 
 .filter-header {
@@ -141,13 +143,13 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-md) var(--spacing-sm);
-  border-bottom: 1rpx solid var(--color-border);
+  border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
 }
 
 .filter-title {
-  font-size: 32rpx;
+  font-size: var(--md-sys-typescale-title-medium);
   font-weight: bold;
-  color: var(--color-text-main);
+  color: var(--md-sys-color-on-surface);
 }
 
 .filter-content {
@@ -162,18 +164,18 @@
 
 .section-title {
   display: block;
-  font-size: 28rpx;
+  font-size: var(--md-sys-typescale-label-large);
   font-weight: 500;
-  color: var(--color-text-main);
+  color: var(--md-sys-color-on-surface);
   margin-bottom: 20rpx;
 }
 
 .picker-value {
   padding: 20rpx 24rpx;
-  background: var(--color-bg-base);
+  background: var(--md-sys-color-surface-container);
   border-radius: 12rpx;
-  font-size: 28rpx;
-  color: var(--color-text-main);
+  font-size: var(--md-sys-typescale-body-large);
+  color: var(--md-sys-color-on-surface);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -187,16 +189,16 @@
 
 .option-item {
   padding: 16rpx 32rpx;
-  background: var(--color-bg-base);
+  background: var(--md-sys-color-surface-container);
   border-radius: 32rpx;
-  font-size: 26rpx;
-  color: var(--color-text-secondary);
+  font-size: var(--md-sys-typescale-label-medium);
+  color: var(--md-sys-color-on-surface-variant);
   transition: all 0.2s;
 }
 
 .option-item.active {
-  background: var(--color-primary);
-  color: #fff;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
 }
 
 /* 筛选操作 */
@@ -205,7 +207,7 @@
   gap: var(--spacing-xs);
   padding: var(--spacing-sm);
   padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
-  border-top: 1rpx solid var(--color-border);
+  border-top: 1rpx solid var(--md-sys-color-outline-variant);
 }
 
 .reset-btn,
@@ -213,19 +215,19 @@
   flex: 1;
   height: 88rpx;
   line-height: 88rpx;
-  font-size: 28rpx;
+  font-size: var(--md-sys-typescale-label-large);
   border-radius: 44rpx;
   border: none;
 }
 
 .reset-btn {
-  background: var(--color-bg-base);
-  color: var(--color-text-secondary);
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
 }
 
 .apply-btn {
-  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
-  color: #fff;
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
 }
 
 .reset-btn::after,
@@ -243,13 +245,13 @@
 .picker-header {
   padding: var(--spacing-md) var(--spacing-sm);
   text-align: center;
-  border-bottom: 1rpx solid var(--color-border);
+  border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
 }
 
 .picker-title {
-  font-size: 32rpx;
+  font-size: var(--md-sys-typescale-title-medium);
   font-weight: bold;
-  color: var(--color-text-main);
+  color: var(--md-sys-color-on-surface);
 }
 
 .picker-search {
@@ -266,16 +268,16 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-sm) var(--spacing-md);
-  border-bottom: 1rpx solid var(--color-divider);
+  border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
 }
 
 .picker-item:active {
-  background: var(--color-bg-base);
+  background: var(--md-sys-color-surface-container-high);
 }
 
 .picker-empty {
   padding: 60rpx;
   text-align: center;
-  color: var(--color-text-tertiary);
-  font-size: 28rpx;
+  color: var(--md-sys-color-outline);
+  font-size: var(--md-sys-typescale-body-medium);
 }
