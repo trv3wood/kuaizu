@@ -21,7 +21,7 @@
     </van-cell-group>
     <van-cell-group inset title="学业信息" custom-style="margin-top: 24rpx;">
         <van-cell title="学校" value="{{selectedSchoolName || '请选择'}}" is-link bindtap="handleShowSchoolPicker" />
-        <van-cell title="专业" value="{{majorName || '请选择'}}" is-link bindtap="handleShowMajorPicker" />
+        <van-cell title="专业" value="{{majorName || '请选择'}}" is-link bindtap="showMajorPicker" />
         <van-cell title="入学年份">
             <picker mode="selector" range="{{gradeOptions}}" value="{{gradeIndex}}" bindchange="handleGradeChange">
                 <view class="picker-value">
@@ -58,22 +58,37 @@
     </view>
 </van-popup>
 <!-- 专业选择弹出层 -->
-<van-popup show="{{showMajorPicker}}" position="bottom" round closeable bind:close="handleCloseMajorPicker" custom-style="height: 70vh;">
+  <van-popup show="{{showMajorPicker}}" position="bottom" round closeable bind:close="closeMajorPicker" custom-style="height: 70vh;">
     <view class="picker-popup">
-        <view class="picker-header">
-            <text class="picker-title">选择专业</text>
+      <view class="picker-header">
+        <text class="picker-title">选择专业</text>
+      </view>
+      <view class="picker-search">
+        <van-search value="{{majorSearchKeyword}}" placeholder="搜索专业" bind:change="handleMajorSearch" />
+      </view>
+      <scroll-view class="picker-list" scroll-y>
+        <view class="picker-loading" wx:if="{{majorLoading}}">
+          <van-loading size="20px">加载中...</van-loading>
         </view>
-        <scroll-view class="picker-list" scroll-y>
-            <block wx:for="{{majorClasses}}" wx:key="id" wx:for-item="mc">
-                <view class="picker-group-title">{{mc.className}}</view>
-                <view class="picker-item" wx:for="{{mc.majors}}" wx:key="id" data-major="{{item}}" bindtap="handleSelectMajor">
-                    <text>{{item.majorName}}</text>
-                    <van-icon wx:if="{{item.id === form.majorId}}" name="success" color="#667eea" />
-                </view>
-            </block>
-            <view class="picker-empty" wx:if="{{majorClasses.length === 0}}">
-                <text>暂无专业数据</text>
+        <block wx:elif="{{majorClasses.length > 0}}">
+          <block wx:for="{{majorClasses}}" wx:key="id" wx:for-item="mc">
+            <!-- 大类标题 -->
+            <view class="picker-group-title" data-class-id="{{mc.id}}" bindtap="handleExpandClass">
+              <text>{{mc.className}}</text>
+              <van-icon name="{{expandedClassId === mc.id ? 'arrow-up' : 'arrow-down'}}" size="14px" color="#999" />
             </view>
-        </scroll-view>
+            <!-- 专业列表 -->
+            <block wx:if="{{expandedClassId === mc.id}}">
+              <view class="picker-item picker-item-indent" wx:for="{{mc.majors}}" wx:key="id" data-major="{{item}}" data-major-class="{{mc}}" bindtap="handleSelectMajor">
+                <text>{{item.majorName}}</text>
+                <van-icon wx:if="{{item.id === filters.majorId}}" name="success" color="#667eea" />
+              </view>
+            </block>
+          </block>
+        </block>
+        <view class="picker-empty" wx:else>
+          <text>暂无专业数据</text>
+        </view>
+      </scroll-view>
     </view>
-</van-popup>
+  </van-popup>

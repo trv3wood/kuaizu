@@ -19,11 +19,11 @@ export const majorPickerBehavior = Behavior({
         showMajorPicker: false,
         majorSearchKeyword: '',
         // 当前展开的大类ID
-        expandedClassId: undefined as number | undefined,
+        expandedClassId: null as number | null,
         // 选中的专业
-        selectedMajorId: undefined as number | undefined,
+        selectedMajorId: null as number | null,
         selectedMajorName: '',
-        selectedClassId: undefined as number | undefined,
+        selectedClassId: null as number | null,
         selectedClassName: '',
         // 加载状态
         majorLoading: false
@@ -80,7 +80,7 @@ export const majorPickerBehavior = Behavior({
             this.setData({
                 showMajorPicker: false,
                 majorSearchKeyword: '',
-                expandedClassId: undefined
+                expandedClassId: null
             })
         },
 
@@ -100,7 +100,7 @@ export const majorPickerBehavior = Behavior({
             const { classId } = e.currentTarget.dataset as { classId: number }
             const currentExpanded = this.data.expandedClassId
             this.setData({
-                expandedClassId: currentExpanded === classId ? undefined : classId
+                expandedClassId: currentExpanded === classId ? null : classId
             })
         },
 
@@ -120,7 +120,7 @@ export const majorPickerBehavior = Behavior({
                 selectedClassName: majorClass.className || '',
                 showMajorPicker: false,
                 majorSearchKeyword: '',
-                expandedClassId: undefined
+                expandedClassId: null
             })
 
             // 触发回调，子类可覆盖
@@ -134,9 +134,9 @@ export const majorPickerBehavior = Behavior({
          */
         clearSelectedMajor() {
             this.setData({
-                selectedMajorId: undefined,
+                selectedMajorId: null,
                 selectedMajorName: '',
-                selectedClassId: undefined,
+                selectedClassId: null,
                 selectedClassName: ''
             })
         },
