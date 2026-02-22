@@ -30,9 +30,9 @@ Page({
 
         // 筛选器选项
         directions: [
-            { value: 1, label: '创业类' },
-            { value: 2, label: '学术类' },
-            { value: 3, label: '实践类' }
+            { value: 1, label: '落地' },
+            { value: 2, label: '比赛' },
+            { value: 3, label: '学习' }
         ],
         statuses: [
             { value: 0, label: '审核中' },
@@ -112,10 +112,9 @@ Page({
      * 应用筛选
      */
     applyFilter(e: WechatMiniprogram.CustomEvent) {
-        const { schoolId, status, direction } = e.detail
+        const { schoolId, direction } = e.detail
         this.setData({
             'filters.schoolId': schoolId,
-            'filters.status': status,
             'filters.direction': direction,
             showFilterPopup: false
         })
@@ -128,7 +127,6 @@ Page({
     resetFilter() {
         this.setData({
             'filters.schoolId': undefined,
-            'filters.status': undefined,
             'filters.direction': undefined,
             showFilterPopup: false
         })

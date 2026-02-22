@@ -37,6 +37,10 @@
                     <van-icon name="friends-o" size="14px" color="#999" />
                     <text class="info-text">{{item.memberCount || 0}} 人</text>
                 </view>
+                <view class="info-item">
+                    <van-icon name="description-o" size="14px" color="#999" />
+                    <text class="info-text">{{directions[item.direction - 1].label}}</text>
+                </view>
             </view>
         </view>
         <!-- 加载更多 -->
