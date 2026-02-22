@@ -1,105 +1,230 @@
 /**app.wxss**/
 page {
   /* 
-   * 校园组队应用全局样式系统 
-   * Theme System for Campus Team Up App
+   * Material Design 3 Theme System 
+   * Based on seed color: #20a0f1 (Vitality Blue)
    */
 
-  /* --- 品牌色 Brand Colors --- */
-  /* 主色调：活力蓝 - 代表连接与科技 */
-  /* --color-primary: #20a0f1; */
-  --color-primary: dodgerblue;
-  --color-primary-light: lightblue;
-  --color-primary-dark: blue;
+  /* --- Color System (Light Theme) --- */
 
-  /* 辅助色：能量橙 - 代表热情与行动 */
-  --color-secondary: #F59E0B;
-  --color-danger: #EF4444;
+  /* Primary */
+  --md-sys-color-primary: #006495;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #cbe6ff;
+  --md-sys-color-on-primary-container: #001e30;
+
+  /* Secondary */
+  --md-sys-color-secondary: #50606e;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #d3e5f5;
+  --md-sys-color-on-secondary-container: #0c1d29;
+
+  /* Tertiary (Brand Accent - Orange/Amber from original) */
+  --md-sys-color-tertiary: #6b5700;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #ffe25d;
+  --md-sys-color-on-tertiary-container: #211b00;
+
+  /* Error */
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #410002;
+
+  /* Background & Surface */
+  --md-sys-color-background: #fcfcff;
+  --md-sys-color-on-background: #1a1c1e;
+  --md-sys-color-surface: #fcfcff;
+  --md-sys-color-on-surface: #1a1c1e;
+  --md-sys-color-surface-variant: #dee3eb;
+  --md-sys-color-on-surface-variant: #42474e;
+  --md-sys-color-outline: #72777f;
+  --md-sys-color-outline-variant: #c2c7cf;
+
+  /* Surface Container (for cards etc) */
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f6f7fa;
+  --md-sys-color-surface-container: #f0f1f5;
+  --md-sys-color-surface-container-high: #eaebf0;
+  --md-sys-color-surface-container-highest: #e4e5ea;
+
+  /* Legacy Mapping for compatibility */
+  --color-primary: var(--md-sys-color-primary);
+  --color-primary-light: var(--md-sys-color-primary-container);
+  --color-primary-dark: var(--md-sys-color-on-primary-container);
+
+  --color-secondary: var(--md-sys-color-tertiary);
+  --color-warning: var(--md-sys-color-tertiary);
+  --color-danger: var(--md-sys-color-error);
   --color-success: #10B981;
-  --color-warning: #F59E0B;
 
-  /* --- 布局背景 Surfaces --- */
-  --color-bg-base: #F3F4F6;
-  /* 应用底色 */
-  --color-bg-card: #FFFFFF;
-  /* 卡片背景 */
-  --color-bg-float: #FFFFFF;
-  /* 浮层背景 */
-  --color-bg-input: #F9FAFB;
-  /* 输入框背景 */
+  --color-bg-base: var(--md-sys-color-background);
+  --color-text-main: var(--md-sys-color-on-background);
+  --color-text-secondary: var(--md-sys-color-on-surface-variant);
+  --color-text-tertiary: var(--md-sys-color-outline);
+  --color-bg-card: var(--md-sys-color-surface-container-lowest);
+  --color-bg-input: var(--md-sys-color-surface-container);
 
-  /* --- 文字排版 Typography Colors --- */
-  --color-text-main: #111827;
-  /* 主要文字 */
-  --color-text-secondary: #4B5563;
-  /* 次要文字 */
-  --color-text-tertiary: #9CA3AF;
-  /* 辅助文字/占位符 */
-  --color-text-inverse: #FFFFFF;
-  /* 反白文字 */
+  --color-border: var(--md-sys-color-outline-variant);
+  --color-divider: var(--md-sys-color-outline-variant);
 
-  /* --- 边框与分割 Borders --- */
-  --color-border: #E5E7EB;
-  --color-divider: #F3F4F6;
+  --radius-sm: var(--md-sys-shape-corner-small);
+  --radius-md: var(--md-sys-shape-corner-medium);
+  --radius-lg: var(--md-sys-shape-corner-large);
+  --radius-full: var(--md-sys-shape-corner-full);
 
-  /* --- 间距系统 Spacing (Responsive via rpx) --- */
-  /* 基础网格单位 8rpx */
-  --spacing-xxs: 8rpx;
-  --spacing-xs: 16rpx;
-  --spacing-sm: 24rpx;
-  --spacing-md: 32rpx;
-  /* 标准间距 */
-  --spacing-lg: 48rpx;
-  --spacing-xl: 64rpx;
-  --spacing-xxl: 96rpx;
+  --shadow-sm: var(--md-sys-elevation-1);
+  --shadow-md: var(--md-sys-elevation-2);
+  --shadow-lg: var(--md-sys-elevation-3);
+  --shadow-float: var(--md-sys-elevation-3);
 
-  /* --- 圆角 Radius --- */
-  --radius-sm: 8rpx;
-  --radius-md: 16rpx;
-  /* 标准卡片圆角 */
-  --radius-lg: 24rpx;
-  --radius-full: 9999rpx;
+  /* --- Typography System --- */
+  --md-sys-typescale-display-large: 57px;
+  --md-sys-typescale-display-medium: 45px;
+  --md-sys-typescale-display-small: 36px;
 
-  /* --- 阴影 Shadows --- */
-  --shadow-sm: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4rpx 6rpx -1rpx rgba(0, 0, 0, 0.1), 0 2rpx 4rpx -1rpx rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10rpx 15rpx -3rpx rgba(0, 0, 0, 0.1), 0 4rpx 6rpx -2rpx rgba(0, 0, 0, 0.05);
-  --shadow-float: 0 20rpx 25rpx -5rpx rgba(0, 0, 0, 0.1), 0 10rpx 10rpx -5rpx rgba(0, 0, 0, 0.04);
+  --md-sys-typescale-headline-large: 32px;
+  --md-sys-typescale-headline-medium: 28px;
+  --md-sys-typescale-headline-small: 24px;
+
+  --md-sys-typescale-title-large: 22px;
+  --md-sys-typescale-title-medium: 16px;
+  --md-sys-typescale-title-small: 14px;
+
+  --md-sys-typescale-body-large: 16px;
+  --md-sys-typescale-body-medium: 14px;
+  --md-sys-typescale-body-small: 12px;
+
+  --md-sys-typescale-label-large: 14px;
+  --md-sys-typescale-label-medium: 12px;
+  --md-sys-typescale-label-small: 11px;
+
+  /* --- Elevation / Shadows --- */
+  --md-sys-elevation-1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-2: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+
+  /* --- Shape / Radius --- */
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-full: 9999px;
+
+  /* --- Spacing --- */
+  --spacing-xs: 8rpx;
+  --spacing-sm: 16rpx;
+  --spacing-md: 24rpx;
+  --spacing-lg: 32rpx;
+  --spacing-xl: 48rpx;
+  --spacing-xxl: 64rpx;
 }
 
-/* 全局应用基础样式 */
+/* Base Styles */
 page {
-  background-color: var(--color-bg-base);
-  color: var(--color-text-main);
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
-    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
-    sans-serif;
-  font-size: 28rpx;
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: var(--md-sys-typescale-body-medium);
   line-height: 1.5;
   box-sizing: border-box;
 }
 
-/* 通用容器类 - 使用响应式间距变量 */
+/* Utility Classes */
+
 .container {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   padding: var(--spacing-md);
   box-sizing: border-box;
 }
 
-/* 通用卡片样式 helper */
-.card {
-  background: var(--color-bg-card);
-  border-radius: var(--radius-md);
+/* Material Card */
+.md-card {
+  background-color: var(--md-sys-color-surface-container-lowest);
+  border-radius: var(--md-sys-shape-corner-medium);
   padding: var(--spacing-md);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--md-sys-elevation-1);
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   margin-bottom: var(--spacing-md);
-  transition: box-shadow 0.2s ease;
 }
 
-.card:active {
-  background-color: var(--color-bg-input);
+.md-card-outlined {
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-medium);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
 }
 
-@import "./app-wxa-auto-dark.wxss";
+.md-card-elevated {
+  background-color: var(--md-sys-color-surface-container-low);
+  box-shadow: var(--md-sys-elevation-1);
+  border-radius: var(--md-sys-shape-corner-medium);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Typography Utilities */
+.text-display-large {
+  font-size: var(--md-sys-typescale-display-large);
+  font-weight: 400;
+}
+
+.text-display-medium {
+  font-size: var(--md-sys-typescale-display-medium);
+  font-weight: 400;
+}
+
+.text-headline-large {
+  font-size: var(--md-sys-typescale-headline-large);
+  font-weight: 400;
+}
+
+.text-headline-medium {
+  font-size: var(--md-sys-typescale-headline-medium);
+  font-weight: 400;
+}
+
+.text-title-large {
+  font-size: var(--md-sys-typescale-title-large);
+  font-weight: 500;
+}
+
+.text-title-medium {
+  font-size: var(--md-sys-typescale-title-medium);
+  font-weight: 500;
+}
+
+.text-body-large {
+  font-size: var(--md-sys-typescale-body-large);
+  font-weight: 400;
+}
+
+.text-body-medium {
+  font-size: var(--md-sys-typescale-body-medium);
+  font-weight: 400;
+}
+
+.text-label-large {
+  font-size: var(--md-sys-typescale-label-large);
+  font-weight: 500;
+}
+
+/* Interactive States */
+.md-clickable:active {
+  background-color: rgba(0, 0, 0, 0.08);
+  /* State layer simulation */
+}
+
+/* Helper for older classes adaptation */
+.card {
+  /* composes: md-card; */
+  background: var(--md-sys-color-surface-container-lowest);
+  border-radius: var(--md-sys-shape-corner-medium);
+  padding: var(--spacing-md);
+  box-shadow: var(--md-sys-elevation-1);
+  margin-bottom: var(--spacing-md);
+}
+
+/* @import "./app-wxa-auto-dark.wxss"; */

@@ -2,15 +2,15 @@
 
 ## Project Structure & Module Organization
 - `miniprogram/`: WeChat Mini Program source (TypeScript + WXML/WXSS).
-  - `miniprogram/app.ts`, `miniprogram/app.json`, `miniprogram/app.wxss`: app entry and global config/styles.
-  - `miniprogram/pages/<page>/`: page modules; keep each page’s `*.ts`, `*.wxml`, `*.wxss`, `*.json` together.
-  - `miniprogram/utils/`: shared utilities (e.g. `miniprogram/utils/util.ts`).
+- `miniprogram/app.ts`, `miniprogram/app.json`, `miniprogram/app.wxss`: app entry and global config/styles.
+- `miniprogram/pages/<page>/`: page modules; keep each page’s `*.ts`, `*.wxml`, `*.wxss`, `*.json` together.
+- `miniprogram/utils/`: shared utilities (e.g. `miniprogram/utils/util.ts`).
 - `miniprogram_npm/`: generated NPM bundle output from WeChat DevTools (do not edit manually).
 - `typings/`: custom type roots used by `tsconfig.json`.
 - `project.config.json` / `project.private.config.json`: DevTools project settings (private file is per-developer).
 
 ## Build, Test, and Development Commands
-- `npm ci` (or `npm install`): install dependencies used by the Mini Program (e.g. Vant Weapp, MobX).
+- `pnpm`: install dependencies used by the Mini Program (e.g. Vant Weapp, MobX).
 - `npx tsc -p tsconfig.json --noEmit`: run a fast TypeScript type-check locally.
 - WeChat DevTools:
   - Open the repo root; `miniprogramRoot` is `miniprogram/`.
@@ -48,7 +48,6 @@ using Powershell
 
 ## 当前测试配置
 - 默认 BaseURL: `http://127.0.0.1:8080/api/v2`
-- 登录逻辑: `authApi.loginWithWechat` 调用后端完成 JWT 颁发。
 
 ## 依赖
 ```json

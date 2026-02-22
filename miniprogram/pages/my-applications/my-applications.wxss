@@ -1,35 +1,35 @@
 /* pages/my-applications/my-applications.wxss */
 .my-applications-container {
     min-height: 100vh;
-    background: var(--color-bg-base);
+    background: var(--md-sys-color-background);
 }
 
 /* 状态筛选标签 */
 .status-tabs {
     display: flex;
-    background: #fff;
+    background: var(--md-sys-color-surface-container-lowest);
     padding: 20rpx var(--spacing-sm);
     gap: var(--spacing-xs);
     position: sticky;
     top: 0;
     z-index: 10;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--md-sys-elevation-1);
 }
 
 .tab-item {
     flex: 1;
     text-align: center;
     padding: 16rpx 0;
-    font-size: 28rpx;
-    color: var(--color-text-secondary);
-    background: var(--color-bg-base);
+    font-size: var(--md-sys-typescale-label-large);
+    color: var(--md-sys-color-on-surface-variant);
+    background: var(--md-sys-color-surface);
     border-radius: 40rpx;
     transition: all 0.3s ease;
 }
 
 .tab-item.active {
-    color: var(--color-text-inverse);
-    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
+    color: var(--md-sys-color-on-primary);
+    background: var(--md-sys-color-primary);
     font-weight: 500;
 }
 
@@ -47,11 +47,11 @@
 }
 
 .application-card {
-    background: var(--color-bg-card);
-    border-radius: var(--radius-lg);
+    background: var(--md-sys-color-surface-container-lowest);
+    border-radius: var(--md-sys-shape-corner-large);
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-sm);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--md-sys-elevation-1);
 }
 
 /* 项目信息 */
@@ -59,16 +59,16 @@
     display: flex;
     align-items: center;
     gap: 12rpx;
-    background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(55, 48, 163, 0.08) 100%);
+    background: var(--md-sys-color-surface-container);
     padding: 20rpx var(--spacing-sm);
-    border-radius: var(--radius-md);
+    border-radius: var(--md-sys-shape-corner-medium);
     margin-bottom: 20rpx;
 }
 
 .project-name {
     flex: 1;
-    font-size: 30rpx;
-    color: var(--color-text-main);
+    font-size: var(--md-sys-typescale-body-large);
+    color: var(--md-sys-color-on-surface);
     font-weight: 500;
 }
 
@@ -81,36 +81,36 @@
 }
 
 .apply-time {
-    font-size: 24rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-outline);
 }
 
 /* 申请理由 */
 .apply-reason,
 .reply-msg {
-    background: var(--color-bg-base);
+    background: var(--md-sys-color-surface-container-low);
     padding: 20rpx var(--spacing-sm);
-    border-radius: var(--radius-sm);
+    border-radius: var(--md-sys-shape-corner-small);
     margin-bottom: var(--spacing-xs);
 }
 
 .apply-reason .label,
 .reply-msg .label {
-    font-size: 26rpx;
-    color: var(--color-text-secondary);
+    font-size: var(--md-sys-typescale-body-medium);
+    color: var(--md-sys-color-on-surface-variant);
     margin-right: var(--spacing-xxs);
 }
 
 .apply-reason .content,
 .reply-msg .content {
-    font-size: 26rpx;
-    color: var(--color-text-main);
+    font-size: var(--md-sys-typescale-body-medium);
+    color: var(--md-sys-color-on-surface);
     line-height: 1.6;
 }
 
 .reply-msg {
-    border-left: 4rpx solid var(--color-primary);
-    background: rgba(79, 70, 229, 0.05);
+    border-left: 4rpx solid var(--md-sys-color-primary);
+    background: var(--md-sys-color-surface-container);
 }
 
 /* 联系方式 */
@@ -119,13 +119,13 @@
     align-items: center;
     gap: var(--spacing-xxs);
     padding: 16rpx 20rpx;
-    background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(55, 48, 163, 0.1) 100%);
-    border-radius: var(--radius-sm);
+    background: var(--md-sys-color-primary-container);
+    border-radius: var(--md-sys-shape-corner-small);
 }
 
 .contact-text {
-    font-size: 28rpx;
-    color: var(--color-primary);
+    font-size: var(--md-sys-typescale-body-large);
+    color: var(--md-sys-color-on-primary-container);
     font-weight: 500;
 }
 
@@ -138,8 +138,8 @@
 }
 
 .no-more text {
-    font-size: 26rpx;
-    color: var(--color-text-tertiary);
+    font-size: var(--md-sys-typescale-body-medium);
+    color: var(--md-sys-color-outline);
 }
 
 /* 空状态 */
