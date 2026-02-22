@@ -46,3 +46,20 @@
         </view>
     </view>
 </view>
+<!-- 手机号绑定弹窗 -->
+<van-popup show="{{showPhoneModal}}" positon="bottom" round bind:close="closePhoneModal">
+    <view class="phone-modal">
+        <view class="modal-header">
+            <text class="modal-title">绑定手机号</text>
+            <van-icon name="cross" size="20px" color="#999" bindtap="closePhoneModal" />
+        </view>
+        <view class="modal-content">
+            <text class="modal-desc">为了更好的服务体验，请绑定您的手机号</text>
+            <button class="phone-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" loading="{{loading}}" disabled="{{loading}}">
+                <van-icon name="phone-o" size="20px" color="#fff" />
+                <text class="btn-text">{{loading ? '绑定中...' : '微信一键绑定'}}</text>
+            </button>
+            <text class="modal-tip">绑定后即可使用所有功能</text>
+        </view>
+    </view>
+</van-popup>
