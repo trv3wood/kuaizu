@@ -18,10 +18,6 @@
             <!-- 项目头部 -->
             <view class="card-header">
                 <text class="project-name">{{item.name}}</text>
-                <van-tag wx:if="{{item.status === 0}}" type="default" plain>审核中</van-tag>
-                <van-tag wx:elif="{{item.status === 1}}" type="success" plain>进行中</van-tag>
-                <van-tag wx:elif="{{item.status === 2}}" type="danger" plain>已驳回</van-tag>
-                <van-tag wx:else type="default" plain>已关闭</van-tag>
             </view>
             <!-- 项目描述 -->
             <view class="card-description">
@@ -80,15 +76,6 @@
                     <text class="section-title">项目方向</text>
                     <view class="filter-options">
                         <view class="option-item {{filters.direction === item.value ? 'active' : ''}}" wx:for="{{directions}}" wx:key="value" data-value="{{item.value}}" bindtap="handleDirectionChange">
-                            {{item.label}}
-                        </view>
-                    </view>
-                </view>
-                <!-- 项目状态 -->
-                <view class="filter-section">
-                    <text class="section-title">项目状态</text>
-                    <view class="filter-options">
-                        <view class="option-item {{filters.status === item.value ? 'active' : ''}}" wx:for="{{statuses}}" wx:key="value" data-value="{{item.value}}" bindtap="handleStatusChange">
                             {{item.label}}
                         </view>
                     </view>
