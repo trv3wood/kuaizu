@@ -159,6 +159,63 @@
     padding: 100rpx 0;
 }
 
+/* ==================== 项目选择弹窗 ==================== */
+.project-picker-popup {
+    padding: var(--spacing-md);
+    padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+    background: var(--md-sys-color-surface);
+}
+
+.project-loading {
+    padding: 60rpx 0;
+    display: flex;
+    justify-content: center;
+}
+
+.project-list {
+    max-height: 50vh;
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-xs);
+    border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
+}
+
+.project-item:last-child {
+    border-bottom: none;
+}
+
+.project-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.project-item-name {
+    display: block;
+    font-size: var(--md-sys-typescale-body-large);
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.project-item-desc {
+    display: block;
+    font-size: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-on-surface-variant);
+    margin-top: 4rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.project-empty {
+    padding: 40rpx 0;
+}
+
 /* ==================== 购买弹窗 ==================== */
 .purchase-popup {
     padding: var(--spacing-md);
