@@ -16,7 +16,6 @@ Page({
         // 表单数据
         form: {
             skills: [] as string[],
-            intro: '',
             selfEvaluation: '',
             projectExperience: '',
             mbti: '',
@@ -221,6 +220,10 @@ Page({
     },
 
     async handleSave() {
+        if (!(this.data as any).isVerified) {
+            wx.showToast({title: "请前往个人中心进行学生认证", icon: 'none'})
+            return
+        }
         const { form } = this.data
 
         if (!form.skills || form.skills.length === 0) {
