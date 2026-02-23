@@ -1,6 +1,7 @@
 // pages/profile/profile.ts
 import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { userStore } from '../../stores/index'
+import { userApi } from '../../api/user'
 
 Page({
     data: {
@@ -89,5 +90,28 @@ Page({
      */
     handleOliveBranchTap() {
         wx.navigateTo({ url: '/pages/olive-branches/olive-branches' })
+    },
+
+    /**
+     * 学生认证：选择学生证照片并上传
+     */
+    handleCertification() {
+        wx.chooseMedia({
+            count: 1,
+            mediaType: ['image'],
+            sourceType: ['album', 'camera'],
+            success: (res) => {
+                const filePath = res.tempFiles[0]!.tempFilePath
+                wx.showLoading({ title: '提交认证中...' })
+                userApi.submitCertification(filePath).then(() => {
+                    wx.hideLoading()
+                    wx.showToast({ title: '认证已提交', icon: 'success' })
+                    userStore.fetchUser()
+                }).catch(() => {
+                    wx.hideLoading()
+                    wx.showToast({ title: '提交失败，请重试', icon: 'none' })
+                })
+            }
+        })
     }
 })

@@ -8,7 +8,9 @@
         <view class="nickname-row">
           <text class="nickname">{{displayName}}</text>
           <van-tag wx:if="{{isVerified}}" type="success" size="medium">已认证</van-tag>
-          <van-tag wx:else type="warning" size="medium">未认证</van-tag>
+          <view wx:else catchtap="handleCertification">
+            <van-tag type="warning" size="medium">未认证</van-tag>
+          </view>
         </view>
         <view class="user-meta">
           <text wx:if="{{user.school}}">{{user.school.schoolName}}</text>
