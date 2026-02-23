@@ -3,7 +3,7 @@
     <!-- 头像区域 -->
     <view class="avatar-section" bindtap="handleChooseAvatar">
         <view class="avatar-wrapper">
-            <image class="avatar" src="{{form.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
+            <image class="avatar" src="{{form.avatarUrl}}" mode="aspectFill" />
             <view class="avatar-mask" wx:if="{{uploading}}">
                 <van-loading size="24px" color="#fff" />
             </view>

@@ -20,7 +20,6 @@ Page({
             selfEvaluation: '',
             projectExperience: '',
             mbti: '',
-            isPublicContact: true,
             status: 1
         } as UpsertTalentProfileDTO,
         // 技能输入
@@ -72,11 +71,9 @@ Page({
                     isEditing: false,
                     form: {
                         skills: profile.skills || [],
-                        intro: profile.intro || '',
                         selfEvaluation: '',
                         projectExperience: '',
                         mbti: profile.mbti || '',
-                        isPublicContact: profile.isPublicContact ?? true,
                         status: profile.status || 1
                     },
                     mbtiIndex,
@@ -150,11 +147,9 @@ Page({
                 isEditing: false,
                 form: {
                     skills: profile.skills || [],
-                    intro: profile.intro || '',
                     selfEvaluation: this.data.form.selfEvaluation,
                     projectExperience: this.data.form.projectExperience,
                     mbti: profile.mbti || '',
-                    isPublicContact: profile.isPublicContact ?? true,
                     status: profile.status || 1
                 },
                 mbtiIndex,
@@ -225,10 +220,6 @@ Page({
         })
     },
 
-    handleContactSwitch(e: WechatMiniprogram.SwitchChange) {
-        this.setData({ 'form.isPublicContact': e.detail.value })
-    },
-
     async handleSave() {
         const { form } = this.data
 
@@ -242,11 +233,9 @@ Page({
         try {
             const res = await talentApi.upsertTalentProfile({
                 skills: form.skills,
-                intro: form.intro,
                 selfEvaluation: form.selfEvaluation,
                 projectExperience: form.projectExperience,
                 mbti: form.mbti,
-                isPublicContact: form.isPublicContact,
                 status: 1
             })
 

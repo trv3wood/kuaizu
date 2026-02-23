@@ -7,7 +7,7 @@
     <block wx:elif="{{profile}}">
         <!-- 头部卡片 -->
         <view class="profile-header">
-            <image class="avatar" src="{{profile.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
+            <image class="avatar" src="{{profile.avatarUrl}}" mode="aspectFill" />
             <view class="info">
                 <text class="name">{{profile.nickname || '匿名用户'}}</text>
                 <text class="school">{{profile.schoolName || '未知学校'}}</text>
