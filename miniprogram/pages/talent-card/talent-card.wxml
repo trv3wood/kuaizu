@@ -79,11 +79,11 @@
                 </van-cell>
             </van-cell-group>
             <!-- 自我评价 -->
-            <van-cell-group inset title="自我评价 (选填)">
+            <van-cell-group inset title="自我评价 (必填)">
                 <van-field type="textarea" placeholder="描述你的优势和特点..." value="{{form.selfEvaluation}}" data-field="selfEvaluation" bind:input="handleInput" autosize="{{ { minHeight: 80 } }}" />
             </van-cell-group>
             <!-- 项目经历 -->
-            <van-cell-group inset title="项目经历 (选填)">
+            <van-cell-group inset title="项目经历 (必填)">
                 <van-field type="textarea" placeholder="介绍你参与过的项目..." value="{{form.projectExperience}}" data-field="projectExperience" bind:input="handleInput" autosize="{{ { minHeight: 80 } }}" />
             </van-cell-group>
             <!-- 隐私设置 -->

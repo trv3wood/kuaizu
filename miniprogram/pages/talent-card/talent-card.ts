@@ -42,7 +42,7 @@ Page({
     onLoad() {
         this.storeBindings = createStoreBindings(this, {
             store: userStore,
-            fields: ['user', 'displayName', 'avatarUrl'],
+            fields: ['user', 'displayName', 'avatarUrl', 'isVerified'],
             actions: []
         })
 
@@ -225,6 +225,16 @@ Page({
 
         if (!form.skills || form.skills.length === 0) {
             wx.showToast({ title: '请添加至少一个技能', icon: 'none' })
+            return
+        }
+
+        if (!form.selfEvaluation || form.selfEvaluation.trim() === '') {
+            wx.showToast({ title: '请填写自我评价', icon: 'none' })
+            return
+        }
+
+        if (!form.projectExperience || form.projectExperience.trim() === '') {
+            wx.showToast({ title: '请填写项目经历', icon: 'none' })
             return
         }
 
