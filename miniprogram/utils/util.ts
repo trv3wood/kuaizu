@@ -30,8 +30,9 @@ export const getProjectDirectionText = (direction?: number): string => {
 export const getOrderStatusText = (status?: number): string => {
   const statusMap: Record<number, string> = {
     0: '待支付',
-    1: '已完成',
-    2: '已退款'
+    1: '已支付',
+    2: '已取消',
+    3: '已退款'
   }
   return status !== undefined ? statusMap[status] || '未知' : '未知'
 }

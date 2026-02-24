@@ -66,7 +66,7 @@
     border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
 }
 
-.order-time {
+.order-id {
     font-size: var(--md-sys-typescale-body-small);
     color: var(--md-sys-color-outline);
 }
@@ -88,7 +88,11 @@
     background: #d1fae5;
 }
 
-.order-status.status-2,
+.order-status.status-2 {
+    color: var(--md-sys-color-error);
+    background: var(--md-sys-color-error-container);
+}
+
 .order-status.status-3 {
     color: var(--md-sys-color-outline);
     background: var(--md-sys-color-surface-container);
@@ -121,11 +125,48 @@
     font-weight: bold;
 }
 
+/* 详细信息 */
+.order-detail {
+    padding: var(--spacing-xs) 0;
+    border-top: 1rpx solid var(--md-sys-color-outline-variant);
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8rpx 0;
+}
+
+.detail-label {
+    font-size: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-outline);
+}
+
+.detail-value {
+    font-size: var(--md-sys-typescale-body-small);
+    color: var(--md-sys-color-on-surface-variant);
+}
+
 .order-footer {
     padding-top: 20rpx;
     border-top: 1rpx solid var(--md-sys-color-outline-variant);
     display: flex;
     justify-content: flex-end;
+    gap: 16rpx;
+}
+
+.cancel-btn {
+    background: transparent;
+    color: var(--md-sys-color-error);
+    font-size: var(--md-sys-typescale-label-large);
+    padding: 12rpx 32rpx;
+    border-radius: 32rpx;
+    border: 2rpx solid var(--md-sys-color-error);
+}
+
+.cancel-btn::after {
+    border: none;
 }
 
 .pay-btn {

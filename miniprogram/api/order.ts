@@ -47,5 +47,15 @@ export const orderApi = {
             `/orders/my`,
             params
         )
+    },
+
+    /**
+     * 撤销未支付订单
+     * 仅允许取消待支付状态(status=0)的订单
+     */
+    cancelOrder(id: number) {
+        return http.post<Schemas['BaseResponse'] & { data: Schemas['OrderVO'] }>(
+            `/orders/${id}/cancel`
+        )
     }
 }

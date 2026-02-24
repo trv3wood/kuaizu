@@ -13,10 +13,12 @@
     <!-- 订单列表 -->
     <view class="order-list" wx:elif="{{orders.length > 0}}">
         <view class="order-card" wx:for="{{orders}}" wx:key="id" data-order="{{item}}" bindtap="handleOrderTap">
+            <!-- 头部：状态 -->
             <view class="order-header">
-                <text class="order-time">{{item.formattedTime}}</text>
+                <text class="order-id">订单号: {{item.id}}</text>
                 <text class="order-status status-{{item.status}}">{{item.statusText}}</text>
             </view>
+            <!-- 商品信息 -->
             <view class="order-body">
                 <view class="order-info">
                     <text class="product-name">{{item.productName || '商品'}}</text>
@@ -25,7 +27,26 @@
                     <text class="price">{{item.formattedPrice}}</text>
                 </view>
             </view>
+            <!-- 详细信息 -->
+            <view class="order-detail">
+                <view class="detail-row">
+                    <text class="detail-label">创建时间</text>
+                    <text class="detail-value">{{item.formattedTime}}</text>
+                </view>
+                <view class="detail-row" wx:if="{{item.status === 1 || item.status === 3}}">
+                    <text class="detail-label">支付时间</text>
+                    <text class="detail-value">{{item.formattedPayTime}}</text>
+                </view>
+                <view class="detail-row" wx:if="{{item.wxPayNo}}">
+                    <text class="detail-label">支付单号</text>
+                    <text class="detail-value">{{item.wxPayNo}}</text>
+                </view>
+            </view>
+            <!-- 操作按钮 -->
             <view class="order-footer" wx:if="{{item.status === 0}}">
+                <button class="cancel-btn" catchtap="handleCancelOrder" data-order="{{item}}">
+                    取消订单
+                </button>
                 <button class="pay-btn" catchtap="handlePayOrder" data-order="{{item}}">
                     立即支付
                 </button>
