@@ -1,7 +1,7 @@
 /* pages/home/home.wxss */
 .guide-container {
   min-height: 100vh;
-  background: var(--md-sys-color-background);
+  background: var(--bg-color);
   padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
 }
 
@@ -14,42 +14,42 @@
 .welcome-header {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: 16rpx;
 }
 
 .welcome-title {
-  font-size: var(--md-sys-typescale-display-small);
+  font-size: 44rpx;
   font-weight: bold;
-  color: var(--md-sys-color-primary);
+  color: var(--primary-color);
   /* Fallback or gradient text if needed */
-  background: linear-gradient(45deg, var(--md-sys-color-primary), var(--md-sys-color-secondary));
+  background: linear-gradient(45deg, var(--primary-color), var(--text-gray));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .welcome-subtitle {
-  font-size: var(--md-sys-typescale-title-medium);
-  color: var(--md-sys-color-outline);
+  font-size: 32rpx;
+  color: var(--text-gray);
   letter-spacing: 2rpx;
 }
 
 /* 导航卡片区域 */
 .nav-cards {
-  padding: 0 var(--spacing-md);
+  padding: 0 40rpx;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: 40rpx;
 }
 
 .nav-card {
-  background: var(--md-sys-color-surface-container-lowest);
-  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--card-bg);
+  border-radius: 32rpx;
   padding: 40rpx;
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  box-shadow: var(--md-sys-elevation-1);
+  gap: 40rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -58,15 +58,15 @@
 
 .nav-card:active {
   transform: scale(0.98);
-  box-shadow: var(--md-sys-elevation-2);
-  background-color: var(--md-sys-color-surface-container);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+  background-color: #f5f7fa;
 }
 
 /* 图标容器 */
 .card-icon-wrapper {
   width: 120rpx;
   height: 120rpx;
-  border-radius: var(--md-sys-shape-corner-medium);
+  border-radius: 24rpx;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,13 +74,13 @@
 }
 
 .projects-icon {
-  background: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
+  background: #e8f4ff;
+  color: var(--primary-color);
 }
 
 .talent-icon {
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
+  background: #f5f7fa;
+  color: var(--text-main);
 }
 
 /* 卡片内容 */
@@ -88,26 +88,26 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xxs);
+  gap: 8rpx;
 }
 
 .card-title {
-  font-size: var(--md-sys-typescale-title-large);
+  font-size: 36rpx;
   font-weight: bold;
-  color: var(--md-sys-color-on-surface);
-  margin-bottom: var(--spacing-xxs);
+  color: var(--text-main);
+  margin-bottom: 8rpx;
 }
 
 .card-desc {
-  font-size: var(--md-sys-typescale-body-medium);
-  color: var(--md-sys-color-on-surface-variant);
+  font-size: 28rpx;
+  color: var(--text-gray);
   line-height: 1.5;
 }
 
 /* 箭头 */
 .card-arrow {
   flex-shrink: 0;
-  color: var(--md-sys-color-outline);
+  color: var(--text-gray);
 }
 
 /* 底部提示 */
@@ -117,6 +117,6 @@
 }
 
 .footer-text {
-  font-size: var(--md-sys-typescale-body-small);
-  color: var(--md-sys-color-outline);
+  font-size: 24rpx;
+  color: var(--text-gray);
 }

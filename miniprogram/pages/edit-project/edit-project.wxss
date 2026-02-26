@@ -1,34 +1,34 @@
 /* pages/edit-project/edit-project.wxss */
 .edit-project-container {
     min-height: 100vh;
-    background: var(--md-sys-color-background);
+    background: var(--bg-color);
     padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
 }
 
 /* 表单区域 */
 .form-section {
-    padding: var(--spacing-sm);
+    padding: 30rpx;
 }
 
 .form-group {
-    background: var(--md-sys-color-surface-container-lowest);
-    border-radius: var(--md-sys-shape-corner-medium);
-    padding: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
-    box-shadow: var(--md-sys-elevation-1);
+    background: var(--card-bg);
+    border-radius: 24rpx;
+    padding: 30rpx;
+    margin-bottom: 30rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 .form-label {
-    font-size: var(--md-sys-typescale-label-large);
+    font-size: 28rpx;
     font-weight: 500;
-    color: var(--md-sys-color-on-surface);
-    margin-bottom: var(--spacing-xs);
+    color: var(--text-main);
+    margin-bottom: 16rpx;
     display: block;
 }
 
 .form-label.required::after {
     content: ' *';
-    color: var(--md-sys-color-error);
+    color: #ff4d4d;
 }
 
 /* Stepper */
@@ -39,54 +39,54 @@
 }
 
 .stepper-hint {
-    font-size: var(--md-sys-typescale-body-small);
-    color: var(--md-sys-color-outline);
+    font-size: 24rpx;
+    color: var(--text-gray);
 }
 
 /* 方向选择 */
 .direction-options {
     display: flex;
-    gap: var(--spacing-xs);
+    gap: 16rpx;
 }
 
 .direction-item {
     flex: 1;
-    background: var(--md-sys-color-surface);
+    background: var(--card-bg);
     border: 2rpx solid transparent;
-    border-radius: var(--md-sys-shape-corner-medium);
+    border-radius: 24rpx;
     padding: 20rpx 16rpx;
     text-align: center;
     transition: all 0.3s;
 }
 
 .direction-item.active {
-    background: var(--md-sys-color-secondary-container);
-    border-color: var(--md-sys-color-secondary);
+    background: #f5f7fa;
+    border-color: var(--text-gray);
 }
 
 .direction-label {
-    font-size: var(--md-sys-typescale-label-large);
+    font-size: 28rpx;
     font-weight: 500;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-main);
     margin-bottom: 8rpx;
 }
 
 .direction-item.active .direction-label {
-    color: var(--md-sys-color-on-secondary-container);
+    color: var(--text-main);
 }
 
 .direction-desc {
-    font-size: var(--md-sys-typescale-body-small);
-    color: var(--md-sys-color-outline);
+    font-size: 24rpx;
+    color: var(--text-gray);
 }
 
 .direction-item.active .direction-desc {
-    color: var(--md-sys-color-on-secondary-container);
+    color: var(--text-main);
 }
 
 /* Placeholder样式 */
 .placeholder {
-    color: var(--md-sys-color-outline) !important;
+    color: var(--text-gray) !important;
 }
 
 /* 提交区域 */
@@ -95,18 +95,18 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--md-sys-color-surface-container-lowest);
-    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--card-bg);
+    padding: 30rpx 40rpx;
     padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
-    box-shadow: var(--md-sys-elevation-2);
+    box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
 }
 
 .submit-hint {
     display: block;
     text-align: center;
-    font-size: var(--md-sys-typescale-body-small);
-    color: var(--md-sys-color-outline);
-    margin-top: var(--spacing-xs);
+    font-size: 24rpx;
+    color: var(--text-gray);
+    margin-top: 16rpx;
 }
 
 /* 学校选择器 */
@@ -114,7 +114,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: var(--md-sys-color-surface);
+    background: var(--card-bg);
 }
 
 .picker-header {
@@ -123,14 +123,14 @@
 }
 
 .picker-title {
-    font-size: var(--md-sys-typescale-title-medium);
+    font-size: 32rpx;
     font-weight: bold;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-main);
 }
 
 .school-list {
     flex: 1;
-    padding: 0 var(--spacing-sm);
+    padding: 0 30rpx;
 }
 
 .school-item {
@@ -138,30 +138,30 @@
     justify-content: space-between;
     align-items: center;
     padding: 24rpx 16rpx;
-    border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
+    border-bottom: 1rpx solid #f0f0f0;
 }
 
 .school-item:active {
-    background: var(--md-sys-color-surface-container-high);
+    background: #f0f0f0;
 }
 
 .school-item.active {
-    background: var(--md-sys-color-secondary-container);
+    background: #f5f7fa;
 }
 
 .school-name {
-    font-size: var(--md-sys-typescale-body-large);
-    color: var(--md-sys-color-on-surface);
+    font-size: 32rpx;
+    color: var(--text-main);
 }
 
 .school-item.active .school-name {
-    color: var(--md-sys-color-on-secondary-container);
+    color: var(--text-main);
     font-weight: 500;
 }
 
 .no-schools {
     padding: 60rpx;
     text-align: center;
-    color: var(--md-sys-color-outline);
-    font-size: var(--md-sys-typescale-body-medium);
+    color: var(--text-gray);
+    font-size: 28rpx;
 }

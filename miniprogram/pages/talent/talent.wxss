@@ -1,15 +1,15 @@
 /* pages/talent/talent.wxss */
 .talent-container {
   min-height: 100vh;
-  background: var(--md-sys-color-background);
+  background: var(--bg-color);
   padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
 }
 
 /* 搜索栏 */
 .search-bar {
-  background: var(--md-sys-color-surface-container-lowest);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  box-shadow: var(--md-sys-elevation-1);
+  background: var(--card-bg);
+  padding: 16rpx 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 /* 加载中 */
@@ -21,15 +21,15 @@
 
 /* 人才列表 */
 .talent-list {
-  padding: var(--spacing-sm);
+  padding: 30rpx;
 }
 
 .talent-card {
-  background: var(--md-sys-color-surface-container-lowest);
-  border-radius: var(--md-sys-shape-corner-medium);
-  padding: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-  box-shadow: var(--md-sys-elevation-1);
+  background: var(--card-bg);
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
   transition: transform 0.2s;
 }
 
@@ -41,7 +41,7 @@
 .card-header {
   display: flex;
   align-items: center;
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 16rpx;
 }
 
 .avatar {
@@ -49,7 +49,7 @@
   height: 96rpx;
   border-radius: 50%;
   margin-right: 20rpx;
-  background: var(--md-sys-color-surface-container-high);
+  background: #f0f0f0;
 }
 
 .info {
@@ -58,15 +58,15 @@
 
 .name {
   display: block;
-  font-size: var(--md-sys-typescale-title-medium);
+  font-size: 32rpx;
   font-weight: bold;
-  color: var(--md-sys-color-on-surface);
+  color: var(--text-main);
   margin-bottom: 6rpx;
 }
 
 .school {
-  font-size: var(--md-sys-typescale-body-small);
-  color: var(--md-sys-color-outline);
+  font-size: 24rpx;
+  color: var(--text-gray);
 }
 
 /* 技能标签 */
@@ -74,7 +74,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12rpx;
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 16rpx;
 }
 
 .skill-tag {
@@ -83,8 +83,8 @@
 
 /* 简介 */
 .intro {
-  font-size: var(--md-sys-typescale-body-medium);
-  color: var(--md-sys-color-on-surface-variant);
+  font-size: 28rpx;
+  color: var(--text-gray);
   line-height: 1.6;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -97,13 +97,13 @@
 /* 加载更多 */
 .load-more,
 .no-more {
-  padding: var(--spacing-md);
+  padding: 40rpx;
   text-align: center;
 }
 
 .no-more text {
-  font-size: var(--md-sys-typescale-body-medium);
-  color: var(--md-sys-color-outline);
+  font-size: 28rpx;
+  color: var(--text-gray);
 }
 
 /* 空状态 */
@@ -116,27 +116,27 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--md-sys-color-surface);
+  background: var(--card-bg);
 }
 
 .filter-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md) var(--spacing-sm);
-  border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
+  padding: 40rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
 }
 
 .filter-title {
-  font-size: var(--md-sys-typescale-title-medium);
+  font-size: 32rpx;
   font-weight: bold;
-  color: var(--md-sys-color-on-surface);
+  color: var(--text-main);
 }
 
 .filter-content {
   flex: 1;
   overflow-y: auto;
-  padding: var(--spacing-sm);
+  padding: 30rpx;
 }
 
 .filter-section {
@@ -145,9 +145,9 @@
 
 .section-title {
   display: block;
-  font-size: var(--md-sys-typescale-label-large);
+  font-size: 28rpx;
   font-weight: 500;
-  color: var(--md-sys-color-on-surface);
+  color: var(--text-main);
   margin-bottom: 20rpx;
 }
 
@@ -156,19 +156,19 @@
   justify-content: space-between;
   align-items: center;
   padding: 20rpx 24rpx;
-  background: var(--md-sys-color-surface-container);
-  border-radius: var(--md-sys-shape-corner-medium);
-  font-size: var(--md-sys-typescale-body-large);
-  color: var(--md-sys-color-on-surface);
+  background: #f5f7fa;
+  border-radius: 24rpx;
+  font-size: 32rpx;
+  color: var(--text-main);
 }
 
 /* 筛选操作 */
 .filter-actions {
   display: flex;
   gap: 16rpx;
-  padding: var(--spacing-sm);
+  padding: 30rpx;
   margin-bottom: 12vh;
-  border-top: 1rpx solid var(--md-sys-color-outline-variant);
+  border-top: 1rpx solid #f0f0f0;
 }
 
 .reset-btn,
@@ -176,19 +176,19 @@
   flex: 1;
   height: 88rpx;
   line-height: 88rpx;
-  font-size: var(--md-sys-typescale-label-large);
+  font-size: 28rpx;
   border-radius: 44rpx;
   border: none;
 }
 
 .reset-btn {
-  background: var(--md-sys-color-surface-container-high);
-  color: var(--md-sys-color-on-surface);
+  background: #f0f0f0;
+  color: var(--text-main);
 }
 
 .apply-btn {
-  background: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
+  background: var(--primary-color);
+  color: #ffffff;
 }
 
 .reset-btn::after,
@@ -204,15 +204,15 @@
 }
 
 .picker-header {
-  padding: var(--spacing-md) var(--spacing-sm);
+  padding: 40rpx 30rpx;
   text-align: center;
-  border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
+  border-bottom: 1rpx solid #f0f0f0;
 }
 
 .picker-title {
-  font-size: var(--md-sys-typescale-title-medium);
+  font-size: 32rpx;
   font-weight: bold;
-  color: var(--md-sys-color-on-surface);
+  color: var(--text-main);
 }
 
 .picker-search {
@@ -229,18 +229,18 @@
   justify-content: space-between;
   align-items: center;
   padding: 24rpx 32rpx;
-  border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
+  border-bottom: 1rpx solid #f0f0f0;
 }
 
 .picker-item:active {
-  background: var(--md-sys-color-surface-container-high);
+  background: #f0f0f0;
 }
 
 .picker-empty {
   padding: 60rpx;
   text-align: center;
-  color: var(--md-sys-color-outline);
-  font-size: var(--md-sys-typescale-body-medium);
+  color: var(--text-gray);
+  font-size: 28rpx;
 }
 
 /* 专业选择器扩展样式 */
@@ -255,10 +255,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 24rpx 32rpx;
-  background: var(--md-sys-color-surface-container);
-  font-size: var(--md-sys-typescale-label-large);
+  background: #f5f7fa;
+  font-size: 28rpx;
   font-weight: 500;
-  color: var(--md-sys-color-on-surface);
+  color: var(--text-main);
 }
 
 .picker-item-indent {
