@@ -2,7 +2,6 @@
 <view class="profile-container">
   <!-- Background decoration -->
   <view class="profile-bg"></view>
-
   <!-- User profile section -->
   <view class="user-section" wx:if="{{isLoggedIn}}">
     <image class="avatar" src="{{avatarUrl}}" mode="aspectFill" bindtap="handleEditProfile" />
@@ -10,25 +9,26 @@
       <view class="name-row">
         <text class="name">{{displayName}}</text>
         <van-tag wx:if="{{isVerified}}" type="success" size="small" plain>已认证</van-tag>
+        <van-tag wx:else type="warning" size="small" plain bindtap="handleVerify">未认证</van-tag>
       </view>
-      <text class="user-meta" wx:if="{{userMeta}}">{{userMeta}}</text>
+      <text class="user-meta" wx:if="{{user}}">
+        {{user.school.schoolName}} · {{user.major.majorName}} · {{user.grade ? user.grade + '级' : ''}}
+      </text>
       <text class="placeholder" wx:else>待完善...</text>
     </view>
-    <view class="settings-btn" bindtap="handleSettings">
+    <view class="settings-btn" bindtap="handleEditProfile">
       <van-icon name="setting-o" size="20px" color="#666" />
     </view>
   </view>
-
   <!-- Login prompt for non-logged-in users -->
   <view class="user-section login-prompt" wx:else bindtap="handleLogin">
-    <image class="avatar" src="https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg" mode="aspectFill" />
+    <image class="avatar" src="{{avatarUrl}}" mode="aspectFill" />
     <view class="user-info">
       <text class="name">点击登录</text>
       <text class="placeholder">登录后体验更多功能</text>
     </view>
     <van-icon name="arrow" color="#999" size="18px" />
   </view>
-
   <!-- Feature cards -->
   <view class="feature-cards">
     <view class="card business-card" bindtap="handleBusinessCard">
@@ -43,7 +43,6 @@
       </view>
     </view>
   </view>
-
   <!-- My projects -->
   <view class="menu-card" bindtap="handleMyProjects">
     <view class="menu-card-left">
@@ -52,7 +51,6 @@
     </view>
     <van-icon name="arrow" color="#999" size="16px" />
   </view>
-
   <!-- My applications -->
   <view class="menu-card" bindtap="handleMyApplications">
     <view class="menu-card-left">
@@ -61,7 +59,6 @@
     </view>
     <van-icon name="arrow" color="#999" size="16px" />
   </view>
-
   <!-- Other services -->
   <view class="other-services">
     <text class="section-title">其他服务</text>
@@ -72,12 +69,10 @@
       </view>
     </view>
   </view>
-
   <!-- Logout button -->
   <view class="logout-section" wx:if="{{isLoggedIn}}">
     <button class="logout-btn" bindtap="handleLogout">退出登录</button>
   </view>
-
   <!-- Version info -->
   <view class="version">3.0版本</view>
 </view>

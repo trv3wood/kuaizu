@@ -1,6 +1,7 @@
 // pages/profile/profile.ts
 import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { userStore } from '../../stores/index'
+import { userApi } from '../../api/user'
 
 Page({
     data: {
@@ -21,19 +22,12 @@ Page({
             fields: ['user', 'isLoggedIn', 'isVerified', 'displayName', 'avatarUrl', 'oliveBranchCount'],
             actions: ['fetchUser', 'clearUser']
         })
-        this.updateUserMeta()
     },
 
     onShow() {
         // 更新 tabBar 状态 (profile is now at visual index 2)
         if (typeof this.getTabBar === 'function' && this.getTabBar()) {
             this.getTabBar().setData({ active: 2 })
-        }
-        // 刷新用户信息
-        if (userStore.isLoggedIn) {
-            userStore.fetchUser().then(() => {
-                this.updateUserMeta()
-            })
         }
     },
 
@@ -42,23 +36,6 @@ Page({
         this.storeBindings?.destroyStoreBindings()
     },
 
-    /**
-     * 更新用户元信息显示
-     */
-    updateUserMeta() {
-        const user = userStore.user
-        if (!user) {
-            this.setData({ userMeta: '' })
-            return
-        }
-
-        const parts: string[] = []
-        if (user.school?.schoolName) parts.push(user.school.schoolName)
-        if (user.major?.majorName) parts.push(user.major.majorName)
-        if (user.grade) parts.push(`${user.grade}级`)
-
-        this.setData({ userMeta: parts.join(' · ') })
-    },
 
     /**
      * 跳转到编辑资料页
@@ -67,11 +44,23 @@ Page({
         wx.navigateTo({ url: '/pages/edit-profile/edit-profile' })
     },
 
-    /**
-     * 跳转到设置页
-     */
-    handleSettings() {
-        wx.navigateTo({ url: '/pages/edit-profile/edit-profile' })
+    async handleVerify() {
+        if (!(this as any).isVerified) {
+            const { confirm } = await wx.showModal({
+                title: '提示',
+                content: '您还未认证，是否上传认证资料？'
+            })
+
+            if (confirm) {
+                const { tempFilePaths } = await wx.chooseImage({
+                    count: 1,
+                    sizeType: ['original', 'compressed'],
+                    sourceType: ['album', 'camera']
+                })
+                await userApi.submitCertification(tempFilePaths[0]!!)
+                wx.showToast({ title: '上传成功', icon: 'success' })
+            }
+        }
     },
 
     /**

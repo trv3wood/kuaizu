@@ -30,7 +30,7 @@ export const userStore = observable({
 
     /** 用户头像（带默认值） */
     get avatarUrl(): string {
-        return this.user?.avatarUrl ? 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/' + this.user.avatarUrl : 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'
+        return this.user?.avatarUrl ? 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu_text_img/' + this.user.avatarUrl : 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'
     },
 
     /** 剩余橄榄枝数量 */
