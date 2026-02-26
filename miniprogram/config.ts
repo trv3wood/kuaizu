@@ -4,7 +4,6 @@ const accountInfo = wx.getAccountInfoSync();
 const env = accountInfo.miniProgram.envVersion; 
 
 let base_url = '';
-let oss_base = 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu_text_img/';
 
 // 你的后端地址配置
 const envConfig = {
@@ -23,5 +22,4 @@ base_url = envConfig[env] || envConfig.release; // 兜底用正式版
 export default {
   BASE_URL: base_url,
   ENV: env,
-  OSS_BASE: oss_base
 }
