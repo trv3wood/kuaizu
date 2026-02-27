@@ -64,3 +64,6 @@ using Powershell
   }
 }
 ```
+
+## Figma MCP server
+对于assets文件，先留空待后续补充 CDN URL

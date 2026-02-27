@@ -24,18 +24,12 @@ Component({
     },
 
     methods: {
-        onChange(event: WechatMiniprogram.CustomEvent) {
-            const index = event.detail as unknown as number
-            // index 0 = 导览, index 1 = center button (handled separately), index 2 = 我的
-            // But since center button is not a real tab, we map: 0 -> home, 1 -> profile
-            const realIndex = index > 0 ? index - 1 : index
-            const item = this.data.list[realIndex === 0 ? 0 : 1]
+        switchTab(event: WechatMiniprogram.TouchEvent) {
+            const indexStr = event.currentTarget.dataset.index;
+            const index = parseInt(indexStr, 10);
 
-            // If clicking center (index 1 in visual), show popup
-            if (index === 1) {
-                this.onCenterClick()
-                return
-            }
+            // Only handle nav indexing (0 -> home, 1 -> profile)
+            const item = this.data.list[index];
 
             // Update active state and navigate
             this.setData({ active: index })

@@ -1,23 +1,110 @@
 /* custom-tab-bar/index.wxss */
 
+.tab-bar-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 999;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.tab-bar {
+  width: 518rpx;
+  height: 120rpx;
+  background: #ffffff;
+  border-radius: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+  /* slight shadow for floating effect */
+  pointer-events: auto;
+  position: relative;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex: 1;
+}
+
+.tab-item.center {
+  flex: 0 0 auto;
+}
+
+.tab-icon {
+  width: 50rpx;
+  height: 50rpx;
+  background: #f0f0f0;
+  /* placeholder background for empty src */
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.tab-icon.active {
+  background: #d0d0d0;
+  /* placeholder active state */
+}
+
 /* 中间凸起发布按钮 */
 .center-btn-wrapper {
-  width: 56rpx;
-  height: 56rpx;
-  background: linear-gradient(135deg, #667eea 0%, #4b9ca2 100%);
+  width: 120rpx;
+  height: 120rpx;
+  background: linear-gradient(180deg, #569fff 0%, #4cc4ff 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6rpx 16rpx rgba(102, 126, 234, 0.4);
-  position: relative;
-  top: -12rpx;
-  border: 4rpx solid #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 4rpx solid #ffffff;
+  box-shadow: 0 6rpx 16rpx rgba(86, 159, 255, 0.4);
   transition: all 0.3s ease;
 }
 
-.center-btn-wrapper.active {
-  background: linear-gradient(135deg, #4b82a2 0%, #6079e9 100%);
-  transform: scale(1.05);
-  box-shadow: 0 8rpx 20rpx rgba(118, 75, 162, 0.5);
+.center-btn-wrapper:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.plus-icon {
+  position: relative;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.plus-icon::before,
+.plus-icon::after {
+  content: "";
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 6rpx;
+}
+
+.plus-icon::before {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 8rpx;
+  transform: translateY(-50%);
+}
+
+.plus-icon::after {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 8rpx;
+  transform: translateX(-50%);
 }
