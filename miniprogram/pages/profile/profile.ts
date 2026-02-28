@@ -2,20 +2,29 @@
 import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { userStore } from '../../stores/index'
 import { userApi } from '../../api/user'
+import { ASSETS } from '../../assets/urls'
 
 Page({
     data: {
-        // 其他服务列表
+        assets: ASSETS,
+        navPaddingTop: 0,
+        // 其他服务列表 (aligned with Figma)
         services: [
-            { name: '订单中心', icon: 'gem-o', url: '/pages/my-orders/my-orders' },
-            { name: '了解我们', icon: 'info-o', url: '/pages/about/about' },
-            { name: '我的客服', icon: 'service-o', url: '/pages/contact/contact' }
+            { name: '订单中心', icon: ASSETS.PROFILE.ORDER_CENTER, url: '/pages/my-orders/my-orders' },
+            { name: '资讯中心', icon: ASSETS.PROFILE.INFO_CENTER, url: '/pages/info-center/info-center' },
+            { name: '我的客服', icon: ASSETS.PROFILE.CUSTOMER_SERVICE, url: '/pages/contact/contact' }
         ]
     },
 
     storeBindings: null as any,
 
     onLoad() {
+        // Calculate navigation safe area for custom nav
+        const menuButton = wx.getMenuButtonBoundingClientRect()
+        this.setData({
+            navPaddingTop: menuButton.bottom + 10
+        })
+
         // 绑定 userStore
         this.storeBindings = createStoreBindings(this, {
             store: userStore,
@@ -35,7 +44,6 @@ Page({
         // 清理绑定
         this.storeBindings?.destroyStoreBindings()
     },
-
 
     /**
      * 跳转到编辑资料页

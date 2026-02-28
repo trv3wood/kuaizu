@@ -1,78 +1,83 @@
 <!-- pages/profile/profile.wxml -->
 <view class="profile-container">
-  <!-- Background decoration -->
-  <view class="profile-bg"></view>
-  <!-- User profile section -->
-  <view class="user-section" wx:if="{{isLoggedIn}}">
-    <image class="avatar" src="{{avatarUrl}}" mode="aspectFill" bindtap="handleEditProfile" />
-    <view class="user-info">
-      <view class="name-row">
-        <text class="name">{{displayName}}</text>
-        <van-tag wx:if="{{isVerified}}" type="success" size="small" plain>已认证</van-tag>
-        <van-tag wx:else type="warning" size="small" plain bindtap="handleVerify">未认证</van-tag>
+  <!-- Full-bleed background SVG -->
+  <image class="profile-bg" src="{{assets.PROFILE.BACKGROUND}}" mode="aspectFill" />
+  <!-- Main content area -->
+  <view class="content" style="padding-top: {{navPaddingTop}}px">
+    <!-- Logged in state -->
+    <block wx:if="{{isLoggedIn}}">
+      <!-- Header: Avatar + Settings pill -->
+      <view class="header-row">
+        <image class="avatar" src="{{avatarUrl}}" mode="aspectFill" bindtap="handleEditProfile" />
+        <view class="settings-btn" bindtap="handleEditProfile">
+          <image class="settings-icon" src="{{assets.PROFILE.SETTING_BTN}}" mode="aspectFit" />
+          <text class="settings-text">设置</text>
+        </view>
       </view>
-      <text class="user-meta" wx:if="{{user}}">
-        {{user.school.schoolName}} · {{user.major.majorName}} · {{user.grade ? user.grade + '级' : ''}}
-      </text>
-      <text class="placeholder" wx:else>待完善...</text>
-    </view>
-    <view class="settings-btn" bindtap="handleEditProfile">
-      <van-icon name="setting-o" size="20px" color="#666" />
-    </view>
-  </view>
-  <!-- Login prompt for non-logged-in users -->
-  <view class="user-section login-prompt" wx:else bindtap="handleLogin">
-    <image class="avatar" src="{{avatarUrl}}" mode="aspectFill" />
-    <view class="user-info">
-      <text class="name">点击登录</text>
-      <text class="placeholder">登录后体验更多功能</text>
-    </view>
-    <van-icon name="arrow" color="#999" size="18px" />
-  </view>
-  <!-- Feature cards -->
-  <view class="feature-cards">
-    <view class="card business-card" bindtap="handleBusinessCard">
-      <view class="card-content">
+      <!-- User info: Name + Badge -->
+      <view class="user-info">
+        <view class="name-row">
+          <text class="name">{{displayName}}</text>
+          <image wx:if="{{isVerified}}" class="badge-icon" src="{{assets.PROFILE.VERIFIED_SUCCESS}}" mode="aspectFit" />
+          <image wx:else class="badge-icon" src="{{assets.PROFILE.UNVERIFIED}}" mode="aspectFit" bindtap="handleVerify" />
+        </view>
+        <view class="school-text" wx:if="{{user}}">
+          <text>{{user.school.schoolName}}</text>
+          <text>{{user.major.majorName}}</text>
+        </view>
+        <text class="placeholder" wx:else>待完善...</text>
+      </view>
+    </block>
+    <!-- Not logged in state -->
+    <block wx:else>
+      <view class="header-row">
+        <image class="avatar" src="{{assets.PROFILE.EMPTY_AVATAR}}" mode="aspectFill" />
+      </view>
+      <view class="user-info" bindtap="handleLogin">
+        <text class="name">点击登录</text>
+        <text class="placeholder">登录后体验更多功能</text>
+      </view>
+    </block>
+    <!-- Feature cards: 名片 + 橄榄枝 -->
+    <view class="feature-cards">
+      <view class="feature-card-wrap" bindtap="handleBusinessCard">
+        <image class="feature-card-img" src="{{assets.PROFILE.CARD}}" mode="aspectFill" />
         <text class="card-title">名片</text>
       </view>
-    </view>
-    <view class="card olive-branch" bindtap="handleOliveBranchTap">
-      <view class="card-content">
+      <view class="feature-card-wrap" bindtap="handleOliveBranchTap">
+        <image class="feature-card-img" src="{{assets.PROFILE.OLIVE_BRANCH}}" mode="aspectFill" />
         <text class="card-title">橄榄枝</text>
-        <text class="card-count">{{oliveBranchCount || 0}}</text>
       </view>
     </view>
-  </view>
-  <!-- My projects -->
-  <view class="menu-card" bindtap="handleMyProjects">
-    <view class="menu-card-left">
-      <van-icon name="orders-o" size="20px" color="#3279ec" />
-      <text class="menu-card-title">我的项目</text>
+    <!-- 我的项目 -->
+    <view class="menu-card" bindtap="handleMyProjects">
+      <image class="menu-icon" src="{{assets.COMMON.MY_PROJECT_ICON}}" mode="aspectFit" />
+      <text class="menu-title">我的项目</text>
+      <image class="menu-arrow" src="{{assets.PROFILE.ENTER}}" mode="aspectFit" />
     </view>
-    <van-icon name="arrow" color="#999" size="16px" />
-  </view>
-  <!-- My applications -->
-  <view class="menu-card" bindtap="handleMyApplications">
-    <view class="menu-card-left">
-      <van-icon name="records" size="20px" color="#3279ec" />
-      <text class="menu-card-title">我的申请</text>
+    <!-- 我的申请 -->
+    <view class="menu-card" bindtap="handleMyApplications">
+      <view class="menu-icon-wrapper">
+        <van-icon name="records" size="22px" color="#3279ec" />
+      </view>
+      <text class="menu-title">我的申请</text>
+      <image class="menu-arrow" src="{{assets.PROFILE.ENTER}}" mode="aspectFit" />
     </view>
-    <van-icon name="arrow" color="#999" size="16px" />
-  </view>
-  <!-- Other services -->
-  <view class="other-services">
-    <text class="section-title">其他服务</text>
-    <view class="services-container">
-      <view class="service-item" wx:for="{{services}}" wx:key="name" data-url="{{item.url}}" bindtap="handleServiceTap">
-        <van-icon name="{{item.icon}}" size="22px" color="#3279ec" />
-        <text class="service-name">{{item.name}}</text>
+    <!-- 其他服务 -->
+    <view class="services-section">
+      <text class="section-title">其他服务</text>
+      <view class="services-card">
+        <view class="service-item" wx:for="{{services}}" wx:key="name" data-url="{{item.url}}" bindtap="handleServiceTap">
+          <image class="service-icon" src="{{item.icon}}" mode="aspectFit" />
+          <text class="service-name">{{item.name}}</text>
+        </view>
       </view>
     </view>
+    <!-- Logout button -->
+    <view class="logout-section" wx:if="{{isLoggedIn}}">
+      <button class="logout-btn" bindtap="handleLogout">退出登录</button>
+    </view>
+    <!-- Version -->
+    <view class="version">3.0版本</view>
   </view>
-  <!-- Logout button -->
-  <view class="logout-section" wx:if="{{isLoggedIn}}">
-    <button class="logout-btn" bindtap="handleLogout">退出登录</button>
-  </view>
-  <!-- Version info -->
-  <view class="version">3.0版本</view>
 </view>
