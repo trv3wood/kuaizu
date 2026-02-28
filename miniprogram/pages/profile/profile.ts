@@ -10,9 +10,9 @@ Page({
             { icon: 'orders-o', title: '我的项目', url: '/pages/my-projects/my-projects' },
             { icon: 'records', title: '我的申请', url: '/pages/my-applications/my-applications' },
             { icon: 'envelop-o', title: '我的橄榄枝', url: '/pages/olive-branches/olive-branches' },
-            { icon: 'service-o', title: '联系客服', url: '/pages/contact/contact' },
-            { icon: 'info-o', title: '了解我们', url: '/pages/about/about' },
-            { icon: 'setting-o', title: '设置', url: '/pages/settings/settings' }
+            { icon: 'service-o', title: '联系客服', url: '/pages/contact-servicePPL/contact-servicePPL' },
+            { icon: 'info-o', title: '了解我们', url: '/pages/about-us/about-us' },
+            { icon: 'setting-o', title: '设置', url: '/pages/my-settings/my-settings' }
         ]
     },
 
