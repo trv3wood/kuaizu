@@ -56,8 +56,7 @@
 }
 
 .settings-icon {
-  width: 30rpx;
-  height: 30rpx;
+  color: white;
 }
 
 .settings-text {
@@ -89,8 +88,14 @@
 }
 
 .badge-icon {
-  width: 32rpx;
-  height: 32rpx;
+  width: 70rpx;
+  height: 70rpx;
+  flex-shrink: 0;
+}
+
+.badge-icon-success {
+  width: 40rpx;
+  height: 40rpx;
   flex-shrink: 0;
 }
 
@@ -129,7 +134,7 @@
 .feature-card-img {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 10rpx;
   width: 100%;
   height: 100%;
 }
