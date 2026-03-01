@@ -1,45 +1,49 @@
 <!-- pages/home/home.wxml -->
-<view class="guide-container">
-  <!-- 欢迎区域 -->
-  <view class="welcome-section">
-    <view class="welcome-header">
-      <text class="welcome-title">快组校园</text>
-      <text class="welcome-subtitle">发现项目，连接人才</text>
+<view class="home-container">
+  <!-- Full-bleed background SVG -->
+  <image class="home-bg" src="{{assets.HOME.BACKGROUND}}" mode="aspectFill" />
+
+  <!-- 自定义导航栏 -->
+  <view class="custom-nav">
+    <view class="brand-block">
+      <text class="nav-title">快组校园</text>
+      <text class="nav-subtitle">校园组队工具</text>
     </view>
   </view>
-  <!-- 导航卡片区域 -->
-  <view class="nav-cards">
-    <!-- 探索项目卡片 -->
-    <view class="nav-card projects-card" bindtap="navigateToProjects">
-      <view class="card-icon-wrapper projects-icon">
-        <van-icon name="orders-o" size="48px" color="#fff" />
+
+  <!-- 主体内容 -->
+  <view class="content">
+    <!-- 导航卡片区域 -->
+    <view class="nav-cards">
+      <!-- 探索项目卡片 -->
+      <view class="project-card" bindtap="navigateToProjects">
+        <view class="card-top">
+          <text class="card-title">校园项目</text>
+          <image class="card-illustration" src="{{assets.HOME.PROJECT_SEARCH_ICON}}" mode="aspectFit"></image>
+        </view>
+        <view class="card-divider"></view>
+        <view class="card-bottom">
+          <image class="desc-icon" src="{{assets.HOME.PROJECT_ICON}}" mode="aspectFit"></image>
+          <text class="card-desc">汇聚优质校园项目，你感兴趣的机会都在这里。</text>
+        </view>
       </view>
-      <view class="card-content">
-        <text class="card-title">探索项目</text>
-        <text class="card-desc">发现校园内的优质项目</text>
-        <text class="card-desc">找到志同道合的队友</text>
-      </view>
-      <view class="card-arrow">
-        <van-icon name="arrow" size="20px" color="#667eea" />
+      <!-- 探索人才卡片 -->
+      <view class="project-card" bindtap="navigateToTalent">
+        <view class="card-top">
+          <text class="card-title">校园人才</text>
+          <image class="card-illustration" src="{{assets.HOME.TALENT_COUNT_BG}}" mode="aspectFit"></image>
+        </view>
+        <view class="card-divider"></view>
+        <view class="card-bottom">
+          <image class="desc-icon" src="{{assets.HOME.TALENT_ICON}}" mode="aspectFit"></image>
+          <text class="card-desc">链接优秀校园人才，与你同频的队友都在这里。</text>
+        </view>
       </view>
     </view>
-    <!-- 探索人才卡片 -->
-    <view class="nav-card talent-card" bindtap="navigateToTalent">
-      <view class="card-icon-wrapper talent-icon">
-        <van-icon name="friends-o" size="48px" color="#fff" />
-      </view>
-      <view class="card-content">
-        <text class="card-title">探索人才</text>
-        <text class="card-desc">浏览人才库，发现技术大牛</text>
-        <text class="card-desc">或创意伙伴加入你的项目</text>
-      </view>
-      <view class="card-arrow">
-        <van-icon name="arrow" size="20px" color="#764ba2" />
-      </view>
+    <!-- 底部提示 -->
+    <view class="guide-footer">
+      <text class="footer-text">快组校园</text>
+      <text class="footer-text2">了解快组校园→</text>
     </view>
-  </view>
-  <!-- 底部提示 -->
-  <view class="guide-footer">
-    <text class="footer-text">点击下方 + 发布你的项目或展示你的才华</text>
   </view>
 </view>

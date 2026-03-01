@@ -1,122 +1,157 @@
 /* pages/home/home.wxss */
-.guide-container {
+.home-container {
   min-height: 100vh;
-  background: var(--bg-color);
-  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+  position: relative;
+  overflow: hidden;
 }
 
-/* 欢迎区域 */
-.welcome-section {
-  padding: 80rpx 40rpx 60rpx;
-  text-align: center;
+.home-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; 
+  pointer-events: none;
 }
 
-.welcome-header {
+.custom-nav {
+  position: fixed;
+  top: 60rpx;
+  left: 0;
+  right: 0;
+  background: transparent;
+  z-index: 999;
+  padding: calc(env(safe-area-inset-top) + 32rpx) 32rpx 28rpx;
+  min-height: 160rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24rpx;
+}
+
+.brand-block {
   display: flex;
   flex-direction: column;
-  gap: 16rpx;
+  gap: 2rpx;
 }
 
-.welcome-title {
-  font-size: 44rpx;
+.nav-title {
+  font-size: 52rpx;
   font-weight: bold;
-  color: var(--primary-color);
-  /* Fallback or gradient text if needed */
-  background: linear-gradient(45deg, var(--primary-color), var(--text-gray));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #000;
+  margin-bottom: -5rpx;
+  letter-spacing: 10rpx;
 }
 
-.welcome-subtitle {
-  font-size: 32rpx;
-  color: var(--text-gray);
-  letter-spacing: 2rpx;
+.nav-subtitle {
+  font-size: 30rpx;
+  color: #797979;
+  font-weight: bold;
+  letter-spacing: 13rpx;
 }
+
+/* 主体内容 */
+.content {
+  position: relative;
+  z-index: 1;
+  padding-top: calc(220rpx + env(safe-area-inset-top));
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+  margin-top: 45rpx;
+}
+
 
 /* 导航卡片区域 */
 .nav-cards {
   padding: 0 40rpx;
   display: flex;
   flex-direction: column;
-  gap: 40rpx;
+  gap: 48rpx;
 }
 
-.nav-card {
-  background: var(--card-bg);
+.project-card {
+  background: #fff;
   border-radius: 32rpx;
-  padding: 40rpx;
-  display: flex;
-  align-items: center;
-  gap: 40rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid transparent;
-}
-
-.nav-card:active {
-  transform: scale(0.98);
-  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
-  background-color: #f5f7fa;
-}
-
-/* 图标容器 */
-.card-icon-wrapper {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 24rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.projects-icon {
-  background: #e8f4ff;
-  color: var(--primary-color);
-}
-
-.talent-icon {
-  background: #f5f7fa;
-  color: var(--text-main);
-}
-
-/* 卡片内容 */
-.card-content {
-  flex: 1;
+  padding: 44rpx 36rpx 20rpx 36rpx;
+  box-shadow: 0 16rpx 40rpx rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 8rpx;
+  gap: 28rpx;
+  box-shadow: 0 20rpx 20rpx rgba(0, 0, 0, 0.2);
+}
+
+.card-top {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  padding: 15rpx 0; 
+  gap: 60rpx; 
 }
 
 .card-title {
-  font-size: 36rpx;
+  font-size: 60rpx;
   font-weight: bold;
-  color: var(--text-main);
-  margin-bottom: 8rpx;
+  color: #000;
+  font-family: 'PingFang SC', sans-serif;
+  letter-spacing: 3rpx;
+
+}
+
+.card-divider {
+  height: 2rpx;
+  background: #dcdcdc;
+  border-radius: 2rpx;
+}
+
+.card-bottom {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+}
+
+.card-illustration {
+  width: 240rpx;
+  height: 240rpx;
+  object-fit: contain; 
+}
+
+/* 图片 */
+.desc-icon {
+  width: 75rpx;
+  height: 75rpx;
+  flex-shrink: 0;
+  margin-left: 10rpx;
+  margin-right: 15rpx;
 }
 
 .card-desc {
   font-size: 28rpx;
-  color: var(--text-gray);
-  line-height: 1.5;
+  color: #7a7a7a;
+  line-height: 1.6;
 }
 
-/* 箭头 */
-.card-arrow {
-  flex-shrink: 0;
-  color: var(--text-gray);
+/* 底部标题 */
+.guide-footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50rpx;
+}
+.footer-text{
+  color: #999999;
+  letter-spacing: 5rpx;
+  font-weight: bold;
+  font-size: 36rpx;
+}
+.footer-text2{
+  color: #6bc0f1;
+  font-size: 26rpx;
+  margin-top: 5rpx;
+  border-bottom: 1rpx solid #6bc0f1;
 }
 
-/* 底部提示 */
-.guide-footer {
-  padding: 60rpx 40rpx;
-  text-align: center;
-}
 
-.footer-text {
-  font-size: 24rpx;
-  color: var(--text-gray);
-}
+
+
