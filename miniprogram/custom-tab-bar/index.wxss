@@ -41,6 +41,8 @@
 
 .tab-item.center {
   flex: 0 0 auto;
+  width: 180rpx;
+  position: relative;
 }
 
 .tab-icon {

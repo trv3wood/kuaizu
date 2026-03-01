@@ -29,7 +29,7 @@ Component({
         showPublishPopup: false,
         publishActions: [
             { name: '发布项目', icon: 'orders-o' },
-            { name: '我是人才', icon: 'contact' }
+            { name: '发布名片', icon: 'contact' }
         ]
     },
 
@@ -69,7 +69,7 @@ Component({
 
             if (name === '发布项目') {
                 wx.navigateTo({ url: '/pages/edit-project/edit-project' })
-            } else if (name === '我是人才') {
+            } else if (name === '发布名片') {
                 wx.navigateTo({ url: '/pages/talent-card/talent-card' })
             }
         }
