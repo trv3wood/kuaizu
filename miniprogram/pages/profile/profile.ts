@@ -11,8 +11,8 @@ Page({
         // 其他服务列表 (aligned with Figma)
         services: [
             { name: '订单中心', icon: ASSETS.PROFILE.ORDER_CENTER, url: '/pages/my-orders/my-orders' },
-            { name: '资讯中心', icon: ASSETS.PROFILE.INFO_CENTER, url: '/pages/info-center/info-center' },
-            { name: '我的客服', icon: ASSETS.PROFILE.CUSTOMER_SERVICE, url: '/pages/contact/contact' }
+            { name: '资讯中心', icon: ASSETS.PROFILE.INFO_CENTER, url: '/pages/about-us/about-us' },
+            { name: '我的客服', icon: ASSETS.PROFILE.CUSTOMER_SERVICE, url: '/pages/contact-servicePPL/contact-servicePPL' }
         ]
     },
 
