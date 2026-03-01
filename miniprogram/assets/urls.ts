@@ -51,6 +51,8 @@ export const ASSETS = {
         PROFILE_INACTIVE: 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-file/assets/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83%E6%8C%89%E9%92%AE-%E6%9C%AA%E6%BF%80%E5%8F%91.svg',
         /** 首页按钮-未激活 */
         HOME_INACTIVE: 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-file/assets/%E9%A6%96%E9%A1%B5%E6%8C%89%E9%92%AE-%E6%9C%AA%E6%BF%80%E5%8F%91.svg',
+        /** 首页按钮-激活 */
+        HOME_ACTIVE: 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-file/assets/%E9%A6%96%E9%A1%B5%E6%8C%89%E9%92%AE-%E5%B7%B2%E6%BF%80%E5%8F%91.svg'
     },
 
     /** 通用静态资源 */

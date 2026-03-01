@@ -34,9 +34,9 @@ Page({
     },
 
     onShow() {
-        // 更新 tabBar 状态 (profile is now at visual index 2)
+        // 更新 tabBar 状态 (profile is at index 1 in the list)
         if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-            this.getTabBar().setData({ active: 2 })
+            this.getTabBar().setData({ active: 1 })
         }
     },
 

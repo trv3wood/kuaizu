@@ -1,3 +1,5 @@
+import ASSETS from '../assets/urls';
+
 // custom-tab-bar/index.ts
 Component({
     options: {
@@ -8,11 +10,19 @@ Component({
         list: [
             {
                 pagePath: "/pages/home/home",
-                text: "导览"
+                text: "导览",
+                icons: [
+                    ASSETS.TAB_BAR.HOME_INACTIVE,
+                    ASSETS.TAB_BAR.HOME_ACTIVE,
+                ],
             },
             {
                 pagePath: "/pages/profile/profile",
-                text: "我的"
+                text: "我的",
+                icons: [
+                    ASSETS.TAB_BAR.PROFILE_INACTIVE,
+                    ASSETS.TAB_BAR.PROFILE_ACTIVE
+                ],
             }
         ],
         // 发布弹窗
@@ -28,12 +38,7 @@ Component({
             const indexStr = event.currentTarget.dataset.index;
             const index = parseInt(indexStr, 10);
 
-            // Only handle nav indexing (0 -> home, 1 -> profile)
             const item = this.data.list[index];
-
-            // Update active state and navigate
-            this.setData({ active: index })
-
             if (item) {
                 wx.switchTab({
                     url: item.pagePath

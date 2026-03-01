@@ -1,9 +1,9 @@
 <!-- custom-tab-bar/index.wxml -->
 <view class="tab-bar-container">
   <view class="tab-bar">
-    <!-- 导览 -->
+    <!-- 左侧标签项（导览） -->
     <view class="tab-item" bindtap="switchTab" data-index="0">
-      <image class="tab-icon {{active === 0 ? 'active' : ''}}" src="" />
+      <image class="tab-icon" src="{{ active === 0 ? list[0].icons[1] : list[0].icons[0] }}" mode="aspectFit" />
     </view>
     <!-- 发布 (中间凸起按钮) -->
     <view class="tab-item center" bindtap="onCenterClick">
@@ -11,9 +11,9 @@
         <view class="plus-icon"></view>
       </view>
     </view>
-    <!-- 我的 -->
+    <!-- 右侧标签项（我的） -->
     <view class="tab-item" bindtap="switchTab" data-index="1">
-      <image class="tab-icon {{active === 1 ? 'active' : ''}}" src="" />
+      <image class="tab-icon" src="{{ active === 1 ? list[1].icons[1] : list[1].icons[0] }}" mode="aspectFit" />
     </view>
   </view>
 </view>

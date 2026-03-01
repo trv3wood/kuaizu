@@ -44,17 +44,10 @@
 }
 
 .tab-icon {
-  width: 50rpx;
-  height: 50rpx;
-  background: #f0f0f0;
-  /* placeholder background for empty src */
+  width: 60rpx;
+  height: 60rpx;
   border-radius: 50%;
   transition: all 0.3s ease;
-}
-
-.tab-icon.active {
-  background: #d0d0d0;
-  /* placeholder active state */
 }
 
 /* 中间凸起发布按钮 */
