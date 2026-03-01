@@ -18,7 +18,6 @@
     "pages/contact-servicePPL/contact-servicePPL",
     "pages/form-feedback/form-feedback",
     "pages/about-us/about-us",
-    "pages/my-settings/my-settings",
     "pages/payment-test/payment-test"
   ],
   "window": {
