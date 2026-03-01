@@ -21,5 +21,5 @@ base_url = envConfig[env] || envConfig.release; // 兜底用正式版
 
 export default {
   BASE_URL: base_url,
-  ENV: env
+  ENV: env,
 }

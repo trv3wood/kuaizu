@@ -1,8 +1,9 @@
 // pages/talent-detail/talent-detail.ts
-import { talentApi, oliveBranchApi, orderApi, productApi } from '../../api/index'
+import { talentApi, oliveBranchApi, orderApi, productApi, applicationApi } from '../../api/index'
 import type { components } from '../../api/schema'
 
 type TalentProfileDetailVO = components['schemas']['TalentProfileDetailVO']
+type ProjectVO = components['schemas']['ProjectVO']
 
 // 橄榄枝商品ID固定为1
 const OLIVE_BRANCH_PRODUCT_ID = 1
@@ -13,6 +14,11 @@ Page({
         profile: null as TalentProfileDetailVO | null,
         loading: true,
         sending: false,
+
+        // 项目选择相关
+        myProjects: [] as ProjectVO[],
+        showProjectPicker: false,
+        loadingProjects: false,
 
         // 购买相关
         showPurchasePopup: false,
@@ -26,6 +32,7 @@ Page({
         if (id) {
             this.setData({ id })
             this.loadProfile(id)
+            this.loadMyProjects()
         } else {
             wx.showToast({ title: '参数错误', icon: 'none' })
             setTimeout(() => wx.navigateBack(), 1500)
@@ -52,28 +59,58 @@ Page({
     },
 
     /**
-     * 发送橄榄枝
+     * 加载我的项目列表
      */
-    async handleSendOliveBranch() {
+    async loadMyProjects() {
+        this.setData({ loadingProjects: true })
+        try {
+            const res = await applicationApi.listMyProjects({ status: 1, size: 100 })
+            this.setData({
+                myProjects: res.data?.list || [],
+                loadingProjects: false
+            })
+        } catch (error) {
+            console.error('加载项目列表失败:', error)
+            this.setData({ loadingProjects: false })
+        }
+    },
+
+    /**
+     * 发送橄榄枝 — 打开项目选择弹窗
+     */
+    handleSendOliveBranch() {
         const { profile, sending } = this.data
         if (!profile || sending) return
+        this.setData({ showProjectPicker: true })
+    },
+
+    /**
+     * 选择项目并发送
+     */
+    async handleSelectProject(e: any) {
+        const index = e.currentTarget.dataset.index as number
+        const project = this.data.myProjects[index]
+        if (!project?.id) return
+
+        const { profile } = this.data
 
         // 确认弹窗
         const { confirm } = await wx.showModal({
             title: '发送邀请',
-            content: `确定向 ${profile.nickname || '该用户'} 发送橄榄枝吗？`,
+            content: `确定以项目「${project.name}」向 ${profile!.nickname || '该用户'} 发送橄榄枝吗？`,
             confirmText: '发送',
-            confirmColor: '#667eea'
+            confirmColor: '#cbe6ff'
         })
 
         if (!confirm) return
 
-        this.setData({ sending: true })
+        this.setData({ showProjectPicker: false, sending: true })
 
         try {
             await oliveBranchApi.sendOliveBranch({
-                receiverId: profile.userId!,
-                type: 1, // 1-人才互联
+                receiverId: profile!.userId!,
+                relatedProjectId: project.id,
+                type: 2, // 2-项目邀请
                 hasSmsNotify: false,
                 message: '您好，我对您的技能很感兴趣，希望能进一步交流！'
             })
@@ -84,12 +121,11 @@ Page({
             const msg = error?.data?.message || '发送失败'
 
             if (error?.data?.code === 4002) {
-                // 额度不足，询问是否购买
                 const { confirm } = await wx.showModal({
                     title: '额度不足',
                     content: '您的橄榄枝额度不足，是否购买更多？',
                     confirmText: '去购买',
-                    confirmColor: '#667eea'
+                    confirmColor: '#cbe6ff'
                 })
 
                 if (confirm) {
@@ -101,6 +137,13 @@ Page({
         } finally {
             this.setData({ sending: false })
         }
+    },
+
+    /**
+     * 关闭项目选择弹窗
+     */
+    handleCloseProjectPicker() {
+        this.setData({ showProjectPicker: false })
     },
 
     /**

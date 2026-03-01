@@ -1,29 +1,29 @@
 /* pages/olive-branches/olive-branches.wxss */
 .olive-branches-container {
     min-height: 100vh;
-    background: var(--md-sys-color-background);
+    background: var(--bg-color);
 }
 
 /* 视图切换标签 */
 .view-tabs {
     display: flex;
-    background: var(--md-sys-color-surface-container-lowest);
+    background: var(--card-bg);
     padding: 24rpx 48rpx;
-    border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
+    border-bottom: 1rpx solid #f0f0f0;
 }
 
 .view-tab {
     flex: 1;
     text-align: center;
     padding: 20rpx 0;
-    font-size: var(--md-sys-typescale-title-small);
-    color: var(--md-sys-color-on-surface-variant);
+    font-size: 28rpx;
+    color: var(--text-gray);
     position: relative;
     transition: all 0.3s ease;
 }
 
 .view-tab.active {
-    color: var(--md-sys-color-primary);
+    color: var(--primary-color);
     font-weight: 600;
 }
 
@@ -35,36 +35,36 @@
     transform: translateX(-50%);
     width: 64rpx;
     height: 6rpx;
-    background: var(--md-sys-color-primary);
+    background: var(--primary-color);
     border-radius: 3rpx;
 }
 
 /* 状态筛选标签 */
 .status-tabs {
     display: flex;
-    background: var(--md-sys-color-surface-container-lowest);
-    padding: 20rpx var(--spacing-sm);
-    gap: var(--spacing-xs);
+    background: var(--card-bg);
+    padding: 20rpx 30rpx;
+    gap: 16rpx;
     position: sticky;
     top: 0;
     z-index: 10;
-    box-shadow: var(--md-sys-elevation-1);
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 .tab-item {
     flex: 1;
     text-align: center;
     padding: 16rpx 0;
-    font-size: var(--md-sys-typescale-label-large);
-    color: var(--md-sys-color-on-surface-variant);
-    background: var(--md-sys-color-surface);
+    font-size: 28rpx;
+    color: var(--text-gray);
+    background: var(--card-bg);
     border-radius: 40rpx;
     transition: all 0.3s ease;
 }
 
 .tab-item.active {
-    color: var(--md-sys-color-on-primary);
-    background: var(--md-sys-color-primary);
+    color: #ffffff;
+    background: var(--primary-color);
     font-weight: 500;
 }
 
@@ -78,15 +78,15 @@
 
 /* 邀请列表 */
 .branch-list {
-    padding: var(--spacing-sm);
+    padding: 30rpx;
 }
 
 .branch-card {
-    background: var(--md-sys-color-surface-container-lowest);
-    border-radius: var(--md-sys-shape-corner-large);
-    padding: var(--spacing-md);
-    margin-bottom: var(--spacing-sm);
-    box-shadow: var(--md-sys-elevation-1);
+    background: var(--card-bg);
+    border-radius: 32rpx;
+    padding: 40rpx;
+    margin-bottom: 30rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 /* 卡片头部 */
@@ -94,7 +94,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 30rpx;
 }
 
 .sender-info {
@@ -107,7 +107,7 @@
     width: 88rpx;
     height: 88rpx;
     border-radius: 50%;
-    border: 4rpx solid var(--md-sys-color-surface-container);
+    border: 4rpx solid #f5f7fa;
 }
 
 .info {
@@ -117,49 +117,49 @@
 }
 
 .name {
-    font-size: var(--md-sys-typescale-title-medium);
+    font-size: 32rpx;
     font-weight: 600;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-main);
 }
 
 .type {
-    font-size: var(--md-sys-typescale-label-small);
-    color: var(--md-sys-color-primary);
-    background: var(--md-sys-color-primary-container);
+    font-size: 20rpx;
+    color: var(--primary-color);
+    background: #e8f4ff;
     padding: 4rpx 12rpx;
-    border-radius: var(--md-sys-shape-corner-small);
+    border-radius: 16rpx;
 }
 
 /* 项目信息 */
 .project-info {
     display: flex;
     align-items: center;
-    gap: var(--spacing-xs);
-    background: var(--md-sys-color-surface-container);
+    gap: 16rpx;
+    background: #f5f7fa;
     padding: 20rpx 24rpx;
-    border-radius: var(--md-sys-shape-corner-medium);
+    border-radius: 24rpx;
     margin-bottom: 20rpx;
 }
 
 .project-name {
     flex: 1;
-    font-size: var(--md-sys-typescale-body-large);
-    color: var(--md-sys-color-on-surface);
+    font-size: 32rpx;
+    color: var(--text-main);
     font-weight: 500;
 }
 
 /* 邀请消息 */
 .message {
-    background: var(--md-sys-color-surface-container-low);
+    background: var(--bg-color);
     padding: 24rpx;
-    border-radius: var(--md-sys-shape-corner-medium);
+    border-radius: 24rpx;
     margin-bottom: 20rpx;
-    border-left: 4rpx solid var(--md-sys-color-primary);
+    border-left: 4rpx solid var(--primary-color);
 }
 
 .message text {
-    font-size: var(--md-sys-typescale-body-medium);
-    color: var(--md-sys-color-on-surface-variant);
+    font-size: 28rpx;
+    color: var(--text-gray);
     font-style: italic;
     line-height: 1.6;
 }
@@ -170,8 +170,8 @@
 }
 
 .time text {
-    font-size: var(--md-sys-typescale-body-small);
-    color: var(--md-sys-color-outline);
+    font-size: 24rpx;
+    color: var(--text-gray);
 }
 
 /* 操作按钮 */
@@ -180,7 +180,7 @@
     justify-content: flex-end;
     gap: 20rpx;
     padding-top: 20rpx;
-    border-top: 1rpx solid var(--md-sys-color-outline-variant);
+    border-top: 1rpx solid #f0f0f0;
 }
 
 /* 加载更多 */
@@ -192,8 +192,8 @@
 }
 
 .no-more text {
-    font-size: var(--md-sys-typescale-body-medium);
-    color: var(--md-sys-color-outline);
+    font-size: 28rpx;
+    color: var(--text-gray);
 }
 
 /* 空状态 */

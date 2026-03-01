@@ -1,7 +1,7 @@
 /* pages/payment-test/payment-test.wxss */
 .payment-test-container {
     min-height: 100vh;
-    background: var(--md-sys-color-background);
+    background: var(--bg-color);
     padding-bottom: 200rpx;
 }
 
@@ -13,15 +13,15 @@
 
 .title {
     display: block;
-    font-size: var(--md-sys-typescale-headline-small);
+    font-size: 36rpx;
     font-weight: 700;
-    color: var(--md-sys-color-on-background);
+    color: var(--text-main);
     margin-bottom: 12rpx;
 }
 
 .subtitle {
-    font-size: var(--md-sys-typescale-body-medium);
-    color: var(--md-sys-color-on-surface-variant);
+    font-size: 28rpx;
+    color: var(--text-gray);
 }
 
 /* 加载中 */
@@ -33,25 +33,25 @@
 
 /* 商品列表 */
 .product-list {
-    padding: 0 var(--spacing-sm);
+    padding: 0 30rpx;
 }
 
 .product-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--md-sys-color-surface-container-lowest);
-    border-radius: var(--md-sys-shape-corner-large);
-    padding: var(--spacing-md);
+    background: var(--card-bg);
+    border-radius: 32rpx;
+    padding: 40rpx;
     margin-bottom: 20rpx;
-    box-shadow: var(--md-sys-elevation-1);
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
     border: 4rpx solid transparent;
     transition: all 0.3s ease;
 }
 
 .product-card.selected {
-    border-color: var(--md-sys-color-primary);
-    background: var(--md-sys-color-secondary-container);
+    border-color: var(--primary-color);
+    background: #f5f7fa;
 }
 
 .product-info {
@@ -60,15 +60,15 @@
 
 .product-name {
     display: block;
-    font-size: var(--md-sys-typescale-title-medium);
+    font-size: 32rpx;
     font-weight: 600;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-main);
     margin-bottom: 8rpx;
 }
 
 .product-desc {
-    font-size: var(--md-sys-typescale-body-small);
-    color: var(--md-sys-color-outline);
+    font-size: 24rpx;
+    color: var(--text-gray);
 }
 
 .product-price {
@@ -78,27 +78,27 @@
 }
 
 .price {
-    font-size: var(--md-sys-typescale-headline-small);
+    font-size: 36rpx;
     font-weight: 700;
-    color: var(--md-sys-color-primary);
+    color: var(--primary-color);
 }
 
 /* 订单信息 */
 .order-info {
-    margin: var(--spacing-md) var(--spacing-sm);
-    background: var(--md-sys-color-surface-container-lowest);
-    border-radius: var(--md-sys-shape-corner-large);
-    padding: var(--spacing-md);
-    box-shadow: var(--md-sys-elevation-1);
+    margin: 40rpx 30rpx;
+    background: var(--card-bg);
+    border-radius: 32rpx;
+    padding: 40rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 .info-title {
-    font-size: var(--md-sys-typescale-title-medium);
+    font-size: 32rpx;
     font-weight: 600;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-main);
     margin-bottom: 20rpx;
     padding-bottom: 16rpx;
-    border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
+    border-bottom: 1rpx solid #f0f0f0;
 }
 
 .info-row {
@@ -109,18 +109,18 @@
 }
 
 .label {
-    font-size: var(--md-sys-typescale-body-medium);
-    color: var(--md-sys-color-on-surface-variant);
+    font-size: 28rpx;
+    color: var(--text-gray);
 }
 
 .value {
-    font-size: var(--md-sys-typescale-body-medium);
-    color: var(--md-sys-color-on-surface);
+    font-size: 28rpx;
+    color: var(--text-main);
 }
 
 .value.price {
     font-weight: 600;
-    color: var(--md-sys-color-error);
+    color: #ff4d4d;
 }
 
 /* 支付区域 */
@@ -129,9 +129,9 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--md-sys-color-surface-container-lowest);
-    padding: var(--spacing-md);
-    box-shadow: var(--md-sys-elevation-2);
+    background: var(--card-bg);
+    padding: 40rpx;
+    box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
 }
 
 .selected-info {
@@ -142,15 +142,15 @@
 }
 
 .selected-name {
-    font-size: var(--md-sys-typescale-title-medium);
+    font-size: 32rpx;
     font-weight: 500;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-main);
 }
 
 .selected-price {
-    font-size: var(--md-sys-typescale-headline-small);
+    font-size: 36rpx;
     font-weight: 700;
-    color: var(--md-sys-color-error);
+    color: #ff4d4d;
 }
 
 .no-selection {
@@ -159,8 +159,8 @@
 }
 
 .no-selection text {
-    font-size: var(--md-sys-typescale-body-medium);
-    color: var(--md-sys-color-outline);
+    font-size: 28rpx;
+    color: var(--text-gray);
 }
 
 /* 空状态 */

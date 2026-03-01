@@ -25,10 +25,9 @@
             <!-- 卡片头部 - 收到视图 -->
             <view class="card-header" wx:if="{{viewMode === 'received'}}">
                 <view class="sender-info" data-sender="{{item.sender}}" bindtap="handleViewSender">
-                    <image class="avatar" src="{{item.sender.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
+                    <image class="avatar" src="{{item.sender.avatarUrl}}" mode="aspectFill" />
                     <view class="info">
                         <text class="name">{{item.sender.nickname || '匿名用户'}}</text>
-                        <text class="type">{{item.type === 2 ? '项目邀请' : '人才互联'}}</text>
                     </view>
                 </view>
                 <view class="status-badge">
@@ -41,10 +40,9 @@
             <!-- 卡片头部 - 发出视图 -->
             <view class="card-header" wx:else>
                 <view class="sender-info" data-receiver="{{item.receiver}}" bindtap="handleViewReceiver">
-                    <image class="avatar" src="{{item.receiver.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
+                    <image class="avatar" src="{{item.receiver.avatarUrl}}" mode="aspectFill" />
                     <view class="info">
                         <text class="name">{{item.receiver.nickname || '匿名用户'}}</text>
-                        <text class="type">{{item.type === 2 ? '项目邀请' : '人才互联'}}</text>
                     </view>
                 </view>
                 <view class="status-badge">
