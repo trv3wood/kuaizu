@@ -56,7 +56,7 @@
         <!-- 所属学校 -->
         <view class="form-group" wx:if="{{!isEdit}}">
             <view class="form-label">所属学校</view>
-            <van-cell wx:if="{{schoolId}}" title="{{schoolName}}" />
+            <van-cell wx:if="{{schoolId}}" title="{{schoolName}}"/>
             <van-cell wx:else title="个人资料暂无学校信息(前往填写)" is-link bind:click="onSchoolClick" />
         </view>
     </view>

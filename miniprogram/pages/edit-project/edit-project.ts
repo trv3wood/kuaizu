@@ -227,6 +227,18 @@ Page({
             return false
         }
 
+        if (!(this.data as any).schoolId) {
+            wx.showModal({
+                content: '缺少学校信息, 是否前往填写',
+                success(res) {
+                    if (res.confirm) {
+                        wx.navigateTo({ url: '/pages/edit-profile/edit-profile' })
+                    }
+                }
+            })
+            return false
+        }
+
         return true
     },
 
