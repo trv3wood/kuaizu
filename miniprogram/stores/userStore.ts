@@ -37,6 +37,14 @@ export const userStore = observable({
     get oliveBranchCount(): number {
         return this.user?.oliveBranchCount || 0
     },
+    
+    get schoolName(): string {
+        return this.user?.school?.schoolName || ''
+    },
+    
+    get schoolId(): number {
+        return this.user?.school?.id || 0
+    },
 
     // ==================== Actions ====================
 
