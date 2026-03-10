@@ -17,9 +17,9 @@ export const getProjectStatusText = (status?: number): string => {
  */
 export const getProjectDirectionText = (direction?: number): string => {
   const directionMap: Record<number, string> = {
-    1: '创业类',
-    2: '科研类',
-    3: '实践类'
+    1: '落地',
+    2: '比赛',
+    3: '学习'
   }
   return direction !== undefined ? directionMap[direction] || '未知' : '未知'
 }
