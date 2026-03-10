@@ -33,7 +33,7 @@
         <!-- 所属学校 -->
         <view class="form-group" wx:if="{{!isEdit}}">
             <view class="form-label">所属学校</view>
-            <van-cell title="{{selectedSchoolName || '选择学校（可选）'}}" is-link bindtap="showSchoolPicker" title-class="{{selectedSchoolName ? '' : 'placeholder'}}" />
+            <van-cell title="{{user.school.schoolName || '个人资料暂无学校信息' }}" title-class="{{user.school.schoolName ? '' : 'placeholder'}}" />
         </view>
     </view>
     <!-- 提交按钮 -->
@@ -45,7 +45,7 @@
     </view>
 </view>
 <!-- 学校选择器 Popup -->
-<van-popup show="{{showSchoolPicker}}" position="bottom" round closeable bind:close="closeSchoolPicker" custom-style="height: 60%">
+<!-- <van-popup show="{{showSchoolPicker}}" position="bottom" round closeable bind:close="closeSchoolPicker" custom-style="height: 60%">
     <view class="school-picker">
         <view class="picker-header">
             <text class="picker-title">选择学校</text>
@@ -61,4 +61,4 @@
             </view>
         </scroll-view>
     </view>
-</van-popup>
+</van-popup> -->

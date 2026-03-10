@@ -1,24 +1,23 @@
 // pages/edit-project/edit-project.ts
+import { createStoreBindings } from 'mobx-miniprogram-bindings'
+import { userStore } from '../../stores/index'
 import { projectApi } from '../../api/index'
-import { schoolPickerBehavior } from '../../behaviors/schoolPicker'
 import type { components } from '../../api/schema'
 
 type Direction = components['schemas']['Direction']
 
 Page({
-    behaviors: [schoolPickerBehavior],
-
     data: {
         isEdit: false,
-        projectId: undefined as number | undefined,
+        projectId: null as number | null,
 
         // 表单数据
         form: {
             name: '',
             description: '',
             memberCount: 3,
-            schoolId: undefined as number | undefined,
-            direction: undefined as Direction | undefined
+            schoolId: null as number | null,
+            direction: null as Direction | null
         },
 
         // 方向选项
@@ -30,6 +29,8 @@ Page({
 
         submitting: false
     },
+
+    storeBindings: null as any,
 
     onLoad(options: { id?: string }) {
         if (options.id) {
@@ -44,8 +45,15 @@ Page({
             wx.setNavigationBarTitle({ title: '发布项目' })
         }
 
-        // 加载学校列表
-        (this as any).loadSchools()
+        this.storeBindings = createStoreBindings(this, {
+            store: userStore,
+            fields: ['schoolId', 'schoolName'],
+            actions: []
+        })
+    },
+
+    onUnload() {
+        this.storeBindings?.destroyStoreBindings()
     },
 
     /**
@@ -65,8 +73,8 @@ Page({
                     'form.memberCount': project.memberCount || 3,
                     'form.schoolId': project.schoolId,
                     'form.direction': project.direction,
-                    selectedSchoolId: project.schoolId,
-                    selectedSchoolName: project.schoolName || ''
+                    // selectedSchoolId: project.schoolId,
+                    // selectedSchoolName: project.schoolName || ''
                 })
             }
         } catch (error) {
@@ -114,19 +122,19 @@ Page({
     /**
      * 学校选择回调(来自behavior)
      */
-    onSchoolSelected(school: any) {
-        this.setData({
-            'form.schoolId': school.id,
-            selectedSchoolId: school.id,
-            selectedSchoolName: school.schoolName
-        })
-    },
+    // onSchoolSelected(school: any) {
+    //     this.setData({
+    //         'form.schoolId': school.id,
+    //         selectedSchoolId: school.id,
+    //         selectedSchoolName: school.schoolName
+    //     })
+    // },
 
     /**
      * 验证表单
      */
     validateForm(): boolean {
-        const { name, description, memberCount } = this.data.form
+        const { name, description, memberCount, schoolId } = this.data.form
 
         if (!name.trim()) {
             wx.showToast({ title: '请输入项目名称', icon: 'none' })
@@ -148,6 +156,18 @@ Page({
             return false
         }
 
+        if (!schoolId) {
+            wx.showModal({
+                content: '缺少学校信息, 是否前往填写',
+                success(res) {
+                    if (res.confirm) {
+                        wx.navigateTo({ url: '/pages/edit-profile/edit-profile' })
+                    }
+                }
+            })
+            return false
+        }
+
         return true
     },
 
@@ -155,6 +175,7 @@ Page({
      * 提交表单
      */
     async handleSubmit() {
+        this.setData({ 'form.schoolId': (this.data as any).user.school.id })
         if (!this.validateForm()) return
         if (this.data.submitting) return
 
@@ -169,7 +190,7 @@ Page({
                     name: form.name,
                     description: form.description,
                     memberCount: form.memberCount,
-                    direction: form.direction
+                    direction: form.direction || undefined
                 })
 
                 wx.showToast({ title: '保存成功', icon: 'success' })
@@ -183,8 +204,8 @@ Page({
                     name: form.name,
                     description: form.description,
                     memberCount: form.memberCount,
-                    schoolId: form.schoolId,
-                    direction: form.direction
+                    schoolId: form.schoolId || undefined,
+                    direction: form.direction || undefined
                 })
 
                 wx.showToast({ title: '发布成功', icon: 'success' })
