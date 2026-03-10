@@ -16,7 +16,6 @@ Page({
             name: '',
             description: '',
             memberCount: 3,
-            schoolId: null as number | null,
             direction: null as Direction | null
         },
 
@@ -71,10 +70,7 @@ Page({
                     'form.name': project.name || '',
                     'form.description': project.description || '',
                     'form.memberCount': project.memberCount || 3,
-                    'form.schoolId': project.schoolId,
                     'form.direction': project.direction,
-                    // selectedSchoolId: project.schoolId,
-                    // selectedSchoolName: project.schoolName || ''
                 })
             }
         } catch (error) {
@@ -119,6 +115,14 @@ Page({
         })
     },
 
+    onSchoolClick() {
+        if (this.data.isEdit) return
+        if ((this.data as any).schoolId) return
+        wx.navigateTo({
+            url: '/pages/edit-profile/edit-profile'
+        })
+    },
+
     /**
      * 学校选择回调(来自behavior)
      */
@@ -134,7 +138,7 @@ Page({
      * 验证表单
      */
     validateForm(): boolean {
-        const { name, description, memberCount, schoolId } = this.data.form
+        const { name, description, memberCount } = this.data.form
 
         if (!name.trim()) {
             wx.showToast({ title: '请输入项目名称', icon: 'none' })
@@ -156,7 +160,7 @@ Page({
             return false
         }
 
-        if (!schoolId) {
+        if (!(this.data as any).schoolId) {
             wx.showModal({
                 content: '缺少学校信息, 是否前往填写',
                 success(res) {
@@ -175,7 +179,6 @@ Page({
      * 提交表单
      */
     async handleSubmit() {
-        this.setData({ 'form.schoolId': (this.data as any).user.school.id })
         if (!this.validateForm()) return
         if (this.data.submitting) return
 
@@ -204,7 +207,7 @@ Page({
                     name: form.name,
                     description: form.description,
                     memberCount: form.memberCount,
-                    schoolId: form.schoolId || undefined,
+                    schoolId: (this.data as any).schoolId || undefined,
                     direction: form.direction || undefined
                 })
 
