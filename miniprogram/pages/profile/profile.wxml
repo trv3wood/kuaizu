@@ -1,59 +1,81 @@
 <!-- pages/profile/profile.wxml -->
 <view class="profile-container">
-  <!-- 用户信息卡片 -->
-  <view class="user-card" wx:if="{{isLoggedIn}}">
-    <view class="user-info" bindtap="handleEditProfile">
-      <image class="avatar" src="{{avatarUrl}}" mode="aspectFill" />
-      <view class="info-content">
-        <view class="nickname-row">
-          <text class="nickname">{{displayName}}</text>
-          <van-tag wx:if="{{isVerified}}" type="success" size="medium">已认证</van-tag>
-          <van-tag wx:else type="warning" size="medium">未认证</van-tag>
-        </view>
-        <view class="user-meta">
-          <text wx:if="{{user.school}}">{{user.school.schoolName}}</text>
-          <text wx:if="{{user.major}}">· {{user.major.majorName}}</text>
-          <text wx:if="{{user.grade}}">· {{user.grade}}级</text>
+  <!-- Full-bleed background SVG -->
+  <image class="profile-bg" src="{{assets.PROFILE.BACKGROUND}}" mode="aspectFill" />
+  <!-- Main content area -->
+  <view class="content" style="padding-top: {{navPaddingTop}}px">
+    <!-- Logged in state -->
+    <block wx:if="{{isLoggedIn}}">
+      <!-- Header: Avatar + Settings pill -->
+      <view class="header-row">
+        <image class="avatar" src="{{avatarUrl}}" mode="aspectFill" bindtap="handleEditProfile" />
+        <view class="settings-btn" bindtap="handleEditProfile">
+          <van-icon name="setting-o" class="settings-icon" />
+          <text class="settings-text">设置</text>
         </view>
       </view>
-      <van-icon name="arrow" color="#999" size="18px" />
-    </view>
-    <!-- 数据统计 -->
-    <view class="stats-row">
-      <view class="stat-item" bindtap="handleOliveBranchTap">
-        <text class="stat-value">{{oliveBranchCount || 0}}</text>
-        <text class="stat-label">橄榄枝</text>
+      <!-- User info: Name + Badge -->
+      <view class="user-info">
+        <view class="name-row">
+          <text class="name">{{displayName}}</text>
+          <image wx:if="{{isVerified}}" class="badge-icon-success" src="{{assets.PROFILE.VERIFIED_SUCCESS}}" mode="aspectFit" />
+          <image wx:else class="badge-icon" src="{{assets.PROFILE.UNVERIFIED}}" mode="aspectFit" bindtap="handleVerify" />
+        </view>
+        <view class="school-text" wx:if="{{user}}">
+          <text>{{user.school.schoolName}}</text>
+          <text>{{user.major.majorName}}</text>
+        </view>
+        <text class="placeholder" wx:else>待完善...</text>
       </view>
-      <view class="stat-divider"></view>
-      <view class="stat-item">
-        <text class="stat-value">{{user.freeBranchUsedToday || 0}}/5</text>
-        <text class="stat-label">今日免费</text>
+    </block>
+    <!-- Not logged in state -->
+    <block wx:else>
+      <view class="header-row">
+        <image class="avatar" src="{{assets.PROFILE.EMPTY_AVATAR}}" mode="aspectFill" />
+      </view>
+      <view class="user-info" bindtap="handleLogin">
+        <text class="name">点击登录</text>
+        <text class="placeholder">登录后体验更多功能</text>
+      </view>
+    </block>
+    <!-- Feature cards: 名片 + 橄榄枝 -->
+    <view class="feature-cards">
+      <view class="feature-card-wrap" bindtap="handleBusinessCard">
+        <image class="feature-card-img" src="{{assets.PROFILE.CARD}}" mode="aspectFill" />
+      </view>
+      <view class="feature-card-wrap" bindtap="handleOliveBranchTap">
+        <image class="feature-card-img" src="{{assets.PROFILE.OLIVE_BRANCH}}" mode="aspectFill" />
       </view>
     </view>
-  </view>
-  <!-- 未登录状态 -->
-  <view class="login-card" wx:else bindtap="handleLogin">
-    <image class="avatar-placeholder" src="https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg" mode="aspectFill" />
-    <view class="login-hint">
-      <text class="login-title">点击登录</text>
-      <text class="login-desc">登录后体验更多功能</text>
+    <!-- 我的项目 -->
+    <view class="menu-card" bindtap="handleMyProjects">
+      <image class="menu-icon" src="{{assets.COMMON.MY_PROJECT_ICON}}" mode="aspectFit" />
+      <text class="menu-title">我的项目</text>
+      <image class="menu-arrow" src="{{assets.PROFILE.ENTER}}" mode="aspectFit" />
     </view>
-    <van-icon name="arrow" color="#999" size="18px" />
-  </view>
-  <!-- 功能菜单 -->
-  <view class="menu-section">
-    <van-cell-group inset>
-      <van-cell wx:for="{{menuList}}" wx:key="title" title="{{item.title}}" is-link data-url="{{item.url}}" bindtap="handleMenuTap">
-        <van-icon slot="icon" name="{{item.icon}}" size="20px" color="#667eea" custom-style="margin-right: 12px;" />
-      </van-cell>
-    </van-cell-group>
-  </view>
-  <!-- 退出登录按钮 -->
-  <view class="logout-section" wx:if="{{isLoggedIn}}">
-    <button class="logout-btn" bindtap="handleLogout">退出登录</button>
-  </view>
-  <!-- 版本信息 -->
-  <view class="version-info">
-    <text>快组校园 v1.0.0</text>
+    <!-- 我的申请 -->
+    <view class="menu-card" bindtap="handleMyApplications">
+      <view class="menu-icon-wrapper">
+        <van-icon name="records" size="22px" color="#3279ec" />
+      </view>
+      <text class="menu-title">我的申请</text>
+      <image class="menu-arrow" src="{{assets.PROFILE.ENTER}}" mode="aspectFit" />
+    </view>
+    <!-- 其他服务 -->
+    <view class="services-section">
+      <text class="section-title">其他服务</text>
+      <view class="services-card">
+        <view class="service-item" wx:for="{{services}}" wx:key="name" data-url="{{item.url}}" bindtap="handleServiceTap">
+          <image class="service-icon" src="{{item.icon}}" mode="aspectFit" />
+          <text class="service-name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- Logout button -->
+    <view class="logout-section" wx:if="{{isLoggedIn}}">
+      <button class="logout-btn" bindtap="handleLogout">退出登录</button>
+    </view>
+    <!-- Version -->
+    <view class="version">3.0版本</view>
   </view>
 </view>

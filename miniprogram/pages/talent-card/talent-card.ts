@@ -16,11 +16,9 @@ Page({
         // 表单数据
         form: {
             skills: [] as string[],
-            intro: '',
             selfEvaluation: '',
             projectExperience: '',
             mbti: '',
-            isPublicContact: true,
             status: 1
         } as UpsertTalentProfileDTO,
         // 技能输入
@@ -43,7 +41,7 @@ Page({
     onLoad() {
         this.storeBindings = createStoreBindings(this, {
             store: userStore,
-            fields: ['user', 'displayName', 'avatarUrl'],
+            fields: ['user', 'displayName', 'avatarUrl', 'isVerified'],
             actions: []
         })
 
@@ -72,11 +70,9 @@ Page({
                     isEditing: false,
                     form: {
                         skills: profile.skills || [],
-                        intro: profile.intro || '',
                         selfEvaluation: '',
                         projectExperience: '',
                         mbti: profile.mbti || '',
-                        isPublicContact: profile.isPublicContact ?? true,
                         status: profile.status || 1
                     },
                     mbtiIndex,
@@ -150,11 +146,9 @@ Page({
                 isEditing: false,
                 form: {
                     skills: profile.skills || [],
-                    intro: profile.intro || '',
                     selfEvaluation: this.data.form.selfEvaluation,
                     projectExperience: this.data.form.projectExperience,
                     mbti: profile.mbti || '',
-                    isPublicContact: profile.isPublicContact ?? true,
                     status: profile.status || 1
                 },
                 mbtiIndex,
@@ -225,15 +219,25 @@ Page({
         })
     },
 
-    handleContactSwitch(e: WechatMiniprogram.SwitchChange) {
-        this.setData({ 'form.isPublicContact': e.detail.value })
-    },
-
     async handleSave() {
+        if (!(this.data as any).isVerified) {
+            wx.showToast({title: "请前往个人中心进行学生认证", icon: 'none'})
+            return
+        }
         const { form } = this.data
 
         if (!form.skills || form.skills.length === 0) {
             wx.showToast({ title: '请添加至少一个技能', icon: 'none' })
+            return
+        }
+
+        if (!form.selfEvaluation || form.selfEvaluation.trim() === '') {
+            wx.showToast({ title: '请填写自我评价', icon: 'none' })
+            return
+        }
+
+        if (!form.projectExperience || form.projectExperience.trim() === '') {
+            wx.showToast({ title: '请填写项目经历', icon: 'none' })
             return
         }
 
@@ -242,11 +246,9 @@ Page({
         try {
             const res = await talentApi.upsertTalentProfile({
                 skills: form.skills,
-                intro: form.intro,
                 selfEvaluation: form.selfEvaluation,
                 projectExperience: form.projectExperience,
                 mbti: form.mbti,
-                isPublicContact: form.isPublicContact,
                 status: 1
             })
 

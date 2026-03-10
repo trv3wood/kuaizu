@@ -1,10 +1,19 @@
 // pages/home/home.ts
+import { ASSETS } from '../../assets/urls'
 Page({
   options: {
     styleIsolation: 'apply-shared'
   },
 
-  data: {},
+  data: {
+    assets: ASSETS,
+  },
+
+  onLoad() {
+    this.setData({
+      navPaddingTop: 100
+    });
+  },
 
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {

@@ -1,0 +1,35 @@
+<!-- pages/form-feedback/form-feedback.wxml -->
+<view class="feedback-container">
+  <!-- 反馈内容输入 -->
+  <view class="feedback-section">
+    <textarea
+      class="feedback-textarea"
+      bindinput="onFeedbackInput"
+      value="{{feedback}}"
+      placeholder="评价或建议、遇到的问题，我们将会更好的改进"
+      maxlength="500"
+    ></textarea>
+  </view>
+
+  <!-- 邮箱输入 -->
+  <view class="email-section">
+    <view class="email-tip">如您填写我们会发送执行回执！</view>
+    <view class="email-input-wrapper">
+      <text class="email-label">邮箱(选填):</text>
+      <input
+        class="email-input"
+        bindinput="onEmailInput"
+        value="{{email}}"
+        placeholder="请输入邮箱"
+      />
+    </view>
+  </view>
+
+  <!-- 提交按钮占位 -->
+  <view class="button-placeholder"></view>
+</view>
+
+<!-- 提交按钮（固定在底部） -->
+<view class="submit-section">
+  <button class="submit-button" bindtap="handleSubmit">立刻提交</button>
+</view>

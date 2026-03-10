@@ -4,7 +4,6 @@
     "pages/profile/profile",
     "pages/projects/projects",
     "pages/talent/talent",
-    "pages/service/service",
     "pages/my-projects/my-projects",
     "pages/edit-project/edit-project",
     "pages/login/login",
@@ -15,6 +14,9 @@
     "pages/project-detail/project-detail",
     "pages/olive-branches/olive-branches",
     "pages/my-applications/my-applications",
+    "pages/contact-servicePPL/contact-servicePPL",
+    "pages/form-feedback/form-feedback",
+    "pages/about-us/about-us",
     "pages/payment-test/payment-test"
   ],
   "window": {

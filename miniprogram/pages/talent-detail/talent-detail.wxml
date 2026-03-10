@@ -7,7 +7,7 @@
     <block wx:elif="{{profile}}">
         <!-- 头部卡片 -->
         <view class="profile-header">
-            <image class="avatar" src="{{profile.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
+            <image class="avatar" src="{{profile.avatarUrl}}" mode="aspectFill" />
             <view class="info">
                 <text class="name">{{profile.nickname || '匿名用户'}}</text>
                 <text class="school">{{profile.schoolName || '未知学校'}}</text>
@@ -51,6 +51,33 @@
     <view class="empty-container" wx:else>
         <van-empty description="人才信息不存在" />
     </view>
+    <!-- 项目选择弹窗 -->
+    <van-popup show="{{showProjectPicker}}" position="bottom" round bind:close="handleCloseProjectPicker" custom-style="max-height: 60vh;">
+        <view class="project-picker-popup">
+            <view class="popup-header">
+                <text class="popup-title">选择关联项目</text>
+                <van-icon name="cross" size="20px" color="#999" bindtap="handleCloseProjectPicker" />
+            </view>
+            <!-- 加载中 -->
+            <view class="project-loading" wx:if="{{loadingProjects}}">
+                <van-loading size="24px">加载中...</van-loading>
+            </view>
+            <!-- 项目列表 -->
+            <scroll-view class="project-list" scroll-y wx:elif="{{myProjects.length > 0}}">
+                <view class="project-item" wx:for="{{myProjects}}" wx:key="id" data-index="{{index}}" bindtap="handleSelectProject">
+                    <view class="project-item-info">
+                        <text class="project-item-name">{{item.name}}</text>
+                        <text class="project-item-desc">{{item.description}}</text>
+                    </view>
+                    <van-icon name="arrow" size="16px" color="#999" />
+                </view>
+            </scroll-view>
+            <!-- 空状态 -->
+            <view class="project-empty" wx:else>
+                <van-empty description="您还没有正在进行的项目" image="search" />
+            </view>
+        </view>
+    </van-popup>
     <!-- 购买橄榄枝弹窗 -->
     <van-popup show="{{showPurchasePopup}}" position="bottom" round bind:close="handleClosePurchase" custom-style="max-height: 60vh;">
         <view class="purchase-popup">

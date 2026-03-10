@@ -45,11 +45,11 @@
                             <view class="applicant-info">
                                 <text class="applicant-name">{{app.applicant.nickname}}</text>
                                 <view class="applicant-meta">
-                                    <text wx:if="{{app.applicant.school}}">
-                                        {{app.applicant.school.schoolName}}
+                                    <text wx:if="{{app.applicant.phone}}">
+                                        {{app.applicant.phone}}
                                     </text>
-                                    <text wx:if="{{app.applicant.major}}">
-                                        · {{app.applicant.major.majorName}}
+                                    <text wx:if="{{app.applicant.email}}">
+                                        {{app.applicant.email}}
                                     </text>
                                 </view>
                             </view>

@@ -1,7 +1,7 @@
 /* pages/talent-detail/talent-detail.wxss */
 .talent-detail-container {
     min-height: 100vh;
-    background: var(--md-sys-color-background);
+    background: var(--bg-color);
     padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
 }
 
@@ -16,11 +16,11 @@
 .profile-header {
     display: flex;
     align-items: center;
-    background: var(--md-sys-color-primary-container);
-    padding: 40rpx var(--spacing-md);
-    margin: var(--spacing-sm);
-    border-radius: var(--md-sys-shape-corner-large);
-    box-shadow: var(--md-sys-elevation-1);
+    background: #e8f4ff;
+    padding: 40rpx 40rpx;
+    margin: 30rpx;
+    border-radius: 32rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 .avatar {
@@ -28,8 +28,8 @@
     height: 140rpx;
     border-radius: 50%;
     border: 4rpx solid rgba(255, 255, 255, 0.5);
-    margin-right: var(--spacing-sm);
-    background: var(--md-sys-color-surface-container-high);
+    margin-right: 30rpx;
+    background: #f0f0f0;
 }
 
 .info {
@@ -38,41 +38,41 @@
 
 .name {
     display: block;
-    font-size: var(--md-sys-typescale-headline-small);
+    font-size: 36rpx;
     font-weight: bold;
-    color: var(--md-sys-color-on-primary-container);
+    color: var(--primary-color);
     margin-bottom: 8rpx;
 }
 
 .school,
 .major {
     display: block;
-    font-size: var(--md-sys-typescale-body-medium);
-    color: var(--md-sys-color-on-primary-container);
+    font-size: 28rpx;
+    color: var(--primary-color);
     opacity: 0.85;
     margin-bottom: 4rpx;
 }
 
 /* 内容区块 */
 .section {
-    background: var(--md-sys-color-surface-container-lowest);
-    border-radius: var(--md-sys-shape-corner-medium);
-    padding: var(--spacing-sm);
-    margin: 0 var(--spacing-sm) var(--spacing-sm);
-    box-shadow: var(--md-sys-elevation-1);
+    background: var(--card-bg);
+    border-radius: 24rpx;
+    padding: 30rpx;
+    margin: 0 30rpx 30rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 .section-title {
     display: block;
-    font-size: var(--md-sys-typescale-title-medium);
+    font-size: 32rpx;
     font-weight: 500;
-    color: var(--md-sys-color-on-surface);
-    margin-bottom: var(--spacing-xs);
+    color: var(--text-main);
+    margin-bottom: 16rpx;
 }
 
 .section-content {
-    font-size: var(--md-sys-typescale-body-large);
-    color: var(--md-sys-color-on-surface-variant);
+    font-size: 32rpx;
+    color: var(--text-gray);
     line-height: 1.8;
     white-space: pre-wrap;
 }
@@ -90,7 +90,7 @@
 
 /* 联系方式 */
 .contact-section {
-    background: linear-gradient(135deg, var(--md-sys-color-surface-container-low) 0%, var(--md-sys-color-surface-container) 100%);
+    background: linear-gradient(135deg, var(--bg-color) 0%, #f5f7fa 100%);
 }
 
 .contact-row {
@@ -100,16 +100,16 @@
 }
 
 .contact-text {
-    font-size: var(--md-sys-typescale-body-large);
-    color: var(--md-sys-color-on-surface);
+    font-size: 32rpx;
+    color: var(--text-main);
     font-weight: 500;
 }
 
 .copy-btn {
     padding: 12rpx 32rpx;
-    background: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
-    font-size: var(--md-sys-typescale-label-medium);
+    background: var(--primary-color);
+    color: #ffffff;
+    font-size: 24rpx;
     border-radius: 32rpx;
     border: none;
 }
@@ -124,10 +124,10 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: 30rpx 40rpx;
     padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
-    background: var(--md-sys-color-surface-container-lowest);
-    box-shadow: var(--md-sys-elevation-2);
+    background: var(--card-bg);
+    box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
 }
 
 .send-btn {
@@ -136,9 +136,9 @@
     justify-content: center;
     width: 100%;
     height: 96rpx;
-    background: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
-    font-size: var(--md-sys-typescale-label-large);
+    background: var(--primary-color);
+    color: #ffffff;
+    font-size: 28rpx;
     font-weight: 500;
     border-radius: 48rpx;
     border: none;
@@ -149,9 +149,9 @@
 }
 
 .send-btn[disabled] {
-    background: var(--md-sys-color-on-surface);
+    background: var(--text-main);
     opacity: 0.12;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-main);
 }
 
 /* 空状态 */
@@ -159,35 +159,92 @@
     padding: 100rpx 0;
 }
 
+/* ==================== 项目选择弹窗 ==================== */
+.project-picker-popup {
+    padding: 40rpx;
+    padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+    background: var(--card-bg);
+}
+
+.project-loading {
+    padding: 60rpx 0;
+    display: flex;
+    justify-content: center;
+}
+
+.project-list {
+    max-height: 50vh;
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    padding: 30rpx 16rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.project-item:last-child {
+    border-bottom: none;
+}
+
+.project-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.project-item-name {
+    display: block;
+    font-size: 32rpx;
+    font-weight: 500;
+    color: var(--text-main);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.project-item-desc {
+    display: block;
+    font-size: 24rpx;
+    color: var(--text-gray);
+    margin-top: 4rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.project-empty {
+    padding: 40rpx 0;
+}
+
 /* ==================== 购买弹窗 ==================== */
 .purchase-popup {
-    padding: var(--spacing-md);
+    padding: 40rpx;
     padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
-    background: var(--md-sys-color-surface);
+    background: var(--card-bg);
 }
 
 .popup-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 40rpx;
 }
 
 .popup-title {
-    font-size: var(--md-sys-typescale-title-large);
+    font-size: 36rpx;
     font-weight: 600;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-main);
 }
 
 /* 商品信息 */
 .product-info {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    background: var(--md-sys-color-surface-container);
-    padding: var(--spacing-md);
-    border-radius: var(--md-sys-shape-corner-large);
-    margin-bottom: var(--spacing-md);
+    gap: 30rpx;
+    background: #f5f7fa;
+    padding: 40rpx;
+    border-radius: 32rpx;
+    margin-bottom: 40rpx;
 }
 
 .product-icon {
@@ -200,21 +257,21 @@
 
 .product-name {
     display: block;
-    font-size: var(--md-sys-typescale-title-medium);
+    font-size: 32rpx;
     font-weight: 600;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-main);
     margin-bottom: 8rpx;
 }
 
 .product-desc {
-    font-size: var(--md-sys-typescale-body-small);
-    color: var(--md-sys-color-on-surface-variant);
+    font-size: 24rpx;
+    color: var(--text-gray);
 }
 
 .product-price {
-    font-size: var(--md-sys-typescale-title-medium);
+    font-size: 32rpx;
     font-weight: 600;
-    color: var(--md-sys-color-primary);
+    color: var(--primary-color);
 }
 
 /* 数量选择 */
@@ -223,12 +280,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 24rpx 0;
-    border-bottom: 1rpx solid var(--md-sys-color-outline-variant);
+    border-bottom: 1rpx solid #f0f0f0;
 }
 
 .quantity-label {
-    font-size: var(--md-sys-typescale-body-large);
-    color: var(--md-sys-color-on-surface);
+    font-size: 32rpx;
+    color: var(--text-main);
 }
 
 /* 总价 */
@@ -240,20 +297,20 @@
 }
 
 .total-label {
-    font-size: var(--md-sys-typescale-body-large);
-    color: var(--md-sys-color-on-surface);
+    font-size: 32rpx;
+    color: var(--text-main);
 }
 
 .total-price {
     font-size: 44rpx;
     font-weight: 700;
-    color: var(--md-sys-color-error);
+    color: #ff4d4d;
 }
 
 /* 购买按钮 */
 .purchase-btn {
     margin-top: 16rpx;
-    background: var(--md-sys-color-primary) !important;
-    color: var(--md-sys-color-on-primary) !important;
+    background: var(--primary-color) !important;
+    color: #ffffff !important;
     border: none !important;
 }

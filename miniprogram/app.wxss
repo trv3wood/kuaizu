@@ -1,230 +1,152 @@
-/**app.wxss**/
+/** app.wxss **/
+
+/* ==========================================
+   1. CSS 变量与基础重置 (CSS Variables & Reset)
+   ========================================== */
 page {
-  /* 
-   * Material Design 3 Theme System 
-   * Based on seed color: #20a0f1 (Vitality Blue)
-   */
+  /* 定义全局主题颜色 */
+  --primary-color: #5bb4ff; /* 主色调：按钮、图标的蓝色 */
+  --bg-color: #f5f7fa;      /* 页面最底层的浅灰白背景色 */
+  --card-bg: #ffffff;       /* 卡片背景色 */
+  
+  /* 定义全局文字颜色 */
+  --text-main: #333333;     /* 主标题/正文颜色 */
+  --text-gray: #999999;     /* 辅助说明/次要文字颜色 */
+  --text-light: #cccccc;    /* 极浅的灰色文字 */
 
-  /* --- Color System (Light Theme) --- */
-
-  /* Primary */
-  --md-sys-color-primary: #006495;
-  --md-sys-color-on-primary: #ffffff;
-  --md-sys-color-primary-container: #cbe6ff;
-  --md-sys-color-on-primary-container: #001e30;
-
-  /* Secondary */
-  --md-sys-color-secondary: #50606e;
-  --md-sys-color-on-secondary: #ffffff;
-  --md-sys-color-secondary-container: #d3e5f5;
-  --md-sys-color-on-secondary-container: #0c1d29;
-
-  /* Tertiary (Brand Accent - Orange/Amber from original) */
-  --md-sys-color-tertiary: #6b5700;
-  --md-sys-color-on-tertiary: #ffffff;
-  --md-sys-color-tertiary-container: #ffe25d;
-  --md-sys-color-on-tertiary-container: #211b00;
-
-  /* Error */
-  --md-sys-color-error: #ba1a1a;
-  --md-sys-color-on-error: #ffffff;
-  --md-sys-color-error-container: #ffdad6;
-  --md-sys-color-on-error-container: #410002;
-
-  /* Background & Surface */
-  --md-sys-color-background: #fcfcff;
-  --md-sys-color-on-background: #1a1c1e;
-  --md-sys-color-surface: #fcfcff;
-  --md-sys-color-on-surface: #1a1c1e;
-  --md-sys-color-surface-variant: #dee3eb;
-  --md-sys-color-on-surface-variant: #42474e;
-  --md-sys-color-outline: #72777f;
-  --md-sys-color-outline-variant: #c2c7cf;
-
-  /* Surface Container (for cards etc) */
-  --md-sys-color-surface-container-lowest: #ffffff;
-  --md-sys-color-surface-container-low: #f6f7fa;
-  --md-sys-color-surface-container: #f0f1f5;
-  --md-sys-color-surface-container-high: #eaebf0;
-  --md-sys-color-surface-container-highest: #e4e5ea;
-
-  /* Legacy Mapping for compatibility */
-  --color-primary: var(--md-sys-color-primary);
-  --color-primary-light: var(--md-sys-color-primary-container);
-  --color-primary-dark: var(--md-sys-color-on-primary-container);
-
-  --color-secondary: var(--md-sys-color-tertiary);
-  --color-warning: var(--md-sys-color-tertiary);
-  --color-danger: var(--md-sys-color-error);
-  --color-success: #10B981;
-
-  --color-bg-base: var(--md-sys-color-background);
-  --color-text-main: var(--md-sys-color-on-background);
-  --color-text-secondary: var(--md-sys-color-on-surface-variant);
-  --color-text-tertiary: var(--md-sys-color-outline);
-  --color-bg-card: var(--md-sys-color-surface-container-lowest);
-  --color-bg-input: var(--md-sys-color-surface-container);
-
-  --color-border: var(--md-sys-color-outline-variant);
-  --color-divider: var(--md-sys-color-outline-variant);
-
-  --radius-sm: var(--md-sys-shape-corner-small);
-  --radius-md: var(--md-sys-shape-corner-medium);
-  --radius-lg: var(--md-sys-shape-corner-large);
-  --radius-full: var(--md-sys-shape-corner-full);
-
-  --shadow-sm: var(--md-sys-elevation-1);
-  --shadow-md: var(--md-sys-elevation-2);
-  --shadow-lg: var(--md-sys-elevation-3);
-  --shadow-float: var(--md-sys-elevation-3);
-
-  /* --- Typography System --- */
-  --md-sys-typescale-display-large: 57px;
-  --md-sys-typescale-display-medium: 45px;
-  --md-sys-typescale-display-small: 36px;
-
-  --md-sys-typescale-headline-large: 32px;
-  --md-sys-typescale-headline-medium: 28px;
-  --md-sys-typescale-headline-small: 24px;
-
-  --md-sys-typescale-title-large: 22px;
-  --md-sys-typescale-title-medium: 16px;
-  --md-sys-typescale-title-small: 14px;
-
-  --md-sys-typescale-body-large: 16px;
-  --md-sys-typescale-body-medium: 14px;
-  --md-sys-typescale-body-small: 12px;
-
-  --md-sys-typescale-label-large: 14px;
-  --md-sys-typescale-label-medium: 12px;
-  --md-sys-typescale-label-small: 11px;
-
-  /* --- Elevation / Shadows --- */
-  --md-sys-elevation-1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-  --md-sys-elevation-2: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
-  --md-sys-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
-
-  /* --- Shape / Radius --- */
-  --md-sys-shape-corner-extra-small: 4px;
-  --md-sys-shape-corner-small: 8px;
-  --md-sys-shape-corner-medium: 12px;
-  --md-sys-shape-corner-large: 16px;
-  --md-sys-shape-corner-extra-large: 28px;
-  --md-sys-shape-corner-full: 9999px;
-
-  /* --- Spacing --- */
-  --spacing-xs: 8rpx;
-  --spacing-sm: 16rpx;
-  --spacing-md: 24rpx;
-  --spacing-lg: 32rpx;
-  --spacing-xl: 48rpx;
-  --spacing-xxl: 64rpx;
-}
-
-/* Base Styles */
-page {
-  background-color: var(--md-sys-color-background);
-  color: var(--md-sys-color-on-background);
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: var(--md-sys-typescale-body-medium);
-  line-height: 1.5;
+  /* 基础页面设置 */
+  background-color: var(--bg-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+  font-size: 28rpx;
+  color: var(--text-main);
   box-sizing: border-box;
 }
 
-/* Utility Classes */
-
-.container {
-  min-height: 100vh;
-  padding: var(--spacing-md);
+/* 重置所有基础组件的盒模型 */
+view, text, scroll-view, image, button, input {
   box-sizing: border-box;
 }
 
-/* Material Card */
-.md-card {
-  background-color: var(--md-sys-color-surface-container-lowest);
-  border-radius: var(--md-sys-shape-corner-medium);
-  padding: var(--spacing-md);
-  box-shadow: var(--md-sys-elevation-1);
-  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-bottom: var(--spacing-md);
+/* 去除 button 的默认边框和背景 */
+button {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+button::after {
+  border: none;
 }
 
-.md-card-outlined {
-  background-color: var(--md-sys-color-surface);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--md-sys-shape-corner-medium);
-  padding: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+/* ==========================================
+   2. Flex 布局工具类 (Flexbox Utilities)
+   ========================================== */
+/* 基础 Flex */
+.flex { display: flex; }
+.flex-row { display: flex; flex-direction: row; }
+.flex-col { display: flex; flex-direction: column; }
+
+/* 居中对齐 */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.md-card-elevated {
-  background-color: var(--md-sys-color-surface-container-low);
-  box-shadow: var(--md-sys-elevation-1);
-  border-radius: var(--md-sys-shape-corner-medium);
-  padding: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+/* 垂直居中 */
+.flex-y-center {
+  display: flex;
+  align-items: center;
 }
 
-/* Typography Utilities */
-.text-display-large {
-  font-size: var(--md-sys-typescale-display-large);
-  font-weight: 400;
+/* 水平居中 */
+.flex-x-center {
+  display: flex;
+  justify-content: center;
 }
 
-.text-display-medium {
-  font-size: var(--md-sys-typescale-display-medium);
-  font-weight: 400;
+/* 两端对齐 */
+.flex-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.text-headline-large {
-  font-size: var(--md-sys-typescale-headline-large);
-  font-weight: 400;
-}
+/* 占满剩余空间 */
+.flex-1 { flex: 1; }
 
-.text-headline-medium {
-  font-size: var(--md-sys-typescale-headline-medium);
-  font-weight: 400;
-}
+/* ==========================================
+   3. 通用 UI 组件 (Common UI Components)
+   ========================================== */
 
-.text-title-large {
-  font-size: var(--md-sys-typescale-title-large);
-  font-weight: 500;
-}
-
-.text-title-medium {
-  font-size: var(--md-sys-typescale-title-medium);
-  font-weight: 500;
-}
-
-.text-body-large {
-  font-size: var(--md-sys-typescale-body-large);
-  font-weight: 400;
-}
-
-.text-body-medium {
-  font-size: var(--md-sys-typescale-body-medium);
-  font-weight: 400;
-}
-
-.text-label-large {
-  font-size: var(--md-sys-typescale-label-large);
-  font-weight: 500;
-}
-
-/* Interactive States */
-.md-clickable:active {
-  background-color: rgba(0, 0, 0, 0.08);
-  /* State layer simulation */
-}
-
-/* Helper for older classes adaptation */
+/* 统一卡片样式 (对应图中的白色模块) */
 .card {
-  /* composes: md-card; */
-  background: var(--md-sys-color-surface-container-lowest);
-  border-radius: var(--md-sys-shape-corner-medium);
-  padding: var(--spacing-md);
-  box-shadow: var(--md-sys-elevation-1);
-  margin-bottom: var(--spacing-md);
+  background-color: var(--card-bg);
+  border-radius: 32rpx; /* 大圆角 */
+  padding: 30rpx;
+  margin: 0 30rpx 30rpx 30rpx; /* 统一的外边距 */
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.04); /* 柔和的阴影 */
 }
 
-/* @import "./app-wxa-auto-dark.wxss"; */
+/* 页面顶部的浅蓝色渐变背景 (可以通过固定定位放在最底层) */
+.page-top-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60vh;
+  background: linear-gradient(to bottom, #d5edff 0%, #e8f4ff 40%, var(--bg-color) 100%);
+  z-index: -1;
+}
+
+/* 分割线 (卡片内部的虚线) */
+.divider-dashed {
+  width: 100%;
+  height: 1px;
+  border-top: 1px dashed #e5e5e5;
+  margin: 20rpx 0;
+}
+
+/* ==========================================
+   4. 字体与排版工具类 (Typography Utilities)
+   ========================================== */
+
+/* 字号 */
+.font-xl { font-size: 44rpx; } /* 超大标题，如“快组校园” */
+.font-l  { font-size: 36rpx; }  /* 模块标题，如“校园项目”、“个人中心名字” */
+.font-m  { font-size: 28rpx; }  /* 常规正文 */
+.font-s  { font-size: 24rpx; }  /* 辅助文字，如底部“了解快组校园” */
+
+/* 字重 */
+.text-bold { font-weight: bold; }
+.text-medium { font-weight: 500; }
+
+/* 颜色 */
+.color-main { color: var(--text-main); }
+.color-gray { color: var(--text-gray); }
+.color-primary { color: var(--primary-color); }
+.color-white { color: #ffffff; }
+
+/* 文本截断 (单行省略号) */
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================
+   5. 安全距离边距 (Safe Area Padding)
+   ========================================== */
+/* 由于使用了自定义顶部导航和自定义底部TabBar，需要预留空间 */
+
+/* 顶部内容区域下推距离 (具体数值需根据自定义导航栏高度计算) */
+.padding-top-nav {
+  padding-top: 180rpx; 
+}
+
+/* 底部留白，防止内容被自定义 TabBar 遮挡 */
+.padding-bottom-tabbar {
+  padding-bottom: 220rpx;
+}

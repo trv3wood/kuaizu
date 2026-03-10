@@ -25,7 +25,7 @@ export const userStore = observable({
 
     /** 用户昵称（带默认值） */
     get displayName(): string {
-        return this.user?.nickname || '未登录用户'
+        return this.user?.nickname || '快组用户' + this.user?.id
     },
 
     /** 用户头像（带默认值） */
@@ -36,6 +36,14 @@ export const userStore = observable({
     /** 剩余橄榄枝数量 */
     get oliveBranchCount(): number {
         return this.user?.oliveBranchCount || 0
+    },
+    
+    get schoolName(): string {
+        return this.user?.school?.schoolName || ''
+    },
+    
+    get schoolId(): number {
+        return this.user?.school?.id || 0
     },
 
     // ==================== Actions ====================

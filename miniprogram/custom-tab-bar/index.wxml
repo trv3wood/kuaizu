@@ -1,19 +1,21 @@
 <!-- custom-tab-bar/index.wxml -->
-<van-tabbar active="{{ active }}" bind:change="onChange" active-color="#1989fa" inactive-color="#7d7e80" z-index="999">
-  <!-- 导览 -->
-  <van-tabbar-item icon="guide-o">导览</van-tabbar-item>
-  <!-- 发布 (中间凸起按钮) -->
-  <van-tabbar-item>
-    <view slot="icon" class="center-btn-wrapper">
-      <van-icon name="plus" size="26px" color="#fff" />
+<view class="tab-bar-container">
+  <view class="tab-bar">
+    <!-- 左侧标签项（导览） -->
+    <view class="tab-item" bindtap="switchTab" data-index="0">
+      <image class="tab-icon" src="{{ active === 0 ? list[0].icons[1] : list[0].icons[0] }}" mode="aspectFit" />
     </view>
-    <view slot="icon-active" class="center-btn-wrapper active">
-      <van-icon name="plus" size="26px" color="#fff" />
+    <!-- 发布 (中间凸起按钮) -->
+    <view class="tab-item center" bindtap="onCenterClick">
+      <view class="center-btn-wrapper">
+        <view class="plus-icon"></view>
+      </view>
     </view>
-    发布
-  </van-tabbar-item>
-  <!-- 我的 -->
-  <van-tabbar-item icon="user-o">我的</van-tabbar-item>
-</van-tabbar>
+    <!-- 右侧标签项（我的） -->
+    <view class="tab-item" bindtap="switchTab" data-index="1">
+      <image class="tab-icon" src="{{ active === 1 ? list[1].icons[1] : list[1].icons[0] }}" mode="aspectFit" />
+    </view>
+  </view>
+</view>
 <!-- 发布选项弹窗 -->
 <van-action-sheet show="{{ showPublishPopup }}" actions="{{ publishActions }}" cancel-text="取消" bind:close="onClosePublishPopup" bind:cancel="onClosePublishPopup" bind:select="onPublishSelect" />

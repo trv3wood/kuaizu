@@ -3,9 +3,9 @@ import { projectApi } from '../../api/index'
 import { schoolPickerBehavior } from '../../behaviors/schoolPicker'
 import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
+import { ProjectStatus } from '../../utils/enum'
 
 type ProjectVO = components['schemas']['ProjectVO']
-type ProjectStatus = components['schemas']['ProjectStatus']
 type Direction = components['schemas']['Direction']
 
 Page({
@@ -21,7 +21,6 @@ Page({
         // 筛选条件
         filters: {
             schoolId: undefined as number | undefined,
-            status: undefined as ProjectStatus | undefined,
             direction: undefined as Direction | undefined
         },
         showFilterPopup: false,
@@ -31,9 +30,9 @@ Page({
 
         // 筛选器选项
         directions: [
-            { value: 1, label: '创业类' },
-            { value: 2, label: '学术类' },
-            { value: 3, label: '实践类' }
+            { value: 1, label: '落地' },
+            { value: 2, label: '比赛' },
+            { value: 3, label: '学习' }
         ],
         statuses: [
             { value: 0, label: '审核中' },
@@ -73,7 +72,7 @@ Page({
      */
     getListParams() {
         const { keyword, filters } = this.data
-        const params: any = { ...filters }
+        const params: any = { status: ProjectStatus.Approved, ...filters } // 默认仅请求进行中的项目
         if (keyword) params.keyword = keyword
         return params
     },
@@ -113,10 +112,9 @@ Page({
      * 应用筛选
      */
     applyFilter(e: WechatMiniprogram.CustomEvent) {
-        const { schoolId, status, direction } = e.detail
+        const { schoolId, direction } = e.detail
         this.setData({
             'filters.schoolId': schoolId,
-            'filters.status': status,
             'filters.direction': direction,
             showFilterPopup: false
         })
@@ -129,7 +127,6 @@ Page({
     resetFilter() {
         this.setData({
             'filters.schoolId': undefined,
-            'filters.status': undefined,
             'filters.direction': undefined,
             showFilterPopup: false
         })
@@ -183,16 +180,4 @@ Page({
             'filters.direction': currentValue === value ? undefined : value
         })
     },
-
-    /**
-     * 选择状态
-     */
-    handleStatusChange(e: WechatMiniprogram.TouchEvent) {
-        const { value } = e.currentTarget.dataset
-        const currentValue = this.data.filters.status
-        // 点击已选中的取消选中
-        this.setData({
-            'filters.status': currentValue === value ? undefined : value
-        })
-    }
 })

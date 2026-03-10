@@ -1,7 +1,7 @@
 /* pages/talent-card/talent-card.wxss */
 .talent-card-container {
     min-height: 100vh;
-    background: var(--md-sys-color-background);
+    background: var(--bg-color);
     padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
 }
 
@@ -14,17 +14,17 @@
 
 /* 查看模式 */
 .view-mode {
-    padding: var(--spacing-sm);
+    padding: 30rpx;
 }
 
 .profile-header {
     display: flex;
     align-items: center;
-    background: var(--md-sys-color-primary-container);
-    border-radius: var(--md-sys-shape-corner-large);
-    padding: var(--spacing-md);
+    background: #e8f4ff;
+    border-radius: 32rpx;
+    padding: 40rpx;
     margin-bottom: 24rpx;
-    box-shadow: var(--md-sys-elevation-1);
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 .avatar {
@@ -36,41 +36,41 @@
 
 .info {
     flex: 1;
-    margin-left: var(--spacing-sm);
+    margin-left: 30rpx;
 }
 
 .name {
-    font-size: var(--md-sys-typescale-headline-small);
+    font-size: 36rpx;
     font-weight: bold;
-    color: var(--md-sys-color-on-primary-container);
+    color: var(--primary-color);
     display: block;
 }
 
 .school {
-    font-size: var(--md-sys-typescale-body-medium);
-    color: var(--md-sys-color-on-primary-container);
+    font-size: 28rpx;
+    color: var(--primary-color);
     opacity: 0.8;
     margin-top: 8rpx;
 }
 
 .section {
-    background: var(--md-sys-color-surface-container-lowest);
-    border-radius: var(--md-sys-shape-corner-medium);
-    padding: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
-    box-shadow: var(--md-sys-elevation-1);
+    background: var(--card-bg);
+    border-radius: 24rpx;
+    padding: 30rpx;
+    margin-bottom: 30rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 .section-title {
-    font-size: var(--md-sys-typescale-title-medium);
+    font-size: 32rpx;
     font-weight: 500;
-    color: var(--md-sys-color-on-surface);
-    margin-bottom: var(--spacing-xs);
+    color: var(--text-main);
+    margin-bottom: 16rpx;
 }
 
 .section-content {
-    font-size: var(--md-sys-typescale-body-large);
-    color: var(--md-sys-color-on-surface-variant);
+    font-size: 32rpx;
+    color: var(--text-gray);
     line-height: 1.6;
 }
 
@@ -81,17 +81,17 @@
 }
 
 .empty-hint {
-    font-size: var(--md-sys-typescale-body-medium);
-    color: var(--md-sys-color-outline);
+    font-size: 28rpx;
+    color: var(--text-gray);
 }
 
 /* 编辑模式 */
 .edit-mode {
-    padding-top: var(--spacing-sm);
+    padding-top: 30rpx;
 }
 
 .skills-edit {
-    padding: var(--spacing-sm);
+    padding: 30rpx;
 }
 
 .skills-tags {
@@ -103,27 +103,27 @@
 
 .skill-input-row {
     display: flex;
-    gap: var(--spacing-xs);
+    gap: 16rpx;
 }
 
 .skill-input {
     flex: 1;
     height: 72rpx;
-    background: var(--md-sys-color-surface-container);
-    border-radius: var(--md-sys-shape-corner-medium);
-    padding: 0 var(--spacing-sm);
-    font-size: var(--md-sys-typescale-body-large);
-    color: var(--md-sys-color-on-surface);
+    background: #f5f7fa;
+    border-radius: 24rpx;
+    padding: 0 30rpx;
+    font-size: 32rpx;
+    color: var(--text-main);
 }
 
 .add-skill-btn {
     width: 120rpx;
     height: 72rpx;
     line-height: 72rpx;
-    background: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
-    font-size: var(--md-sys-typescale-label-small);
-    border-radius: var(--md-sys-shape-corner-medium);
+    background: var(--primary-color);
+    color: #ffffff;
+    font-size: 20rpx;
+    border-radius: 24rpx;
     padding: 0;
     border: none;
 }
@@ -133,7 +133,7 @@
 }
 
 .picker-value {
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-main);
 }
 
 /* 操作按钮 */
@@ -142,10 +142,10 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: 30rpx 40rpx;
     padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
-    background: var(--md-sys-color-surface-container-lowest);
-    box-shadow: var(--md-sys-elevation-2);
+    background: var(--card-bg);
+    box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
 }
 
 .edit-btn,
@@ -153,13 +153,13 @@
     flex: 2;
     height: 96rpx;
     line-height: 96rpx;
-    background: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
-    font-size: var(--md-sys-typescale-label-large);
+    background: var(--primary-color);
+    color: #ffffff;
+    font-size: 28rpx;
     font-weight: 500;
     border-radius: 48rpx;
     border: none;
-    box-shadow: var(--md-sys-elevation-1);
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 .edit-btn::after,
@@ -170,7 +170,7 @@
 .view-actions,
 .edit-actions {
     display: flex;
-    gap: var(--spacing-sm);
+    gap: 30rpx;
 }
 
 .unpublish-btn,
@@ -178,9 +178,9 @@
     flex: 1;
     height: 96rpx;
     line-height: 96rpx;
-    background: var(--md-sys-color-surface-container-high);
-    color: var(--md-sys-color-on-surface);
-    font-size: var(--md-sys-typescale-label-large);
+    background: #f0f0f0;
+    color: var(--text-main);
+    font-size: 28rpx;
     border-radius: 48rpx;
     border: none;
 }
@@ -195,7 +195,7 @@
 }
 
 .save-btn[disabled] {
-    background: var(--md-sys-color-on-surface);
+    background: var(--text-main);
     opacity: 0.12;
-    color: var(--md-sys-color-on-surface);
+    color: var(--text-main);
 }

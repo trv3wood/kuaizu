@@ -17,7 +17,7 @@
     <view class="talent-card" wx:for="{{talents}}" wx:key="id" data-id="{{item.id}}" bindtap="handleTalentTap">
       <!-- 头像和基本信息 -->
       <view class="card-header">
-        <image class="avatar" src="{{item.avatarUrl || 'https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/user-avatar.jpg'}}" mode="aspectFill" />
+        <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
         <view class="info">
           <text class="name">{{item.nickname || '匿名用户'}}</text>
           <text class="school">{{item.schoolName || '未知学校'}} · {{item.majorName || '未知专业'}}</text>

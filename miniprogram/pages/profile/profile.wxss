@@ -1,164 +1,271 @@
 /* pages/profile/profile.wxss */
+
+/* ==============================
+   Container & Background
+   ============================== */
 .profile-container {
   min-height: 100vh;
-  background: var(--md-sys-color-background);
-  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+  position: relative;
+  overflow: hidden;
 }
 
-/* 用户信息卡片 */
-.user-card {
-  margin: var(--spacing-sm);
-  padding: var(--spacing-md);
-  background: var(--md-sys-color-primary);
-  border-radius: var(--md-sys-shape-corner-large);
-  color: var(--md-sys-color-on-primary);
-  box-shadow: var(--md-sys-elevation-1);
+.profile-bg {
+  position: fixed;
+  top: -300rpx;
+  left: -140rpx;
+  width: 980rpx;
+  height: 1960rpx;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.user-info {
+.content {
+  position: relative;
+  z-index: 1;
+  padding-left: 48rpx;
+  padding-right: 48rpx;
+  padding-bottom: calc(180rpx + env(safe-area-inset-bottom));
+}
+
+/* ==============================
+   Header: Avatar + Settings
+   ============================== */
+.header-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+  padding-top: 20rpx;
 }
 
 .avatar {
-  width: 120rpx;
-  height: 120rpx;
+  width: 176rpx;
+  height: 170rpx;
   border-radius: 50%;
-  border: 4rpx solid var(--md-sys-color-primary-container);
   flex-shrink: 0;
 }
 
-.info-content {
-  flex: 1;
-  margin-left: var(--spacing-sm);
-  overflow: hidden;
+.settings-btn {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  background: rgba(0, 0, 0, 0.56);
+  border-radius: 40rpx;
+  padding: 12rpx 28rpx;
+  margin-top: 60rpx;
 }
 
-.nickname-row {
+.settings-icon {
+  color: white;
+}
+
+.settings-text {
+  font-size: 28rpx;
+  font-weight: 800;
+  color: #ffffff;
+  font-family: 'PingFang SC', sans-serif;
+}
+
+/* ==============================
+   User Info: Name + Badge + School
+   ============================== */
+.user-info {
+  margin-bottom: 40rpx;
+}
+
+.name-row {
   display: flex;
   align-items: center;
   gap: 12rpx;
-  margin-bottom: var(--spacing-xxs);
+  margin-bottom: 8rpx;
 }
 
-.nickname {
-  font-size: var(--md-sys-typescale-headline-small);
-  font-weight: bold;
-  color: var(--md-sys-color-on-primary);
+.name {
+  font-size: 40rpx;
+  font-weight: 800;
+  color: #000000;
+  font-family: 'PingFang SC', sans-serif;
 }
 
-.user-meta {
-  font-size: var(--md-sys-typescale-body-medium);
-  color: rgba(255, 255, 255, 0.9);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* 数据统计 */
-.stats-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: var(--spacing-md);
-  padding-top: var(--spacing-sm);
-  border-top: 1rpx solid rgba(255, 255, 255, 0.2);
-}
-
-.stat-item {
-  flex: 1;
-  text-align: center;
-}
-
-.stat-value {
-  display: block;
-  font-size: var(--md-sys-typescale-headline-medium);
-  font-weight: bold;
-  color: var(--md-sys-color-on-primary);
-}
-
-.stat-label {
-  display: block;
-  font-size: var(--md-sys-typescale-label-medium);
-  color: rgba(255, 255, 255, 0.9);
-  margin-top: 4rpx;
-}
-
-.stat-divider {
-  width: 1rpx;
-  height: 60rpx;
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* 未登录卡片 */
-.login-card {
-  margin: var(--spacing-sm);
-  padding: var(--spacing-md);
-  background: var(--md-sys-color-surface-container-lowest);
-  border-radius: var(--md-sys-shape-corner-large);
-  display: flex;
-  align-items: center;
-  box-shadow: var(--md-sys-elevation-1);
-}
-
-.avatar-placeholder {
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 50%;
-  background: var(--md-sys-color-surface-container-high);
+.badge-icon {
+  width: 70rpx;
+  height: 70rpx;
   flex-shrink: 0;
 }
 
-.login-hint {
+.badge-icon-success {
+  width: 40rpx;
+  height: 40rpx;
+  flex-shrink: 0;
+}
+
+.school-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 26rpx;
+  color: #000000;
+  line-height: 1.6;
+  font-family: 'PingFang SC', sans-serif;
+}
+
+.placeholder {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+/* ==============================
+   Feature Cards: 名片 + 橄榄枝
+   ============================== */
+.feature-cards {
+  display: flex;
+  gap: 38rpx;
+  margin-bottom: 34rpx;
+}
+
+.feature-card-wrap {
   flex: 1;
-  margin-left: var(--spacing-sm);
+  height: 188rpx;
+  border-radius: 24rpx;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 6rpx 4rpx 8rpx rgba(0, 0, 0, 0.25);
 }
 
-.login-title {
+.feature-card-img {
+  position: absolute;
+  top: 0;
+  left: 10rpx;
+  width: 100%;
+  height: 100%;
+}
+
+.card-title {
+  position: absolute;
+  top: 18rpx;
+  left: 24rpx;
+  z-index: 1;
+  font-size: 40rpx;
+  font-weight: 800;
+  color: #ffffff;
+  font-family: 'PingFang SC', sans-serif;
+}
+
+/* ==============================
+   Menu Cards: 我的项目 / 我的申请
+   ============================== */
+.menu-card {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 40rpx;
+  padding: 28rpx 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 6rpx 4rpx 8rpx rgba(0, 0, 0, 0.2);
+}
+
+.menu-icon {
+  width: 80rpx;
+  height: 80rpx;
+  flex-shrink: 0;
+  margin-right: 16rpx;
+}
+
+.menu-icon-wrapper {
+  width: 80rpx;
+  height: 80rpx;
+  flex-shrink: 0;
+  margin-right: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-title {
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #000000;
+  font-family: 'PingFang SC', sans-serif;
+}
+
+.menu-arrow {
+  width: 24rpx;
+  height: 24rpx;
+  flex-shrink: 0;
+}
+
+/* ==============================
+   Other Services: 其他服务
+   ============================== */
+.services-section {
+  margin-top: 10rpx;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
   display: block;
-  font-size: var(--md-sys-typescale-title-medium);
-  font-weight: 500;
-  color: var(--md-sys-color-on-surface);
+  font-size: 28rpx;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 16rpx;
+  padding-left: 16rpx;
+  font-family: 'PingFang SC', sans-serif;
 }
 
-.login-desc {
-  display: block;
-  font-size: var(--md-sys-typescale-body-medium);
-  color: var(--md-sys-color-on-surface-variant);
-  margin-top: 4rpx;
+.services-card {
+  background: #ffffff;
+  border-radius: 40rpx;
+  padding: 24rpx 16rpx;
+  display: flex;
+  justify-content: space-around;
 }
 
-/* 功能菜单 */
-.menu-section {
-  margin-top: var(--spacing-sm);
+.service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14rpx;
+  flex: 1;
 }
 
-/* 退出登录 */
+.service-icon {
+  width: 56rpx;
+  height: 56rpx;
+}
+
+.service-name {
+  font-size: 24rpx;
+  color: #404040;
+  font-family: 'PingFang SC', sans-serif;
+}
+
+/* ==============================
+   Logout & Version
+   ============================== */
 .logout-section {
-  padding: 40rpx var(--spacing-sm);
+  padding: 40rpx 0 20rpx;
 }
 
 .logout-btn {
   width: 100%;
   height: 88rpx;
   line-height: 88rpx;
-  background: var(--md-sys-color-surface-container);
-  color: var(--md-sys-color-error);
-  font-size: var(--md-sys-typescale-label-large);
-  border-radius: var(--md-sys-shape-corner-medium);
-  border: none;
+  background: #ffffff;
+  color: #ff4d4d;
+  font-size: 28rpx;
+  border-radius: 24rpx;
+  border: 1rpx solid #ffe5e5;
+  box-shadow: 0 2rpx 8rpx rgba(255, 77, 77, 0.1);
 }
 
 .logout-btn::after {
   border: none;
 }
 
-/* 版本信息 */
-.version-info {
+.version {
   text-align: center;
-  padding: var(--spacing-sm) 0;
-  font-size: var(--md-sys-typescale-body-small);
-  color: var(--md-sys-color-outline);
+  padding: 30rpx 0;
+  font-size: 28rpx;
+  color: #aaaaaa;
+  font-family: 'PingFang SC', sans-serif;
 }
-
-/* @import "./profile-wxa-auto-dark.wxss"; */

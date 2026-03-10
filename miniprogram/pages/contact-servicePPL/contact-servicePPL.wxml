@@ -1,0 +1,85 @@
+<!-- pages/contact-servicePPL/contact-servicePPL.wxml -->
+<view class="service-container">
+  <!-- 在线帮助 -->
+  <button class="service-card" open-type="contact">
+    <view class="card-icon">
+      <image src="https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/onlineHelp.png"></image>
+    </view>
+    <text class="card-title">在线帮助</text>
+    <text class="card-arrow">></text>
+  </button>
+
+  <!-- 电话帮助 -->
+  <button class="service-card" bindtap="handlePhoneHelp">
+    <view class="card-icon">
+      <image src="https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/phoneHelp.png"></image>
+    </view>
+    <text class="card-title">电话帮助</text>
+    <text class="card-arrow">></text>
+  </button>
+
+  <!-- 投诉建议 -->
+  <button class="service-card" bindtap="handleComplaint">
+    <view class="card-icon">
+      <image src="https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/advise.png"></image>
+    </view>
+    <text class="card-title">投诉建议</text>
+    <text class="card-arrow">></text>
+  </button>
+
+  <!-- 电话帮助弹窗 -->
+  <van-popup
+    show="{{showPhonePopup}}"
+    round
+    closeable
+    close-icon="close"
+    bind:close="closePhonePopup"
+  >
+    <view class="popup-content">
+      <view class="popup-icon">
+        <image src="https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/客服.png"></image>
+      </view>
+      <view class="popup-text">
+        <text>请不要着急</text>
+        <text>我们会尽全力解决您的问题</text>
+        <text class="phone-number">{{servicePhone}}</text>
+        <text class="work-time">（工作时间：24H）</text>
+      </view>
+      <view class="popup-tip">
+        <text>我们已尝试将号码复制到您的粘贴板。</text>
+      </view>
+    </view>
+  </van-popup>
+
+  <!-- 投诉建议选择 -->
+  <van-action-sheet
+    show="{{showComplaintSheet}}"
+    actions="{{complaintActions}}"
+    bind:close="closeComplaintSheet"
+    bind:select="onComplaintSelect"
+    cancel-text="取消"
+  />
+
+  <!-- 人工投诉弹窗 -->
+  <van-popup
+    show="{{showManualComplaintPopup}}"
+    round
+    closeable
+    close-icon="close"
+    bind:close="closeManualComplaintPopup"
+  >
+    <view class="popup-content">
+      <view class="popup-icon">
+        <image src="https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/客服.png"></image>
+      </view>
+      <view class="popup-text">
+        <text>您可拨打</text>
+        <text class="phone-number">{{servicePhone}}</text>
+        <text class="work-time">（6:00 — 23:00）</text>
+      </view>
+      <view class="popup-tip">
+        <text>我们随时待命，并将尽全力解决您的问题！</text>
+      </view>
+    </view>
+  </van-popup>
+</view>

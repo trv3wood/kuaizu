@@ -17,11 +17,12 @@ Page({
         page: 1,
         size: 10,
         // 当前筛选状态
-        activeTab: 0,  // 0-全部 1-待支付 2-已完成
+        activeTab: 0,  // 0-全部 1-待支付 2-已支付 3-已取消
         tabs: [
             { name: '全部', status: undefined as number | undefined },
             { name: '待支付', status: 0 },
-            { name: '已完成', status: 1 }
+            { name: '已支付', status: 1 },
+            { name: '已取消', status: 2 }
         ]
     },
 
@@ -121,6 +122,7 @@ Page({
                 ...item,
                 statusText: this._getStatusText(item.status),
                 formattedTime: this._formatTime(item.createdAt),
+                formattedPayTime: this._formatTime(item.payTime),
                 formattedPrice: this._formatPrice(item.actualPaid)
             }
         })
@@ -161,19 +163,16 @@ Page({
     /**
      * 点击订单
      */
-    handleOrderTap(e: WechatMiniprogram.TouchEvent) {
-        const { order } = e.currentTarget.dataset as { order: OrderVO }
-        // 如果是待支付订单，跳转支付
-        if (order.status === 0 && order.id) {
-            this.handlePayOrder(order)
-        }
+    handleOrderTap(_e: WechatMiniprogram.TouchEvent) {
+        // 订单详情点击（预留，操作通过按钮触发）
     },
 
     /**
-     * 支付订单
+     * 支付订单（从 wxml catchtap 调用）
      */
-    async handlePayOrder(order: OrderVO) {
-        if (!order.id) return
+    async handlePayOrder(e: WechatMiniprogram.TouchEvent) {
+        const order = e.currentTarget.dataset.order as OrderVO
+        if (!order?.id) return
 
         wx.showLoading({ title: '正在支付...' })
 
@@ -204,6 +203,36 @@ Page({
             } else {
                 wx.showToast({ title: '支付失败', icon: 'none' })
             }
+        }
+    },
+
+    /**
+     * 撤销未支付订单
+     */
+    async handleCancelOrder(e: WechatMiniprogram.TouchEvent) {
+        const order = e.currentTarget.dataset.order as OrderVO
+        if (!order?.id) return
+
+        const { confirm } = await wx.showModal({
+            title: '取消订单',
+            content: '确定要取消该订单吗？取消后不可恢复。',
+            confirmText: '确定取消',
+            confirmColor: '#FA5151'
+        })
+
+        if (!confirm) return
+
+        wx.showLoading({ title: '正在取消...' })
+
+        try {
+            await orderApi.cancelOrder(order.id)
+            wx.hideLoading()
+            wx.showToast({ title: '订单已取消', icon: 'success' })
+            this.loadOrders()
+        } catch (error) {
+            wx.hideLoading()
+            console.error('取消订单失败:', error)
+            wx.showToast({ title: '取消失败', icon: 'none' })
         }
     },
 
