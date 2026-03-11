@@ -311,5 +311,17 @@ Page({
         wx.navigateTo({
             url: `/pages/edit-project/edit-project?id=${id}`
         })
+    },
+
+    /**
+     * 处理头像点击事件
+     */
+    handleAvatarTap(e: WechatMiniprogram.TouchEvent) {
+        const { id } = e.currentTarget.dataset
+        if (id) {
+            wx.navigateTo({
+                url: `/pages/talent-detail/talent-detail?id=${id}`
+            })
+        }
     }
 })

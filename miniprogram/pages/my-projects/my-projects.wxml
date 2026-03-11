@@ -41,7 +41,8 @@
                     <view class="application-item" wx:for="{{applications}}" wx:for-item="app" wx:key="id">
                         <!-- Applicant Info -->
                         <view class="applicant-header">
-                            <image class="avatar" src="{{app.applicant.avatarUrl}}" mode="aspectFill" />
+                            <image class="avatar" src="{{app.applicant.avatarUrl}}" mode="aspectFill"
+                                bindtap="handleAvatarTap" data-id="{{app.talentProfile.id}}" />
                             <view class="applicant-info">
                                 <text class="applicant-name">{{app.applicant.nickname}}</text>
                                 <!-- 仅申请通过后才显示联系方式 -->
