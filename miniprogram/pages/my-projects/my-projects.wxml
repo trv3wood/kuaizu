@@ -63,6 +63,8 @@
                                 <van-tag wx:else type="danger">已拒绝</van-tag>
                             </view>
                         </view>
+                        <!-- 技能标签 -->
+                        <skill-tags wx:if="{{app.talentProfile && app.talentProfile.skills && app.talentProfile.skills.length > 0}}" skills="{{app.talentProfile.skills}}" class="applicant-skills" />
                         <!-- Action Buttons (only for pending applications) -->
                         <view wx:if="{{app.status === 0}}" class="application-actions">
                             <van-button size="small" type="danger" plain bindtap="handleReject" data-app="{{app}}">

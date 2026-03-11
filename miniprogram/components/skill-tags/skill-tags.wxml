@@ -1,0 +1,11 @@
+<!-- components/skill-tags/skill-tags.wxml -->
+<view class="skill-tags" wx:if="{{skills && skills.length > 0}}">
+  <van-tag
+    wx:for="{{skills}}"
+    wx:key="*this"
+    type="default"
+    plain
+    size="medium"
+    custom-class="skill-tag"
+  >{{item}}</van-tag>
+</view>
