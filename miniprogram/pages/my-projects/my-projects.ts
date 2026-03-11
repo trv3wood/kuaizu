@@ -24,7 +24,6 @@ Page({
         reviewDialogVisible: false,
         currentApplication: undefined as ProjectApplicationVO | undefined,
         reviewAction: 0 as ApplicationStatus, // 1=通过, 2=拒绝
-        replyMsg: '',
 
         // 推广对话框
         promotionDialogVisible: false,
@@ -105,8 +104,7 @@ Page({
         this.setData({
             currentApplication: app,
             reviewAction: 1,
-            reviewDialogVisible: true,
-            replyMsg: ''
+            reviewDialogVisible: true
         })
     },
 
@@ -118,8 +116,7 @@ Page({
         this.setData({
             currentApplication: app,
             reviewAction: 2,
-            reviewDialogVisible: true,
-            replyMsg: ''
+            reviewDialogVisible: true
         })
     },
 
@@ -129,30 +126,21 @@ Page({
     closeReviewDialog() {
         this.setData({
             reviewDialogVisible: false,
-            currentApplication: undefined,
-            replyMsg: ''
+            currentApplication: undefined
         })
-    },
-
-    /**
-     * 输入回复消息
-     */
-    onReplyInput(e: any) {
-        this.setData({ replyMsg: e.detail })
     },
 
     /**
      * 提交审核
      */
     async submitReview() {
-        const { currentApplication, reviewAction, replyMsg } = this.data
+        const { currentApplication, reviewAction } = this.data
 
         if (!currentApplication) return
 
         try {
             await applicationApi.reviewApplication(currentApplication.id!, {
-                status: reviewAction,
-                replyMsg: replyMsg || undefined
+                status: reviewAction
             })
 
             wx.showToast({
