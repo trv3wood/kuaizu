@@ -252,10 +252,10 @@ Page({
             wx.showLoading({ title: '处理中...', mask: true })
 
             // 1. 创建订单
-            const orderRes = await orderApi.createOrder([{
+            const orderRes = await orderApi.createOrder({
                 productId: promotionProduct.id!,
                 quantity: promotionQuantity
-            }])
+            })
             const orderId = orderRes.data!.id!
 
             // 2. 获取支付参数
