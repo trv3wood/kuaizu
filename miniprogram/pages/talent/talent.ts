@@ -159,5 +159,12 @@ Page({
             'filters.majorId': major?.id,
             selectedMajorName: major?.majorName || ''
         })
+    },
+
+    /**
+     * 点击悬浮按钮，跳转到编辑人才名片
+     */
+    handleEditCard() {
+        wx.navigateTo({ url: '/pages/talent-card/talent-card' })
     }
 })
