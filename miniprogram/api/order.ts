@@ -10,7 +10,7 @@ export const orderApi = {
     /**
      * 创建订单
      */
-    createOrder(body: Array<Schemas['CreateOrderDTO']>) {
+    createOrder(body: Schemas['CreateOrderDTO']) {
         return http.post<Schemas['BaseResponse'] & { data: Schemas['OrderVO'] }>(
             '/orders',
             body

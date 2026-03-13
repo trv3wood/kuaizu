@@ -6,7 +6,8 @@
         "van-loading": "@vant/weapp/loading/index",
         "van-popup": "@vant/weapp/popup/index",
         "van-stepper": "@vant/weapp/stepper/index",
-        "van-button": "@vant/weapp/button/index"
+        "van-button": "@vant/weapp/button/index",
+        "skill-tags": "/components/skill-tags/skill-tags"
     },
     "navigationBarTitleText": "人才详情"
 }

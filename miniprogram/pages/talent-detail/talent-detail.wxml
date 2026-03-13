@@ -18,11 +18,7 @@
         <!-- 技能标签 -->
         <view class="section" wx:if="{{profile.skills && profile.skills.length > 0}}">
             <text class="section-title">技能标签</text>
-            <view class="skills">
-                <van-tag wx:for="{{profile.skills}}" wx:key="*this" type="default" plain size="medium" custom-class="skill-tag">
-                    {{item}}
-                </van-tag>
-            </view>
+            <skill-tags skills="{{profile.skills}}" />
         </view>
         <!-- 个人简介 -->
         <view class="section" wx:if="{{profile.intro}}">

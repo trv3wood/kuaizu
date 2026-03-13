@@ -57,10 +57,10 @@ Page({
         try {
             // 1. 创建订单
             wx.showLoading({ title: '创建订单中...' })
-            const orderRes = await orderApi.createOrder([{
+            const orderRes = await orderApi.createOrder({
                 productId: selectedProduct.id!,
                 quantity: 1
-            }])
+            })
 
             const order = orderRes.data
             if (!order?.id) {

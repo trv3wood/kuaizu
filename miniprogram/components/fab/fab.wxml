@@ -1,0 +1,5 @@
+<!-- miniprogram/components/fab/fab.wxml -->
+<!--悬浮发布按钮-->
+<view class="fab" bindtap="handleTap">
+    <van-icon name="{{icon}}" size="{{size}}" color="{{color}}" />
+</view>

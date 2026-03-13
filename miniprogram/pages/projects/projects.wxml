@@ -56,9 +56,7 @@
         <van-empty description="暂无项目" />
     </view>
     <!-- 悬浮按钮 -->
-    <view class="fab" bindtap="handlePublish">
-        <van-icon name="plus" size="24px" color="#fff" />
-    </view>
+    <fab icon="plus" bind:click="handlePublish" />
     <!-- 筛选弹出层 -->
     <van-popup show="{{showFilterPopup}}" position="right" custom-style="width: 75%; height: 100%;" bind:close="closeFilter">
         <view class="filter-panel">
