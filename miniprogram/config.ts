@@ -8,8 +8,8 @@ let base_url = '';
 // 你的后端地址配置
 const envConfig = {
   // 开发环境
-  // develop: 'http://127.0.0.1:8080/api/v2',
-  develop: 'https://kuaizu.xyz/api/v2',
+  develop: 'http://127.0.0.1:8080/api/v2',
+  // develop: 'https://kuaizu.xyz/api/v2',
   // 体验环境 (通常是测试服)
   trial: 'https://kuaizu.xyz/api/v2',
   // 正式环境

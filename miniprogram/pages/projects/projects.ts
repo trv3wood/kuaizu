@@ -49,7 +49,6 @@ Page({
 
     onLoad() {
         ; (this as any).initListConfig({ listKey: 'projects', pageSize: 10 })
-            ; (this as any).loadSchools()
             ; (this as any).loadList()
     },
 
