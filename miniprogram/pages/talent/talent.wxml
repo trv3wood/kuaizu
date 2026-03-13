@@ -75,7 +75,7 @@
       <!-- 筛选操作 -->
       <view class="filter-actions">
         <button class="reset-btn" bindtap="resetFilter">重置</button>
-        <button class="apply-btn" bindtap="closeFilter">确定</button>
+        <button class="apply-btn" bindtap="filteredSearch">确定</button>
       </view>
     </view>
   </van-popup>

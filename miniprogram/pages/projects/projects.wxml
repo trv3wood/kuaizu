@@ -30,8 +30,8 @@
                     <text class="info-text">{{item.schoolName || '未知学校'}}</text>
                 </view>
                 <view class="info-item">
-                    <van-icon name="eye-o" size="14px" color="#999" />
-                    <text class="info-text">{{item.viewCount || 0}} 浏览</text>
+                    <van-icon name="info-o" size="14px" color="#999" />
+                    <text class="info-text">{{crossSchool[item.isCrossSchool - 1].label}}</text>
                 </view>
                 <view class="info-item">
                     <van-icon name="friends-o" size="14px" color="#999" />
@@ -39,7 +39,7 @@
                 </view>
                 <view class="info-item">
                     <van-icon name="description-o" size="14px" color="#999" />
-                    <text class="info-text">{{directions[item.direction - 1].label}}</text>
+                    <text class="info-text">{{directions[item.direction].label}}</text>
                 </view>
             </view>
         </view>

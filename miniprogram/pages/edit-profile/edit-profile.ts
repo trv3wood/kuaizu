@@ -43,9 +43,6 @@ Page({
 
         // 初始化表单
         this.initForm()
-            // 加载字典数据
-            ; (this as any).loadSchools()
-            ; (this as any).loadMajors()
     },
 
     onUnload() {
