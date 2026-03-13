@@ -32,7 +32,7 @@ Page({
         // 是否跨校选项
         crossSchoolOptions: [
             { value: 1, label: '可以' },
-            { value: 2, label: '不可以' }
+            { value: 0, label: '不可以' }
         ],
 
         // 学历要求选项
@@ -136,9 +136,8 @@ Page({
      */
     onCrossSchoolSelect(e: WechatMiniprogram.TouchEvent) {
         const { value } = e.currentTarget.dataset
-        const current = this.data.form.isCrossSchool
         this.setData({
-            'form.isCrossSchool': current === value ? null : value
+            'form.isCrossSchool': value
         })
     },
 
@@ -205,7 +204,7 @@ Page({
             return false
         }
         
-        if (!isCrossSchool) {
+        if (isCrossSchool === null) {
             wx.showToast({ title: '请选择是否接受跨校成员', icon: 'none' })
             return false
         }
@@ -261,7 +260,7 @@ Page({
                     description: form.description,
                     memberCount: form.memberCount,
                     direction: form.direction || undefined,
-                    isCrossSchool: form.isCrossSchool || undefined,
+                    isCrossSchool: form.isCrossSchool!,
                     educationRequirement: form.educationRequirement || undefined,
                     skillRequirement: form.skillRequirement.trim() || undefined
                 })
@@ -277,7 +276,7 @@ Page({
                     memberCount: form.memberCount,
                     schoolId: (this.data as any).schoolId || undefined,
                     direction: form.direction || undefined,
-                    isCrossSchool: form.isCrossSchool || undefined,
+                    isCrossSchool: form.isCrossSchool!,
                     educationRequirement: form.educationRequirement || undefined,
                     skillRequirement: form.skillRequirement.trim() || undefined
                 })
