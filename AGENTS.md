@@ -1,1 +1,0 @@
-C:/Users/0/WechatProjects/kuaizu/.vscode/AGENTS.md
