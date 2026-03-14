@@ -31,7 +31,7 @@
                 </view>
                 <view class="info-item">
                     <van-icon name="info-o" size="14px" color="#999" />
-                    <text class="info-text">{{crossSchool[item.isCrossSchool - 1].label}}</text>
+                    <text class="info-text">{{crossSchool[item.isCrossSchool].label}}</text>
                 </view>
                 <view class="info-item">
                     <van-icon name="friends-o" size="14px" color="#999" />
