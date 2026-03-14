@@ -36,9 +36,10 @@ export const talentApi = {
     /**
      * 查看人才详情
      */
-    getTalentProfile(id: number) {
+    getTalentProfile(id: number, userId?: number) {
         return http.get<Schemas['BaseResponse'] & { data: Schemas['TalentProfileDetailVO'] }>(
-            `/talent-profiles/${id}`
+            `/talent-profiles/${id}`,
+            { userId }
         )
     },
 

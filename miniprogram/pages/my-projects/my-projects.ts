@@ -317,11 +317,16 @@ Page({
      * 处理头像点击事件
      */
     handleAvatarTap(e: WechatMiniprogram.TouchEvent) {
-        const { id } = e.currentTarget.dataset
+        const { id, userId } = e.currentTarget.dataset
+        let url = `/pages/talent-detail/talent-detail?`
         if (id) {
-            wx.navigateTo({
-                url: `/pages/talent-detail/talent-detail?id=${id}`
-            })
+            url += `id=${id}`
+            if (userId) url += `&userId=${userId}`
+        } else if (userId) {
+            url += `id=0&userId=${userId}`
+        } else {
+            return
         }
+        wx.navigateTo({ url })
     }
 })

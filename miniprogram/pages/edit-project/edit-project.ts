@@ -19,7 +19,6 @@ Page({
             direction: null as Direction | null,
             isCrossSchool: null as number | null,
             educationRequirement: null as number | null,
-            skillRequirement: ''
         },
 
         // 方向选项
@@ -35,10 +34,11 @@ Page({
             { value: 0, label: '不可以' }
         ],
 
-        // 学历要求选项
+        // 学校要求选项
         educationOptions: [
-            { value: 1, label: '大专' },
-            { value: 2, label: '本科' }
+            { value: 1, label: '大专及以上' },
+            { value: 2, label: '本科及以上' },
+            { value: 3, label: '研究生及以上' }
         ],
 
         submitting: false
@@ -88,7 +88,6 @@ Page({
                     'form.direction': project.direction ?? null,
                     'form.isCrossSchool': project.isCrossSchool ?? null,
                     'form.educationRequirement': project.educationRequirement ?? null,
-                    'form.skillRequirement': project.skillRequirement || ''
                 })
             }
         } catch (error) {
@@ -142,7 +141,7 @@ Page({
     },
 
     /**
-     * 选择学历要求
+     * 选择学校要求
      */
     onEducationSelect(e: WechatMiniprogram.TouchEvent) {
         const { value } = e.currentTarget.dataset
@@ -150,13 +149,6 @@ Page({
         this.setData({
             'form.educationRequirement': current === value ? null : value
         })
-    },
-
-    /**
-     * 输入技能要求
-     */
-    onSkillRequirementInput(e: any) {
-        this.setData({ 'form.skillRequirement': e.detail })
     },
 
     onSchoolClick() {
@@ -203,12 +195,12 @@ Page({
             wx.showToast({ title: '团队人数至少为1人', icon: 'none' })
             return false
         }
-        
+
         if (isCrossSchool === null) {
             wx.showToast({ title: '请选择是否接受跨校成员', icon: 'none' })
             return false
         }
-        
+
         if (!direction) {
             wx.showToast({ title: '请选择项目方向', icon: 'none' })
             return false
@@ -262,7 +254,6 @@ Page({
                     direction: form.direction || undefined,
                     isCrossSchool: form.isCrossSchool!,
                     educationRequirement: form.educationRequirement || undefined,
-                    skillRequirement: form.skillRequirement.trim() || undefined
                 })
 
                 wx.showToast({ title: '保存成功', icon: 'success' })
@@ -278,7 +269,6 @@ Page({
                     direction: form.direction || undefined,
                     isCrossSchool: form.isCrossSchool!,
                     educationRequirement: form.educationRequirement || undefined,
-                    skillRequirement: form.skillRequirement.trim() || undefined
                 })
 
                 wx.showToast({ title: '发布成功', icon: 'success' })

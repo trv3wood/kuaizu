@@ -29,9 +29,10 @@ Page({
 
     onLoad(options) {
         const id = Number(options.id)
-        if (id) {
+        const userId = options.userId ? Number(options.userId) : undefined
+        if (id || userId) {
             this.setData({ id })
-            this.loadProfile(id)
+            this.loadProfile(id, userId)
             this.loadMyProjects()
         } else {
             wx.showToast({ title: '参数错误', icon: 'none' })
@@ -42,11 +43,11 @@ Page({
     /**
      * 加载人才详情
      */
-    async loadProfile(id: number) {
+    async loadProfile(id: number, userId?: number) {
         this.setData({ loading: true })
 
         try {
-            const res = await talentApi.getTalentProfile(id)
+            const res = await talentApi.getTalentProfile(id, userId)
             this.setData({
                 profile: res.data || null,
                 loading: false
@@ -245,19 +246,4 @@ Page({
             this.setData({ purchasing: false })
         }
     },
-
-    /**
-     * 复制联系方式
-     */
-    handleCopyContact() {
-        const contact = this.data.profile?.contact
-        if (contact) {
-            wx.setClipboardData({
-                data: contact,
-                success() {
-                    wx.showToast({ title: '已复制', icon: 'success' })
-                }
-            })
-        }
-    }
 })

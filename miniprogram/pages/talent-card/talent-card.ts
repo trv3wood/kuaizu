@@ -96,9 +96,9 @@ Page({
     /**
      * 加载人才详情
      */
-    async loadProfileDetail(id: number) {
+    async loadProfileDetail(id: number, userId?: number) {
         try {
-            const res = await talentApi.getTalentProfile(id)
+            const res = await talentApi.getTalentProfile(id, userId)
             const detail = res.data
             if (detail) {
                 this.setData({

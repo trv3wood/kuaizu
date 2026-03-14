@@ -42,7 +42,7 @@
                         <!-- Applicant Info -->
                         <view class="applicant-header">
                             <image class="avatar" src="{{app.applicant.avatarUrl}}" mode="aspectFill"
-                                bindtap="handleAvatarTap" data-id="{{app.talentProfile.id}}" />
+                                bindtap="handleAvatarTap" data-id="{{app.talentProfile.id}}" data-user-id="{{app.applicant.id}}" />
                             <view class="applicant-info">
                                 <text class="applicant-name">{{app.applicant.nickname}}</text>
                                 <!-- 仅申请通过后才显示联系方式 -->
