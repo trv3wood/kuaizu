@@ -1,0 +1,10 @@
+/* components/skill-tags/skill-tags.wxss */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+.skill-tag {
+  margin: 0 !important;
+}

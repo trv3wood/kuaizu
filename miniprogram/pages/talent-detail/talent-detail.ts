@@ -111,7 +111,6 @@ Page({
                 receiverId: profile!.userId!,
                 relatedProjectId: project.id,
                 type: 2, // 2-项目邀请
-                hasSmsNotify: false,
                 message: '您好，我对您的技能很感兴趣，希望能进一步交流！'
             })
 
@@ -197,10 +196,10 @@ Page({
         try {
             // 1. 创建订单
             wx.showLoading({ title: '创建订单...' })
-            const orderRes = await orderApi.createOrder([{
+            const orderRes = await orderApi.createOrder({
                 productId: OLIVE_BRANCH_PRODUCT_ID,
                 quantity
-            }])
+            })
 
             const order = orderRes.data
             if (!order?.id) {

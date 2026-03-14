@@ -20,8 +20,8 @@ Page({
 
         // 筛选条件
         filters: {
-            schoolId: undefined as number | undefined,
-            majorId: undefined as number | undefined
+            schoolId: null as number | null,
+            majorId: null as number | null
         },
         showFilterPopup: false,
 
@@ -31,8 +31,6 @@ Page({
 
     onLoad() {
         ; (this as any).initListConfig({ listKey: 'talents', pageSize: 10 })
-            ; (this as any).loadSchools()
-            ; (this as any).loadMajors()
             ; (this as any).loadList()
     },
 
@@ -50,7 +48,7 @@ Page({
     /**
      * 实现数据获取方法（behavior要求）
      */
-    async fetchListData(params: { page: number, size: number }): Promise<ListResponse<TalentProfileVO>> {
+    async fetchListData(params: any): Promise<ListResponse<TalentProfileVO>> {
         const res = await talentApi.listTalentProfiles(params)
         return {
             list: res.data?.list || [],
@@ -65,8 +63,8 @@ Page({
         const { keyword, filters } = this.data
         const params: any = {}
         if (keyword) params.keyword = keyword
-        if (filters.schoolId !== undefined) params.schoolId = filters.schoolId
-        if (filters.majorId !== undefined) params.majorId = filters.majorId
+        if (filters.schoolId !== null) params.schoolId = filters.schoolId
+        if (filters.majorId !== null) params.majorId = filters.majorId
         return params
     },
 
@@ -83,7 +81,6 @@ Page({
      */
     handleSearchCancel() {
         this.setData({ keyword: '' })
-            ; (this as any).loadList()
     },
 
     /**
@@ -98,6 +95,10 @@ Page({
      */
     closeFilter() {
         this.setData({ showFilterPopup: false })
+    },
+    
+    filteredSearch() {
+        this.closeFilter()
             ; (this as any).loadList()
     },
 
@@ -106,8 +107,8 @@ Page({
      */
     resetFilter() {
         this.setData({
-            'filters.schoolId': undefined,
-            'filters.majorId': undefined,
+            'filters.schoolId': null,
+            'filters.majorId': null,
             selectedSchoolName: '',
             selectedMajorName: '',
             showFilterPopup: false
@@ -159,5 +160,12 @@ Page({
             'filters.majorId': major?.id,
             selectedMajorName: major?.majorName || ''
         })
+    },
+
+    /**
+     * 点击悬浮按钮，跳转到编辑人才名片
+     */
+    handleEditCard() {
+        wx.navigateTo({ url: '/pages/talent-card/talent-card' })
     }
 })

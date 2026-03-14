@@ -25,7 +25,7 @@ export const userStore = observable({
 
     /** 用户昵称（带默认值） */
     get displayName(): string {
-        return this.user?.nickname || '快组用户' + this.user?.id
+        return this.user?.nickname || '快组儿'
     },
 
     /** 用户头像（带默认值） */

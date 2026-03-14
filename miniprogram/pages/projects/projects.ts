@@ -21,7 +21,8 @@ Page({
         // 筛选条件
         filters: {
             schoolId: undefined as number | undefined,
-            direction: undefined as Direction | undefined
+            direction: undefined as Direction | undefined,
+            isCrossSchool: undefined as number | undefined
         },
         showFilterPopup: false,
 
@@ -39,12 +40,15 @@ Page({
             { value: 1, label: '进行中' },
             { value: 2, label: '已驳回' },
             { value: 3, label: '已关闭' }
+        ],
+        crossSchool: [
+            { value: 0, label: '本校' },
+            { value: 1, label: '跨校' }
         ]
     },
 
     onLoad() {
         ; (this as any).initListConfig({ listKey: 'projects', pageSize: 10 })
-            ; (this as any).loadSchools()
             ; (this as any).loadList()
     },
 

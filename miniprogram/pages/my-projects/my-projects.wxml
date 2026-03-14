@@ -41,10 +41,12 @@
                     <view class="application-item" wx:for="{{applications}}" wx:for-item="app" wx:key="id">
                         <!-- Applicant Info -->
                         <view class="applicant-header">
-                            <image class="avatar" src="{{app.applicant.avatarUrl}}" mode="aspectFill" />
+                            <image class="avatar" src="{{app.applicant.avatarUrl}}" mode="aspectFill"
+                                bindtap="handleAvatarTap" data-id="{{app.talentProfile.id}}" />
                             <view class="applicant-info">
                                 <text class="applicant-name">{{app.applicant.nickname}}</text>
-                                <view class="applicant-meta">
+                                <!-- 仅申请通过后才显示联系方式 -->
+                                <view class="applicant-meta" wx:if="{{app.status === 1}}">
                                     <text wx:if="{{app.applicant.phone}}">
                                         {{app.applicant.phone}}
                                     </text>
@@ -62,21 +64,8 @@
                                 <van-tag wx:else type="danger">已拒绝</van-tag>
                             </view>
                         </view>
-                        <!-- Application Details -->
-                        <view class="application-details">
-                            <view wx:if="{{app.applyReason}}" class="detail-row">
-                                <text class="detail-label">申请理由:</text>
-                                <text class="detail-value">{{app.applyReason}}</text>
-                            </view>
-                            <view wx:if="{{app.contact}}" class="detail-row">
-                                <text class="detail-label">联系方式:</text>
-                                <text class="detail-value">{{app.contact}}</text>
-                            </view>
-                            <view wx:if="{{app.replyMsg}}" class="detail-row">
-                                <text class="detail-label">回复:</text>
-                                <text class="detail-value reply">{{app.replyMsg}}</text>
-                            </view>
-                        </view>
+                        <!-- 技能标签 -->
+                        <skill-tags wx:if="{{app.talentProfile && app.talentProfile.skills && app.talentProfile.skills.length > 0}}" skills="{{app.talentProfile.skills}}" class="applicant-skills" />
                         <!-- Action Buttons (only for pending applications) -->
                         <view wx:if="{{app.status === 0}}" class="application-actions">
                             <van-button size="small" type="danger" plain bindtap="handleReject" data-app="{{app}}">
@@ -111,7 +100,6 @@
 <van-dialog show="{{reviewDialogVisible}}" title="{{reviewAction === 1 ? '通过申请' : '拒绝申请'}}" show-cancel-button confirm-button-text="确定" cancel-button-text="取消" bind:confirm="submitReview" bind:cancel="closeReviewDialog">
     <view class="dialog-content">
         <text class="dialog-hint">{{reviewAction === 1 ? '是否通过该申请者？' : '是否拒绝该申请者？'}}</text>
-        <van-field value="{{replyMsg}}" label="回复消息" type="textarea" placeholder="选填：给申请者一些回复" autosize maxlength="200" show-word-limit bind:change="onReplyInput" />
     </view>
 </van-dialog>
 <!-- Promotion Dialog -->

@@ -32,9 +32,9 @@
                 <van-icon name="eye-o" size="16px" color="#999" />
                 <text class="info-text">浏览量：{{project.viewCount || 0}}</text>
             </view>
-            <view class="info-row" wx:if="{{project.applicationCount !== undefined}}">
+            <view class="info-row" wx:if="{{project.isCrossSchool !== undefined}}">
                 <van-icon name="records" size="16px" color="#999" />
-                <text class="info-text">申请数：{{project.applicationCount}}</text>
+                <text class="info-text">{{project.isCrossSchool ? '接受跨校成员' : '仅限本校成员'}}</text>
             </view>
         </view>
         <!-- 项目描述 -->

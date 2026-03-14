@@ -84,6 +84,30 @@
     color: var(--text-main);
 }
 
+/* 标签选择（跨校 / 学历） */
+.tag-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16rpx;
+}
+
+.tag-item {
+    padding: 12rpx 36rpx;
+    border-radius: 100rpx;
+    font-size: 26rpx;
+    color: var(--text-gray);
+    background: var(--bg-color);
+    border: 2rpx solid transparent;
+    transition: all 0.2s;
+}
+
+.tag-item.active {
+    color: var(--text-main);
+    background: #f5f7fa;
+    border-color: var(--text-gray);
+    font-weight: 500;
+}
+
 /* Placeholder样式 */
 .placeholder {
     color: var(--text-gray) !important;

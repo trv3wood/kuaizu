@@ -214,6 +214,11 @@
     color: var(--primary-color);
 }
 
+/* Applicant Skills */
+.applicant-skills {
+    margin-bottom: 16rpx;
+}
+
 /* Action Buttons */
 .application-actions {
     display: flex;

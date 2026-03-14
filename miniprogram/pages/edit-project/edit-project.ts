@@ -16,7 +16,10 @@ Page({
             name: '',
             description: '',
             memberCount: 3,
-            direction: null as Direction | null
+            direction: null as Direction | null,
+            isCrossSchool: null as number | null,
+            educationRequirement: null as number | null,
+            skillRequirement: ''
         },
 
         // 方向选项
@@ -24,6 +27,18 @@ Page({
             { value: 1, label: '落地', desc: '实际产品或服务' },
             { value: 2, label: '比赛', desc: '竞赛/挑战赛' },
             { value: 3, label: '学习', desc: '学习/研究项目' }
+        ],
+
+        // 是否跨校选项
+        crossSchoolOptions: [
+            { value: 1, label: '可以' },
+            { value: 0, label: '不可以' }
+        ],
+
+        // 学历要求选项
+        educationOptions: [
+            { value: 1, label: '大专' },
+            { value: 2, label: '本科' }
         ],
 
         submitting: false
@@ -70,7 +85,10 @@ Page({
                     'form.name': project.name || '',
                     'form.description': project.description || '',
                     'form.memberCount': project.memberCount || 3,
-                    'form.direction': project.direction,
+                    'form.direction': project.direction ?? null,
+                    'form.isCrossSchool': project.isCrossSchool ?? null,
+                    'form.educationRequirement': project.educationRequirement ?? null,
+                    'form.skillRequirement': project.skillRequirement || ''
                 })
             }
         } catch (error) {
@@ -108,11 +126,37 @@ Page({
     onDirectionSelect(e: WechatMiniprogram.TouchEvent) {
         const { value } = e.currentTarget.dataset
         const currentDirection = this.data.form.direction
-
-        // 点击已选中的则取消选择
         this.setData({
-            'form.direction': currentDirection === value ? undefined : value
+            'form.direction': currentDirection === value ? null : value
         })
+    },
+
+    /**
+     * 选择是否跨校
+     */
+    onCrossSchoolSelect(e: WechatMiniprogram.TouchEvent) {
+        const { value } = e.currentTarget.dataset
+        this.setData({
+            'form.isCrossSchool': value
+        })
+    },
+
+    /**
+     * 选择学历要求
+     */
+    onEducationSelect(e: WechatMiniprogram.TouchEvent) {
+        const { value } = e.currentTarget.dataset
+        const current = this.data.form.educationRequirement
+        this.setData({
+            'form.educationRequirement': current === value ? null : value
+        })
+    },
+
+    /**
+     * 输入技能要求
+     */
+    onSkillRequirementInput(e: any) {
+        this.setData({ 'form.skillRequirement': e.detail })
     },
 
     onSchoolClick() {
@@ -138,7 +182,7 @@ Page({
      * 验证表单
      */
     validateForm(): boolean {
-        const { name, description, memberCount } = this.data.form
+        const { name, description, memberCount, isCrossSchool, direction } = this.data.form
 
         if (!name.trim()) {
             wx.showToast({ title: '请输入项目名称', icon: 'none' })
@@ -157,6 +201,28 @@ Page({
 
         if (!memberCount || memberCount < 1) {
             wx.showToast({ title: '团队人数至少为1人', icon: 'none' })
+            return false
+        }
+        
+        if (isCrossSchool === null) {
+            wx.showToast({ title: '请选择是否接受跨校成员', icon: 'none' })
+            return false
+        }
+        
+        if (!direction) {
+            wx.showToast({ title: '请选择项目方向', icon: 'none' })
+            return false
+        }
+
+        if (!(this.data as any).schoolId) {
+            wx.showModal({
+                content: '缺少学校信息, 是否前往填写',
+                success(res) {
+                    if (res.confirm) {
+                        wx.navigateTo({ url: '/pages/edit-profile/edit-profile' })
+                    }
+                }
+            })
             return false
         }
 
@@ -193,14 +259,15 @@ Page({
                     name: form.name,
                     description: form.description,
                     memberCount: form.memberCount,
-                    direction: form.direction || undefined
+                    direction: form.direction || undefined,
+                    isCrossSchool: form.isCrossSchool!,
+                    educationRequirement: form.educationRequirement || undefined,
+                    skillRequirement: form.skillRequirement.trim() || undefined
                 })
 
                 wx.showToast({ title: '保存成功', icon: 'success' })
                 // 返回上一页
-                setTimeout(() => {
-                    wx.navigateBack()
-                }, 1500)
+                wx.navigateBack()
             } else {
                 // 创建项目
                 await projectApi.createProject({
@@ -208,7 +275,10 @@ Page({
                     description: form.description,
                     memberCount: form.memberCount,
                     schoolId: (this.data as any).schoolId || undefined,
-                    direction: form.direction || undefined
+                    direction: form.direction || undefined,
+                    isCrossSchool: form.isCrossSchool!,
+                    educationRequirement: form.educationRequirement || undefined,
+                    skillRequirement: form.skillRequirement.trim() || undefined
                 })
 
                 wx.showToast({ title: '发布成功', icon: 'success' })
