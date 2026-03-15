@@ -39,7 +39,7 @@
                 </view>
                 <view class="info-item">
                     <van-icon name="description-o" size="14px" color="#999" />
-                    <text class="info-text">{{directions[item.direction].label}}</text>
+                    <text class="info-text">{{directions[item.direction - 1].label}}</text>
                 </view>
             </view>
         </view>
@@ -86,7 +86,7 @@
             <!-- 筛选操作 -->
             <view class="filter-actions">
                 <button class="reset-btn" bindtap="resetFilter">重置</button>
-                <button class="apply-btn" bindtap="closeFilter">确定</button>
+                <button class="apply-btn" bindtap="applyFilter">确定</button>
             </view>
         </view>
     </van-popup>

@@ -109,19 +109,13 @@ Page({
      */
     closeFilter() {
         this.setData({ showFilterPopup: false })
-            ; (this as any).loadList()
     },
 
     /**
      * 应用筛选
      */
-    applyFilter(e: WechatMiniprogram.CustomEvent) {
-        const { schoolId, direction } = e.detail
-        this.setData({
-            'filters.schoolId': schoolId,
-            'filters.direction': direction,
-            showFilterPopup: false
-        })
+    applyFilter() {
+        this.closeFilter()
             ; (this as any).loadList()
     },
 
