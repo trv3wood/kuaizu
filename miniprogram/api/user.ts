@@ -69,5 +69,12 @@ export const userApi = {
             '/users/me/olive-branches',
             params
         )
+    },
+
+    /**
+     * 同步用户订阅授权状态
+     */
+    syncUserSubscription(data: Schemas['SubscribeSyncRequest']) {
+        return http.post<Schemas['BaseResponse']>('/user/subscribe', data)
     }
 }
