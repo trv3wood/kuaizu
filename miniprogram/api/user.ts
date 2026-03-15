@@ -1,8 +1,9 @@
-import type { components } from './schema'
+import type { components, operations } from './schema'
 import http from '../utils/http'
 import config from '../config'
 
 type Schemas = components['schemas']
+type Operations = operations
 
 /**
  * 用户模块
@@ -76,5 +77,12 @@ export const userApi = {
      */
     syncUserSubscription(data: Schemas['SubscribeSyncRequest']) {
         return http.post<Schemas['BaseResponse']>('/user/subscribe', data)
+    },
+
+    /**
+     * 获取订阅消息模板
+     */
+    getSubscriptionTemplateId(data: Operations['getMsgTemplates']['parameters']['query']) {
+        return http.get<Schemas['BaseResponse'] & { data: Schemas['MsgTemplateVO'][] }>('/user/subscribe', data)
     }
 }
