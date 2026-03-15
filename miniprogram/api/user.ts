@@ -83,6 +83,10 @@ export const userApi = {
      * 获取订阅消息模板
      */
     getSubscriptionTemplateId(data: Operations['getMsgTemplates']['parameters']['query']) {
-        return http.get<Schemas['BaseResponse'] & { data: Schemas['MsgTemplateVO'][] }>('/user/subscribe', data)
+        const params = {
+            ...data,
+            bizKeys: Array.isArray(data.bizKeys) ? data.bizKeys.join(',') : data.bizKeys
+        }
+        return http.get<Schemas['BaseResponse'] & { data: Schemas['MsgTemplateVO'][] }>('/user/subscribe', params as any)
     }
 }

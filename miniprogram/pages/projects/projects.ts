@@ -124,8 +124,8 @@ Page({
      */
     resetFilter() {
         this.setData({
-            'filters.schoolId': undefined,
-            'filters.direction': undefined,
+            'filters.schoolId': null,
+            'filters.direction': null,
             showFilterPopup: false
         })
             ; (this as any).loadList()

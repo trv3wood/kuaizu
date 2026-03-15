@@ -1,7 +1,9 @@
 // pages/edit-profile/edit-profile.ts
 import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { userStore } from '../../stores/index'
-import { commonApi } from '../../api/index'
+import { commonApi, userApi } from '../../api/index'
+import { templateStore } from '../../stores/templateStore'
+import { MsgBizKey } from '../../utils/constants'
 import { schoolPickerBehavior } from '../../behaviors/schoolPicker'
 import type { components } from '../../api/schema'
 import { majorPickerBehavior } from '../../behaviors/majorPicker'
@@ -34,19 +36,33 @@ Page({
     storeBindings: null as any,
 
     onLoad() {
-        // 绑定 userStore
-        this.storeBindings = createStoreBindings(this, {
-            store: userStore,
-            fields: ['user'],
-            actions: ['updateUser']
-        })
+        // 绑定 Store
+        this.storeBindings = [
+            createStoreBindings(this, {
+                store: userStore,
+                fields: ['user'],
+                actions: ['updateUser']
+            }),
+            createStoreBindings(this, {
+                store: templateStore,
+                fields: ['templates'],
+                actions: ['getTemplateId']
+            })
+        ]
 
         // 初始化表单
         this.initForm()
+
+        // 预加载订阅消息模板 ID
+        templateStore.getTemplateId(MsgBizKey.CardReceived).catch(() => { })
     },
 
     onUnload() {
-        this.storeBindings?.destroyStoreBindings()
+        if (Array.isArray(this.storeBindings)) {
+            this.storeBindings.forEach(b => b.destroyStoreBindings())
+        } else {
+            this.storeBindings?.destroyStoreBindings()
+        }
     },
 
     /**
@@ -175,6 +191,23 @@ Page({
             return
         }
 
+        // 获取订阅模板 ID
+        const bizKey = MsgBizKey.CardReceived
+        const templateId = templateStore.templates[bizKey]
+        let subResult: 'accept' | 'reject' | 'ban' | undefined;
+
+        // 1. 调起订阅权限（必须在异步请求前）
+        if (templateId) {
+            try {
+                const res = await wx.requestSubscribeMessage({
+                    tmplIds: [templateId]
+                })
+                subResult = res[templateId] as 'accept' | 'reject' | 'ban'
+            } catch (err) {
+                console.log('[handleSave] 订阅逻辑跳过/失败:', err)
+            }
+        }
+
         this.setData({ loading: true })
 
         try {
@@ -189,6 +222,17 @@ Page({
             })
 
             wx.showToast({ title: '保存成功', icon: 'success' })
+
+            // 2. 同步订阅状态
+            if (subResult) {
+                userApi.syncUserSubscription({
+                    templates: [{
+                        biz_key: bizKey,
+                        result: subResult
+                    }]
+                }).catch(err => console.error('同步订阅状态失败:', err))
+            }
+
             setTimeout(() => {
                 wx.navigateBack()
             }, 1500)
