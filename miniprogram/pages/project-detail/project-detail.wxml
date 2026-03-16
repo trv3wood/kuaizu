@@ -38,9 +38,13 @@
             </view>
         </view>
         <!-- 项目描述 -->
-        <view class="section">
-            <text class="section-title">项目简介</text>
-            <text class="section-content">{{project.description || '暂无描述'}}</text>
+        <view class="description-section">
+            <van-collapse value="{{ activeNames }}" bind:change="onCollapseChange" border="{{ false }}">
+                <van-collapse-item name="description" border="{{ false }}" is-link="{{ project.description.length > 20 }}">
+                    <view slot="title" class="section-title">项目简介</view>
+                    <text class="section-content" user-select="true">{{project.description || '暂无描述'}}</text>
+                </van-collapse-item>
+            </van-collapse>
         </view>
         <!-- 发起人信息 -->
         <view class="section" wx:if="{{project.creator}}">
@@ -50,7 +54,9 @@
                 <view class="creator-detail">
                     <text class="creator-name">{{project.creator.nickname || '匿名用户'}}</text>
                     <text class="creator-uid">UID: {{project.creator.id || '未知'}}</text>
-                    <text class="creator-contact" wx:if="{{isPublicContact}}">联系电话：{{project.creator.phone || '未知'}}</text>
+                    <text class="creator-contact" wx:if="{{isPublicContact}}">
+                        联系电话：{{project.creator.phone || '未知'}}
+                    </text>
                 </view>
             </view>
         </view>

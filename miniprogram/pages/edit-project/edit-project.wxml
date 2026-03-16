@@ -10,7 +10,7 @@
         <!-- 项目描述 -->
         <view class="form-group">
             <view class="form-label required">项目描述</view>
-            <van-field value="{{form.description}}" type="textarea" placeholder="描述你的项目，包括项目背景、目标和需要的人才类型..." autosize="{{ { minHeight: 120 } }}" maxlength="200" show-word-limit bind:change="onDescriptionInput" />
+            <van-field value="{{form.description}}" type="textarea" placeholder="描述你的项目，包括项目背景、目标和需要的人才类型..." autosize="{{ { minHeight: 120 } }}" maxlength="1000" show-word-limit bind:change="onDescriptionInput" />
         </view>
         <!-- 团队人数 -->
         <view class="form-group">

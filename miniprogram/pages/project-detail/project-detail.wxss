@@ -58,7 +58,30 @@
     font-size: 32rpx;
     color: var(--text-gray);
     line-height: 1.8;
-    white-space: pre-wrap;
+}
+
+.description-section {
+    margin: 0 30rpx 30rpx;
+    border-radius: 24rpx;
+    overflow: hidden;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.description-section .section-title {
+    margin-bottom: 0;
+}
+
+.description-section .van-cell {
+    background: var(--card-bg) !important;
+    padding: 30rpx !important;
+    border-radius: 24rpx !important;
+}
+
+.description-section .van-collapse-item__content {
+    background: var(--card-bg) !important;
+    padding: 0 30rpx 30rpx !important;
+    color: var(--text-gray) !important;
+    line-height: 1.8 !important;
 }
 
 /* 信息行 */

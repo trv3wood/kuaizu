@@ -14,7 +14,8 @@ Page({
         project: null as ProjectDetailVO | null,
         loading: true,
         applying: false,
-        isPublicContact: false
+        isPublicContact: false,
+        activeNames: [] as string[]
     },
     storeBindings: null as any,
 
@@ -127,6 +128,13 @@ Page({
         } finally {
             this.setData({ applying: false })
         }
+    },
+
+
+    onCollapseChange(event: any) {
+        this.setData({
+            activeNames: event.detail
+        })
     },
 
 
