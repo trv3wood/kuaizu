@@ -1,10 +1,12 @@
 // pages/edit-project/edit-project.ts
 import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { userStore } from '../../stores/index'
-import { projectApi, userApi } from '../../api/index'
-import { templateStore } from '../../stores/templateStore'
+import { projectApi } from '../../api/index'
 import { MsgBizKey } from '../../utils/constants'
+import { requestSubscription } from '../../utils/subscription'
 import type { components } from '../../api/schema'
+
+
 
 type Direction = components['schemas']['Direction']
 
@@ -66,17 +68,10 @@ Page({
                 store: userStore,
                 fields: ['schoolId', 'schoolName'],
                 actions: []
-            }),
-            createStoreBindings(this, {
-                store: templateStore,
-                fields: ['templates'],
-                actions: ['getTemplateId']
             })
         ]
-
-        // 预加载订阅消息模板 ID
-        templateStore.getTemplateId(MsgBizKey.CardReceived).catch(() => { })
     },
+
 
     onUnload() {
         if (Array.isArray(this.storeBindings)) {
@@ -256,22 +251,8 @@ Page({
         if (!this.validateForm()) return
         if (this.data.submitting) return
 
-        // 获取订阅模板 ID
-        const bizKey = MsgBizKey.CardReceived
-        const templateId = templateStore.templates[bizKey]
-        let subResult: 'accept' | 'reject' | 'ban' | undefined;
-
         // 1. 调起订阅权限（必须在异步请求前）
-        if (templateId) {
-            try {
-                const res = await wx.requestSubscribeMessage({
-                    tmplIds: [templateId]
-                })
-                subResult = res[templateId] as 'accept' | 'reject' | 'ban'
-            } catch (err) {
-                console.log('[handleSubmit] 订阅逻辑跳过/失败:', err)
-            }
-        }
+        await requestSubscription([MsgBizKey.CardReceived, MsgBizKey.AuditResultProj])
 
         this.setData({ submitting: true })
 
@@ -291,16 +272,6 @@ Page({
 
                 wx.showToast({ title: '保存成功', icon: 'success' })
 
-                // 2. 同步订阅状态
-                if (subResult) {
-                    userApi.syncUserSubscription({
-                        templates: [{
-                            biz_key: bizKey,
-                            result: subResult
-                        }]
-                    }).catch(err => console.error('同步订阅状态失败:', err))
-                }
-
                 // 返回上一页
                 wx.navigateBack()
             } else {
@@ -316,16 +287,6 @@ Page({
                 })
 
                 wx.showToast({ title: '发布成功', icon: 'success' })
-
-                // 2. 同步订阅状态
-                if (subResult) {
-                    userApi.syncUserSubscription({
-                        templates: [{
-                            biz_key: bizKey,
-                            result: subResult
-                        }]
-                    }).catch(err => console.error('同步订阅状态失败:', err))
-                }
 
                 wx.navigateTo({
                     url: '/pages/my-projects/my-projects'

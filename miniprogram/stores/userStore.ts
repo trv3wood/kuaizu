@@ -1,6 +1,8 @@
 import { observable, action } from 'mobx-miniprogram'
 import type { components } from '../api/schema'
 import { userApi } from '../api/index'
+import { templateStore } from './templateStore'
+
 
 type UserVO = components['schemas']['UserVO']
 
@@ -106,12 +108,15 @@ export const userStore = observable({
         if (token) {
             try {
                 await this.fetchUser()
+                // 登录成功后预加载所有模板 ID
+                templateStore.fetchAll().catch(() => { })
             } catch {
                 // token 失效，清除登录状态
                 this.clearUser()
             }
         }
     })
+
 })
 
 export default userStore

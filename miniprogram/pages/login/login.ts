@@ -1,6 +1,6 @@
-// pages/login/login.ts
 import { authApi } from '../../api/index'
-import { userStore } from '../../stores/index'
+import { userStore, templateStore } from '../../stores/index'
+
 
 Page({
     data: {
@@ -29,7 +29,8 @@ Page({
             // 需要提供手机号（新用户）
             if (res.code === 1001) {
                 // 保存注册凭证
-                const registerToken = res.data?.registerToken
+                const registerToken = (res.data as any)?.registerToken
+
                 if (registerToken) {
                     this.setData({
                         registerToken,
@@ -56,6 +57,10 @@ Page({
                     // 如果接口没返回用户信息，手动获取
                     await userStore.fetchUser()
                 }
+
+                // 登录成功后预加载订阅消息模板 ID
+                templateStore.fetchAll().catch(() => { })
+
 
                 // 提示并跳转
                 wx.showToast({
@@ -130,6 +135,10 @@ Page({
                 } else {
                     await userStore.fetchUser()
                 }
+
+                // 注册并登录成功后预加载订阅消息模板 ID
+                templateStore.fetchAll().catch(() => { })
+
 
                 // 关闭弹窗
                 this.closePhoneModal()

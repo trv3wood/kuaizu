@@ -1,5 +1,7 @@
 import { observable, action } from 'mobx-miniprogram'
 import { userApi } from '../api/index'
+import { MsgBizKey } from '../utils/constants'
+
 
 /**
  * 订阅消息模板 Store
@@ -17,19 +19,39 @@ export const templateStore = observable({
     // ==================== Getters ====================
 
     /**
-     * 根据业务标识获取模板 ID
+     * 根据业务标识获取模板 ID (从缓存中同步获取)
      */
-    async getTemplateId(bizKey: string): Promise<string | undefined> {
-        if (Object.keys(this.templates).length === 0) {
-            await this.fetch([bizKey])
-        }
+    getTemplateId(bizKey: string): string | undefined {
         return this.templates[bizKey]
     },
+
 
     // ==================== Actions ====================
 
     /**
-     * 批量获取并同步订阅消息模板 ID
+     * 获取所有订阅消息模板 ID
+     */
+    fetchAll: action(async function (this: typeof templateStore) {
+        try {
+            const bizKeys = Object.keys(MsgBizKey).map(key => (MsgBizKey as any)[key])
+            const res = await userApi.getSubscriptionTemplateId({ bizKeys })
+
+            if (res.data && Array.isArray(res.data)) {
+                const newTemplates = { ...this.templates }
+                res.data.forEach(item => {
+                    if (item.bizKey && item.templateId) {
+                        newTemplates[item.bizKey] = item.templateId
+                    }
+                })
+                this.templates = newTemplates
+            }
+        } catch (error) {
+            console.error('[templateStore] 批量获取模板 ID 失败:', error)
+        }
+    }),
+
+    /**
+     * 批量获取并同步订阅消息模板 ID (按需获取)
      */
     fetch: action(async function (this: typeof templateStore, bizKeys: string[]) {
         try {
@@ -47,6 +69,7 @@ export const templateStore = observable({
             console.error('[templateStore] 获取模板 ID 失败:', error)
         }
     })
+
 })
 
 export default templateStore

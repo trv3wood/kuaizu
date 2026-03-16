@@ -3,6 +3,8 @@ import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { userStore } from '../../stores/index'
 import { userApi } from '../../api/user'
 import { ASSETS } from '../../assets/urls'
+import { requestSubscription } from '../../utils/subscription'
+import { MsgBizKey } from '../../utils/constants'
 
 Page({
     data: {
@@ -54,6 +56,7 @@ Page({
 
     async handleVerify() {
         if (!(this as any).isVerified) {
+            await requestSubscription(MsgBizKey.IdentityAuth)
             const { confirm } = await wx.showModal({
                 title: '提示',
                 content: '您还未认证，是否上传认证资料？'
