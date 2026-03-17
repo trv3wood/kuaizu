@@ -12,6 +12,19 @@ REQUEST.Defaults.baseURL = config.BASE_URL
 // 自动提取返回值为 2xx 时的 response.data
 REQUEST.Defaults.transformResponse = transformRequestResponseOkData
 
+// 辅助函数：递归移除对象中的空值 (null/undefined)
+const removeEmpty = (obj: any) => {
+  if (!(obj instanceof Object)) return obj
+  Object.keys(obj).forEach(key => {
+    if (obj[key] === null || obj[key] === undefined) {
+      delete obj[key]
+    } else if (obj[key] instanceof Object) {
+      removeEmpty(obj[key])
+    }
+  })
+  return obj
+}
+
 // 请求发送前添加 Token
 REQUEST.Defaults.transformSend = (options) => {
     const token = wx.getStorageSync('token')
@@ -24,9 +37,10 @@ REQUEST.Defaults.transformSend = (options) => {
             }
         }
     }
-    // 去除 undefined 属性导致的服务器解析错误
-    if (options.data) {
-      options.data = JSON.parse(JSON.stringify(options.data))
+    // 自动过滤 null 和 undefined 属性，防止 JSON.stringify 将 null 序列化传给后端
+    // 同时也解决了小程序 data 必须用 null 而 API 定义期望 undefined 的不一致问题
+    if (options.data && typeof options.data === 'object' && !(options.data instanceof ArrayBuffer)) {
+      options.data = removeEmpty({ ...(options.data as object) })
     }
     // 调用默认的 transformSend 以正确构建 URL (包括 baseURL)
     return transformRequestSendDefault(options)

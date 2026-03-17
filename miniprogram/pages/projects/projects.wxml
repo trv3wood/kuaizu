@@ -82,6 +82,15 @@
                         </view>
                     </view>
                 </view>
+                <!-- 是否允许跨校 -->
+                <view class="filter-section">
+                    <text class="section-title">允许跨校</text>
+                    <view class="filter-options">
+                        <view class="option-item {{filters.isCrossSchool === item.value ? 'active' : ''}}" wx:for="{{crossSchool}}" wx:key="value" data-value="{{item.value}}" bindtap="handleCrossSchoolChange">
+                            {{item.label}}
+                        </view>
+                    </view>
+                </view>
             </view>
             <!-- 筛选操作 -->
             <view class="filter-actions">

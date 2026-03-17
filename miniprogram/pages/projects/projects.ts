@@ -20,9 +20,9 @@ Page({
 
         // 筛选条件
         filters: {
-            schoolId: undefined as number | undefined,
-            direction: undefined as Direction | undefined,
-            isCrossSchool: undefined as number | undefined
+            schoolId: null as number | null,
+            direction: null as Direction | null,
+            isCrossSchool: null as number | null
         },
         showFilterPopup: false,
 
@@ -76,7 +76,7 @@ Page({
      */
     getListParams() {
         const { keyword, filters } = this.data
-        const params: any = { status: ProjectStatus.Approved, ...filters } // 默认仅请求进行中的项目
+        const params: any = { status: ProjectStatus.Approved, ...filters }
         if (keyword) params.keyword = keyword
         return params
     },
@@ -126,6 +126,8 @@ Page({
         this.setData({
             'filters.schoolId': null,
             'filters.direction': null,
+            'filters.isCrossSchool': null,
+            selectedSchoolName: '',
             showFilterPopup: false
         })
             ; (this as any).loadList()
@@ -175,7 +177,19 @@ Page({
         const currentValue = this.data.filters.direction
         // 点击已选中的取消选中
         this.setData({
-            'filters.direction': currentValue === value ? undefined : value
+            'filters.direction': currentValue === value ? null : value
+        })
+    },
+
+    /**
+     * 选择跨校
+     */
+    handleCrossSchoolChange(e: WechatMiniprogram.TouchEvent) {
+        const { value } = e.currentTarget.dataset
+        const currentValue = this.data.filters.isCrossSchool
+        // 点击已选中的取消选中
+        this.setData({
+            'filters.isCrossSchool': currentValue === value ? null : value
         })
     },
 })
