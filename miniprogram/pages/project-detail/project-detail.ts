@@ -36,6 +36,13 @@ Page({
     }
   },
 
+  onShareTimeline() {
+    return {
+      title: this.data.project?.name,
+      query: `id=${this.data.id}`
+    }
+  },
+
   /**
    * 加载项目详情
    */
