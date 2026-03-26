@@ -1,64 +1,97 @@
 <!-- pages/talent-detail/talent-detail.wxml -->
 <view class="talent-detail-container">
-    <!-- 加载中 -->
-    <view class="loading-container" wx:if="{{loading}}">
-        <van-loading size="24px">加载中...</van-loading>
-    </view>
-    <block wx:elif="{{profile}}">
-        <!-- 头部卡片 -->
-        <view class="profile-header">
-            <image class="avatar" src="{{profile.avatarUrl}}" mode="aspectFill" />
-            <view class="info">
-                <text class="name">{{profile.nickname || '匿名用户'}}</text>
-                <text class="school">{{profile.schoolName || '未知学校'}}</text>
-                <text class="major">{{profile.majorName || '未知专业'}}</text>
+    <view class="hero-shell">
+        <view class="hero-nav" style="padding-top: {{statusBarHeight}}px; height: {{statusBarHeight + navBarHeight}}px;">
+            <view class="hero-nav-row">
+                <view class="nav-action" bindtap="handleBack">
+                    <van-icon name="arrow-left" size="18px" color="#101010" />
+                </view>
+                <view class="nav-capsule-placeholder"></view>
             </view>
-            <van-tag wx:if="{{profile.mbti}}" type="primary" size="large">{{profile.mbti}}</van-tag>
         </view>
-        <!-- 技能标签 -->
-        <view class="section" wx:if="{{profile.skills && profile.skills.length > 0}}">
-            <text class="section-title">技能标签</text>
-            <skill-tags skills="{{profile.skills}}" />
-        </view>
-        <!-- 个人简介 -->
-        <view class="section" wx:if="{{profile.intro}}">
-            <text class="section-title">个人简介</text>
-            <text class="section-content">{{profile.intro}}</text>
-        </view>
-        <!-- 自我评价 -->
-        <view class="section" wx:if="{{profile.selfEvaluation}}">
-            <text class="section-title">自我评价</text>
-            <text class="section-content">{{profile.selfEvaluation}}</text>
-        </view>
-        <!-- 项目经历 -->
-        <view class="section" wx:if="{{profile.projectExperience}}">
-            <text class="section-title">项目经历</text>
-            <text class="section-content">{{profile.projectExperience}}</text>
-        </view>
-        <!-- 底部操作栏 -->
+    </view>
+
+    <view class="loading-container" wx:if="{{loading}}">
+        <van-loading size="24px" color="#5bb4ff">加载中...</van-loading>
+    </view>
+
+    <block wx:elif="{{profile}}">
+        <scroll-view class="detail-scroll" scroll-y enable-flex>
+            <view class="hero-profile">
+                <text class="hero-mbti-bg" wx:if="{{profile.mbti}}" style="color: {{profile.mbtiColor}};">{{profile.mbti}}</text>
+
+                <image wx:if="{{profile.avatarUrl}}" class="avatar" src="{{profile.avatarUrl}}" mode="aspectFill" />
+                <view wx:else class="avatar avatar-placeholder">
+                    <van-icon name="contact" size="36px" color="#b7bcc5" />
+                </view>
+
+                <view class="name-row">
+                    <text class="name">{{profile.nickname || '匿名用户'}}</text>
+                </view>
+
+                <view class="pill-list">
+                    <view class="info-pill">
+                        <text class="pill-icon">🏫</text>
+                        <text class="pill-text">{{profile.schoolLabel}}</text>
+                    </view>
+                    <view class="info-pill">
+                        <text class="pill-icon">📖</text>
+                        <text class="pill-text">{{profile.majorLabel}}</text>
+                    </view>
+                    <view class="info-pill" wx:if="{{profile.gradeLabel}}">
+                        <text class="pill-icon">🎓</text>
+                        <text class="pill-text">{{profile.gradeLabel}}</text>
+                    </view>
+                </view>
+            </view>
+
+            <view class="content-sections">
+                <view class="section-card" wx:if="{{profile.selfEvaluation || (profile.displaySkills && profile.displaySkills.length > 0)}}">
+                    <view class="section-title-row">
+                        <view class="title-accent"></view>
+                        <text class="section-title">自我评价</text>
+                    </view>
+
+                    <text class="section-content" wx:if="{{profile.selfEvaluation}}">{{profile.selfEvaluation}}</text>
+
+                    <view class="skill-grid" wx:if="{{profile.displaySkills && profile.displaySkills.length > 0}}">
+                        <view class="skill-chip" wx:for="{{profile.displaySkills}}" wx:key="*this">
+                            <text>{{item}}</text>
+                        </view>
+                    </view>
+                </view>
+
+                <view class="section-card" wx:if="{{profile.projectExperience}}">
+                    <view class="section-title-row">
+                        <view class="title-accent"></view>
+                        <text class="section-title">项目经历</text>
+                    </view>
+
+                    <text class="section-content section-content-pre">{{profile.projectExperience}}</text>
+                </view>
+            </view>
+
+            <view class="detail-spacer"></view>
+        </scroll-view>
+
         <view class="action-bar">
-            <button class="send-btn" loading="{{sending}}" disabled="{{sending}}" bindtap="handleSendOliveBranch">
-                <van-icon name="like-o" size="18px" color="#fff" custom-style="margin-right: 8rpx;" />
-                发送橄榄枝
-            </button>
+            <button class="send-btn" loading="{{sending}}" disabled="{{sending}}" bindtap="handleSendOliveBranch">发送橄榄枝</button>
         </view>
     </block>
-    <!-- 空状态 -->
+
     <view class="empty-container" wx:else>
         <van-empty description="人才信息不存在" />
     </view>
-    <!-- 项目选择弹窗 -->
+
     <van-popup show="{{showProjectPicker}}" position="bottom" round bind:close="handleCloseProjectPicker" custom-style="max-height: 60vh;">
         <view class="project-picker-popup">
             <view class="popup-header">
                 <text class="popup-title">选择关联项目</text>
                 <van-icon name="cross" size="20px" color="#999" bindtap="handleCloseProjectPicker" />
             </view>
-            <!-- 加载中 -->
             <view class="project-loading" wx:if="{{loadingProjects}}">
-                <van-loading size="24px">加载中...</van-loading>
+                <van-loading size="24px" color="#5bb4ff">加载中...</van-loading>
             </view>
-            <!-- 项目列表 -->
             <scroll-view class="project-list" scroll-y wx:elif="{{myProjects.length > 0}}">
                 <view class="project-item" wx:for="{{myProjects}}" wx:key="id" data-index="{{index}}" bindtap="handleSelectProject">
                     <view class="project-item-info">
@@ -68,20 +101,18 @@
                     <van-icon name="arrow" size="16px" color="#999" />
                 </view>
             </scroll-view>
-            <!-- 空状态 -->
             <view class="project-empty" wx:else>
                 <van-empty description="您还没有正在进行的项目" image="search" />
             </view>
         </view>
     </van-popup>
-    <!-- 购买橄榄枝弹窗 -->
+
     <van-popup show="{{showPurchasePopup}}" position="bottom" round bind:close="handleClosePurchase" custom-style="max-height: 60vh;">
         <view class="purchase-popup">
             <view class="popup-header">
                 <text class="popup-title">购买橄榄枝</text>
                 <van-icon name="cross" size="20px" color="#999" bindtap="handleClosePurchase" />
             </view>
-            <!-- 商品信息 -->
             <view class="product-info">
                 <view class="product-icon">🫒</view>
                 <view class="product-detail">
@@ -90,17 +121,14 @@
                 </view>
                 <text class="product-price">¥{{unitPrice}}/个</text>
             </view>
-            <!-- 数量选择 -->
             <view class="quantity-section">
                 <text class="quantity-label">购买数量</text>
                 <van-stepper value="{{quantity}}" min="1" max="99" bind:change="handleQuantityChange" button-size="28px" input-width="50px" />
             </view>
-            <!-- 总价 -->
             <view class="total-section">
                 <text class="total-label">合计</text>
                 <text class="total-price">¥{{quantity * unitPrice}}</text>
             </view>
-            <!-- 购买按钮 -->
             <van-button type="primary" block round loading="{{purchasing}}" loading-text="处理中..." custom-class="purchase-btn" bindtap="handlePurchase">
                 立即购买
             </van-button>

@@ -1,17 +1,27 @@
 // pages/talent-detail/talent-detail.ts
 import { talentApi, oliveBranchApi, orderApi, productApi, applicationApi } from '../../api/index'
 import type { components } from '../../api/schema'
+import { DEFAULT_MBTI_COLOR, MBTI_COLOR_MAP } from '../../utils/constants'
 
 type TalentProfileDetailVO = components['schemas']['TalentProfileDetailVO']
 type ProjectVO = components['schemas']['ProjectVO']
+type TalentProfileDetailCardVO = TalentProfileDetailVO & {
+    mbtiColor: string
+    schoolLabel: string
+    majorLabel: string
+    gradeLabel: string
+    displaySkills: string[]
+}
 
 // 橄榄枝商品ID固定为1
 const OLIVE_BRANCH_PRODUCT_ID = 1
 
 Page({
     data: {
+        statusBarHeight: 0,
+        navBarHeight: 44,
         id: 0,
-        profile: null as TalentProfileDetailVO | null,
+        profile: null as TalentProfileDetailCardVO | null,
         loading: true,
         sending: false,
 
@@ -28,6 +38,16 @@ Page({
     },
 
     onLoad(options) {
+        const menuButton = wx.getMenuButtonBoundingClientRect()
+        const systemInfo = wx.getSystemInfoSync()
+        const statusBarHeight = systemInfo.statusBarHeight || 0
+        const navBarHeight = menuButton.height + (menuButton.top - statusBarHeight) * 2
+
+        this.setData({
+            statusBarHeight,
+            navBarHeight
+        })
+
         const id = Number(options.id)
         const userId = options.userId ? Number(options.userId) : undefined
         if (id || userId) {
@@ -48,8 +68,9 @@ Page({
 
         try {
             const res = await talentApi.getTalentProfile(id, userId)
+            const profile = res.data ? this.formatProfile(res.data as TalentProfileDetailVO) : null
             this.setData({
-                profile: res.data || null,
+                profile,
                 loading: false
             })
         } catch (error) {
@@ -246,4 +267,22 @@ Page({
             this.setData({ purchasing: false })
         }
     },
+
+    handleBack() {
+        wx.navigateBack()
+    },
+
+    formatProfile(profile: TalentProfileDetailVO): TalentProfileDetailCardVO {
+        const mbti = (profile.mbti || '').toUpperCase()
+        const gradeLabel = (profile as any).gradeText || (profile as any).gradeLabel || ''
+
+        return {
+            ...profile,
+            mbtiColor: MBTI_COLOR_MAP[mbti] || DEFAULT_MBTI_COLOR,
+            schoolLabel: profile.schoolName || '未知学校',
+            majorLabel: profile.majorName || '未知专业',
+            gradeLabel,
+            displaySkills: (profile.skills || []).slice(0, 6)
+        }
+    }
 })

@@ -4,6 +4,7 @@ import { schoolPickerBehavior } from '../../behaviors/schoolPicker'
 import { majorPickerBehavior } from '../../behaviors/majorPicker'
 import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
+import { DEFAULT_MBTI_COLOR, MBTI_COLOR_MAP } from '../../utils/constants'
 
 type TalentProfileVO = components['schemas']['TalentProfileVO']
 type TalentCardVO = TalentProfileVO & {
@@ -12,25 +13,6 @@ type TalentCardVO = TalentProfileVO & {
     schoolLabel: string
     avatarUrl?: string
     displaySkills: string[]
-}
-
-const MBTI_COLOR_MAP: Record<string, string> = {
-    INTJ: '#dbb4fd',
-    INTP: '#dbb4fd',
-    ENTJ: '#dbb4fd',
-    ENTP: '#dbb4fd',
-    ISTJ: '#5bfdfd',
-    ISFJ: '#5bfdfd',
-    ESFJ: '#5bfdfd',
-    ESTJ: '#5bfdfd',
-    INFJ: 'rgba(78, 211, 61, 0.75)',
-    INFP: 'rgba(78, 211, 61, 0.75)',
-    ENFP: 'rgba(78, 211, 61, 0.75)',
-    ENFJ: 'rgba(78, 211, 61, 0.75)',
-    ESTP: '#ffd633',
-    ESFP: '#ffd633',
-    ISTP: '#ffd633',
-    ISFP: '#ffd633'
 }
 
 Page({
@@ -226,7 +208,7 @@ Page({
 
         return {
             ...talent,
-            mbtiColor: MBTI_COLOR_MAP[mbti] || 'rgba(78, 211, 61, 0.75)',
+            mbtiColor: MBTI_COLOR_MAP[mbti] || DEFAULT_MBTI_COLOR,
             schoolLabel: talent.schoolName || '未知学校',
             majorLabel: talent.majorName || '未知专业',
             displaySkills: (talent.skills || []).slice(0, 5)
