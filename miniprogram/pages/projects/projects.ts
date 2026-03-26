@@ -4,9 +4,16 @@ import { schoolPickerBehavior } from '../../behaviors/schoolPicker'
 import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
 import { ProjectStatus } from '../../utils/enum'
+import { getProjectDirectionText } from '../../utils/util'
 
 type ProjectVO = components['schemas']['ProjectVO']
 type Direction = components['schemas']['Direction']
+type ProjectCardVO = ProjectVO & {
+    directionLabel: string
+    directionIcon: string
+    schoolLabel: string
+    viewLabel: number
+}
 
 Page({
     behaviors: [schoolPickerBehavior, listPaginationBehavior],
@@ -15,6 +22,10 @@ Page({
     },
 
     data: {
+        statusBarHeight: 0,
+        navBarHeight: 44,
+        showBackButton: false,
+
         // 搜索关键词
         keyword: '',
 
@@ -27,13 +38,13 @@ Page({
         showFilterPopup: false,
 
         // 项目列表（由behavior管理）
-        projects: [] as ProjectVO[],
+        projects: [] as ProjectCardVO[],
 
         // 筛选器选项
         directions: [
-            { value: 1, label: '落地' },
-            { value: 2, label: '比赛' },
-            { value: 3, label: '学习' }
+            { value: 1, label: '落地', icon: '💼' },
+            { value: 2, label: '比赛', icon: '🏅' },
+            { value: 3, label: '学习', icon: '🔬' }
         ],
         statuses: [
             { value: 0, label: '审核中' },
@@ -48,8 +59,20 @@ Page({
     },
 
     onLoad() {
+        const menuButton = wx.getMenuButtonBoundingClientRect()
+        const systemInfo = wx.getSystemInfoSync()
+        const pages = getCurrentPages()
+        const statusBarHeight = systemInfo.statusBarHeight || 0
+        const navBarHeight = menuButton.height + (menuButton.top - statusBarHeight) * 2
+
+        this.setData({
+            statusBarHeight,
+            navBarHeight,
+            showBackButton: pages.length > 1
+        })
+
         ; (this as any).initListConfig({ listKey: 'projects', pageSize: 10 })
-            ; (this as any).loadList()
+        ; (this as any).loadList()
     },
 
     onPullDownRefresh() {
@@ -63,10 +86,11 @@ Page({
     /**
      * 实现数据获取方法（behavior要求）
      */
-    async fetchListData(params: { page: number, size: number }): Promise<ListResponse<ProjectVO>> {
+    async fetchListData(params: { page: number, size: number }): Promise<ListResponse<ProjectCardVO>> {
         const res = await projectApi.listProjects(params)
+        const list = (res.data?.list || []).map((project) => this.formatProjectCard(project))
         return {
-            list: res.data?.list || [],
+            list,
             pageInfo: res.data?.pageInfo
         }
     },
@@ -84,9 +108,12 @@ Page({
     /**
      * 搜索
      */
-    handleSearch(e: any) {
-        this.setData({ keyword: e.detail })
-            ; (this as any).loadList()
+    handleKeywordInput(e: any) {
+        this.setData({ keyword: e.detail.value })
+    },
+
+    handleSearch() {
+        ; (this as any).loadList()
     },
 
     /**
@@ -94,7 +121,7 @@ Page({
      */
     handleSearchCancel() {
         this.setData({ keyword: '' })
-            ; (this as any).loadList()
+        ; (this as any).loadList()
     },
 
     /**
@@ -150,6 +177,12 @@ Page({
         wx.navigateTo({ url: '/pages/edit-project/edit-project' })
     },
 
+    handleBack() {
+        if (getCurrentPages().length > 1) {
+            wx.navigateBack()
+        }
+    },
+
     /**
      * 显示学校筛选搜索
      */
@@ -192,4 +225,16 @@ Page({
             'filters.isCrossSchool': currentValue === value ? null : value
         })
     },
+
+    formatProjectCard(project: ProjectVO): ProjectCardVO {
+        const direction = this.data.directions.find((item) => item.value === project.direction)
+
+        return {
+            ...project,
+            directionLabel: getProjectDirectionText(project.direction),
+            directionIcon: direction?.icon || '📁',
+            schoolLabel: project.schoolName || '未知学校',
+            viewLabel: project.viewCount || 0
+        }
+    }
 })

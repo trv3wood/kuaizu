@@ -1,98 +1,114 @@
 <!-- pages/projects/projects.wxml -->
 <view class="projects-container">
-    <!-- 搜索栏 -->
-    <view class="search-bar">
-        <van-search value="{{keyword}}" placeholder="搜索项目" bind:search="handleSearch" bind:cancel="handleSearchCancel" use-action-slot>
-            <view slot="action" bindtap="showFilter">
-                <van-icon name="filter-o" size="20px" color="#666" />
-            </view>
-        </van-search>
-    </view>
-    <!-- 加载中 -->
-    <view class="loading-container" wx:if="{{listLoading}}">
-        <van-loading size="24px">加载中...</van-loading>
-    </view>
-    <!-- 项目列表 -->
-    <view class="project-list" wx:elif="{{projects.length > 0}}">
-        <view class="project-card" wx:for="{{projects}}" wx:key="id" data-id="{{item.id}}" bindtap="handleProjectTap">
-            <!-- 项目头部 -->
-            <view class="card-header">
-                <text class="project-name">{{item.name}}</text>
-            </view>
-            <!-- 项目描述 -->
-            <view class="card-description">
-                <text class="description-text">{{item.description || '暂无描述'}}</text>
-            </view>
-            <!-- 项目信息 -->
-            <view class="card-footer">
-                <view class="info-item">
-                    <van-icon name="location-o" size="14px" color="#999" />
-                    <text class="info-text">{{item.schoolName || '未知学校'}}</text>
+    <view class="hero-header">
+        <view class="hero-nav" style="padding-top: {{statusBarHeight}}px; height: {{statusBarHeight + navBarHeight}}px;">
+            <view class="hero-nav-row">
+                <view class="nav-action nav-back {{showBackButton ? '' : 'nav-back-hidden'}}" bindtap="handleBack">
+                    <van-icon name="arrow-left" size="18px" color="#101010" />
                 </view>
-                <view class="info-item">
-                    <van-icon name="info-o" size="14px" color="#999" />
-                    <text class="info-text">{{crossSchool[item.isCrossSchool].label}}</text>
-                </view>
-                <view class="info-item">
-                    <van-icon name="friends-o" size="14px" color="#999" />
-                    <text class="info-text">{{item.memberCount || 0}} 人</text>
-                </view>
-                <view class="info-item">
-                    <van-icon name="description-o" size="14px" color="#999" />
-                    <text class="info-text">{{directions[item.direction - 1].label}}</text>
-                </view>
+                <text class="hero-title">校园项目</text>
+                <view class="nav-capsule-placeholder"></view>
             </view>
         </view>
-        <!-- 加载更多 -->
-        <view class="load-more" wx:if="{{listLoadingMore}}">
-            <van-loading size="20px">加载中...</van-loading>
-        </view>
-        <view class="no-more" wx:elif="{{!listHasMore}}">
-            <text>没有更多了</text>
+
+        <view class="search-shell">
+            <view class="search-box">
+                <van-icon name="search" size="16px" color="#a8a8a8" />
+                <input class="search-input" value="{{keyword}}" placeholder="搜索项目" confirm-type="search" bindinput="handleKeywordInput" bindconfirm="handleSearch" />
+                <view class="search-clear" wx:if="{{keyword}}" bindtap="handleSearchCancel">
+                    <van-icon name="cross" size="14px" color="#b8b8b8" />
+                </view>
+            </view>
+            <view class="filter-trigger" bindtap="showFilter">
+                <van-icon name="filter-o" size="22px" color="#55606f" />
+            </view>
         </view>
     </view>
-    <!-- 空状态 -->
-    <view class="empty-container" wx:else>
-        <van-empty description="暂无项目" />
+
+    <view class="content-area">
+        <view class="loading-container" wx:if="{{listLoading}}">
+            <van-loading size="24px" color="#5bb4ff">加载中...</van-loading>
+        </view>
+
+        <block wx:elif="{{projects.length > 0}}">
+            <view class="project-list">
+                <view class="project-card" wx:for="{{projects}}" wx:key="id" data-id="{{item.id}}" bindtap="handleProjectTap">
+                    <view class="card-top">
+                        <text class="direction-icon">{{item.directionIcon}}</text>
+                        <view class="view-badge">
+                            <van-icon name="eye-o" size="16px" color="#989da5" />
+                            <text class="view-text">{{item.viewLabel}}</text>
+                        </view>
+                    </view>
+
+                    <text class="project-name">{{item.name}}</text>
+
+                    <view class="school-pill-wrap">
+                        <view class="school-pill">
+                            <text class="school-pill-icon" wx:if="{{item.isCrossSchool === 1}}">🏫</text>
+                            <text class="school-pill-text">{{item.schoolLabel}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="load-more" wx:if="{{listLoadingMore}}">
+                <van-loading size="20px" color="#5bb4ff">加载中...</van-loading>
+            </view>
+
+            <view class="page-footer" wx:elif="{{!listHasMore}}">
+                <text class="footer-symbol">∞</text>
+                <text class="footer-line">无限可能</text>
+                <text class="footer-line">待你将想法发布</text>
+            </view>
+        </block>
+
+        <view class="empty-container" wx:else>
+            <van-empty description="暂无项目" />
+        </view>
     </view>
-    <!-- 悬浮按钮 -->
-    <fab icon="plus" bind:click="handlePublish" />
+
+    <button class="publish-fab" bindtap="handlePublish">
+        <van-icon name="plus" size="30px" color="#ffffff" />
+    </button>
+
     <!-- 筛选弹出层 -->
-    <van-popup show="{{showFilterPopup}}" position="right" custom-style="width: 75%; height: 100%;" bind:close="closeFilter">
+    <van-popup show="{{showFilterPopup}}" position="right" custom-style="width: 312px; max-width: 83%; height: 100%;" bind:close="closeFilter">
         <view class="filter-panel">
             <view class="filter-header">
                 <text class="filter-title">筛选</text>
-                <van-icon name="cross" size="20px" bindtap="closeFilter" />
+                <view class="filter-close" bindtap="closeFilter">
+                    <van-icon name="cross" size="22px" color="#101010" />
+                </view>
             </view>
             <view class="filter-content">
-                <!-- 学校筛选 -->
                 <view class="filter-section">
                     <text class="section-title">学校</text>
                     <view class="picker-value" bindtap="handleShowSchoolFilter">
-                        {{selectedSchoolName || '全部学校'}}
-                        <van-icon name="arrow" size="14px" color="#999" />
+                        <text>{{selectedSchoolName || '全部学校'}}</text>
+                        <van-icon name="arrow" size="14px" color="#7d8a98" />
                     </view>
                 </view>
-                <!-- 项目方向 -->
+
                 <view class="filter-section">
                     <text class="section-title">项目方向</text>
-                    <view class="filter-options">
-                        <view class="option-item {{filters.direction === item.value ? 'active' : ''}}" wx:for="{{directions}}" wx:key="value" data-value="{{item.value}}" bindtap="handleDirectionChange">
-                            {{item.label}}
+                    <view class="filter-direction-grid">
+                        <view class="direction-tile {{filters.direction === item.value ? 'active' : ''}}" wx:for="{{directions}}" wx:key="value" data-value="{{item.value}}" bindtap="handleDirectionChange">
+                            <text class="direction-tile-label">{{item.label}}</text>
+                            <text class="direction-tile-icon">{{item.icon}}</text>
                         </view>
                     </view>
                 </view>
-                <!-- 是否允许跨校 -->
+
                 <view class="filter-section">
-                    <text class="section-title">允许跨校</text>
-                    <view class="filter-options">
-                        <view class="option-item {{filters.isCrossSchool === item.value ? 'active' : ''}}" wx:for="{{crossSchool}}" wx:key="value" data-value="{{item.value}}" bindtap="handleCrossSchoolChange">
-                            {{item.label}}
+                    <text class="section-title">招募细节</text>
+                    <view class="cross-school-row">
+                        <view class="cross-school-option {{filters.isCrossSchool === item.value ? 'active' : ''}}" wx:for="{{crossSchool}}" wx:key="value" data-value="{{item.value}}" bindtap="handleCrossSchoolChange">
+                            <text>{{item.value === 1 ? '接受跨校' : '拒绝跨校'}}</text>
                         </view>
                     </view>
                 </view>
             </view>
-            <!-- 筛选操作 -->
             <view class="filter-actions">
                 <button class="reset-btn" bindtap="resetFilter">重置</button>
                 <button class="apply-btn" bindtap="applyFilter">确定</button>
@@ -108,10 +124,10 @@
             <view class="picker-search">
                 <van-search value="{{schoolSearchKeyword}}" placeholder="搜索学校" bind:change="handleSchoolSearch" />
             </view>
-            <scroll-view class="picker-list" scroll-y>
+                    <scroll-view class="picker-list" scroll-y>
                 <view class="picker-item" wx:for="{{schools}}" wx:key="id" data-school="{{item}}" bindtap="handleSelectSchoolFilter">
                     <text>{{item.schoolName}}</text>
-                    <van-icon wx:if="{{item.id === filters.schoolId}}" name="success" color="#667eea" />
+                    <van-icon wx:if="{{item.id === filters.schoolId}}" name="success" color="#5bb4ff" />
                 </view>
                 <view class="picker-empty" wx:if="{{schools.length === 0}}">
                     <text>暂无匹配的学校</text>
