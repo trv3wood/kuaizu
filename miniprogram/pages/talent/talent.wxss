@@ -1,193 +1,356 @@
 /* pages/talent/talent.wxss */
 .talent-container {
   min-height: 100vh;
-  background: var(--bg-color);
-  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+  background: #f5f7fa;
+  padding-bottom: calc(220rpx + env(safe-area-inset-bottom));
 }
 
-/* 搜索栏 */
-.search-bar {
-  background: var(--card-bg);
-  padding: 16rpx 30rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+.hero-header {
+  background: #cff4ff;
+  box-shadow: 0 4rpx 14rpx rgba(0, 0, 0, 0.12);
+  padding: 0 20rpx 26rpx;
 }
 
-/* 加载中 */
-.loading-container {
-  padding: 100rpx 0;
+.hero-nav {
+  position: relative;
+}
+
+.hero-nav-row {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.nav-action {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-back-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32rpx;
+  line-height: 1;
+  font-weight: 800;
+  color: #101010;
+}
+
+.nav-capsule-placeholder {
+  width: 176rpx;
+  height: 64rpx;
+  border-radius: 999rpx;
+  opacity: 0;
+}
+
+.search-shell {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin-top: 6rpx;
+}
+
+.search-box {
+  flex: 1;
+  height: 64rpx;
+  background: #ffffff;
+  border-radius: 999rpx;
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 0 1rpx rgba(0, 0, 0, 0.08);
+}
+
+.search-input {
+  flex: 1;
+  height: 64rpx;
+  margin-left: 14rpx;
+  font-size: 26rpx;
+  color: #101010;
+}
+
+.search-clear {
+  width: 36rpx;
+  height: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-trigger {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.content-area {
+  padding-top: 26rpx;
+}
+
+.loading-container,
+.empty-container {
+  padding: 140rpx 0;
   display: flex;
   justify-content: center;
 }
 
-/* 人才列表 */
 .talent-list {
-  padding: 30rpx;
+  padding: 0 17px;
 }
 
 .talent-card {
-  background: var(--card-bg);
-  border-radius: 24rpx;
-  padding: 30rpx;
-  margin-bottom: 30rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
-  transition: transform 0.2s;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 4rpx 4rpx 12rpx rgba(0, 0, 0, 0.14);
 }
 
 .talent-card:active {
-  transform: scale(0.98);
+  transform: scale(0.985);
 }
 
-/* 卡片头部 */
-.card-header {
+.card-main {
   display: flex;
-  align-items: center;
-  margin-bottom: 16rpx;
+  align-items: flex-start;
 }
 
 .avatar {
-  width: 96rpx;
-  height: 96rpx;
+  width: 84rpx;
+  height: 84rpx;
   border-radius: 50%;
-  margin-right: 20rpx;
-  background: #f0f0f0;
+  flex-shrink: 0;
+  margin-right: 14px;
+  background: #ececec;
 }
 
-.info {
+.avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-body {
   flex: 1;
+  min-width: 0;
+}
+
+.card-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12rpx;
+  margin-bottom: 4rpx;
+}
+
+.name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  min-width: 0;
 }
 
 .name {
-  display: block;
-  font-size: 32rpx;
-  font-weight: bold;
-  color: var(--text-main);
-  margin-bottom: 6rpx;
+  font-size: 30rpx;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #111111;
+}
+
+.mbti {
+  font-size: 28rpx;
+  line-height: 44rpx;
+  font-weight: 800;
+  flex-shrink: 0;
 }
 
 .school {
+  display: block;
   font-size: 24rpx;
-  color: var(--text-gray);
+  line-height: 1.4;
+  color: #777777;
+  margin-bottom: 8rpx;
 }
 
-/* 技能标签 */
+.major {
+  display: block;
+  font-size: 24rpx;
+  line-height: 1.4;
+  color: #111111;
+  margin-bottom: 12rpx;
+}
+
 .skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 12rpx;
-  margin-bottom: 16rpx;
+  gap: 8rpx 10rpx;
 }
 
-.skill-tag {
-  margin: 0 !important;
+.skill-chip {
+  min-height: 36rpx;
+  padding: 0 10rpx;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 简介 */
-.intro {
-  font-size: 28rpx;
-  color: var(--text-gray);
-  line-height: 1.6;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.skill-chip text {
+  font-size: 20rpx;
+  line-height: 24rpx;
+  color: #252525;
 }
 
-/* 加载更多 */
-.load-more,
-.no-more {
-  padding: 40rpx;
+.load-more {
+  padding: 28rpx 0 16rpx;
   text-align: center;
 }
 
-.no-more text {
+.page-footer {
+  padding: 40rpx 0 60rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.footer-symbol {
+  font-size: 56rpx;
+  line-height: 1;
+  color: #58a7ff;
+}
+
+.footer-line {
   font-size: 28rpx;
-  color: var(--text-gray);
+  line-height: 1.5;
+  color: #111111;
+  font-weight: 500;
 }
 
-/* 空状态 */
-.empty-container {
-  padding: 100rpx 0;
+.edit-card-fab {
+  position: fixed;
+  right: 34rpx;
+  bottom: calc(170rpx + env(safe-area-inset-bottom));
+  width: 116rpx;
+  height: 116rpx;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #67adff 0%, #4c95f6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16rpx 28rpx rgba(76, 149, 246, 0.34);
+  z-index: 10;
 }
 
-/* 筛选面板 */
+.edit-card-fab:active {
+  transform: scale(0.96);
+}
+
+.edit-card-fab::after {
+  border: none;
+}
+
 .filter-panel {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--card-bg);
+  background: #ffffff;
 }
 
 .filter-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 40rpx 30rpx;
-  border-bottom: 1rpx solid #f0f0f0;
+  justify-content: space-between;
+  padding: 88rpx 18px 20rpx;
+  border-bottom: 1rpx solid #e8edf2;
 }
 
 .filter-title {
-  font-size: 32rpx;
-  font-weight: bold;
-  color: var(--text-main);
+  font-size: 56rpx;
+  font-weight: 800;
+  color: #111111;
+}
+
+.filter-close {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .filter-content {
   flex: 1;
   overflow-y: auto;
-  padding: 30rpx;
+  padding: 34rpx 17px 32rpx;
 }
 
 .filter-section {
-  margin-bottom: 48rpx;
+  margin-bottom: 52rpx;
 }
 
 .section-title {
   display: block;
-  font-size: 28rpx;
-  font-weight: 500;
-  color: var(--text-main);
-  margin-bottom: 20rpx;
+  font-size: 30rpx;
+  line-height: 44rpx;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 28rpx;
 }
 
 .picker-value {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20rpx 24rpx;
+  min-height: 82rpx;
   background: #f5f7fa;
-  border-radius: 24rpx;
-  font-size: 32rpx;
-  color: var(--text-main);
+  border-radius: 41rpx;
+  padding: 0 28rpx 0 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #111111;
 }
 
-/* 筛选操作 */
 .filter-actions {
   display: flex;
-  gap: 16rpx;
-  padding: 30rpx;
-  margin-bottom: 12vh;
-  border-top: 1rpx solid #f0f0f0;
+  gap: 12px;
+  padding: 18rpx 9px calc(18rpx + env(safe-area-inset-bottom));
+  border-top: 1rpx solid #e8edf2;
+  background: #ffffff;
 }
 
 .reset-btn,
 .apply-btn {
   flex: 1;
-  height: 88rpx;
-  line-height: 88rpx;
-  font-size: 28rpx;
-  border-radius: 44rpx;
-  border: none;
+  height: 45px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 700;
 }
 
 .reset-btn {
   background: #f0f0f0;
-  color: var(--text-main);
+  color: #111111;
 }
 
 .apply-btn {
-  background: var(--primary-color);
+  background: linear-gradient(90deg, #5fa6ff 0%, #4f92f2 100%);
   color: #ffffff;
 }
 
@@ -196,71 +359,71 @@
   border: none;
 }
 
-/* 学校搜索弹出层 */
 .picker-popup {
   height: 100%;
   display: flex;
   flex-direction: column;
+  background: #f5f7fa;
 }
 
 .picker-header {
-  padding: 40rpx 30rpx;
+  padding: 36rpx 32rpx 20rpx;
   text-align: center;
-  border-bottom: 1rpx solid #f0f0f0;
 }
 
 .picker-title {
-  font-size: 32rpx;
-  font-weight: bold;
-  color: var(--text-main);
+  font-size: 30rpx;
+  font-weight: 800;
+  color: #111111;
 }
 
 .picker-search {
-  padding: 16rpx 0;
+  padding: 0 24rpx 16rpx;
 }
 
 .picker-list {
   flex: 1;
-  height: 0;
+  padding: 0 24rpx 24rpx;
 }
 
 .picker-item {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 26rpx 24rpx;
+  margin-bottom: 16rpx;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 24rpx 32rpx;
-  border-bottom: 1rpx solid #f0f0f0;
-}
-
-.picker-item:active {
-  background: #f0f0f0;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #111111;
 }
 
 .picker-empty {
-  padding: 60rpx;
+  padding: 120rpx 0;
   text-align: center;
-  color: var(--text-gray);
-  font-size: 28rpx;
+  font-size: 26rpx;
+  color: #97a0aa;
 }
 
-/* 专业选择器扩展样式 */
 .picker-loading {
-  padding: 60rpx;
+  padding: 120rpx 0;
   display: flex;
   justify-content: center;
 }
 
 .picker-group-title {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 24rpx 24rpx;
+  margin-bottom: 12rpx;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 24rpx 32rpx;
-  background: #f5f7fa;
-  font-size: 28rpx;
-  font-weight: 500;
-  color: var(--text-main);
+  justify-content: space-between;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #111111;
 }
 
 .picker-item-indent {
-  padding-left: 48rpx;
+  margin-left: 20rpx;
 }

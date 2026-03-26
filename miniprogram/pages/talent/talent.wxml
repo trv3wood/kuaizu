@@ -1,78 +1,109 @@
 <!-- pages/talent/talent.wxml -->
 <view class="talent-container">
-  <!-- 搜索栏 -->
-  <view class="search-bar">
-    <van-search value="{{keyword}}" placeholder="搜索人才" bind:search="handleSearch" bind:cancel="handleSearchCancel" use-action-slot>
-      <view slot="action" bindtap="showFilter">
-        <van-icon name="filter-o" size="20px" color="#666" />
-      </view>
-    </van-search>
-  </view>
-  <!-- 加载中 -->
-  <view class="loading-container" wx:if="{{listLoading}}">
-    <van-loading size="24px">加载中...</van-loading>
-  </view>
-  <!-- 人才列表 -->
-  <view class="talent-list" wx:elif="{{talents.length > 0}}">
-    <view class="talent-card" wx:for="{{talents}}" wx:key="id" data-id="{{item.id}}" bindtap="handleTalentTap">
-      <!-- 头像和基本信息 -->
-      <view class="card-header">
-        <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
-        <view class="info">
-          <text class="name">{{item.nickname || '匿名用户'}}</text>
-          <text class="school">{{item.schoolName || '未知学校'}} · {{item.majorName || '未知专业'}}</text>
+  <view class="hero-header">
+    <view class="hero-nav" style="padding-top: {{statusBarHeight}}px; height: {{statusBarHeight + navBarHeight}}px;">
+      <view class="hero-nav-row">
+        <view class="nav-action {{showBackButton ? '' : 'nav-back-hidden'}}" bindtap="handleBack">
+          <van-icon name="arrow-left" size="18px" color="#101010" />
         </view>
-        <van-tag wx:if="{{item.mbti}}" type="primary" plain size="medium">{{item.mbti}}</van-tag>
-      </view>
-      <!-- 技能标签 -->
-      <view class="skills" wx:if="{{item.skills && item.skills.length > 0}}">
-        <van-tag wx:for="{{item.skills}}" wx:for-item="skill" wx:key="*this" type="default" plain size="medium" custom-class="skill-tag">
-          {{skill}}
-        </van-tag>
-      </view>
-      <!-- 简介 -->
-      <view class="intro" wx:if="{{item.intro}}">
-        <text>{{item.intro}}</text>
+        <text class="hero-title">校园人才</text>
+        <view class="nav-capsule-placeholder"></view>
       </view>
     </view>
-    <!-- 加载更多 -->
-    <view class="load-more" wx:if="{{listLoadingMore}}">
-      <van-loading size="20px">加载中...</van-loading>
-    </view>
-    <view class="no-more" wx:elif="{{!listHasMore}}">
-      <text>没有更多了</text>
+
+    <view class="search-shell">
+      <view class="search-box">
+        <van-icon name="search" size="16px" color="#a8a8a8" />
+        <input class="search-input" value="{{keyword}}" placeholder="搜索人才" confirm-type="search" bindinput="handleKeywordInput" bindconfirm="handleSearch" />
+        <view class="search-clear" wx:if="{{keyword}}" bindtap="handleSearchCancel">
+          <van-icon name="cross" size="14px" color="#b8b8b8" />
+        </view>
+      </view>
+      <view class="filter-trigger" bindtap="showFilter">
+        <van-icon name="filter-o" size="22px" color="#55606f" />
+      </view>
     </view>
   </view>
-  <!-- 空状态 -->
-  <view class="empty-container" wx:else>
-    <van-empty description="暂无人才" />
+
+  <view class="content-area">
+    <view class="loading-container" wx:if="{{listLoading}}">
+      <van-loading size="24px" color="#5bb4ff">加载中...</van-loading>
+    </view>
+
+    <block wx:elif="{{talents.length > 0}}">
+      <view class="talent-list">
+        <view class="talent-card" wx:for="{{talents}}" wx:key="id" data-id="{{item.id}}" bindtap="handleTalentTap">
+          <view class="card-main">
+            <image wx:if="{{item.avatarUrl}}" class="avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+            <view wx:else class="avatar avatar-placeholder">
+              <van-icon name="contact" size="28px" color="#b7bcc5" />
+            </view>
+            <view class="card-body">
+              <view class="card-top-row">
+                <view class="name-wrap">
+                  <text class="name">{{item.nickname || '匿名用户'}}</text>
+                </view>
+                <text class="mbti" wx:if="{{item.mbti}}" style="color: {{item.mbtiColor}};">{{item.mbti}}</text>
+              </view>
+
+              <text class="school">{{item.schoolLabel}}</text>
+              <text class="major">专业：{{item.majorLabel}}</text>
+
+              <view class="skills" wx:if="{{item.displaySkills.length > 0}}">
+                <view class="skill-chip" wx:for="{{item.displaySkills}}" wx:key="*this">
+                  <text>{{item}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="load-more" wx:if="{{listLoadingMore}}">
+        <van-loading size="20px" color="#5bb4ff">加载中...</van-loading>
+      </view>
+
+      <view class="page-footer" wx:elif="{{!listHasMore}}">
+        <text class="footer-symbol">∞</text>
+        <text class="footer-line">无限可能</text>
+        <text class="footer-line">待你上线</text>
+      </view>
+    </block>
+
+    <view class="empty-container" wx:else>
+      <van-empty description="暂无人才" />
+    </view>
   </view>
-  <!-- 筛选弹出层 -->
-  <van-popup show="{{showFilterPopup}}" position="right" custom-style="width: 75%; height: 100%;" bind:close="closeFilter">
+
+  <button class="edit-card-fab" bindtap="handleEditCard">
+    <van-icon name="idcard-o" size="26px" color="#ffffff" />
+  </button>
+
+  <van-popup show="{{showFilterPopup}}" position="right" custom-style="width: 312px; max-width: 83%; height: 100%;" bind:close="closeFilter">
     <view class="filter-panel">
       <view class="filter-header">
         <text class="filter-title">筛选</text>
-        <van-icon name="cross" size="20px" bindtap="closeFilter" />
+        <view class="filter-close" bindtap="closeFilter">
+          <van-icon name="cross" size="22px" color="#101010" />
+        </view>
       </view>
       <view class="filter-content">
-        <!-- 学校筛选 -->
         <view class="filter-section">
           <text class="section-title">学校</text>
           <view class="picker-value" bindtap="handleShowSchoolFilter">
-            {{selectedSchoolName || '全部学校'}}
-            <van-icon name="arrow" size="14px" color="#999" />
+            <text>{{selectedSchoolName || '全部学校'}}</text>
+            <van-icon name="arrow" size="14px" color="#7d8a98" />
           </view>
         </view>
-        <!-- 专业筛选 -->
+
         <view class="filter-section">
           <text class="section-title">专业</text>
           <view class="picker-value" bindtap="handleShowMajorFilter">
-            {{selectedMajorName || '全部专业'}}
-            <van-icon name="arrow" size="14px" color="#999" />
+            <text>{{selectedMajorName || '全部专业'}}</text>
+            <van-icon name="arrow" size="14px" color="#7d8a98" />
           </view>
         </view>
       </view>
-      <!-- 筛选操作 -->
       <view class="filter-actions">
         <button class="reset-btn" bindtap="resetFilter">重置</button>
         <button class="apply-btn" bindtap="filteredSearch">确定</button>
@@ -91,7 +122,7 @@
       <scroll-view class="picker-list" scroll-y>
         <view class="picker-item" wx:for="{{schools}}" wx:key="id" data-school="{{item}}" bindtap="handleSelectSchoolFilter">
           <text>{{item.schoolName}}</text>
-          <van-icon wx:if="{{item.id === filters.schoolId}}" name="success" color="#667eea" />
+          <van-icon wx:if="{{item.id === filters.schoolId}}" name="success" color="#5bb4ff" />
         </view>
         <view class="picker-empty" wx:if="{{schools.length === 0}}">
           <text>暂无匹配的学校</text>
@@ -123,7 +154,7 @@
             <block wx:if="{{expandedClassId === mc.id}}">
               <view class="picker-item picker-item-indent" wx:for="{{mc.majors}}" wx:key="id" data-major="{{item}}" data-major-class="{{mc}}" bindtap="handleSelectMajor">
                 <text>{{item.majorName}}</text>
-                <van-icon wx:if="{{item.id === filters.majorId}}" name="success" color="#667eea" />
+                <van-icon wx:if="{{item.id === filters.majorId}}" name="success" color="#5bb4ff" />
               </view>
             </block>
           </block>
@@ -134,6 +165,4 @@
       </scroll-view>
     </view>
   </van-popup>
-  <!-- 悬浮按钮 -->
-  <fab icon="plus" bind:click="handleEditCard" />
 </view>
