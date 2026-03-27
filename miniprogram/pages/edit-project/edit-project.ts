@@ -32,18 +32,6 @@ Page({
             { value: 3, label: '学习', desc: '学习/研究项目' }
         ],
 
-        // 是否跨校选项
-        crossSchoolOptions: [
-            { value: 1, label: '可以' },
-            { value: 0, label: '不可以' }
-        ],
-
-        // 学校要求选项
-        educationOptions: [
-            { value: 1, label: '大专及以上' },
-            { value: 2, label: '本科及以上' },
-            { value: 3, label: '研究生及以上' }
-        ],
 
         submitting: false
     },
@@ -113,14 +101,14 @@ Page({
      * 输入项目名称
      */
     onNameInput(e: any) {
-        this.setData({ 'form.name': e.detail })
+        this.setData({ 'form.name': e.detail.value ?? e.detail })
     },
 
     /**
      * 输入项目描述
      */
     onDescriptionInput(e: any) {
-        this.setData({ 'form.description': e.detail })
+        this.setData({ 'form.description': e.detail.value ?? e.detail })
     },
 
     /**

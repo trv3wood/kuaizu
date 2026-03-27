@@ -1,5 +1,7 @@
 {
     "navigationBarTitleText": "发布项目",
+    "navigationBarBackgroundColor": "#eef8ff",
+    "navigationBarTextStyle": "black",
     "usingComponents": {
         "van-field": "@vant/weapp/field/index",
         "van-stepper": "@vant/weapp/stepper/index",
