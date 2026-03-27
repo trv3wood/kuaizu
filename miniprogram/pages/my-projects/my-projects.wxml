@@ -1,127 +1,117 @@
 <!-- pages/my-projects/my-projects.wxml -->
 <view class="my-projects-container">
-    <!-- Loading State -->
-    <view class="loading-container" wx:if="{{listLoading}}">
-        <van-loading size="24px">加载中...</van-loading>
-    </view>
-    <!-- Project List -->
-    <scroll-view class="project-list" scroll-y wx:elif="{{projects.length > 0}}">
-        <view class="project-card" wx:for="{{projects}}" wx:key="id">
-            <!-- Project Header -->
-            <view class="project-header" bindtap="toggleApplications" data-id="{{item.id}}">
-                <view class="header-left">
-                    <text class="project-name">{{item.name}}</text>
-                    <view class="project-meta">
-                        <text class="meta-item">{{item.schoolName || '未知学校'}}</text>
-                        <text class="meta-item">{{item.memberCount}}人团队</text>
-                    </view>
-                </view>
-                <view class="header-right">
-                    <view class="promote-container" catchtap="handlePromoteProject" data-id="{{item.id}}">
-                        <van-icon name="fire-o" size="24px" color="#ee0a24" class="promote-icon" />
-                        <text class="promote-text">推广</text>
-                    </view>
-                    <van-icon name="edit" size="18px" color="#667eea" class="edit-icon" catchtap="handleEditProject" data-id="{{item.id}}" />
-                    <van-icon name="delete-o" size="18px" color="#ee0a24" class="delete-icon" catchtap="handleDeleteProject" data-id="{{item.id}}" data-name="{{item.name}}" />
-                    <van-tag wx:if="{{item.status === 0}}" type="default" plain>待审核</van-tag>
-                    <van-tag wx:elif="{{item.status === 1}}" type="success" plain>进行中</van-tag>
-                    <van-tag wx:elif="{{item.status === 2}}" type="danger" plain>已驳回</van-tag>
-                    <van-tag wx:else type="default" plain>已关闭</van-tag>
-                    <van-icon name="{{expandedProjectId === item.id ? 'arrow-up' : 'arrow-down'}}" size="16px" color="#999" />
-                </view>
+    <!-- 背景渐变 -->
+    <view class="page-background"></view>
+
+    <view class="page-content">
+        <view class="page-header">
+            <view class="page-title">我的项目</view>
+            <view class="page-description">
+                <view>您可在这里管理已经发布的项目，</view>
+                <view>您可进行进阶邮件推广也可编辑或下线项目。</view>
             </view>
-            <!-- Applications Section (Expandable) -->
-            <view wx:if="{{expandedProjectId === item.id}}" class="applications-section">
-                <!-- Loading Applications -->
-                <view wx:if="{{applicationsLoading}}" class="applications-loading">
-                    <van-loading size="20px">加载申请中...</van-loading>
+        </view>
+
+        <!-- Loading State -->
+        <view class="loading-container" wx:if="{{listLoading && !listLoadingMore}}">
+            <van-loading size="24px">加载中...</van-loading>
+        </view>
+
+        <!-- Project List -->
+        <block wx:elif="{{projects.length > 0}}">
+            <view class="project-item" wx:for="{{projects}}" wx:key="id">
+                <!-- 项目主卡片 -->
+                <view class="project-card" bindtap="toggleApplications" data-id="{{item.id}}">
+                    <view class="card-header-row">
+                        <view class="project-status">
+                            <view class="status-dot {{item.status === 1 ? 'active' : ''}}"></view>
+                            <text class="status-text">{{item.status === 1 ? '进行中' : (item.status === 0 ? '待审核' : '已关闭')}}</text>
+                        </view>
+                        <van-icon name="edit" size="20px" catchtap="handleEditProject" data-id="{{item.id}}" class="edit-btn" />
+                    </view>
+
+                    <view class="project-title">{{item.name}}</view>
+
+                    <view class="card-footer-row">
+                        <view class="promote-btn" catchtap="handlePromoteProject" data-id="{{item.id}}">
+                            <van-icon name="bullhorn-o" size="18px" color="#000" />
+                            <text>推广</text>
+                        </view>
+                        
+                        <view class="complete-btn" catchtap="handleDeleteProject" data-id="{{item.id}}" data-name="{{item.name}}">
+                            <text>完成招募</text>
+                        </view>
+
+                        <van-icon name="{{expandedProjectId === item.id ? 'arrow-up' : 'arrow-down'}}" color="#ccc" size="16px" class="expand-icon" />
+                    </view>
                 </view>
-                <!-- Applications List -->
-                <view wx:elif="{{applications.length > 0}}" class="applications-list">
-                    <view class="application-item" wx:for="{{applications}}" wx:for-item="app" wx:key="id">
-                        <!-- Applicant Info -->
-                        <view class="applicant-header">
-                            <image class="avatar" src="{{app.applicant.avatarUrl}}" mode="aspectFill"
-                                bindtap="handleAvatarTap" data-id="{{app.talentProfile.id}}" data-user-id="{{app.applicant.id}}" />
-                            <view class="applicant-info">
-                                <text class="applicant-name">{{app.applicant.nickname}}</text>
-                                <!-- 仅申请通过后才显示联系方式 -->
-                                <view class="applicant-meta" wx:if="{{app.status === 1}}">
-                                    <text wx:if="{{app.applicant.phone}}">
-                                        {{app.applicant.phone}}
-                                    </text>
-                                    <text wx:if="{{app.applicant.email}}">
-                                        {{app.applicant.email}}
-                                    </text>
+
+                <!-- 申请者列表 (展开) -->
+                <view wx:if="{{expandedProjectId === item.id}}" class="applicant-list">
+                    <view wx:if="{{applicationsLoading}}" class="list-loading">
+                        <van-loading size="20px" />
+                    </view>
+                    <block wx:elif="{{applications.length > 0}}">
+                        <view class="applicant-card" wx:for="{{applications}}" wx:for-item="app" wx:key="id">
+                            <!-- 邮件推广转化标识 -->
+                            <view class="promotion-source" wx:if="{{app.fromPromotion}}">邮件推广转化</view>
+                            
+                            <view class="applicant-main" bindtap="handleAvatarTap" data-id="{{app.talentProfile.id}}" data-user-id="{{app.applicant.id}}">
+                                <view class="applicant-left">
+                                    <view class="avatar-container">
+                                        <image class="applicant-avatar" src="{{app.applicant.avatarUrl}}" mode="aspectFill" />
+                                        <view class="grade-badge">本科三年级</view>
+                                    </view>
+                                </view>
+                                
+                                <view class="applicant-info">
+                                    <view class="applicant-name-row">
+                                        <text class="applicant-name">{{app.applicant.nickname}}</text>
+                                        <van-icon name="passed" color="#3e84fa" size="12px" wx:if="{{app.talentProfile.isVerified}}" />
+                                        <view class="mbti-tag" wx:if="{{app.talentProfile.mbti}}">{{app.talentProfile.mbti}}</view>
+                                    </view>
+                                    <view class="applicant-school">{{app.talentProfile.schoolName || '未知学校'}} · {{app.talentProfile.majorName || '未知专业'}}</view>
+                                    
+                                    <view class="skill-tags">
+                                        <view class="skill-tag" wx:for="{{app.talentProfile.skills}}" wx:for-item="skill" wx:key="*this">{{skill}}</view>
+                                    </view>
                                 </view>
                             </view>
-                            <!-- Status Badge -->
-                            <view class="application-status">
-                                <van-tag wx:if="{{app.status === 0}}" type="warning" plain>
-                                    待审核
-                                </van-tag>
-                                <van-tag wx:elif="{{app.status === 1}}" type="success">已通过</van-tag>
-                                <van-tag wx:else type="danger">已拒绝</van-tag>
+
+                            <view class="applicant-actions">
+                                <view class="divider"></view>
+                                <view class="action-buttons">
+                                    <block wx:if="{{app.status === 0}}">
+                                        <van-icon name="close" size="28px" color="#ee0a24" catchtap="handleReject" data-app="{{app}}" />
+                                        <van-icon name="checked" size="28px" color="#35e08e" catchtap="handleApprove" data-app="{{app}}" />
+                                    </block>
+                                    <view wx:else class="status-pill {{app.status === 1 ? 'passed' : 'rejected'}}">
+                                        {{app.status === 1 ? '已通过' : '已拒绝'}}
+                                    </view>
+                                </view>
                             </view>
                         </view>
-                        <!-- 技能标签 -->
-                        <skill-tags wx:if="{{app.talentProfile && app.talentProfile.skills && app.talentProfile.skills.length > 0}}" skills="{{app.talentProfile.skills}}" class="applicant-skills" />
-                        <!-- Action Buttons (only for pending applications) -->
-                        <view wx:if="{{app.status === 0}}" class="application-actions">
-                            <van-button size="small" type="danger" plain bindtap="handleReject" data-app="{{app}}">
-                                拒绝
-                            </van-button>
-                            <van-button size="small" type="primary" bindtap="handleApprove" data-app="{{app}}">
-                                通过
-                            </van-button>
-                        </view>
-                    </view>
-                </view>
-                <!-- Empty State -->
-                <view wx:else class="applications-empty">
-                    <van-empty description="暂无申请" />
+                    </block>
+                    <view wx:else class="empty-applications">暂无申请记录</view>
                 </view>
             </view>
+
+            <view class="list-footer">
+                <van-loading size="16px" wx:if="{{listLoadingMore}}">加载更多...</van-loading>
+                <text wx:elif="{{!listHasMore}}">没有更多了</text>
+            </view>
+        </block>
+
+        <!-- Empty State -->
+        <view class="empty-state" wx:else>
+            <view class="empty-icon-wrapper">
+                <image src="../../assets/images/empty_folder.png" class="empty-img" mode="aspectFit" />
+            </view>
+            <text class="empty-text">暂无记录</text>
+            <view class="create-project-btn" bindtap="goToCreate">发布项目</view>
         </view>
-        <!-- Load More -->
-        <view class="load-more" wx:if="{{listLoadingMore}}">
-            <van-loading size="20px">加载更多...</van-loading>
-        </view>
-        <view class="no-more" wx:elif="{{!listHasMore && projects.length > 0}}">
-            <text>没有更多了</text>
-        </view>
-    </scroll-view>
-    <!-- Empty State -->
-    <view class="empty-container" wx:else>
-        <van-empty description="暂无项目" />
     </view>
 </view>
-<!-- Review Dialog -->
-<van-dialog show="{{reviewDialogVisible}}" title="{{reviewAction === 1 ? '通过申请' : '拒绝申请'}}" show-cancel-button confirm-button-text="确定" cancel-button-text="取消" bind:confirm="submitReview" bind:cancel="closeReviewDialog">
-    <view class="dialog-content">
-        <text class="dialog-hint">{{reviewAction === 1 ? '是否通过该申请者？' : '是否拒绝该申请者？'}}</text>
-    </view>
-</van-dialog>
-<!-- Promotion Dialog -->
-<van-dialog use-slot show="{{promotionDialogVisible}}" title="项目推广" show-cancel-button confirm-button-text="确认支付" cancel-button-text="取消" bind:confirm="submitPromotion" bind:cancel="closePromotionDialog">
-    <view class="dialog-content" style="padding: 20px;">
-        <view style="margin-bottom: 15px; font-size: 14px; color: #666;">通过邮件推广，让更多人看到你的项目。</view>
-        <view style="margin-bottom: 10px;">
-            <!-- Product Info -->
-            <view wx:if="{{promotionProduct}}" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <text>单价</text>
-                <text style="color: #ee0a24; font-weight: bold;">
-                    ¥{{promotionProduct.price}} / 人
-                </text>
-            </view>
-        </view>
-        <van-field value="{{promotionQuantity}}" label="推广人数" type="number" placeholder="输入人数" border="{{ true }}" bind:change="onPromotionQuantityChange" />
-        <view style="margin-top: 15px; text-align: right; border-top: 1px solid #f5f5f5; padding-top: 15px;">
-            <text style="font-size: 14px; margin-right: 5px;">总计:</text>
-            <text style="color: #ee0a24; font-size: 18px; font-weight: bold;" wx:if="{{promotionProduct}}">
-                ¥{{(promotionProduct.price * promotionQuantity) || 0}}
-            </text>
-            <text wx:else>计算中...</text>
-        </view>
-    </view>
-</van-dialog>
+
+<!-- 审核对话框 -->
+<van-dialog id="van-dialog" />

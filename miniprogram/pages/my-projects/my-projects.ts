@@ -2,10 +2,10 @@
 import { applicationApi, projectApi, productApi, orderApi, emailPromotionApi } from '../../api/index'
 import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
+import Dialog from '@vant/weapp/dialog/dialog'
 
 type ProjectVO = components['schemas']['ProjectVO']
 type ProjectApplicationVO = components['schemas']['ProjectApplicationVO']
-type ApplicationStatus = components['schemas']['ApplicationStatus']
 type ProductVO = components['schemas']['ProductVO']
 
 Page({
@@ -20,11 +20,6 @@ Page({
         applications: [] as ProjectApplicationVO[],
         applicationsLoading: false,
 
-        // 审核对话框
-        reviewDialogVisible: false,
-        currentApplication: undefined as ProjectApplicationVO | undefined,
-        reviewAction: 0 as ApplicationStatus, // 1=通过, 2=拒绝
-
         // 推广对话框
         promotionDialogVisible: false,
         currentPromotingProjectId: null as number | null,
@@ -34,7 +29,10 @@ Page({
 
     onLoad() {
         ; (this as any).initListConfig({ listKey: 'projects', pageSize: 10 })
-            ; (this as any).loadList()
+    },
+
+    onShow() {
+        ; (this as any).loadList()
     },
 
     onReachBottom() {
@@ -60,13 +58,11 @@ Page({
         const currentExpanded = this.data.expandedProjectId
 
         if (currentExpanded === id) {
-            // 收起
             this.setData({
                 expandedProjectId: null,
                 applications: []
             })
         } else {
-            // 展开并加载申请
             this.setData({ expandedProjectId: id })
             this.loadApplications(id)
         }
@@ -81,7 +77,7 @@ Page({
         try {
             const res = await applicationApi.listProjectApplications(projectId, {
                 page: 1,
-                size: 100 // 暂时一次加载所有
+                size: 100
             })
 
             const applications = res.data?.list || []
@@ -99,65 +95,47 @@ Page({
     /**
      * 处理通过申请
      */
-    handleApprove(e: WechatMiniprogram.TouchEvent) {
+    async handleApprove(e: WechatMiniprogram.TouchEvent) {
         const { app } = e.currentTarget.dataset
-        this.setData({
-            currentApplication: app,
-            reviewAction: 1,
-            reviewDialogVisible: true
-        })
+        try {
+            await Dialog.confirm({
+                title: '通过申请',
+                message: `确定要通过${app.applicant.nickname}的申请吗？`,
+            })
+            
+            wx.showLoading({ title: '处理中...', mask: true })
+            await applicationApi.reviewApplication(app.id!, { status: 1 })
+            wx.showToast({ title: '已通过', icon: 'success' })
+            this.loadApplications(this.data.expandedProjectId!)
+        } catch (error) {
+            if (error !== 'cancel') {
+                console.error('审批失败:', error)
+                wx.showToast({ title: '操作失败', icon: 'none' })
+            }
+        }
     },
 
     /**
      * 处理拒绝申请
      */
-    handleReject(e: WechatMiniprogram.TouchEvent) {
+    async handleReject(e: WechatMiniprogram.TouchEvent) {
         const { app } = e.currentTarget.dataset
-        this.setData({
-            currentApplication: app,
-            reviewAction: 2,
-            reviewDialogVisible: true
-        })
-    },
-
-    /**
-     * 关闭对话框
-     */
-    closeReviewDialog() {
-        this.setData({
-            reviewDialogVisible: false,
-            currentApplication: undefined
-        })
-    },
-
-    /**
-     * 提交审核
-     */
-    async submitReview() {
-        const { currentApplication, reviewAction } = this.data
-
-        if (!currentApplication) return
-
         try {
-            await applicationApi.reviewApplication(currentApplication.id!, {
-                status: reviewAction
+            await Dialog.confirm({
+                title: '拒绝申请',
+                message: `确定要拒绝${app.applicant.nickname}的申请吗？`,
+                confirmButtonText: '拒绝',
             })
-
-            wx.showToast({
-                title: reviewAction === 1 ? '已通过' : '已拒绝',
-                icon: 'success'
-            })
-
-            // 关闭对话框
-            this.closeReviewDialog()
-
-            // 重新加载申请列表
-            if (this.data.expandedProjectId) {
-                this.loadApplications(this.data.expandedProjectId)
-            }
+            
+            wx.showLoading({ title: '处理中...', mask: true })
+            await applicationApi.reviewApplication(app.id!, { status: 2 })
+            wx.showToast({ title: '已拒绝', icon: 'success' })
+            this.loadApplications(this.data.expandedProjectId!)
         } catch (error) {
-            console.error('审核失败:', error)
-            wx.showToast({ title: '操作失败', icon: 'none' })
+            if (error !== 'cancel') {
+                console.error('操作失败:', error)
+                wx.showToast({ title: '操作失败', icon: 'none' })
+            }
         }
     },
 
@@ -180,8 +158,7 @@ Page({
                             title: '已下架',
                             icon: 'success'
                         })
-                            // 重新加载项目列表
-                            ; (this as any).loadList()
+                        ; (this as any).loadList()
                     } catch (error) {
                         console.error('下架项目失败:', error)
                         wx.showToast({ title: '下架失败', icon: 'none' })
@@ -191,20 +168,14 @@ Page({
         })
     },
 
-    // ==================== 推广相关 ====================
-
-    /**
-     * 点击推广按钮
-     */
     async handlePromoteProject(e: WechatMiniprogram.TouchEvent) {
         const { id } = e.currentTarget.dataset
         this.setData({
             currentPromotingProjectId: id,
             promotionDialogVisible: true,
-            promotionQuantity: 10 // 默认值
+            promotionQuantity: 10
         })
 
-        // 获取推广商品信息(ID=2)
         if (!this.data.promotionProduct) {
             try {
                 const res = await productApi.getProductDetail(2)
@@ -213,14 +184,10 @@ Page({
                 }
             } catch (error) {
                 console.error('获取推广商品失败:', error)
-                wx.showToast({ title: '获取价格失败', icon: 'none' })
             }
         }
     },
 
-    /**
-     * 关闭推广对话框
-     */
     closePromotionDialog() {
         this.setData({
             promotionDialogVisible: false,
@@ -229,40 +196,24 @@ Page({
         })
     },
 
-    /**
-     * 推广人数变化
-     */
     onPromotionQuantityChange(e: any) {
         this.setData({ promotionQuantity: parseInt(e.detail) || 0 })
     },
 
-    /**
-     * 确认推广（创建订单 -> 支付 -> 触发推广）
-     */
     async submitPromotion() {
         const { currentPromotingProjectId, promotionQuantity, promotionProduct } = this.data
-
         if (!currentPromotingProjectId || !promotionProduct) return
-        if (promotionQuantity <= 0) {
-            wx.showToast({ title: '请输入有效人数', icon: 'none' })
-            return
-        }
-
+        
         try {
             wx.showLoading({ title: '处理中...', mask: true })
-
-            // 1. 创建订单
             const orderRes = await orderApi.createOrder({
                 productId: promotionProduct.id!,
                 quantity: promotionQuantity
             })
             const orderId = orderRes.data!.id!
-
-            // 2. 获取支付参数
             const payRes = await orderApi.initiatePayment(orderId)
             const payParams = payRes.data!
 
-            // 3. 发起微信支付
             await new Promise((resolve, reject) => {
                 wx.requestPayment({
                     timeStamp: payParams.timeStamp!,
@@ -275,37 +226,25 @@ Page({
                 })
             })
 
-            // 4. 支付成功，触发推广
             await emailPromotionApi.triggerEmailPromotion({
                 orderId,
                 projectId: currentPromotingProjectId
             })
 
             wx.hideLoading()
-            wx.showToast({
-                title: '推广成功',
-                icon: 'success'
-            })
+            wx.showToast({ title: '推广成功', icon: 'success' })
             this.closePromotionDialog()
-
-                // 刷新列表更新状态
-                ; (this as any).loadList()
-
+            ; (this as any).loadList()
         } catch (error: any) {
             wx.hideLoading()
-            console.error('推广流程失败:', error)
-
             if (error.errMsg && error.errMsg.indexOf('cancel') > -1) {
                 wx.showToast({ title: '支付已取消', icon: 'none' })
             } else {
-                wx.showToast({ title: '推广失败，请重试', icon: 'none' })
+                wx.showToast({ title: '推广失败', icon: 'none' })
             }
         }
     },
 
-    /**
-     * 编辑项目
-     */
     handleEditProject(e: WechatMiniprogram.TouchEvent) {
         const { id } = e.currentTarget.dataset
         wx.navigateTo({
@@ -313,9 +252,12 @@ Page({
         })
     },
 
-    /**
-     * 处理头像点击事件
-     */
+    goToCreate() {
+        wx.navigateTo({
+            url: '/pages/edit-project/edit-project'
+        })
+    },
+
     handleAvatarTap(e: WechatMiniprogram.TouchEvent) {
         const { id, userId } = e.currentTarget.dataset
         let url = `/pages/talent-detail/talent-detail?`

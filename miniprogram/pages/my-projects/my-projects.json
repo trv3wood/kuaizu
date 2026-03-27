@@ -1,5 +1,7 @@
 {
-    "navigationBarTitleText": "我的项目",
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#c4f1ff",
+    "navigationBarTextStyle": "black",
     "usingComponents": {
         "van-tag": "@vant/weapp/tag/index",
         "van-icon": "@vant/weapp/icon/index",
@@ -7,7 +9,6 @@
         "van-dialog": "@vant/weapp/dialog/index",
         "van-field": "@vant/weapp/field/index",
         "van-empty": "@vant/weapp/empty/index",
-        "van-loading": "@vant/weapp/loading/index",
-        "skill-tags": "/components/skill-tags/skill-tags"
+        "van-loading": "@vant/weapp/loading/index"
     }
 }
