@@ -53,14 +53,6 @@
       <text class="menu-title">我的项目</text>
       <image class="menu-arrow" src="{{assets.PROFILE.ENTER}}" mode="aspectFit" />
     </view>
-    <!-- 我的申请 -->
-    <view class="menu-card" bindtap="handleMyApplications">
-      <view class="menu-icon-wrapper">
-        <van-icon name="records" size="22px" color="#3279ec" />
-      </view>
-      <text class="menu-title">我的申请</text>
-      <image class="menu-arrow" src="{{assets.PROFILE.ENTER}}" mode="aspectFit" />
-    </view>
     <!-- 其他服务 -->
     <view class="services-section">
       <text class="section-title">其他服务</text>
@@ -72,9 +64,9 @@
       </view>
     </view>
     <!-- Logout button -->
-    <view class="logout-section" wx:if="{{isLoggedIn}}">
+    <!-- <view class="logout-section" wx:if="{{isLoggedIn}}">
       <button class="logout-btn" bindtap="handleLogout">退出登录</button>
-    </view>
+    </view> -->
     <!-- Version -->
     <view class="version">3.0版本</view>
   </view>
