@@ -60,7 +60,7 @@
                                 <view class="applicant-left">
                                     <view class="avatar-container">
                                         <image class="applicant-avatar" src="{{app.applicant.avatarUrl}}" mode="aspectFill" />
-                                        <view class="grade-badge">本科三年级</view>
+                                        <view class="grade-badge">{{app.applicant.grade || '未知年级'}}</view>
                                     </view>
                                 </view>
                                 
@@ -70,7 +70,7 @@
                                         <van-icon name="passed" color="#3e84fa" size="12px" wx:if="{{app.talentProfile.isVerified}}" />
                                         <view class="mbti-tag" wx:if="{{app.talentProfile.mbti}}">{{app.talentProfile.mbti}}</view>
                                     </view>
-                                    <view class="applicant-school">{{app.talentProfile.schoolName || '未知学校'}} · {{app.talentProfile.majorName || '未知专业'}}</view>
+                                    <view class="applicant-school">{{app.applicant.school.schoolName || '未知学校'}} · {{app.applicant.major.majorName || '未知专业'}}</view>
                                     
                                     <view class="skill-tags">
                                         <view class="skill-tag" wx:for="{{app.talentProfile.skills}}" wx:for-item="skill" wx:key="*this">{{skill}}</view>
