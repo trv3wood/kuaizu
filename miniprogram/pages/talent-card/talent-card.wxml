@@ -1,98 +1,98 @@
 <!-- pages/talent-card/talent-card.wxml -->
 <view class="talent-card-container">
-    <!-- 加载中 -->
-    <view class="loading-container" wx:if="{{loading}}">
-        <van-loading size="24px">加载中...</van-loading>
+  <!-- 加载中 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <van-loading size="24px">加载中...</van-loading>
+  </view>
+  <block wx:else>
+    <!-- 无名片时提示去创建 -->
+    <view class="empty-state" wx:if="{{!profile}}">
+      <view class="page-title">名片</view>
+      <view class="page-subtitle">面对喜欢的校园项目或对外社交时，一张完善的名片会让您更具竞争力。</view>
+      <view class="primary-action create-btn" bindtap="handleEdit">
+        <text>创建名片</text>
+      </view>
     </view>
-    <block wx:else>
-        <!-- 无名片时提示去创建 -->
-        <view class="empty-state" wx:if="{{!profile}}">
-            <view class="page-title">名片</view>
-            <view class="page-subtitle">面对喜欢的校园项目或对外社交时，一张完善的名片会让您更具竞争力。</view>
-            <view class="primary-action create-btn" bindtap="handleEdit">
-                <text>创建名片</text>
+    <!-- 查看模式 -->
+    <view class="view-mode" wx:else>
+      <view class="page-title">名片</view>
+      <view class="page-subtitle">面对喜欢的校园项目或对外社交时，一张完善的名片会让您更具竞争力。</view>
+      <!-- 核心人才卡片 -->
+      <view class="card-wrapper">
+        <view class="talent-card">
+          <!-- 左侧边栏色彩 -->
+          <view class="card-side-bar">
+            <view class="side-blue"></view>
+            <view class="side-yellow"></view>
+          </view>
+          <view class="card-main">
+            <!-- 个人基本信息 -->
+            <view class="card-header">
+              <view class="header-left">
+                <view class="name-row">
+                  <text class="name">{{displayName}}</text>
+                  <view class="verify-tag {{isVerified ? 'verified' : ''}}">
+                    <van-icon wx:if="{{isVerified}}" name="passed" color="#3e84fa" size="16px" />
+                    <text wx:else class="unverified-text">未认证</text>
+                  </view>
+                </view>
+                <view class="school-row">
+                  <view class="divider-line"></view>
+                  <view class="school-info">
+                    <view class="school-name">
+                      {{user.school.schoolName || profile.schoolName || ''}}
+                    </view>
+                    <view class="major-name">
+                      {{user.major.majorName || profile.majorName || ''}}
+                    </view>
+                  </view>
+                </view>
+              </view>
+              <image class="avatar" src="{{avatarUrl}}" mode="aspectFill" />
             </view>
+            <!-- 联系信息 -->
+            <view class="contact-area">
+              <view class="contact-item">
+                <van-icon name="phone-o" color="#559dfc" size="14px" />
+                <text class="contact-text">电话：{{user.phone || '未填写'}}</text>
+              </view>
+              <view class="contact-item">
+                <van-icon name="chat-o" color="#559dfc" size="14px" />
+                <text class="contact-text">微信：{{user.wechat || '未填写'}}</text>
+              </view>
+              <view class="contact-item">
+                <van-icon name="envelop-o" color="#559dfc" size="14px" />
+                <text class="contact-text">邮箱：{{user.email || '未填写'}}</text>
+              </view>
+            </view>
+            <!-- MBTI -->
+            <view class="mbti-display" wx:if="{{profile.mbti}}">
+              <text class="mbti-text">{{profile.mbti}}</text>
+              <view class="mbti-shadow-box"></view>
+            </view>
+          </view>
         </view>
-        <!-- 查看模式 -->
-        <view class="view-mode" wx:else>
-            <view class="page-title">名片</view>
-            <view class="page-subtitle">面对喜欢的校园项目或对外社交时，一张完善的名片会让您更具竞争力。</view>
-            <!-- 核心人才卡片 -->
-            <view class="card-wrapper">
-                <view class="talent-card">
-                    <!-- 左侧边栏色彩 -->
-                    <view class="card-side-bar">
-                        <view class="side-blue"></view>
-                        <view class="side-yellow"></view>
-                    </view>
-                    <view class="card-main">
-                        <!-- 个人基本信息 -->
-                        <view class="card-header">
-                            <view class="header-left">
-                                <view class="name-row">
-                                    <text class="name">{{displayName}}</text>
-                                    <view class="verify-tag {{isVerified ? 'verified' : ''}}">
-                                        <van-icon wx:if="{{isVerified}}" name="passed" color="#3e84fa" size="16px" />
-                                        <text wx:else class="unverified-text">未认证</text>
-                                    </view>
-                                </view>
-                                <view class="school-row">
-                                    <view class="divider-line"></view>
-                                    <view class="school-info">
-                                        <view class="school-name">
-                                            {{user.school.schoolName || profile.schoolName || ''}}
-                                        </view>
-                                        <view class="major-name">
-                                            {{user.major.majorName || profile.majorName || ''}}
-                                        </view>
-                                    </view>
-                                </view>
-                            </view>
-                            <image class="avatar" src="{{avatarUrl}}" mode="aspectFill" />
-                        </view>
-                        <!-- 联系信息 -->
-                        <view class="contact-area">
-                            <view class="contact-item">
-                                <van-icon name="phone-o" color="#559dfc" size="14px" />
-                                <text class="contact-text">电话：{{user.phone || '未填写'}}</text>
-                            </view>
-                            <view class="contact-item">
-                                <van-icon name="chat-o" color="#559dfc" size="14px" />
-                                <text class="contact-text">微信：{{user.wechat || '未填写'}}</text>
-                            </view>
-                            <view class="contact-item">
-                                <van-icon name="envelop-o" color="#559dfc" size="14px" />
-                                <text class="contact-text">邮箱：{{user.email || '未填写'}}</text>
-                            </view>
-                        </view>
-                        <!-- MBTI -->
-                        <view class="mbti-display" wx:if="{{profile.mbti}}">
-                            <text class="mbti-text">{{profile.mbti}}</text>
-                            <view class="mbti-shadow-box"></view>
-                        </view>
-                    </view>
-                </view>
-                <!-- 状态提示 -->
-                <view class="status-tip {{profile.status === 1 ? 'published' : ''}}">
-                    <text>{{profile.status === 1 ? '名片已发布人才库' : '名片未发布人才库'}}</text>
-                </view>
-            </view>
-            <!-- 操作按钮 -->
-            <view class="bottom-area">
-                <view class="secondary-btns">
-                    <view class="action-card" bindtap="handleEdit">
-                        <van-icon name="edit" size="24px" />
-                        <text>编辑名片</text>
-                    </view>
-                    <button class="action-card share-btn" open-type="share">
-                        <van-icon name="share-o" size="24px" />
-                        <text>分享名片</text>
-                    </button>
-                </view>
-                <view class="primary-action" bindtap="goToApplications">
-                    <text>投递名片管理</text>
-                </view>
-            </view>
+        <!-- 状态提示 -->
+        <view class="status-tip {{profile.status === 1 ? 'published' : ''}}">
+          <text>{{profile.status === 1 ? '名片已发布人才库' : '名片未发布人才库'}}</text>
         </view>
-    </block>
+      </view>
+      <!-- 操作按钮 -->
+      <view class="bottom-area">
+        <view class="secondary-btns">
+          <view class="action-card" bindtap="handleEdit">
+            <van-icon name="edit" size="24px" />
+            <text>编辑名片</text>
+          </view>
+          <button class="action-card share-btn" open-type="share">
+            <van-icon name="share-o" size="24px" />
+            <text>分享名片</text>
+          </button>
+        </view>
+        <view class="primary-action" bindtap="goToApplications">
+          <text>投递名片管理</text>
+        </view>
+      </view>
+    </view>
+  </block>
 </view>
