@@ -1,177 +1,177 @@
 /* pages/project-detail/project-detail.wxss */
+
+/* ===== 页面容器 ===== */
 .project-detail-container {
     min-height: 100vh;
-    background: var(--bg-color);
-    padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
+    background: #f6f7fb;
+    padding-bottom: calc(60rpx + env(safe-area-inset-bottom));
 }
 
-/* 加载中 */
+/* ===== 加载中 ===== */
 .loading-container {
     padding: 100rpx 0;
     display: flex;
     justify-content: center;
 }
 
-/* 头部卡片 */
-.project-header {
-    background: #e8f4ff;
-    padding: 40rpx 40rpx;
-    margin: 30rpx;
-    border-radius: 32rpx;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+/* ===== 顶部白色头部 ===== */
+.header-area {
+    background: #ffffff;
+    padding: 24rpx 36rpx 30rpx;
+    box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.06);
 }
 
-.header-content {
-    color: var(--primary-color);
-}
-
-.project-name {
-    display: block;
-    font-size: 36rpx;
-    font-weight: bold;
-    margin-bottom: 16rpx;
-}
-
-.status-row {
-    display: flex;
-    gap: 12rpx;
-}
-
-/* 内容区块 */
-.section {
-    background: var(--card-bg);
-    border-radius: 24rpx;
-    padding: 30rpx;
-    margin: 0 30rpx 30rpx;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
-}
-
-.section-title {
-    display: block;
-    font-size: 32rpx;
-    font-weight: 500;
-    color: var(--text-main);
-    margin-bottom: 16rpx;
-}
-
-.section-content {
-    font-size: 32rpx;
-    color: var(--text-gray);
-    line-height: 1.8;
-}
-
-.description-section {
-    margin: 0 30rpx 30rpx;
-    border-radius: 24rpx;
-    overflow: hidden;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
-}
-
-.description-section .section-title {
-    margin-bottom: 0;
-}
-
-.description-section .van-cell {
-    background: var(--card-bg) !important;
-    padding: 30rpx !important;
-    border-radius: 24rpx !important;
-}
-
-.description-section .van-collapse-item__content {
-    background: var(--card-bg) !important;
-    padding: 0 30rpx 30rpx !important;
-    color: var(--text-gray) !important;
-    line-height: 1.8 !important;
-}
-
-/* 信息行 */
-.info-row {
-    display: flex;
+/* 学校徽章 */
+.school-badge {
+    display: inline-flex;
     align-items: center;
-    gap: 12rpx;
-    margin-bottom: 16rpx;
+    background: #cff2fe;
+    border-radius: 40rpx;
+    padding: 6rpx 24rpx 6rpx 12rpx;
+    margin-bottom: 20rpx;
 }
 
-.info-row:last-child {
-    margin-bottom: 0;
-}
-
-.info-text {
+.school-icon {
     font-size: 28rpx;
-    color: var(--text-gray);
+    margin-right: 8rpx;
 }
 
-/* 发起人信息 */
-.creator-info {
+.school-badge-text {
+    font-size: 24rpx;
+    font-weight: 600;
+    color: #000000;
+}
+
+/* 项目标题 */
+.project-title {
+    font-size: 48rpx;
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.35;
+    margin-bottom: 16rpx;
+}
+
+/* 阅读量 */
+.view-count-row {
     display: flex;
     align-items: center;
-    gap: 20rpx;
+    gap: 8rpx;
 }
 
-.creator-avatar {
-    width: 96rpx;
-    height: 96rpx;
-    border-radius: 50%;
-    background: #f0f0f0;
+.view-count-text {
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #989da5;
 }
 
-.creator-detail {
-    flex: 1;
+/* ===== 标签行 ===== */
+.tag-row {
+    display: flex;
+    gap: 16rpx;
+    padding: 30rpx 36rpx 10rpx;
 }
 
-.creator-name {
-    display: block;
+.info-pill {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 40rpx;
+    padding: 10rpx 24rpx;
+    gap: 6rpx;
+}
+
+.pill-icon {
+    font-size: 26rpx;
+}
+
+.pill-text {
     font-size: 32rpx;
     font-weight: 500;
-    color: var(--text-main);
-    margin-bottom: 6rpx;
+    color: #000000;
 }
 
-.creator-uid,
-.creator-contact {
-    display: block;
-    font-size: 24rpx;
-    color: var(--text-gray);
+/* ===== 描述卡片 ===== */
+.desc-card {
+    background: #ffffff;
+    border-radius: 40rpx;
+    margin: 20rpx 36rpx 24rpx;
+    padding: 32rpx 36rpx;
 }
 
-/* 底部操作栏 */
-.action-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 30rpx 40rpx;
-    padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
-    background: var(--card-bg);
-    box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+.desc-text {
+    font-size: 32rpx;
+    color: rgba(0, 0, 0, 0.8);
+    line-height: 1.65;
+    white-space: pre-wrap;
+    word-break: break-all;
 }
 
-.apply-btn {
+/* ===== 底部操作区 ===== */
+.bottom-actions {
+    padding: 0 36rpx;
+}
+
+/* 投递名片按钮 */
+.deliver-btn {
+    background: #559dfc;
+    color: #ffffff;
+    border-radius: 40rpx;
+    text-align: center;
+    font-size: 34rpx;
+    font-weight: 600;
+    line-height: 90rpx;
+    margin-bottom: 20rpx;
+}
+
+.deliver-btn.disabled {
+    opacity: 0.6;
+}
+
+/* 分享按钮行 */
+.share-row {
+    display: flex;
+    justify-content: center;
+    gap: 24rpx;
+    margin-top: 10rpx;
+}
+
+.share-icon-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 96rpx;
-    background: var(--primary-color);
-    color: #ffffff;
+    width: 102rpx;
+    height: 102rpx;
+    background: #ffffff;
+    border-radius: 40rpx;
+    box-shadow: 0 8rpx 8rpx rgba(0, 0, 0, 0.06);
+    padding: 0;
+    margin: 0;
+    border: none;
+    line-height: normal;
+}
+
+.share-icon-btn::after {
+    border: none;
+}
+
+/* ===== 底部声明 ===== */
+.footer-note {
+    padding: 40rpx 60rpx 20rpx;
+}
+
+.footer-divider {
+    height: 1rpx;
+    background: #e0e0e0;
+    margin-bottom: 20rpx;
+}
+
+.footer-text {
+    display: block;
     font-size: 28rpx;
-    font-weight: 500;
-    border-radius: 48rpx;
-    border: none;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+    color: rgba(0, 0, 0, 0.3);
 }
 
-.apply-btn::after {
-    border: none;
-}
-
-.apply-btn[disabled] {
-    background: var(--text-main);
-    opacity: 0.12;
-    color: var(--text-main);
-}
-
-/* 空状态 */
+/* ===== 空状态 ===== */
 .empty-container {
     padding: 100rpx 0;
 }

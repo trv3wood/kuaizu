@@ -4,70 +4,70 @@
     <view class="loading-container" wx:if="{{loading}}">
         <van-loading size="24px">加载中...</van-loading>
     </view>
+
     <block wx:elif="{{project}}">
-        <!-- 头部卡片 -->
-        <view class="project-header">
-            <view class="header-content">
-                <text class="project-name">{{project.name}}</text>
-                <view class="status-row">
-                    <van-tag wx:if="{{project.status === 0}}" type="default" plain>审核中</van-tag>
-                    <van-tag wx:elif="{{project.status === 1}}" type="success" plain>进行中</van-tag>
-                    <van-tag wx:elif="{{project.status === 2}}" type="danger" plain>已驳回</van-tag>
-                    <van-tag wx:else type="default" plain>已关闭</van-tag>
-                    <van-tag type="primary" plain>{{project.directionText}}</van-tag>
-                </view>
+        <!-- 顶部白色头部区域 -->
+        <view class="header-area">
+            <!-- 学校标签 -->
+            <view class="school-badge" wx:if="{{project.schoolName}}">
+                <text class="school-icon">🏫</text>
+                <text class="school-badge-text">{{project.schoolName}}</text>
+            </view>
+            <!-- 项目名称 -->
+            <view class="project-title">{{project.name}}</view>
+            <!-- 阅读量 -->
+            <view class="view-count-row">
+                <van-icon name="eye-o" size="16px" color="#989da5" />
+                <text class="view-count-text">{{project.viewCount || 0}}</text>
             </view>
         </view>
-        <!-- 基本信息 -->
-        <view class="section">
-            <view class="info-row">
-                <van-icon name="location-o" size="16px" color="#999" />
-                <text class="info-text">{{project.schoolName || '未知学校'}}</text>
+
+        <!-- 标签行 -->
+        <view class="tag-row">
+            <!-- 方向标签 -->
+            <view class="info-pill">
+                <text class="pill-icon">🏆</text>
+                <text class="pill-text">{{project.directionText}}方向</text>
             </view>
-            <view class="info-row">
-                <van-icon name="friends-o" size="16px" color="#999" />
-                <text class="info-text">团队规模：{{project.memberCount || 0}} 人</text>
+            <!-- 跨校标签 -->
+            <view class="info-pill">
+                <text class="pill-icon" wx:if="{{project.isCrossSchool}}">✅</text>
+                <text class="pill-text">{{project.isCrossSchool ? '允许跨校' : '⚠️仅限本校'}}</text>
             </view>
-            <view class="info-row">
-                <van-icon name="eye-o" size="16px" color="#999" />
-                <text class="info-text">浏览量：{{project.viewCount || 0}}</text>
-            </view>
-            <view class="info-row" wx:if="{{project.isCrossSchool !== undefined}}">
-                <van-icon name="records" size="16px" color="#999" />
-                <text class="info-text">{{project.isCrossSchool ? '接受跨校成员' : '仅限本校成员'}}</text>
-            </view>
-        </view>
-        <!-- 项目描述 -->
-        <view class="description-section">
-            <van-collapse value="{{ activeNames }}" bind:change="onCollapseChange" border="{{ false }}">
-                <van-collapse-item name="description" border="{{ false }}" is-link="{{ project.description.length > 20 }}">
-                    <view slot="title" class="section-title">项目简介</view>
-                    <text class="section-content" user-select="true">{{project.description || '暂无描述'}}</text>
-                </van-collapse-item>
-            </van-collapse>
-        </view>
-        <!-- 发起人信息 -->
-        <view class="section" wx:if="{{project.creator}}">
-            <text class="section-title">发起人</text>
-            <view class="creator-info">
-                <image class="creator-avatar" src="{{project.creator.avatarUrl}}" mode="aspectFill" />
-                <view class="creator-detail">
-                    <text class="creator-name">{{project.creator.nickname || '匿名用户'}}</text>
-                    <text class="creator-uid">UID: {{project.creator.id || '未知'}}</text>
-                    <text class="creator-contact" wx:if="{{isPublicContact}}">
-                        联系电话：{{project.creator.phone || '未知'}}
-                    </text>
-                </view>
+            <!-- 团队人数标签 -->
+            <view class="info-pill">
+                <text class="pill-icon">👥</text>
+                <text class="pill-text">团队{{project.memberCount || 0}}人</text>
             </view>
         </view>
-        <!-- 底部操作栏 -->
-        <view class="action-bar" wx:if="{{project.status === 1 && !isPublicContact}}">
-            <button class="apply-btn" loading="{{applying}}" disabled="{{applying}}" bindtap="handleApply">
-                <van-icon name="plus" size="18px" color="#fff" custom-style="margin-right: 8rpx;" />
-                申请加入
-            </button>
+
+        <!-- 项目描述卡片 -->
+        <view class="desc-card">
+            <text class="desc-text" user-select="true">{{project.description || '暂无描述'}}</text>
+        </view>
+
+        <!-- 底部操作区 -->
+        <view class="bottom-actions" wx:if="{{project.status === 1 && !isPublicContact}}">
+            <!-- 投递名片按钮 -->
+            <view class="deliver-btn {{applying ? 'disabled' : ''}}" bindtap="handleApply">
+                {{applying ? '提交中...' : '投递名片'}}
+            </view>
+
+            <!-- 分享按钮组 -->
+            <view class="share-row">
+                <button class="share-icon-btn" open-type="share">
+                    <van-icon name="share-o" size="24px" color="#333" />
+                </button>
+            </view>
+        </view>
+
+        <!-- 底部声明 -->
+        <view class="footer-note">
+            <view class="footer-divider"></view>
+            <text class="footer-text">@所有项目快组校园团队均对于内容进行资料审查</text>
         </view>
     </block>
+
     <!-- 空状态 -->
     <view class="empty-container" wx:else>
         <van-empty description="项目不存在" />
