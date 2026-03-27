@@ -304,3 +304,47 @@
     font-size: 24rpx;
     color: #999;
 }
+
+.promotion-dialog {
+    padding: 40rpx;
+}
+
+.promotion-dialog-tip {
+    margin-bottom: 30rpx;
+    font-size: 28rpx;
+    color: #666;
+    line-height: 1.6;
+}
+
+.promotion-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20rpx;
+    font-size: 28rpx;
+    color: #333;
+}
+
+.promotion-price {
+    color: #ee0a24;
+    font-weight: 700;
+}
+
+.promotion-total-row {
+    margin-top: 30rpx;
+    padding-top: 30rpx;
+    border-top: 1px solid #f5f5f5;
+    text-align: right;
+}
+
+.promotion-total-label {
+    margin-right: 10rpx;
+    font-size: 28rpx;
+    color: #666;
+}
+
+.promotion-total-value {
+    color: #ee0a24;
+    font-size: 36rpx;
+    font-weight: 700;
+}

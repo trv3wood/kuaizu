@@ -203,6 +203,10 @@ Page({
   async submitPromotion() {
     const { currentPromotingProjectId, promotionQuantity, promotionProduct } = this.data
     if (!currentPromotingProjectId || !promotionProduct) return
+    if (promotionQuantity <= 0) {
+      wx.showToast({ title: '请输入有效人数', icon: 'none' })
+      return
+    }
 
     try {
       wx.showLoading({ title: '处理中...', mask: true })

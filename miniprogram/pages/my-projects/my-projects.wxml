@@ -108,3 +108,37 @@
 </view>
 <!-- 审核对话框 -->
 <van-dialog id="van-dialog" />
+<!-- 推广对话框 -->
+<van-dialog
+  use-slot
+  show="{{promotionDialogVisible}}"
+  title="项目推广"
+  show-cancel-button
+  confirm-button-text="确认支付"
+  cancel-button-text="取消"
+  bind:confirm="submitPromotion"
+  bind:cancel="closePromotionDialog"
+>
+  <view class="promotion-dialog">
+    <view class="promotion-dialog-tip">通过邮件推广，让更多人看到你的项目。</view>
+    <view class="promotion-price-row" wx:if="{{promotionProduct}}">
+      <text>单价</text>
+      <text class="promotion-price">¥{{promotionProduct.price}} / 人</text>
+    </view>
+    <van-field
+      value="{{promotionQuantity}}"
+      label="推广人数"
+      type="number"
+      placeholder="输入人数"
+      border="{{true}}"
+      bind:change="onPromotionQuantityChange"
+    />
+    <view class="promotion-total-row">
+      <text class="promotion-total-label">总计:</text>
+      <text class="promotion-total-value" wx:if="{{promotionProduct}}">
+        ¥{{(promotionProduct.price * promotionQuantity) || 0}}
+      </text>
+      <text wx:else>计算中...</text>
+    </view>
+  </view>
+</van-dialog>
