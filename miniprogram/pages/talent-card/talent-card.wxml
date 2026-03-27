@@ -5,8 +5,16 @@
         <van-loading size="24px">加载中...</van-loading>
     </view>
     <block wx:else>
+        <!-- 无名片时提示去创建 -->
+        <view class="empty-state" wx:if="{{!profile}}">
+            <view class="page-title">名片</view>
+            <view class="page-subtitle">面对喜欢的校园项目或对外社交时，一张完善的名片会让您更具竞争力。</view>
+            <view class="primary-action create-btn" bindtap="handleEdit">
+                <text>创建名片</text>
+            </view>
+        </view>
         <!-- 查看模式 -->
-        <view class="view-mode" wx:if="{{!isEditing && profile}}">
+        <view class="view-mode" wx:else>
             <view class="page-title">名片</view>
             <view class="page-subtitle">面对喜欢的校园项目或对外社交时，一张完善的名片会让您更具竞争力。</view>
             <!-- 核心人才卡片 -->
@@ -23,7 +31,6 @@
                             <view class="header-left">
                                 <view class="name-row">
                                     <text class="name">{{displayName}}</text>
-                                    <!-- 认证标识 -->
                                     <view class="verify-tag {{isVerified ? 'verified' : ''}}">
                                         <van-icon wx:if="{{isVerified}}" name="passed" color="#3e84fa" size="16px" />
                                         <text wx:else class="unverified-text">未认证</text>
@@ -85,161 +92,6 @@
                 <view class="primary-action" bindtap="goToApplications">
                     <text>投递名片管理</text>
                 </view>
-            </view>
-        </view>
-
-        <!-- 编辑模式 -->
-        <view class="edit-mode" wx:else>
-            <!-- 头像更换 -->
-            <view class="edit-avatar-section" bindtap="handleChangeAvatar">
-                <view class="avatar-wrapper">
-                    <image class="edit-avatar" src="{{avatarUrl}}" mode="aspectFill" />
-                </view>
-                <text class="change-hint">点击更换头像</text>
-            </view>
-
-            <!-- 基本信息卡片 -->
-            <view class="edit-section">
-                <view class="edit-section-title">基本信息</view>
-                <view class="edit-card">
-                    <view class="form-item">
-                        <text class="label">昵称</text>
-                        <input class="value" value="{{displayName}}" disabled />
-                    </view>
-                    <view class="form-item">
-                        <text class="label">手机号</text>
-                        <input class="value disabled" value="{{user.phone}}" disabled />
-                    </view>
-                    <view class="form-item">
-                        <text class="label">邮箱</text>
-                        <input class="value" value="{{user.email}}" placeholder="zhaozewen2016@126.com" bindinput="handleEmailInput" />
-                    </view>
-                    <view class="form-item">
-                        <text class="label">微信号</text>
-                        <input class="value" value="{{user.wechat}}" placeholder="Zzw65918767" bindinput="handleWechatInput" />
-                    </view>
-                    
-                    <!-- MBTI 选择器 -->
-                    <view class="mbti-selector-container">
-                        <text class="label">MBTI</text>
-                        <view class="mbti-pills">
-                            <!-- E/I -->
-                            <view class="mbti-pill-group">
-                                <view class="mbti-pill {{mbtiArray[0] === 'E' ? 'active' : ''}}" bindtap="toggleMbti" data-idx="0" data-val="E">
-                                    <text class="main">E</text>
-                                    <text class="sub">（外向）</text>
-                                </view>
-                                <view class="mbti-pill {{mbtiArray[0] === 'I' ? 'active' : ''}}" bindtap="toggleMbti" data-idx="0" data-val="I">
-                                    <text class="main">I</text>
-                                    <text class="sub">（内向）</text>
-                                </view>
-                            </view>
-                            <!-- S/N -->
-                            <view class="mbti-pill-group">
-                                <view class="mbti-pill {{mbtiArray[1] === 'S' ? 'active' : ''}}" bindtap="toggleMbti" data-idx="1" data-val="S">
-                                    <text class="main">S</text>
-                                    <text class="sub">（实感）</text>
-                                </view>
-                                <view class="mbti-pill {{mbtiArray[1] === 'N' ? 'active' : ''}}" bindtap="toggleMbti" data-idx="1" data-val="N">
-                                    <text class="main">N</text>
-                                    <text class="sub">（直觉）</text>
-                                </view>
-                            </view>
-                            <!-- T/F -->
-                            <view class="mbti-pill-group">
-                                <view class="mbti-pill {{mbtiArray[2] === 'T' ? 'active' : ''}}" bindtap="toggleMbti" data-idx="2" data-val="T">
-                                    <text class="main">T</text>
-                                    <text class="sub">（思考）</text>
-                                </view>
-                                <view class="mbti-pill {{mbtiArray[2] === 'F' ? 'active' : ''}}" bindtap="toggleMbti" data-idx="2" data-val="F">
-                                    <text class="main">F</text>
-                                    <text class="sub">（情感）</text>
-                                </view>
-                            </view>
-                            <!-- J/P -->
-                            <view class="mbti-pill-group">
-                                <view class="mbti-pill {{mbtiArray[3] === 'J' ? 'active' : ''}}" bindtap="toggleMbti" data-idx="3" data-val="J">
-                                    <text class="main">J</text>
-                                    <text class="sub">（判断）</text>
-                                </view>
-                                <view class="mbti-pill {{mbtiArray[3] === 'P' ? 'active' : ''}}" bindtap="toggleMbti" data-idx="3" data-val="P">
-                                    <text class="main">P</text>
-                                    <text class="sub">（知觉）</text>
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                </view>
-            </view>
-
-            <!-- 学业信息 -->
-            <view class="edit-section">
-                <view class="edit-section-title">学业信息</view>
-                <view class="edit-card">
-                    <view class="form-item arrow" bindtap="handleSchoolPicker">
-                        <text class="label">学校</text>
-                        <text class="value">{{user.school.schoolName || '请选择'}}</text>
-                        <van-icon name="arrow" color="#868686" />
-                    </view>
-                    <view class="form-item arrow" bindtap="handleMajorPicker">
-                        <text class="label">专业</text>
-                        <text class="value">{{user.major.majorName || '请选择'}}</text>
-                        <van-icon name="arrow" color="#868686" />
-                    </view>
-                    <view class="form-item arrow">
-                        <text class="label">入学年份</text>
-                        <picker mode="date" fields="year" value="{{user.grade}}" bindchange="handleGradeChange">
-                            <text class="value">{{user.grade || '2023'}}</text>
-                        </picker>
-                        <van-icon name="arrow" color="#868686" />
-                    </view>
-                    <view class="form-item arrow" bindtap="goToCert">
-                        <text class="label">认证状态</text>
-                        <text class="value">{{isVerified ? '已认证' : '未认证'}}</text>
-                        <van-icon name="arrow" color="#868686" />
-                    </view>
-                </view>
-            </view>
-
-            <!-- 自我评价 -->
-            <view class="edit-section">
-                <view class="edit-section-title">自我评价</view>
-                <view class="edit-card no-padding">
-                    <textarea class="edit-textarea" placeholder="描述你的优势和特点..." value="{{form.selfEvaluation}}" data-field="selfEvaluation" bindinput="handleTextareaInput" maxlength="500"></textarea>
-                </view>
-            </view>
-
-            <!-- 项目经历 -->
-            <view class="edit-section">
-                <view class="edit-section-title">项目经历</view>
-                <view class="edit-card no-padding">
-                    <textarea class="edit-textarea" placeholder="介绍你参与过的项目..." value="{{form.projectExperience}}" data-field="projectExperience" bindinput="handleTextareaInput" maxlength="1000"></textarea>
-                </view>
-            </view>
-
-            <!-- 标签 -->
-            <view class="edit-section">
-                <view class="edit-section-title">标签</view>
-                <view class="edit-card tag-edit-box">
-                    <view class="tag-hint">
-                        <view>根据以上内容提取一些鲜明标签，</view>
-                        <view>让更多优秀的团队快速锁定您。</view>
-                    </view>
-                    <view class="add-tag-btn" bindtap="handleAddSkill">添加</view>
-                </view>
-                <!-- 已加标签展示 -->
-                <view class="current-tags" wx:if="{{form.skills.length > 0}}">
-                    <view class="tag-item" wx:for="{{form.skills}}" wx:key="*this">
-                        <text>{{item}}</text>
-                        <van-icon name="cross" size="12px" data-index="{{index}}" bindtap="handleRemoveSkill" />
-                    </view>
-                </view>
-            </view>
-
-            <!-- 底部按钮 -->
-            <view class="edit-footer">
-                <view class="cancel-btn" bindtap="handleCancel">取消</view>
-                <view class="save-btn {{saving ? 'disabled' : ''}}" bindtap="handleSave">保存</view>
             </view>
         </view>
     </block>
