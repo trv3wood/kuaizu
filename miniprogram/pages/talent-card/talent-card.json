@@ -1,10 +1,14 @@
 {
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#c4f1ff",
+    "navigationBarTextStyle": "black",
     "usingComponents": {
-        "van-loading": "@vant/weapp/loading/index",
+        "van-icon": "@vant/weapp/icon/index",
         "van-tag": "@vant/weapp/tag/index",
+        "van-loading": "@vant/weapp/loading/index",
         "van-cell": "@vant/weapp/cell/index",
         "van-cell-group": "@vant/weapp/cell-group/index",
-        "van-field": "@vant/weapp/field/index"
-    },
-    "navigationBarTitleText": "人才名片"
+        "van-field": "@vant/weapp/field/index",
+        "van-button": "@vant/weapp/button/index"
+    }
 }

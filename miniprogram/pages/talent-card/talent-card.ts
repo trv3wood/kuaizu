@@ -13,6 +13,8 @@ Page({
         isEditing: false,
         // 人才档案
         profile: null as TalentProfileDetailVO | null,
+        // MBTI 数组 (E/I, S/N, T/F, J/P)
+        mbtiArray: ['E', 'S', 'T', 'J'],
         // 表单数据
         form: {
             skills: [] as string[],
@@ -23,14 +25,13 @@ Page({
         } as UpsertTalentProfileDTO,
         // 技能输入
         skillInput: '',
-        // MBTI 选项
+        // MBTI 原始选项 (保留以防其他逻辑需要)
         mbtiOptions: [
             'INTJ', 'INTP', 'ENTJ', 'ENTP',
             'INFJ', 'INFP', 'ENFJ', 'ENFP',
             'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ',
             'ISTP', 'ISFP', 'ESTP', 'ESFP'
         ],
-        mbtiIndex: -1,
         // 状态
         loading: true,
         saving: false
@@ -42,7 +43,7 @@ Page({
         this.storeBindings = createStoreBindings(this, {
             store: userStore,
             fields: ['user', 'displayName', 'avatarUrl', 'isVerified'],
-            actions: []
+            actions: ['updateUser']
         })
 
         this.loadProfile()
@@ -63,19 +64,21 @@ Page({
             const profile = res.data
 
             if (profile) {
-                const mbtiIndex = this.data.mbtiOptions.indexOf(profile.mbti || '')
+                // 解析 MBTI 字符串为数组
+                const mbti = profile.mbti || 'ESTJ'
+                const mbtiArray = mbti.split('')
 
                 this.setData({
                     profile,
                     isEditing: false,
                     form: {
                         skills: profile.skills || [],
-                        selfEvaluation: '',
-                        projectExperience: '',
-                        mbti: profile.mbti || '',
+                        selfEvaluation: profile.selfEvaluation || '',
+                        projectExperience: profile.projectExperience || '',
+                        mbti: mbti,
                         status: profile.status || 1
                     },
-                    mbtiIndex,
+                    mbtiArray,
                     loading: false
                 })
 
@@ -93,80 +96,100 @@ Page({
         }
     },
 
-    /**
-     * 加载人才详情
-     */
-    async loadProfileDetail(id: number, userId?: number) {
-        try {
-            const res = await talentApi.getTalentProfile(id, userId)
-            const detail = res.data
-            if (detail) {
-                this.setData({
-                    'form.selfEvaluation': detail.selfEvaluation || '',
-                    'form.projectExperience': detail.projectExperience || ''
-                })
-            }
-        } catch (error) {
-            console.error('加载人才详情失败:', error)
-        }
-    },
-
     handleEdit() {
+        // 从 profile 初始化 edit 状态
+        const mbti = this.data.profile?.mbti || 'ESTJ'
         this.setData({
             isEditing: true,
-            form: {
-                ...this.data.profile,
-            }
+            'form.skills': this.data.profile?.skills || [],
+            'form.selfEvaluation': this.data.profile?.selfEvaluation || '',
+            'form.projectExperience': this.data.profile?.projectExperience || '',
+            'form.mbti': mbti,
+            mbtiArray: mbti.split('')
         })
     },
-    handleUnpublish() {
-        wx.showModal({
+
+    async handleUnpublish() {
+        const res = await wx.showModal({
             title: '提示',
             content: '确定要下架名片吗？',
-            success: async (res) => {
-                if (res.confirm) {
-                    try {
-                        await talentApi.deleteMyTalentProfile()
-                        wx.showToast({ title: '下架成功', icon: 'success' })
-                        this.loadProfile()
-                    } catch (error) {
-                        console.error('下架失败:', error)
-                        wx.showToast({ title: '下架失败', icon: 'none' })
-                    }
-                }
-            }
         })
+        
+        if (res.confirm) {
+            try {
+                await talentApi.deleteMyTalentProfile()
+                wx.showToast({ title: '下架成功', icon: 'success' })
+                this.loadProfile()
+            } catch (error) {
+                console.error('下架失败:', error)
+                wx.showToast({ title: '下架失败', icon: 'none' })
+            }
+        }
     },
 
     handleCancel() {
         if (this.data.profile) {
-            const profile = this.data.profile
-            const mbtiIndex = this.data.mbtiOptions.indexOf(profile.mbti || '')
-            this.setData({
-                isEditing: false,
-                form: {
-                    skills: profile.skills || [],
-                    selfEvaluation: this.data.form.selfEvaluation,
-                    projectExperience: this.data.form.projectExperience,
-                    mbti: profile.mbti || '',
-                    status: profile.status || 1
-                },
-                mbtiIndex,
-                skillInput: ''
-            })
+            this.setData({ isEditing: false })
         } else {
             wx.navigateBack()
         }
     },
 
-    handleInput(e: WechatMiniprogram.Input) {
-        const { field } = e.currentTarget.dataset
+    /**
+     * MBTI 维度切换
+     */
+    toggleMbti(e: any) {
+        const { idx, val } = e.currentTarget.dataset
+        const mbtiArray = [...this.data.mbtiArray]
+        mbtiArray[idx] = val
+        const mbti = mbtiArray.join('')
         this.setData({
-            [`form.${field}`]: e.detail
+            mbtiArray,
+            'form.mbti': mbti
         })
     },
 
-    handleSkillInput(e: WechatMiniprogram.Input) {
+    /**
+     * 更换头像
+     */
+    handleChangeAvatar() {
+        wx.chooseMedia({
+            count: 1,
+            mediaType: ['image'],
+            success: (res) => {
+                const tempFilePath = res.tempFiles[0].tempFilePath
+                // TODO: 真正的上传逻辑
+                // 这里暂时更新 store 给用户反馈
+                (this as any).updateUser({ avatarUrl: tempFilePath })
+                wx.showToast({ title: '已更新头像', icon: 'none' })
+            }
+        })
+    },
+
+    /**
+     * 入学年份更改
+     */
+    handleGradeChange(e: any) {
+        const grade = e.detail.value
+        this.setData({
+            'user.grade': grade
+        })
+    },
+
+    handleEmailInput(e: any) {
+        this.setData({ 'user.email': e.detail.value })
+    },
+
+    handleWechatInput(e: any) {
+        this.setData({ 'user.wechat': e.detail.value })
+    },
+
+    handleTextareaInput(e: any) {
+        const { field } = e.currentTarget.dataset
+        this.setData({ [`form.${field}`]: e.detail.value })
+    },
+
+    handleSkillInput(e: any) {
         this.setData({ skillInput: e.detail.value })
     },
 
@@ -175,26 +198,25 @@ Page({
         const skill = skillInput.trim()
 
         if (!skill) {
-            wx.showToast({ title: '请输入技能', icon: 'none' })
+            // 如果是空的，可能是在点击“添加”按钮想输入
+            // 我们可以在这里弹窗输入，或者让用户先在输入框填
+            wx.showModal({
+                title: '添加标签',
+                editable: true,
+                placeholderText: '请输入鲜明标签，如 极具创意',
+                success: (res) => {
+                    if (res.confirm && res.content.trim()) {
+                        const newSkill = res.content.trim()
+                        this.setData({ 'form.skills': [...(form.skills || []), newSkill] })
+                    }
+                }
+            })
             return
         }
 
         const skills = form.skills || []
-        let exists = false
-        for (let i = 0; i < skills.length; i++) {
-            if (skills[i] === skill) {
-                exists = true
-                break
-            }
-        }
-
-        if (exists) {
-            wx.showToast({ title: '技能已存在', icon: 'none' })
-            return
-        }
-
-        if (skills.length >= 10) {
-            wx.showToast({ title: '最多添加10个技能', icon: 'none' })
+        if (skills.includes(skill)) {
+            wx.showToast({ title: '标签已存在', icon: 'none' })
             return
         }
 
@@ -204,40 +226,29 @@ Page({
         })
     },
 
-    handleRemoveSkill(e: WechatMiniprogram.TouchEvent) {
+    handleRemoveSkill(e: any) {
         const { index } = e.currentTarget.dataset
         const skills = [...(this.data.form.skills || [])]
         skills.splice(index, 1)
         this.setData({ 'form.skills': skills })
     },
 
-    handleMbtiChange(e: WechatMiniprogram.PickerChange) {
-        const index = Number(e.detail.value)
-        this.setData({
-            mbtiIndex: index,
-            'form.mbti': this.data.mbtiOptions[index]
-        })
+    goToCert() {
+        wx.navigateTo({ url: '/pages/certification/certification' })
+    },
+
+    handleSchoolPicker() {
+        wx.navigateTo({ url: '/pages/select-school/select-school' })
+    },
+
+    handleMajorPicker() {
+        wx.navigateTo({ url: '/pages/select-major/select-major' })
     },
 
     async handleSave() {
-        if (!(this.data as any).isVerified) {
-            wx.showToast({title: "请前往个人中心进行学生认证", icon: 'none'})
-            return
-        }
         const { form } = this.data
-
         if (!form.skills || form.skills.length === 0) {
-            wx.showToast({ title: '请添加至少一个技能', icon: 'none' })
-            return
-        }
-
-        if (!form.selfEvaluation || form.selfEvaluation.trim() === '') {
-            wx.showToast({ title: '请填写自我评价', icon: 'none' })
-            return
-        }
-
-        if (!form.projectExperience || form.projectExperience.trim() === '') {
-            wx.showToast({ title: '请填写项目经历', icon: 'none' })
+            wx.showToast({ title: '请添加至少一个标签', icon: 'none' })
             return
         }
 
@@ -245,20 +256,29 @@ Page({
 
         try {
             const res = await talentApi.upsertTalentProfile({
-                skills: form.skills,
-                selfEvaluation: form.selfEvaluation,
-                projectExperience: form.projectExperience,
-                mbti: form.mbti,
+                ...form,
                 status: 1
             })
 
             wx.showToast({ title: '保存成功', icon: 'success' })
-            this.setData({ isEditing: false, profile: res.data })
+            this.setData({ 
+                isEditing: false, 
+                profile: res.data,
+            })
+            // 同时更新用户 stores (如果修改了 email/grade)
+            // (this as any).updateUser(this.data.user)
+
         } catch (error) {
             console.error('保存失败:', error)
             wx.showToast({ title: '保存失败', icon: 'none' })
         } finally {
             this.setData({ saving: false })
         }
+    },
+
+    goToApplications() {
+        wx.navigateTo({
+            url: '/pages/my-applications/my-applications'
+        })
     }
 })
