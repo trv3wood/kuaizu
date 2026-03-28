@@ -14,8 +14,6 @@
 .feedback-textarea {
   width: 100%;
   min-height: 320rpx;
-  background-color: #fff;
-  border-radius: 30rpx;
   padding: 20rpx;
   font-size: 30rpx;
   line-height: 1.5;
@@ -23,8 +21,6 @@
 }
 
 .email-section {
-  background-color: #fff;
-  border-radius: 30rpx;
   padding: 20rpx 20rpx 30rpx 20rpx;
   margin-bottom: 30rpx;
 }
@@ -62,25 +58,11 @@
 }
 
 .submit-section {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
   padding: 20rpx 30rpx 30rpx 30rpx;
-  background-color: #fff;
-  z-index: 100;
   box-sizing: border-box;
 }
 
 .submit-button {
   width: 80%;
-  border-radius: 30rpx;
-  color: #fff;
-  background-color: rgb(0, 177, 38);
   margin: 0 auto;
-  display: block;
-}
-
-.submit-button::after {
-  border: none;
 }

@@ -91,19 +91,6 @@
 
 .info-pill {
     max-width: 100%;
-    min-height: 54rpx;
-    padding: 0 22rpx;
-    border-radius: var(--radius-pill);
-    background: var(--bg-pill-blue);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10rpx;
-}
-
-.pill-icon {
-    font-size: 24rpx;
-    line-height: 1;
 }
 
 .pill-text {
@@ -118,11 +105,8 @@
 }
 
 .section-card {
-    background: var(--card-bg);
-    border-radius: var(--radius-xl);
     padding: 26rpx 22rpx 20rpx;
     margin-bottom: 24rpx;
-    box-shadow: var(--shadow-md);
 }
 
 .section-title-row {
@@ -169,10 +153,6 @@
 .skill-chip {
     min-height: 44rpx;
     padding: 0 14rpx;
-    background: var(--bg-muted-chip);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .skill-chip text {
@@ -186,28 +166,13 @@
 }
 
 .action-bar {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
     padding: 18rpx 57rpx calc(24rpx + env(safe-area-inset-bottom));
-    background: transparent;
     z-index: 5;
 }
 
 .send-btn {
-    width: 100%;
     height: 94rpx;
-    border-radius: 40rpx;
-    background: linear-gradient(180deg, #67adff 0%, #559dfc 100%);
-    color: #ffffff;
     font-size: 28rpx;
-    font-weight: 700;
-    box-shadow: 0 8rpx 16rpx rgba(85, 157, 252, 0.24);
-}
-
-.send-btn::after {
-    border: none;
 }
 
 .send-btn[disabled] {
@@ -274,12 +239,8 @@
 }
 
 .product-info {
-    display: flex;
-    align-items: center;
     gap: 30rpx;
-    background: var(--bg-page-soft);
     padding: 40rpx;
-    border-radius: var(--radius-lg);
     margin-bottom: 40rpx;
 }
 

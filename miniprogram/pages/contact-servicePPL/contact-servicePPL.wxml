@@ -1,7 +1,7 @@
 <!-- pages/contact-servicePPL/contact-servicePPL.wxml -->
 <view class="service-container">
   <!-- 在线帮助 -->
-  <button class="service-card" open-type="contact">
+  <button class="service-card ui-card ui-card--button ui-card--shadow-pop" open-type="contact">
     <view class="card-icon">
       <image src="https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/onlineHelp.png"></image>
     </view>
@@ -10,7 +10,7 @@
   </button>
 
   <!-- 电话帮助 -->
-  <button class="service-card" bindtap="handlePhoneHelp">
+  <button class="service-card ui-card ui-card--button ui-card--shadow-pop" bindtap="handlePhoneHelp">
     <view class="card-icon">
       <image src="https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/phoneHelp.png"></image>
     </view>
@@ -19,7 +19,7 @@
   </button>
 
   <!-- 投诉建议 -->
-  <button class="service-card" bindtap="handleComplaint">
+  <button class="service-card ui-card ui-card--button ui-card--shadow-pop" bindtap="handleComplaint">
     <view class="card-icon">
       <image src="https://kuaizu-img-file.oss-cn-hangzhou.aliyuncs.com/kuaizu-img/imges/images/advise.png"></image>
     </view>

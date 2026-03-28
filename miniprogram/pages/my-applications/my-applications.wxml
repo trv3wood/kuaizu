@@ -12,9 +12,9 @@
     </view>
     <!-- 申请列表 -->
     <view class="application-list" wx:elif="{{applications.length > 0}}">
-        <view class="application-card" wx:for="{{applications}}" wx:key="id">
+        <view class="application-card ui-card ui-card--lg ui-card--shadow-sm" wx:for="{{applications}}" wx:key="id">
             <!-- 项目信息 -->
-            <view class="project-info" data-project-id="{{item.projectId}}" bindtap="handleViewProject">
+            <view class="project-info ui-card ui-card--soft ui-card--md ui-card--button" data-project-id="{{item.projectId}}" bindtap="handleViewProject">
                 <van-icon name="orders-o" size="18px" color="#667eea" />
                 <text class="project-name">{{item.projectName || '未知项目'}}</text>
                 <van-icon name="arrow" size="12px" color="#999" />
@@ -28,12 +28,12 @@
                 <text class="apply-time">{{item.appliedAt}}</text>
             </view>
             <!-- 申请理由 -->
-            <view class="apply-reason" wx:if="{{item.applyReason}}">
+            <view class="apply-reason ui-card ui-card--soft ui-card--md" wx:if="{{item.applyReason}}">
                 <text class="label">申请理由：</text>
                 <text class="content">{{item.applyReason}}</text>
             </view>
             <!-- 队长回复 -->
-            <view class="reply-msg" wx:if="{{item.replyMsg}}">
+            <view class="reply-msg ui-card ui-card--soft ui-card--md" wx:if="{{item.replyMsg}}">
                 <text class="label">队长回复：</text>
                 <text class="content">{{item.replyMsg}}</text>
             </view>

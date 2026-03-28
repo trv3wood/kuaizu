@@ -9,7 +9,7 @@
     <view class="empty-state" wx:if="{{!profile}}">
       <view class="page-title">名片</view>
       <view class="page-subtitle">面对喜欢的校园项目或对外社交时，一张完善的名片会让您更具竞争力。</view>
-      <view class="primary-action create-btn" bindtap="handleEdit">
+      <view class="primary-action create-btn ui-btn ui-btn--pill ui-btn--lg ui-btn--primary" bindtap="handleEdit">
         <text>创建名片</text>
       </view>
     </view>
@@ -19,7 +19,7 @@
       <view class="page-subtitle">面对喜欢的校园项目或对外社交时，一张完善的名片会让您更具竞争力。</view>
       <!-- 核心人才卡片 -->
       <view class="card-wrapper">
-        <view class="talent-card">
+        <view class="talent-card ui-card ui-card--xl">
           <!-- 左侧边栏色彩 -->
           <view class="card-side-bar">
             <view class="side-blue"></view>
@@ -78,18 +78,18 @@
         </view>
       </view>
       <!-- 操作按钮 -->
-      <view class="bottom-area">
+      <view class="bottom-area ui-bottom-bar ui-bottom-bar--transparent">
         <view class="secondary-btns">
-          <view class="action-card" bindtap="handleEdit">
+          <view class="action-card ui-card ui-card--xl ui-card--shadow-pop" bindtap="handleEdit">
             <van-icon name="edit" size="24px" />
             <text>编辑名片</text>
           </view>
-          <button class="action-card share-btn" open-type="share">
+          <button class="action-card share-btn ui-btn ui-card ui-card--xl ui-card--shadow-pop" open-type="share">
             <van-icon name="share-o" size="24px" />
             <text>分享名片</text>
           </button>
         </view>
-        <view class="primary-action" bindtap="goToApplications">
+        <view class="primary-action ui-btn ui-btn--pill ui-btn--lg ui-btn--primary" bindtap="goToApplications">
           <text>投递名片管理</text>
         </view>
       </view>

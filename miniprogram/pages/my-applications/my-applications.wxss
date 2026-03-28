@@ -42,21 +42,14 @@
 }
 
 .application-card {
-    background: var(--card-bg);
-    border-radius: var(--radius-lg);
     padding: 40rpx;
     margin-bottom: 30rpx;
-    box-shadow: var(--shadow-sm);
 }
 
 /* 项目信息 */
 .project-info {
-    display: flex;
-    align-items: center;
     gap: 12rpx;
-    background: var(--bg-page-soft);
     padding: 20rpx 30rpx;
-    border-radius: var(--radius-md);
     margin-bottom: 20rpx;
 }
 
@@ -83,9 +76,7 @@
 /* 申请理由 */
 .apply-reason,
 .reply-msg {
-    background: var(--bg-color);
     padding: 20rpx 30rpx;
-    border-radius: var(--radius-sm);
     margin-bottom: 16rpx;
 }
 
@@ -105,7 +96,6 @@
 
 .reply-msg {
     border-left: 4rpx solid var(--primary-color);
-    background: var(--bg-page-soft);
 }
 
 /* 联系方式 */

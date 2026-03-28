@@ -30,23 +30,23 @@
                 </view>
 
                 <view class="pill-list">
-                    <view class="info-pill">
-                        <text class="pill-icon">🏫</text>
-                        <text class="pill-text">{{profile.schoolLabel}}</text>
+                    <view class="info-pill ui-pill ui-pill--blue">
+                        <text class="pill-icon ui-pill__icon">🏫</text>
+                        <text class="pill-text ui-pill__text">{{profile.schoolLabel}}</text>
                     </view>
-                    <view class="info-pill">
-                        <text class="pill-icon">📖</text>
-                        <text class="pill-text">{{profile.majorLabel}}</text>
+                    <view class="info-pill ui-pill ui-pill--blue">
+                        <text class="pill-icon ui-pill__icon">📖</text>
+                        <text class="pill-text ui-pill__text">{{profile.majorLabel}}</text>
                     </view>
-                    <view class="info-pill" wx:if="{{profile.gradeLabel}}">
-                        <text class="pill-icon">🎓</text>
-                        <text class="pill-text">{{profile.gradeLabel}}</text>
+                    <view class="info-pill ui-pill ui-pill--blue" wx:if="{{profile.gradeLabel}}">
+                        <text class="pill-icon ui-pill__icon">🎓</text>
+                        <text class="pill-text ui-pill__text">{{profile.gradeLabel}}</text>
                     </view>
                 </view>
             </view>
 
             <view class="content-sections">
-                <view class="section-card" wx:if="{{profile.selfEvaluation || (profile.displaySkills && profile.displaySkills.length > 0)}}">
+                <view class="section-card ui-card ui-card--xl ui-card--shadow-md" wx:if="{{profile.selfEvaluation || (profile.displaySkills && profile.displaySkills.length > 0)}}">
                     <view class="section-title-row">
                         <view class="title-accent"></view>
                         <text class="section-title">自我评价</text>
@@ -54,14 +54,14 @@
 
                     <text class="section-content" wx:if="{{profile.selfEvaluation}}">{{profile.selfEvaluation}}</text>
 
-                    <view class="skill-grid" wx:if="{{profile.displaySkills && profile.displaySkills.length > 0}}">
-                        <view class="skill-chip" wx:for="{{profile.displaySkills}}" wx:key="*this">
+                    <view class="skill-grid ui-tag-list" wx:if="{{profile.displaySkills && profile.displaySkills.length > 0}}">
+                        <view class="skill-chip ui-tag" wx:for="{{profile.displaySkills}}" wx:key="*this">
                             <text>{{item}}</text>
                         </view>
                     </view>
                 </view>
 
-                <view class="section-card" wx:if="{{profile.projectExperience}}">
+                <view class="section-card ui-card ui-card--xl ui-card--shadow-md" wx:if="{{profile.projectExperience}}">
                     <view class="section-title-row">
                         <view class="title-accent"></view>
                         <text class="section-title">项目经历</text>
@@ -74,8 +74,8 @@
             <view class="detail-spacer"></view>
         </scroll-view>
 
-        <view class="action-bar">
-            <button class="send-btn" loading="{{sending}}" disabled="{{sending}}" bindtap="handleSendOliveBranch">发送橄榄枝</button>
+        <view class="action-bar ui-bottom-bar ui-bottom-bar--transparent">
+            <button class="send-btn ui-btn ui-btn--block ui-btn--pill ui-btn--lg ui-btn--gradient-blue" loading="{{sending}}" disabled="{{sending}}" bindtap="handleSendOliveBranch">发送橄榄枝</button>
         </view>
     </block>
 
@@ -113,7 +113,7 @@
                 <text class="popup-title">购买橄榄枝</text>
                 <van-icon name="cross" size="20px" color="#999" bindtap="handleClosePurchase" />
             </view>
-            <view class="product-info">
+            <view class="product-info ui-card ui-card--soft ui-card--lg">
                 <view class="product-icon">🫒</view>
                 <view class="product-detail">
                     <text class="product-name">橄榄枝额度</text>

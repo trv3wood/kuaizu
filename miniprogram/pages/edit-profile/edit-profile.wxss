@@ -73,8 +73,6 @@
 
 /* ===== 白色卡片 ===== */
 .edit-card {
-    background: var(--card-bg);
-    border-radius: var(--radius-xl);
     padding: 10rpx 44rpx;
 }
 
@@ -84,40 +82,8 @@
 }
 
 /* ===== 表单行 ===== */
-.form-item {
-    display: flex;
-    align-items: center;
-    min-height: 88rpx;
-    border-bottom: 1rpx solid #f0f0f0;
-    padding: 10rpx 0;
-}
-
-.form-item:last-child {
-    border-bottom: none;
-}
-
-.form-item .label {
-    font-size: 28rpx;
-    font-weight: bold;
-    color: #868686;
-    min-width: 120rpx;
-    flex-shrink: 0;
-}
-
-.form-item .form-value {
-    flex: 1;
-    text-align: right;
-    font-size: 28rpx;
-    font-weight: bold;
-    color: #000000;
-}
-
 .form-item .form-value.disabled {
     color: #868686;
-}
-
-.form-item.arrow {
-    gap: 8rpx;
 }
 
 /* ===== MBTI 选择器 ===== */
@@ -203,69 +169,24 @@
 
 .add-tag-btn {
     width: 140rpx;
-    height: 88rpx;
-    line-height: 88rpx;
-    text-align: center;
-    background: #559dfc;
-    color: #ffffff;
-    border-radius: var(--radius-xl);
-    font-size: 32rpx;
-    font-weight: bold;
     flex-shrink: 0;
 }
 
 .current-tags {
     margin-top: 24rpx;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16rpx;
-}
-
-.tag-item {
-    background: var(--bg-pill-blue);
-    border-radius: var(--radius-xl);
-    padding: 8rpx 24rpx;
-    display: flex;
-    align-items: center;
-    gap: 8rpx;
-    font-size: 24rpx;
-    font-weight: bold;
 }
 
 /* ===== 底部固定按钮 ===== */
 .edit-footer {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
     padding: 24rpx 54rpx calc(44rpx + env(safe-area-inset-bottom));
-    display: flex;
-    gap: 40rpx;
-    background: #ffffff;
-    box-shadow: 0px -8rpx 8rpx 0px rgba(0, 0, 0, 0.15);
-    z-index: 100;
 }
 
 .cancel-btn {
     flex: 1;
-    height: 88rpx;
-    line-height: 88rpx;
-    text-align: center;
-    background: #ebebeb;
-    border-radius: var(--radius-xl);
-    font-size: 34rpx;
-    font-weight: bold;
-    color: #000000;
 }
 
 .save-btn {
     flex: 2;
-    height: 88rpx;
-    line-height: 88rpx;
-    text-align: center;
-    background: #3e84fa;
-    color: #ffffff;
-    border-radius: var(--radius-xl);
-    font-size: 34rpx;
-    font-weight: bold;
 }
 
 /* ===== Picker 弹出层 (保留原有) ===== */

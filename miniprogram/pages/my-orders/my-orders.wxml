@@ -12,7 +12,7 @@
     </view>
     <!-- 订单列表 -->
     <view class="order-list" wx:elif="{{orders.length > 0}}">
-        <view class="order-card" wx:for="{{orders}}" wx:key="id" data-order="{{item}}" bindtap="handleOrderTap">
+        <view class="order-card ui-card ui-card--md ui-card--shadow-sm" wx:for="{{orders}}" wx:key="id" data-order="{{item}}" bindtap="handleOrderTap">
             <!-- 头部：状态 -->
             <view class="order-header">
                 <text class="order-id">订单号: {{item.id}}</text>
@@ -44,10 +44,10 @@
             </view>
             <!-- 操作按钮 -->
             <view class="order-footer" wx:if="{{item.status === 0}}">
-                <button class="cancel-btn" catchtap="handleCancelOrder" data-order="{{item}}">
+                <button class="cancel-btn ui-btn ui-btn--pill ui-btn--md ui-btn--outline-danger" catchtap="handleCancelOrder" data-order="{{item}}">
                     取消订单
                 </button>
-                <button class="pay-btn" catchtap="handlePayOrder" data-order="{{item}}">
+                <button class="pay-btn ui-btn ui-btn--pill ui-btn--md ui-btn--primary" catchtap="handlePayOrder" data-order="{{item}}">
                     立即支付
                 </button>
             </view>
@@ -63,7 +63,7 @@
     <!-- 空状态 -->
     <view class="empty-container" wx:else>
         <van-empty description="暂无订单">
-            <button class="empty-btn" bindtap="goShopping">去购买</button>
+            <button class="empty-btn ui-btn ui-btn--pill ui-btn--lg ui-btn--primary" bindtap="goShopping">去购买</button>
         </van-empty>
     </view>
 </view>

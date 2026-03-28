@@ -3,8 +3,8 @@
     <!-- 表单内容 -->
     <view class="form-section">
         <!-- 项目名称 -->
-        <view class="form-card">
-            <view class="card-title">项目名称</view>
+        <view class="form-card ui-card ui-card--md ui-card--shadow-sm">
+            <view class="card-title ui-form-title">项目名称</view>
             <van-field
                 value="{{form.name}}"
                 placeholder="输入项目名称，不超过20字"
@@ -18,8 +18,8 @@
         </view>
 
         <!-- 项目描述 -->
-        <view class="form-card">
-            <view class="card-title">项目描述</view>
+        <view class="form-card ui-card ui-card--md ui-card--shadow-sm">
+            <view class="card-title ui-form-title">项目描述</view>
             <van-field
                 value="{{form.description}}"
                 type="textarea"
@@ -35,23 +35,23 @@
         </view>
 
         <!-- 团队人数 -->
-        <view class="form-card form-card--inline">
-            <view class="card-title">团队人数</view>
+        <view class="form-card form-card--inline ui-card ui-card--md ui-card--shadow-sm ui-card--row">
+            <view class="card-title ui-form-title">团队人数</view>
             <van-stepper value="{{form.memberCount}}" min="1" max="50" bind:change="onMemberCountChange" />
         </view>
 
         <!-- 是否接受跨校 -->
-        <view class="form-card form-card--inline">
-            <view class="card-title">是否接受跨校</view>
+        <view class="form-card form-card--inline ui-card ui-card--md ui-card--shadow-sm ui-card--row">
+            <view class="card-title ui-form-title">是否接受跨校</view>
             <view class="toggle-group">
-                <view class="toggle-item {{form.isCrossSchool === 1 ? 'active' : ''}}" bindtap="onCrossSchoolSelect" data-value="{{1}}">接受</view>
-                <view class="toggle-item {{form.isCrossSchool === 0 ? 'active' : ''}}" bindtap="onCrossSchoolSelect" data-value="{{0}}">不接受</view>
+                <view class="toggle-item ui-pill {{form.isCrossSchool === 1 ? 'active' : ''}}" bindtap="onCrossSchoolSelect" data-value="{{1}}">接受</view>
+                <view class="toggle-item ui-pill {{form.isCrossSchool === 0 ? 'active' : ''}}" bindtap="onCrossSchoolSelect" data-value="{{0}}">不接受</view>
             </view>
         </view>
 
         <!-- 项目类型 -->
-        <view class="form-card">
-            <view class="card-title">项目类型</view>
+        <view class="form-card ui-card ui-card--md ui-card--shadow-sm">
+            <view class="card-title ui-form-title">项目类型</view>
             <view class="direction-row">
                 <view wx:for="{{directions}}" wx:key="value"
                     class="direction-col {{form.direction === item.value ? 'active' : ''}}"
@@ -63,8 +63,8 @@
         </view>
 
         <!-- 所属学校 -->
-        <view class="form-card" wx:if="{{!isEdit}}">
-            <view class="card-title">所属学校</view>
+        <view class="form-card ui-card ui-card--md ui-card--shadow-sm" wx:if="{{!isEdit}}">
+            <view class="card-title ui-form-title">所属学校</view>
             <view class="school-row" bindtap="onSchoolClick">
                 <text class="school-text {{schoolId ? '' : 'placeholder'}}">{{schoolId ? schoolName : '选择学校'}}</text>
                 <van-icon name="arrow" color="#999" size="16px" />
@@ -74,8 +74,8 @@
     </view>
 
     <!-- 提交按钮 -->
-    <view class="bottom-bar">
-        <view class="publish-btn {{submitting ? 'disabled' : ''}}" bindtap="handleSubmit">
+    <view class="bottom-bar ui-bottom-bar ui-bottom-bar--solid">
+        <view class="publish-btn ui-btn ui-btn--block ui-btn--pill ui-btn--xl ui-btn--primary {{submitting ? 'disabled' : ''}}" bindtap="handleSubmit">
             {{submitting ? '提交中...' : (isEdit ? '保存修改' : '发布项目')}}
         </view>
     </view>

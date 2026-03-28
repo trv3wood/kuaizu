@@ -89,8 +89,6 @@
 }
 
 .branch-card {
-    background: var(--card-bg);
-    border-radius: var(--radius-xl);
     box-shadow: 0 0 8rpx rgba(0, 0, 0, 0.16);
     margin-bottom: 24rpx;
 }
@@ -191,13 +189,6 @@
 }
 
 .status-pill {
-    min-width: 140rpx;
-    height: 50rpx;
-    padding: 0 24rpx;
-    border-radius: 999rpx;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-left: auto;
 }
 
@@ -349,12 +340,6 @@
     margin-bottom: 12rpx;
 }
 
-.tag-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8rpx;
-}
-
 .sent-footer {
     display: flex;
     justify-content: flex-end;
@@ -366,8 +351,6 @@
     height: 54rpx;
     padding: 0 24rpx;
     margin: 0;
-    border: none;
-    border-radius: 999rpx;
     background: #0cc160;
     color: #ffffff;
     font-size: 26rpx;
@@ -377,10 +360,6 @@
 
 .sms-button.is-sent {
     background: #54a8f8;
-}
-
-.sms-button::after {
-    border: none;
 }
 
 .load-more,

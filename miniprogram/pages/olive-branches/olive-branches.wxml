@@ -33,7 +33,7 @@
 
         <block wx:elif="{{branches.length > 0}}">
             <view class="branch-list">
-                <view class="branch-card branch-card-{{viewMode}}" wx:for="{{branches}}" wx:key="id">
+                <view class="branch-card ui-card ui-card--xl branch-card-{{viewMode}}" wx:for="{{branches}}" wx:key="id">
                     <block wx:if="{{viewMode === 'received'}}">
                         <text class="sms-tip" wx:if="{{item.hasSmsNotice}}">项目曾向您发送短信</text>
 
@@ -57,7 +57,7 @@
                                 </view>
                             </view>
 
-                            <view class="status-pill {{item.statusPillClass}}" wx:else>
+                            <view class="status-pill ui-pill ui-pill--status {{item.statusPillClass}}" wx:else>
                                 <text>{{item.statusText}}</text>
                             </view>
                         </view>
@@ -90,8 +90,8 @@
                                 <text class="profile-school">{{item.schoolLabel}}</text>
                                 <text class="profile-major">专业：{{item.majorLabel}}</text>
 
-                                <view class="tag-row" wx:if="{{item.skillTags.length > 0}}">
-                                    <view class="tag-chip" wx:for="{{item.skillTags}}" wx:key="*this">
+                                <view class="tag-row ui-tag-list" wx:if="{{item.skillTags.length > 0}}">
+                                    <view class="tag-chip ui-tag" wx:for="{{item.skillTags}}" wx:key="*this">
                                         <text>{{item}}</text>
                                     </view>
                                 </view>
@@ -99,7 +99,7 @@
                         </view>
 
                         <view class="sent-footer" wx:if="{{item.showSmsAction}}">
-                            <button class="sms-button {{item.hasSmsNotice ? 'is-sent' : ''}}" data-id="{{item.id}}" bindtap="handleSmsNotify">
+                            <button class="sms-button ui-btn ui-btn--pill {{item.hasSmsNotice ? 'is-sent' : ''}}" data-id="{{item.id}}" bindtap="handleSmsNotify">
                                 {{item.smsActionText}}
                             </button>
                         </view>

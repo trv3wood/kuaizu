@@ -17,27 +17,10 @@
 
 /* ===== Card base ===== */
 .form-card {
-    background: var(--card-bg);
-    border-radius: var(--radius-md);
     padding: 28rpx 36rpx;
-    box-shadow: var(--shadow-sm);
-}
-
-.form-card--inline {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 /* ===== Card title (所有卡的标题) ===== */
-.card-title {
-    font-size: 34rpx;
-    font-weight: 500;
-    color: #000000;
-    line-height: 44rpx;
-}
-
-/* ===== Toggle buttons (接受 / 不接受) ===== */
 .toggle-group {
     display: flex;
     align-items: center;
@@ -119,23 +102,8 @@
 
 /* ===== Bottom bar & publish button ===== */
 .bottom-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #ffffff;
     padding: 24rpx 44rpx;
     padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
-}
-
-.publish-btn {
-    background: #3e84fa;
-    color: #ffffff;
-    border-radius: var(--radius-xl);
-    text-align: center;
-    font-size: 34rpx;
-    font-weight: 600;
-    line-height: 102rpx;
 }
 
 /* ===== Overrides for van-field word limit ===== */

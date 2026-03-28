@@ -424,3 +424,267 @@
   justify-content: space-between;
   margin-bottom: 40rpx;
 }
+
+/* ==========================================
+   4. Shared UI Components
+   ========================================== */
+.ui-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-xl);
+}
+
+.ui-card--md {
+  border-radius: var(--radius-md);
+}
+
+.ui-card--lg {
+  border-radius: var(--radius-lg);
+}
+
+.ui-card--xl {
+  border-radius: var(--radius-xl);
+}
+
+.ui-card--soft {
+  background: var(--bg-page-soft);
+}
+
+.ui-card--muted {
+  background: var(--bg-page-muted);
+}
+
+.ui-card--shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.ui-card--shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.ui-card--shadow-pop {
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+}
+
+.ui-card--button,
+.ui-card--row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ui-form-title {
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #000000;
+  line-height: 44rpx;
+}
+
+.ui-form-row {
+  display: flex;
+  align-items: center;
+  min-height: 88rpx;
+  padding: 10rpx 0;
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.ui-form-row:last-child {
+  border-bottom: none;
+}
+
+.ui-form-row--arrow {
+  gap: 8rpx;
+}
+
+.ui-form-label {
+  min-width: 120rpx;
+  flex-shrink: 0;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #868686;
+}
+
+.ui-form-value {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #000000;
+}
+
+.ui-form-value--muted {
+  color: #868686;
+}
+
+.ui-bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.ui-bottom-bar--solid {
+  background: var(--card-bg);
+  box-shadow: 0 -8rpx 8rpx rgba(0, 0, 0, 0.15);
+}
+
+.ui-bottom-bar--transparent {
+  background: transparent;
+}
+
+.ui-bottom-bar__row {
+  display: flex;
+  gap: 24rpx;
+}
+
+.ui-btn {
+  margin: 0;
+  padding: 0 24rpx;
+  border: none;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.ui-btn::after {
+  border: none;
+}
+
+.ui-btn--block {
+  width: 100%;
+}
+
+.ui-btn--pill {
+  border-radius: var(--radius-xl);
+}
+
+.ui-btn--md {
+  min-height: 64rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.ui-btn--lg {
+  min-height: 88rpx;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.ui-btn--xl {
+  min-height: 102rpx;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+.ui-btn--primary {
+  background: #3e84fa;
+  color: #ffffff;
+}
+
+.ui-btn--primary-soft {
+  background: #559dfc;
+  color: #ffffff;
+}
+
+.ui-btn--gradient-blue {
+  background: linear-gradient(180deg, #67adff 0%, #559dfc 100%);
+  color: #ffffff;
+  box-shadow: 0 8rpx 16rpx rgba(85, 157, 252, 0.24);
+}
+
+.ui-btn--secondary {
+  background: #ebebeb;
+  color: #000000;
+}
+
+.ui-btn--outline-danger {
+  background: transparent;
+  color: #ff4d4d;
+  border: 2rpx solid #ff4d4d;
+}
+
+.ui-btn--success {
+  background: #0cc160;
+  color: #ffffff;
+}
+
+.ui-btn--share-icon {
+  width: 102rpx;
+  height: 102rpx;
+  padding: 0;
+  line-height: normal;
+  background: var(--card-bg);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8rpx 8rpx rgba(0, 0, 0, 0.06);
+}
+
+.ui-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  max-width: 100%;
+  min-height: 54rpx;
+  padding: 0 22rpx;
+  border-radius: var(--radius-pill);
+}
+
+.ui-pill--blue {
+  background: var(--bg-pill-blue);
+}
+
+.ui-pill--card {
+  background: var(--card-bg);
+}
+
+.ui-pill--status {
+  min-width: 140rpx;
+  height: 50rpx;
+  padding: 0 24rpx;
+}
+
+.ui-pill__icon {
+  flex-shrink: 0;
+  font-size: 24rpx;
+  line-height: 1;
+}
+
+.ui-pill__text {
+  min-width: 0;
+}
+
+.ui-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.ui-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  min-height: 36rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  background: var(--bg-muted-chip);
+  color: #252525;
+  font-size: 20rpx;
+  font-weight: 700;
+}
+
+.ui-tag--pill {
+  border-radius: 20rpx;
+}
+
+.ui-tag--blue {
+  background: var(--bg-pill-blue);
+}
+
+.ui-tag--amber {
+  background: #ffd05b;
+  color: #ffffff;
+}

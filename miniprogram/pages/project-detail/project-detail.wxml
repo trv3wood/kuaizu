@@ -9,8 +9,8 @@
         <!-- 顶部白色头部区域 -->
         <view class="header-area">
             <!-- 学校标签 -->
-            <view class="school-badge" wx:if="{{project.schoolName}}">
-                <text class="school-icon">🏫</text>
+            <view class="school-badge ui-pill ui-pill--blue" wx:if="{{project.schoolName}}">
+                <text class="school-icon ui-pill__icon">🏫</text>
                 <text class="school-badge-text">{{project.schoolName}}</text>
             </view>
             <!-- 项目名称 -->
@@ -25,37 +25,37 @@
         <!-- 标签行 -->
         <view class="tag-row">
             <!-- 方向标签 -->
-            <view class="info-pill">
-                <text class="pill-icon">🏆</text>
-                <text class="pill-text">{{project.directionText}}方向</text>
+            <view class="info-pill ui-pill ui-pill--card">
+                <text class="pill-icon ui-pill__icon">🏆</text>
+                <text class="pill-text ui-pill__text">{{project.directionText}}方向</text>
             </view>
             <!-- 跨校标签 -->
-            <view class="info-pill">
-                <text class="pill-icon" wx:if="{{project.isCrossSchool}}">✅</text>
-                <text class="pill-text">{{project.isCrossSchool ? '允许跨校' : '⚠️仅限本校'}}</text>
+            <view class="info-pill ui-pill ui-pill--card">
+                <text class="pill-icon ui-pill__icon" wx:if="{{project.isCrossSchool}}">✅</text>
+                <text class="pill-text ui-pill__text">{{project.isCrossSchool ? '允许跨校' : '⚠️仅限本校'}}</text>
             </view>
             <!-- 团队人数标签 -->
-            <view class="info-pill">
-                <text class="pill-icon">👥</text>
-                <text class="pill-text">团队{{project.memberCount || 0}}人</text>
+            <view class="info-pill ui-pill ui-pill--card">
+                <text class="pill-icon ui-pill__icon">👥</text>
+                <text class="pill-text ui-pill__text">团队{{project.memberCount || 0}}人</text>
             </view>
         </view>
 
         <!-- 项目描述卡片 -->
-        <view class="desc-card">
+        <view class="desc-card ui-card ui-card--xl">
             <text class="desc-text" user-select="true">{{project.description || '暂无描述'}}</text>
         </view>
 
         <!-- 底部操作区 -->
         <view class="bottom-actions" wx:if="{{project.status === 1 && !isPublicContact}}">
             <!-- 投递名片按钮 -->
-            <view class="deliver-btn {{applying ? 'disabled' : ''}}" bindtap="handleApply">
+            <view class="deliver-btn ui-btn ui-btn--block ui-btn--pill ui-btn--lg ui-btn--primary-soft {{applying ? 'disabled' : ''}}" bindtap="handleApply">
                 {{applying ? '提交中...' : '投递名片'}}
             </view>
 
             <!-- 分享按钮组 -->
             <view class="share-row">
-                <button class="share-icon-btn" open-type="share">
+                <button class="share-icon-btn ui-btn ui-btn--share-icon" open-type="share">
                     <van-icon name="share-o" size="24px" color="#333" />
                 </button>
             </view>

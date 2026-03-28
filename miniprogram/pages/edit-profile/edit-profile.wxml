@@ -14,26 +14,26 @@
     <!-- 基本信息 -->
     <view class="edit-section">
         <view class="section-title">基本信息</view>
-        <view class="edit-card">
-            <view class="form-item">
-                <text class="label">昵称</text>
-                <input class="form-value" value="{{form.nickname}}" data-field="nickname" bindinput="handleNativeInput" />
+        <view class="edit-card ui-card ui-card--xl">
+            <view class="form-item ui-form-row">
+                <text class="label ui-form-label">昵称</text>
+                <input class="form-value ui-form-value" value="{{form.nickname}}" data-field="nickname" bindinput="handleNativeInput" />
             </view>
-            <view class="form-item">
-                <text class="label">手机号</text>
-                <input class="form-value disabled" value="{{form.phone}}" disabled />
+            <view class="form-item ui-form-row">
+                <text class="label ui-form-label">手机号</text>
+                <input class="form-value ui-form-value ui-form-value--muted disabled" value="{{form.phone}}" disabled />
             </view>
-            <view class="form-item">
-                <text class="label">邮箱</text>
-                <input class="form-value" value="{{form.email}}" data-field="email" bindinput="handleNativeInput" placeholder="请输入邮箱" />
+            <view class="form-item ui-form-row">
+                <text class="label ui-form-label">邮箱</text>
+                <input class="form-value ui-form-value" value="{{form.email}}" data-field="email" bindinput="handleNativeInput" placeholder="请输入邮箱" />
             </view>
-            <view class="form-item">
-                <text class="label">微信号</text>
-                <input class="form-value" value="{{form.wechat}}" data-field="wechat" bindinput="handleNativeInput" placeholder="请输入微信号" />
+            <view class="form-item ui-form-row">
+                <text class="label ui-form-label">微信号</text>
+                <input class="form-value ui-form-value" value="{{form.wechat}}" data-field="wechat" bindinput="handleNativeInput" placeholder="请输入微信号" />
             </view>
             <!-- MBTI 选择器 -->
             <view class="mbti-selector-container">
-                <text class="label">MBTI</text>
+                <text class="label ui-form-label">MBTI</text>
                 <view class="mbti-pills">
                     <!-- E/I -->
                     <view class="mbti-pill-group">
@@ -87,27 +87,27 @@
     <!-- 学业信息 -->
     <view class="edit-section">
         <view class="section-title">学业信息</view>
-        <view class="edit-card">
-            <view class="form-item arrow" bindtap="handleShowSchoolPicker">
-                <text class="label">学校</text>
-                <text class="form-value">{{selectedSchoolName || '请选择'}}</text>
+        <view class="edit-card ui-card ui-card--xl">
+            <view class="form-item arrow ui-form-row ui-form-row--arrow" bindtap="handleShowSchoolPicker">
+                <text class="label ui-form-label">学校</text>
+                <text class="form-value ui-form-value">{{selectedSchoolName || '请选择'}}</text>
                 <van-icon name="arrow" color="#868686" />
             </view>
-            <view class="form-item arrow" bindtap="showMajorPicker">
-                <text class="label">专业</text>
-                <text class="form-value">{{majorName || '请选择'}}</text>
+            <view class="form-item arrow ui-form-row ui-form-row--arrow" bindtap="showMajorPicker">
+                <text class="label ui-form-label">专业</text>
+                <text class="form-value ui-form-value">{{majorName || '请选择'}}</text>
                 <van-icon name="arrow" color="#868686" />
             </view>
-            <view class="form-item arrow">
-                <text class="label">入学年份</text>
+            <view class="form-item arrow ui-form-row ui-form-row--arrow">
+                <text class="label ui-form-label">入学年份</text>
                 <picker mode="selector" range="{{gradeOptions}}" value="{{gradeIndex}}" bindchange="handleGradeChange">
-                    <text class="form-value">{{gradeIndex >= 0 ? gradeOptions[gradeIndex] : '请选择'}}</text>
+                    <text class="form-value ui-form-value">{{gradeIndex >= 0 ? gradeOptions[gradeIndex] : '请选择'}}</text>
                 </picker>
                 <van-icon name="arrow" color="#868686" />
             </view>
-            <view class="form-item arrow" bindtap="goToCert">
-                <text class="label">认证状态</text>
-                <text class="form-value">{{isVerified ? '已认证' : '未认证'}}</text>
+            <view class="form-item arrow ui-form-row ui-form-row--arrow" bindtap="goToCert">
+                <text class="label ui-form-label">认证状态</text>
+                <text class="form-value ui-form-value">{{isVerified ? '已认证' : '未认证'}}</text>
                 <van-icon name="arrow" color="#868686" />
             </view>
         </view>
@@ -116,7 +116,7 @@
     <!-- 自我评价 -->
     <view class="edit-section">
         <view class="section-title">自我评价</view>
-        <view class="edit-card textarea-card">
+        <view class="edit-card textarea-card ui-card ui-card--xl">
             <textarea class="edit-textarea" placeholder="描述你的优势和特点..." value="{{talentForm.selfEvaluation}}" data-field="selfEvaluation" bindinput="handleTalentInput" maxlength="500"></textarea>
         </view>
     </view>
@@ -124,7 +124,7 @@
     <!-- 项目经历 -->
     <view class="edit-section">
         <view class="section-title">项目经历</view>
-        <view class="edit-card textarea-card">
+        <view class="edit-card textarea-card ui-card ui-card--xl">
             <textarea class="edit-textarea" placeholder="介绍你参与过的项目..." value="{{talentForm.projectExperience}}" data-field="projectExperience" bindinput="handleTalentInput" maxlength="1000"></textarea>
         </view>
     </view>
@@ -132,15 +132,15 @@
     <!-- 标签 -->
     <view class="edit-section">
         <view class="section-title">标签</view>
-        <view class="edit-card tag-edit-box">
+        <view class="edit-card tag-edit-box ui-card ui-card--xl">
             <view class="tag-hint">
                 <view>根据以上内容提取一些鲜明标签，</view>
                 <view>让更多优秀的团队快速锁定您。</view>
             </view>
-            <view class="add-tag-btn" bindtap="handleAddSkill">添加</view>
+            <view class="add-tag-btn ui-btn ui-btn--lg ui-btn--pill ui-btn--primary" bindtap="handleAddSkill">添加</view>
         </view>
-        <view class="current-tags" wx:if="{{talentForm.skills.length > 0}}">
-            <view class="tag-item" wx:for="{{talentForm.skills}}" wx:key="*this">
+        <view class="current-tags ui-tag-list" wx:if="{{talentForm.skills.length > 0}}">
+            <view class="tag-item ui-tag ui-tag--blue ui-tag--pill" wx:for="{{talentForm.skills}}" wx:key="*this">
                 <text>{{item}}</text>
                 <van-icon name="cross" size="12px" data-index="{{index}}" bindtap="handleRemoveSkill" />
             </view>
@@ -149,9 +149,9 @@
 </view>
 
 <!-- 底部固定按钮 -->
-<view class="edit-footer">
-    <view class="cancel-btn" bindtap="handleCancel">取消</view>
-    <view class="save-btn {{loading ? 'disabled' : ''}}" bindtap="handleSave">保存</view>
+<view class="edit-footer ui-bottom-bar ui-bottom-bar--solid ui-bottom-bar__row">
+    <view class="cancel-btn ui-btn ui-btn--lg ui-btn--pill ui-btn--secondary" bindtap="handleCancel">取消</view>
+    <view class="save-btn ui-btn ui-btn--lg ui-btn--pill ui-btn--primary {{loading ? 'disabled' : ''}}" bindtap="handleSave">保存</view>
 </view>
 
 <!-- 学校选择弹出层 -->

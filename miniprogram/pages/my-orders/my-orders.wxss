@@ -43,10 +43,8 @@
 }
 
 .order-card {
-    border-radius: var(--radius-md);
     padding: 30rpx;
     margin-bottom: 30rpx;
-    box-shadow: var(--shadow-sm);
 }
 
 .order-header {
@@ -148,30 +146,12 @@
 }
 
 .cancel-btn {
-    background: transparent;
-    color: #ff4d4d;
-    font-size: 28rpx;
     padding: 12rpx 32rpx;
-    border-radius: 32rpx;
-    border: 2rpx solid #ff4d4d;
-}
-
-.cancel-btn::after {
-    border: none;
 }
 
 .pay-btn {
-    background: var(--primary-color);
-    color: #ffffff;
-    font-size: 28rpx;
     padding: 12rpx 32rpx;
-    border-radius: var(--radius-lg);
-    border: none;
     box-shadow: var(--shadow-sm);
-}
-
-.pay-btn::after {
-    border: none;
 }
 
 /* 加载更多 */
@@ -192,16 +172,7 @@
 }
 
 .empty-btn {
-    background: var(--primary-color);
-    color: #ffffff;
-    font-size: 28rpx;
     padding: 20rpx 48rpx;
-    border-radius: var(--radius-xl);
-    border: none;
     margin-top: 40rpx;
     box-shadow: var(--shadow-sm);
-}
-
-.empty-btn::after {
-    border: none;
 }

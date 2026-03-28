@@ -18,7 +18,7 @@
     <block wx:elif="{{projects.length > 0}}">
       <view class="project-item" wx:for="{{projects}}" wx:key="id">
         <!-- 项目主卡片 -->
-        <view class="project-card" bindtap="toggleApplications" data-id="{{item.id}}">
+        <view class="project-card ui-card ui-card--xl" bindtap="toggleApplications" data-id="{{item.id}}">
           <view class="card-header-row">
             <view class="project-status">
               <view class="status-dot {{item.status === 1 ? 'active' : ''}}"></view>
@@ -30,11 +30,11 @@
           </view>
           <view class="project-title">{{item.name}}</view>
           <view class="card-footer-row">
-            <view class="promote-btn" catchtap="handlePromoteProject" data-id="{{item.id}}">
+            <view class="promote-btn ui-btn ui-btn--pill ui-btn--md" catchtap="handlePromoteProject" data-id="{{item.id}}">
               <van-icon name="bullhorn-o" size="18px" color="#000" />
               <text>推广</text>
             </view>
-            <view class="complete-btn" catchtap="handleDeleteProject" data-id="{{item.id}}" data-name="{{item.name}}">
+            <view class="complete-btn ui-btn ui-btn--pill ui-btn--md" catchtap="handleDeleteProject" data-id="{{item.id}}" data-name="{{item.name}}">
               <text>完成招募</text>
             </view>
             <van-icon name="{{expandedProjectId === item.id ? 'arrow-up' : 'arrow-down'}}" color="#ccc" size="16px" class="expand-icon" />
@@ -46,7 +46,7 @@
             <van-loading size="20px" />
           </view>
           <block wx:elif="{{applications.length > 0}}">
-            <view class="applicant-card" wx:for="{{applications}}" wx:for-item="app" wx:key="id">
+            <view class="applicant-card ui-card ui-card--xl" wx:for="{{applications}}" wx:for-item="app" wx:key="id">
               <!-- 邮件推广转化标识 -->
               <view class="promotion-source" wx:if="{{app.fromPromotion}}">邮件推广转化</view>
               <view class="applicant-main" bindtap="handleAvatarTap" data-id="{{app.talentProfile.id}}" data-user-id="{{app.applicant.id}}">
@@ -60,15 +60,15 @@
                   <view class="applicant-name-row">
                     <text class="applicant-name">{{app.applicant.nickname}}</text>
                     <van-icon name="passed" color="#3e84fa" size="12px" wx:if="{{app.talentProfile.isVerified}}" />
-                    <view class="mbti-tag" wx:if="{{app.talentProfile.mbti}}">
+                    <view class="mbti-tag ui-tag ui-tag--pill ui-tag--amber" wx:if="{{app.talentProfile.mbti}}">
                       {{app.talentProfile.mbti}}
                     </view>
                   </view>
                   <view class="applicant-school">
                     {{app.applicant.school.schoolName || '未知学校'}} · {{app.applicant.major.majorName || '未知专业'}}
                   </view>
-                  <view class="skill-tags">
-                    <view class="skill-tag" wx:for="{{app.talentProfile.skills}}" wx:for-item="skill" wx:key="*this">
+                  <view class="skill-tags ui-tag-list">
+                    <view class="skill-tag ui-tag" wx:for="{{app.talentProfile.skills}}" wx:for-item="skill" wx:key="*this">
                       {{skill}}
                     </view>
                   </view>
@@ -81,7 +81,7 @@
                     <van-icon name="close" size="28px" color="#ee0a24" catchtap="handleReject" data-app="{{app}}" />
                     <van-icon name="checked" size="28px" color="#35e08e" catchtap="handleApprove" data-app="{{app}}" />
                   </block>
-                  <view wx:else class="status-pill {{app.status === 1 ? 'passed' : 'rejected'}}">
+                  <view wx:else class="status-pill ui-pill ui-pill--status {{app.status === 1 ? 'passed' : 'rejected'}}">
                     {{app.status === 1 ? '已通过' : '已拒绝'}}
                   </view>
                 </view>
@@ -102,7 +102,7 @@
         <image src="../../assets/images/empty_folder.png" class="empty-img" mode="aspectFit" />
       </view>
       <text class="empty-text">暂无记录</text>
-      <view class="create-project-btn" bindtap="goToCreate">发布项目</view>
+      <view class="create-project-btn ui-btn ui-btn--pill ui-btn--lg ui-btn--primary-soft" bindtap="goToCreate">发布项目</view>
     </view>
   </view>
 </view>

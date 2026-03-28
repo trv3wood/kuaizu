@@ -62,8 +62,6 @@
 }
 
 .talent-card {
-  background: #ffffff;
-  border-radius: 40rpx;
   box-shadow: 4rpx 8rpx 32rpx rgba(0, 0, 0, 0.12);
   display: flex;
   height: 420rpx;
@@ -213,10 +211,6 @@
 
 /* ===== 底部操作区 ===== */
 .bottom-area {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
   padding: 32rpx 44rpx calc(44rpx + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
@@ -230,39 +224,14 @@
 
 .action-card {
   flex: 1;
-  background: #ffffff;
-  border-radius: 40rpx;
   height: 140rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 16rpx;
-  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
   font-size: 34rpx;
   font-weight: bold;
   color: #000000;
 }
 
-.share-btn {
-  padding: 0;
-  margin: 0;
-  border: none;
-  line-height: normal;
-}
-
-.share-btn::after {
-  border: none;
-}
-
 .primary-action {
-  background: #3e84fa;
-  color: #ffffff;
-  border-radius: 40rpx;
   height: 114rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 34rpx;
-  font-weight: 700;
   box-shadow: 0 8rpx 24rpx rgba(62, 132, 250, 0.3);
 }
