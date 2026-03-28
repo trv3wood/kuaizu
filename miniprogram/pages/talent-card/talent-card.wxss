@@ -225,6 +225,9 @@
 .action-card {
   flex: 1;
   height: 140rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 16rpx;
   font-size: 34rpx;
   font-weight: bold;
