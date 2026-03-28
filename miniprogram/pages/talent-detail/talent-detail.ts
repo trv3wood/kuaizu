@@ -6,12 +6,19 @@ import { resolveTalentDetailStrategy } from '../../utils/detail-display-strategy
 
 type TalentProfileDetailVO = components['schemas']['TalentProfileDetailVO']
 type ProjectVO = components['schemas']['ProjectVO']
+type PublicContactItem = {
+    type: 'phone' | 'email' | 'wechat'
+    label: string
+    value: string
+    icon: string
+}
 type TalentProfileDetailCardVO = TalentProfileDetailVO & {
     mbtiColor: string
     schoolLabel: string
     majorLabel: string
     gradeLabel: string
     displaySkills: string[]
+    publicContacts: PublicContactItem[]
 }
 
 // 橄榄枝商品ID固定为1
@@ -282,9 +289,26 @@ Page({
         wx.navigateBack()
     },
 
+    handleContactTap(e: WechatMiniprogram.BaseEvent) {
+        const { value, label } = e.currentTarget.dataset
+        if (!value) return
+
+        wx.setClipboardData({
+            data: value,
+            success: () => {
+                wx.showToast({ title: `${label}已复制`, icon: 'none' })
+            }
+        })
+    },
+
     formatProfile(profile: TalentProfileDetailVO): TalentProfileDetailCardVO {
         const mbti = (profile.mbti || '').toUpperCase()
         const gradeLabel = (profile as any).gradeText || (profile as any).gradeLabel || ''
+        const publicContacts: PublicContactItem[] = [
+            { type: 'phone', label: '电话', value: (profile as any).phone || '', icon: 'phone-o' },
+            { type: 'email', label: '邮箱', value: (profile as any).email || '', icon: 'envelop-o' },
+            { type: 'wechat', label: '微信', value: (profile as any).wechat || '', icon: 'chat-o' }
+        ].filter((item) => !!item.value)
 
         return {
             ...profile,
@@ -292,7 +316,8 @@ Page({
             schoolLabel: profile.schoolName || '未知学校',
             majorLabel: profile.majorName || '未知专业',
             gradeLabel,
-            displaySkills: (profile.skills || []).slice(0, 6)
+            displaySkills: (profile.skills || []).slice(0, 6),
+            publicContacts
         }
     }
 })

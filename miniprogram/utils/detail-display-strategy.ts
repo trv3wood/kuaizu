@@ -5,6 +5,7 @@ type ProjectDetailViewStrategy = {
 
 type TalentDetailViewStrategy = {
   showOliveBranchAction: boolean
+  showPublicContact: boolean
 }
 
 export type ProjectDetailScene = 'default' | 'olive-branch-contact'
@@ -26,10 +27,12 @@ const PROJECT_DETAIL_STRATEGIES: Record<ProjectDetailScene, ProjectDetailViewStr
 
 const TALENT_DETAIL_STRATEGIES: Record<TalentDetailScene, TalentDetailViewStrategy> = {
   default: {
-    showOliveBranchAction: true
+    showOliveBranchAction: true,
+    showPublicContact: false
   },
   'project-application-review': {
-    showOliveBranchAction: false
+    showOliveBranchAction: false,
+    showPublicContact: true
   }
 }
 
