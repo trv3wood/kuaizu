@@ -154,6 +154,39 @@
     border: none;
 }
 
+/* ===== 公开联系方式 ===== */
+.public-contact-row {
+    display: flex;
+    gap: 16rpx;
+    padding: 4rpx 36rpx 0;
+    flex-wrap: wrap;
+}
+
+.contact-pill {
+    min-width: 0;
+    flex: 1 1 200rpx;
+    height: 88rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12rpx;
+    padding: 0 24rpx;
+    background: linear-gradient(135deg, #8fc1ff 0%, #6fa6f5 100%);
+    border-radius: 44rpx;
+    box-shadow: 0 8rpx 16rpx rgba(111, 166, 245, 0.22);
+    box-sizing: border-box;
+}
+
+.contact-pill-text {
+    min-width: 0;
+    font-size: 24rpx;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* ===== 底部声明 ===== */
 .footer-note {
     padding: 40rpx 60rpx 20rpx;

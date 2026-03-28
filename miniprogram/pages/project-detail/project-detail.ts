@@ -5,6 +5,12 @@ import { requestSubscription } from '../../utils/subscription'
 import type { components } from '../../api/schema'
 
 type ProjectDetailVO = components['schemas']['ProjectDetailVO']
+type PublicContactItem = {
+  type: 'phone' | 'email' | 'wechat'
+  label: string
+  value: string
+  icon: string
+}
 
 Page({
   data: {
@@ -12,7 +18,8 @@ Page({
     project: null as ProjectDetailVO | null,
     loading: true,
     applying: false,
-    isPublicContact: false
+    isPublicContact: false,
+    publicContacts: [] as PublicContactItem[]
   },
 
   onLoad(options) {
@@ -51,13 +58,22 @@ Page({
     try {
       const res = await projectApi.getProject(id)
       const project = res.data
+      let publicContacts: PublicContactItem[] = []
       if (project) {
         // 预格式化显示文本
         ; (project as any).statusText = getProjectStatusText(project.status)
-          ; (project as any).directionText = getProjectDirectionText(project.direction)
+        ; (project as any).directionText = getProjectDirectionText(project.direction)
+
+        const creator = project.creator || {}
+        publicContacts = [
+          { type: 'phone', label: '电话', value: creator.phone || '', icon: 'phone-o' },
+          { type: 'email', label: '邮箱', value: creator.email || '', icon: 'envelop-o' },
+          { type: 'wechat', label: '微信', value: creator.wechat || '', icon: 'chat-o' }
+        ].filter((item) => !!item.value)
       }
       this.setData({
         project: project || null,
+        publicContacts,
         loading: false
       })
     } catch (error) {
@@ -104,6 +120,18 @@ Page({
     } finally {
       this.setData({ applying: false })
     }
+  },
+
+  handleContactTap(e: WechatMiniprogram.BaseEvent) {
+    const { value, label } = e.currentTarget.dataset
+    if (!value) return
+
+    wx.setClipboardData({
+      data: value,
+      success: () => {
+        wx.showToast({ title: `${label}已复制`, icon: 'none' })
+      }
+    })
   },
 
 
