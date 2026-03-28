@@ -25,7 +25,7 @@
 .logo-circle {
     width: 180rpx;
     height: 180rpx;
-    background: #e8f4ff;
+    background: var(--bg-soft-blue);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -68,8 +68,8 @@
     gap: 20rpx;
     padding: 30rpx 40rpx;
     background: var(--card-bg);
-    border-radius: 24rpx;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
 }
 
 .feature-text {
@@ -140,13 +140,6 @@
     width: 600rpx;
     padding: 60rpx 40rpx;
     box-sizing: border-box;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40rpx;
 }
 
 .modal-title {

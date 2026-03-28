@@ -3,7 +3,7 @@
 /* ===== 容器 ===== */
 .edit-profile-container {
     min-height: 100vh;
-    background: #f6f7fb;
+    background: var(--bg-page-muted);
     padding: 0 44rpx calc(200rpx + env(safe-area-inset-bottom));
     box-sizing: border-box;
     position: relative;
@@ -15,7 +15,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 800rpx;
-    background: linear-gradient(180deg, #e8f9ff 0%, #f6fafd 13%, #f6fafd 100%);
+    background: linear-gradient(180deg, #e8f9ff 0%, #f6fafd 13%, var(--bg-page-muted) 100%);
     z-index: -1;
 }
 
@@ -73,8 +73,8 @@
 
 /* ===== 白色卡片 ===== */
 .edit-card {
-    background: #ffffff;
-    border-radius: 40rpx;
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
     padding: 10rpx 44rpx;
 }
 
@@ -154,7 +154,7 @@
 }
 
 .mbti-pill.active {
-    background: #cff2fe;
+    background: var(--bg-pill-blue);
 }
 
 .mbti-pill .main {
@@ -208,7 +208,7 @@
     text-align: center;
     background: #559dfc;
     color: #ffffff;
-    border-radius: 40rpx;
+    border-radius: var(--radius-xl);
     font-size: 32rpx;
     font-weight: bold;
     flex-shrink: 0;
@@ -222,8 +222,8 @@
 }
 
 .tag-item {
-    background: #cff2fe;
-    border-radius: 40rpx;
+    background: var(--bg-pill-blue);
+    border-radius: var(--radius-xl);
     padding: 8rpx 24rpx;
     display: flex;
     align-items: center;
@@ -250,7 +250,7 @@
     line-height: 88rpx;
     text-align: center;
     background: #ebebeb;
-    border-radius: 40rpx;
+    border-radius: var(--radius-xl);
     font-size: 34rpx;
     font-weight: bold;
     color: #000000;
@@ -263,13 +263,9 @@
     text-align: center;
     background: #3e84fa;
     color: #ffffff;
-    border-radius: 40rpx;
+    border-radius: var(--radius-xl);
     font-size: 34rpx;
     font-weight: bold;
-}
-
-.save-btn.disabled {
-    opacity: 0.6;
 }
 
 /* ===== Picker 弹出层 (保留原有) ===== */

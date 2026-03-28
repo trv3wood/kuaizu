@@ -1,9 +1,4 @@
 /* pages/my-applications/my-applications.wxss */
-.my-applications-container {
-    min-height: 100vh;
-    background: var(--bg-color);
-}
-
 /* 状态筛选标签 */
 .status-tabs {
     display: flex;
@@ -48,10 +43,10 @@
 
 .application-card {
     background: var(--card-bg);
-    border-radius: 32rpx;
+    border-radius: var(--radius-lg);
     padding: 40rpx;
     margin-bottom: 30rpx;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-sm);
 }
 
 /* 项目信息 */
@@ -59,9 +54,9 @@
     display: flex;
     align-items: center;
     gap: 12rpx;
-    background: #f5f7fa;
+    background: var(--bg-page-soft);
     padding: 20rpx 30rpx;
-    border-radius: 24rpx;
+    border-radius: var(--radius-md);
     margin-bottom: 20rpx;
 }
 
@@ -90,7 +85,7 @@
 .reply-msg {
     background: var(--bg-color);
     padding: 20rpx 30rpx;
-    border-radius: 16rpx;
+    border-radius: var(--radius-sm);
     margin-bottom: 16rpx;
 }
 
@@ -110,7 +105,7 @@
 
 .reply-msg {
     border-left: 4rpx solid var(--primary-color);
-    background: #f5f7fa;
+    background: var(--bg-page-soft);
 }
 
 /* 联系方式 */
@@ -119,8 +114,8 @@
     align-items: center;
     gap: 8rpx;
     padding: 16rpx 20rpx;
-    background: #e8f4ff;
-    border-radius: 16rpx;
+    background: var(--bg-soft-blue);
+    border-radius: var(--radius-sm);
 }
 
 .contact-text {

@@ -1,0 +1,426 @@
+/* Shared WXSS patterns */
+
+/* ==========================================
+   1. Shared Containers & Navigation
+   ========================================== */
+.projects-container,
+.talent-container {
+  min-height: 100vh;
+  background: var(--bg-page-soft);
+  padding-bottom: calc(220rpx + env(safe-area-inset-bottom));
+}
+
+.my-applications-container,
+.orders-container {
+  min-height: 100vh;
+  background: var(--bg-color);
+}
+
+.project-detail-container,
+.olive-branches-page,
+.talent-detail-container {
+  background: var(--bg-page-muted);
+}
+
+.projects-container .hero-nav,
+.talent-container .hero-nav,
+.olive-branches-page .hero-nav,
+.talent-detail-container .hero-nav {
+  position: relative;
+}
+
+.projects-container .hero-nav-row,
+.talent-container .hero-nav-row,
+.olive-branches-page .hero-nav-row,
+.talent-detail-container .hero-nav-row {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.projects-container .nav-action,
+.talent-container .nav-action,
+.olive-branches-page .nav-action,
+.talent-detail-container .nav-action {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projects-container .nav-capsule-placeholder,
+.talent-container .nav-capsule-placeholder,
+.olive-branches-page .nav-capsule-placeholder,
+.talent-detail-container .nav-capsule-placeholder {
+  width: 176rpx;
+  height: 64rpx;
+  opacity: 0;
+}
+
+.projects-container .nav-back-hidden,
+.talent-container .nav-back-hidden,
+.olive-branches-page .nav-back-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.projects-container .hero-title,
+.talent-container .hero-title,
+.olive-branches-page .hero-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32rpx;
+  line-height: 1;
+  font-weight: 800;
+  color: #101010;
+}
+
+/* ==========================================
+   2. Shared Browse Pages (projects / talent)
+   ========================================== */
+.projects-container .hero-header,
+.talent-container .hero-header {
+  background: var(--bg-hero-blue);
+  box-shadow: var(--shadow-hero);
+  padding: 0 20rpx 26rpx;
+}
+
+.projects-container .search-shell,
+.talent-container .search-shell {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin-top: 6rpx;
+}
+
+.projects-container .search-box,
+.talent-container .search-box {
+  flex: 1;
+  height: 64rpx;
+  background: var(--card-bg);
+  border-radius: var(--radius-pill);
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 0 1rpx rgba(0, 0, 0, 0.08);
+}
+
+.projects-container .search-input,
+.talent-container .search-input {
+  flex: 1;
+  height: 64rpx;
+  margin-left: 14rpx;
+  font-size: 26rpx;
+  color: #101010;
+}
+
+.projects-container .search-clear,
+.talent-container .search-clear {
+  width: 36rpx;
+  height: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projects-container .filter-trigger,
+.talent-container .filter-trigger {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.projects-container .content-area,
+.talent-container .content-area {
+  padding-top: 26rpx;
+}
+
+.olive-branches-page .avatar-placeholder,
+.talent-container .avatar-placeholder,
+.talent-detail-container .avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.olive-branches-page .profile-body,
+.talent-container .card-body,
+.talent-detail-container .project-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.olive-branches-page .tag-chip,
+.talent-container .skill-chip {
+  min-height: 36rpx;
+  padding: 0 10rpx;
+  background: var(--bg-muted-chip);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.olive-branches-page .tag-chip text,
+.talent-container .skill-chip text {
+  font-size: 20rpx;
+  line-height: 24rpx;
+  color: #252525;
+}
+
+.projects-container .loading-container,
+.projects-container .empty-container,
+.talent-container .loading-container,
+.talent-container .empty-container {
+  padding: 140rpx 0;
+  display: flex;
+  justify-content: center;
+}
+
+.projects-container .load-more,
+.talent-container .load-more {
+  padding: 28rpx 0 16rpx;
+  text-align: center;
+}
+
+.projects-container .page-footer,
+.talent-container .page-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.projects-container .footer-symbol,
+.talent-container .footer-symbol {
+  font-size: 56rpx;
+  line-height: 1;
+  color: #58a7ff;
+}
+
+.projects-container .footer-line,
+.talent-container .footer-line {
+  font-size: 28rpx;
+  line-height: 1.5;
+  color: #111111;
+  font-weight: 500;
+}
+
+.publish-fab,
+.edit-card-fab {
+  position: fixed;
+  right: 34rpx;
+  bottom: calc(170rpx + env(safe-area-inset-bottom));
+  width: 116rpx;
+  height: 116rpx;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #67adff 0%, #4c95f6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-fab);
+  z-index: 10;
+}
+
+.publish-fab:active,
+.edit-card-fab:active {
+  transform: scale(0.96);
+}
+
+.publish-fab::after,
+.edit-card-fab::after {
+  border: none;
+}
+
+.projects-container .filter-panel,
+.talent-container .filter-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+}
+
+.projects-container .filter-header,
+.talent-container .filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 88rpx 18px 20rpx;
+  border-bottom: 1rpx solid var(--border-muted);
+}
+
+.projects-container .filter-title,
+.talent-container .filter-title {
+  font-size: 56rpx;
+  font-weight: 800;
+  color: #111111;
+}
+
+.projects-container .filter-close,
+.talent-container .filter-close {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projects-container .filter-content,
+.talent-container .filter-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 34rpx 17px 32rpx;
+}
+
+.projects-container .filter-section,
+.talent-container .filter-section {
+  margin-bottom: 52rpx;
+}
+
+.projects-container .section-title,
+.talent-container .section-title {
+  display: block;
+  font-size: 30rpx;
+  line-height: 44rpx;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 28rpx;
+}
+
+.projects-container .picker-value,
+.talent-container .picker-value {
+  min-height: 82rpx;
+  background: var(--bg-page-soft);
+  border-radius: 41rpx;
+  padding: 0 28rpx 0 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #111111;
+}
+
+.projects-container .filter-actions,
+.talent-container .filter-actions {
+  display: flex;
+  gap: 12px;
+  padding: 18rpx 9px calc(18rpx + env(safe-area-inset-bottom));
+  border-top: 1rpx solid var(--border-muted);
+  background: var(--card-bg);
+}
+
+.projects-container .reset-btn,
+.projects-container .apply-btn,
+.talent-container .reset-btn,
+.talent-container .apply-btn {
+  flex: 1;
+  height: 45px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.projects-container .reset-btn,
+.talent-container .reset-btn {
+  background: #f0f0f0;
+  color: #111111;
+}
+
+.projects-container .apply-btn,
+.talent-container .apply-btn {
+  background: linear-gradient(90deg, #5fa6ff 0%, #4f92f2 100%);
+  color: #ffffff;
+}
+
+.projects-container .reset-btn::after,
+.projects-container .apply-btn::after,
+.talent-container .reset-btn::after,
+.talent-container .apply-btn::after {
+  border: none;
+}
+
+.projects-container .picker-popup,
+.talent-container .picker-popup {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-page-soft);
+}
+
+.projects-container .picker-header,
+.talent-container .picker-header {
+  padding: 36rpx 32rpx 20rpx;
+  text-align: center;
+}
+
+.projects-container .picker-title,
+.talent-container .picker-title {
+  font-size: 30rpx;
+  font-weight: 800;
+  color: #111111;
+}
+
+.projects-container .picker-search,
+.talent-container .picker-search {
+  padding: 0 24rpx 16rpx;
+}
+
+.projects-container .picker-list,
+.talent-container .picker-list {
+  flex: 1;
+  padding: 0 24rpx 24rpx;
+}
+
+.projects-container .picker-item,
+.talent-container .picker-item {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 26rpx 24rpx;
+  margin-bottom: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #111111;
+}
+
+.projects-container .picker-empty,
+.talent-container .picker-empty {
+  padding: 120rpx 0;
+  text-align: center;
+  font-size: 26rpx;
+  color: #97a0aa;
+}
+
+/* ==========================================
+   3. Shared States & Dialog Layouts
+   ========================================== */
+.project-detail-container .loading-container,
+.orders-container .loading-container {
+  padding: 100rpx 0;
+  display: flex;
+  justify-content: center;
+}
+
+.publish-btn.disabled,
+.deliver-btn.disabled,
+.save-btn.disabled {
+  opacity: 0.6;
+}
+
+.phone-modal .modal-header,
+.talent-detail-container .popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40rpx;
+}

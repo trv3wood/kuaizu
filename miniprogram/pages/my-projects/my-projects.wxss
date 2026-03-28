@@ -2,7 +2,7 @@
 
 .my-projects-container {
     min-height: 100vh;
-    background: #f6f7fb;
+    background: var(--bg-page-muted);
     position: relative;
     padding-bottom: env(safe-area-inset-bottom);
 }
@@ -46,8 +46,8 @@
 }
 
 .project-card {
-    background: #ffffff;
-    border-radius: 40rpx;
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
     padding: 40rpx;
     box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.08);
     position: relative;
@@ -122,15 +122,15 @@
 /* Applicant List */
 .applicant-list {
     margin-top: -20rpx;
-    background: #fff;
+    background: var(--card-bg);
     padding: 40rpx 40rpx 20rpx;
-    border-radius: 0 0 40rpx 40rpx;
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
     box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
 
 .applicant-card {
-    background: #ffffff;
-    border-radius: 40rpx;
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
     padding: 30rpx;
     margin-bottom: 24rpx;
     box-shadow: 0 0 16rpx rgba(0, 0, 0, 0.1);

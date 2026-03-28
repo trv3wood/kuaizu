@@ -1,7 +1,6 @@
 /* pages/my-orders/my-orders.wxss */
 .orders-container {
-    min-height: 100vh;
-    background: var(--bg-color);
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* 标签栏 */
@@ -38,24 +37,16 @@
     border-radius: 2rpx;
 }
 
-/* 加载中 */
-.loading-container {
-    padding: 100rpx 0;
-    display: flex;
-    justify-content: center;
-}
-
 /* 订单列表 */
 .order-list {
     padding: 30rpx;
 }
 
 .order-card {
-    background: var(--card-bg);
-    border-radius: 24rpx;
+    border-radius: var(--radius-md);
     padding: 30rpx;
     margin-bottom: 30rpx;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-sm);
 }
 
 .order-header {
@@ -174,9 +165,9 @@
     color: #ffffff;
     font-size: 28rpx;
     padding: 12rpx 32rpx;
-    border-radius: 32rpx;
+    border-radius: var(--radius-lg);
     border: none;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-sm);
 }
 
 .pay-btn::after {
@@ -205,10 +196,10 @@
     color: #ffffff;
     font-size: 28rpx;
     padding: 20rpx 48rpx;
-    border-radius: 40rpx;
+    border-radius: var(--radius-xl);
     border: none;
     margin-top: 40rpx;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-sm);
 }
 
 .empty-btn::after {

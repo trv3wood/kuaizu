@@ -3,30 +3,22 @@
 /* ===== 页面容器 ===== */
 .project-detail-container {
     min-height: 100vh;
-    background: #f6f7fb;
     padding-bottom: calc(60rpx + env(safe-area-inset-bottom));
-}
-
-/* ===== 加载中 ===== */
-.loading-container {
-    padding: 100rpx 0;
-    display: flex;
-    justify-content: center;
 }
 
 /* ===== 顶部白色头部 ===== */
 .header-area {
-    background: #ffffff;
+    background: var(--card-bg);
     padding: 24rpx 36rpx 30rpx;
-    box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-sm);
 }
 
 /* 学校徽章 */
 .school-badge {
     display: inline-flex;
     align-items: center;
-    background: #cff2fe;
-    border-radius: 40rpx;
+    background: var(--bg-pill-blue);
+    border-radius: var(--radius-pill);
     padding: 6rpx 24rpx 6rpx 12rpx;
     margin-bottom: 20rpx;
 }
@@ -74,8 +66,8 @@
 .info-pill {
     display: flex;
     align-items: center;
-    background: #ffffff;
-    border-radius: 40rpx;
+    background: var(--card-bg);
+    border-radius: var(--radius-pill);
     padding: 10rpx 24rpx;
     gap: 6rpx;
 }
@@ -92,8 +84,8 @@
 
 /* ===== 描述卡片 ===== */
 .desc-card {
-    background: #ffffff;
-    border-radius: 40rpx;
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
     margin: 20rpx 36rpx 24rpx;
     padding: 32rpx 36rpx;
 }
@@ -123,10 +115,6 @@
     margin-bottom: 20rpx;
 }
 
-.deliver-btn.disabled {
-    opacity: 0.6;
-}
-
 /* 分享按钮行 */
 .share-row {
     display: flex;
@@ -141,8 +129,8 @@
     justify-content: center;
     width: 102rpx;
     height: 102rpx;
-    background: #ffffff;
-    border-radius: 40rpx;
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
     box-shadow: 0 8rpx 8rpx rgba(0, 0, 0, 0.06);
     padding: 0;
     margin: 0;

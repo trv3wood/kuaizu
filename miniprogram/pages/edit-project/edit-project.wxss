@@ -3,8 +3,7 @@
 /* ===== Page background ===== */
 .edit-project-container {
     min-height: 100vh;
-    /* Figma: 从底部 #c4f1ff → #eaf4fc → #fafbfc（翻转） */
-    background: linear-gradient(to bottom, #fafbfc 0%, #eaf4fc 42%, #c4f1ff 100%);
+    background: linear-gradient(to bottom, var(--bg-gradient-end) 0%, var(--bg-gradient-mid) 42%, var(--bg-gradient-start) 100%);
     padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
 }
 
@@ -18,10 +17,10 @@
 
 /* ===== Card base ===== */
 .form-card {
-    background: #ffffff;
-    border-radius: 24rpx;
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
     padding: 28rpx 36rpx;
-    box-shadow: 0 0 8rpx rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-sm);
 }
 
 .form-card--inline {
@@ -55,7 +54,7 @@
 }
 
 .toggle-item.active {
-    background: #cff2fe;
+    background: var(--bg-pill-blue);
     color: #000000;
 }
 
@@ -132,15 +131,11 @@
 .publish-btn {
     background: #3e84fa;
     color: #ffffff;
-    border-radius: 40rpx;
+    border-radius: var(--radius-xl);
     text-align: center;
     font-size: 34rpx;
     font-weight: 600;
     line-height: 102rpx;
-}
-
-.publish-btn.disabled {
-    opacity: 0.6;
 }
 
 /* ===== Overrides for van-field word limit ===== */
