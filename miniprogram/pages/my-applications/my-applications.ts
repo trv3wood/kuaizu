@@ -2,6 +2,7 @@
 import { applicationApi } from '../../api/index'
 import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
+import { buildProjectDetailUrl } from '../../utils/detail-display-strategy'
 
 type ProjectApplicationVO = components['schemas']['ProjectApplicationVO']
 type ApplicationStatus = components['schemas']['ApplicationStatus']
@@ -79,7 +80,7 @@ Page({
     handleViewProject(e: WechatMiniprogram.TouchEvent) {
         const { projectId } = e.currentTarget.dataset
         if (projectId) {
-            wx.navigateTo({ url: `/pages/project-detail/project-detail?id=${projectId}` })
+            wx.navigateTo({ url: buildProjectDetailUrl(Number(projectId)) })
         }
     }
 })

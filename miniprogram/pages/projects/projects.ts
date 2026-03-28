@@ -4,6 +4,7 @@ import { schoolPickerBehavior } from '../../behaviors/schoolPicker'
 import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
 import { ProjectStatus } from '../../utils/enum'
+import { buildProjectDetailUrl } from '../../utils/detail-display-strategy'
 import { getProjectDirectionText } from '../../utils/util'
 
 type ProjectVO = components['schemas']['ProjectVO']
@@ -166,7 +167,7 @@ Page({
     handleProjectTap(e: WechatMiniprogram.TouchEvent) {
         const { id } = e.currentTarget.dataset
         if (id) {
-            wx.navigateTo({ url: `/pages/project-detail/project-detail?id=${id}` })
+            wx.navigateTo({ url: buildProjectDetailUrl(Number(id)) })
         }
     },
 

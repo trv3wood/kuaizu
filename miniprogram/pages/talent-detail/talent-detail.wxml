@@ -74,7 +74,7 @@
             <view class="detail-spacer"></view>
         </scroll-view>
 
-        <view class="action-bar ui-bottom-bar ui-bottom-bar--transparent">
+        <view class="action-bar ui-bottom-bar ui-bottom-bar--transparent" wx:if="{{viewStrategy.showOliveBranchAction}}">
             <button class="send-btn ui-btn ui-btn--block ui-btn--pill ui-btn--lg ui-btn--gradient-blue" loading="{{sending}}" disabled="{{sending}}" bindtap="handleSendOliveBranch">发送橄榄枝</button>
         </view>
     </block>

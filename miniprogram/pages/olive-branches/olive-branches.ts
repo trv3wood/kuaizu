@@ -2,6 +2,7 @@ import { userApi, oliveBranchApi } from '../../api/index'
 import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
 import { DEFAULT_MBTI_COLOR, MBTI_COLOR_MAP } from '../../utils/constants'
+import { buildProjectDetailUrl } from '../../utils/detail-display-strategy'
 
 type OliveBranchVO = components['schemas']['OliveBranchVO']
 type OliveBranchStatus = components['schemas']['OliveBranchStatus']
@@ -200,7 +201,7 @@ Page({
     handleViewProject(e: WechatMiniprogram.TouchEvent) {
         const projectId = Number(e.currentTarget.dataset.projectId)
         if (projectId) {
-            wx.navigateTo({ url: `/pages/project-detail/project-detail?id=${projectId}&contact=true` })
+            wx.navigateTo({ url: buildProjectDetailUrl(projectId, 'olive-branch-contact') })
         }
     },
 

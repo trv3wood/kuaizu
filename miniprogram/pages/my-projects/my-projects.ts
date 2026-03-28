@@ -3,6 +3,7 @@ import { applicationApi, projectApi, productApi, orderApi, emailPromotionApi } f
 import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
 import Dialog from '@vant/weapp/dialog/dialog'
+import { buildTalentDetailUrl } from '../../utils/detail-display-strategy'
 
 type ProjectVO = components['schemas']['ProjectVO']
 type ProjectApplicationVO = components['schemas']['ProjectApplicationVO']
@@ -264,15 +265,19 @@ Page({
 
   handleAvatarTap(e: WechatMiniprogram.TouchEvent) {
     const { id, userId } = e.currentTarget.dataset
-    let url = `/pages/talent-detail/talent-detail?`
-    if (id) {
-      url += `id=${id}`
-      if (userId) url += `&userId=${userId}`
-    } else if (userId) {
-      url += `id=0&userId=${userId}`
-    } else {
+    if (!id && !userId) {
       return
     }
-    wx.navigateTo({ url })
+
+    const talentId = id === undefined || id === null || id === '' ? undefined : Number(id)
+    const targetUserId = userId === undefined || userId === null || userId === '' ? undefined : Number(userId)
+
+    wx.navigateTo({
+      url: buildTalentDetailUrl({
+        id: talentId,
+        userId: targetUserId,
+        scene: 'project-application-review'
+      })
+    })
   }
 })

@@ -2,6 +2,7 @@
 import { talentApi, oliveBranchApi, orderApi, productApi, applicationApi } from '../../api/index'
 import type { components } from '../../api/schema'
 import { DEFAULT_MBTI_COLOR, MBTI_COLOR_MAP } from '../../utils/constants'
+import { resolveTalentDetailStrategy } from '../../utils/detail-display-strategy'
 
 type TalentProfileDetailVO = components['schemas']['TalentProfileDetailVO']
 type ProjectVO = components['schemas']['ProjectVO']
@@ -21,6 +22,8 @@ Page({
         statusBarHeight: 0,
         navBarHeight: 44,
         id: 0,
+        scene: 'default',
+        viewStrategy: resolveTalentDetailStrategy().strategy,
         profile: null as TalentProfileDetailCardVO | null,
         loading: true,
         sending: false,
@@ -48,8 +51,15 @@ Page({
             navBarHeight
         })
 
+        const { scene, strategy } = resolveTalentDetailStrategy(options.scene)
         const id = Number(options.id)
         const userId = options.userId ? Number(options.userId) : undefined
+
+        this.setData({
+            scene,
+            viewStrategy: strategy
+        })
+
         if (id || userId) {
             this.setData({ id })
             this.loadProfile(id, userId)

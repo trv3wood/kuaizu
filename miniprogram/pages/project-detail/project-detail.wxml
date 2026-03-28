@@ -47,7 +47,7 @@
         </view>
 
         <!-- 底部操作区 -->
-        <view class="bottom-actions" wx:if="{{project.status === 1 && !isPublicContact}}">
+        <view class="bottom-actions" wx:if="{{project.status === 1 && viewStrategy.showApplyAction}}">
             <!-- 投递名片按钮 -->
             <view class="deliver-btn ui-btn ui-btn--block ui-btn--pill ui-btn--lg ui-btn--primary-soft {{applying ? 'disabled' : ''}}" bindtap="handleApply">
                 {{applying ? '提交中...' : '投递名片'}}
@@ -62,7 +62,7 @@
         </view>
 
         <!-- 公开联系方式 -->
-        <view class="public-contact-row" wx:if="{{isPublicContact && publicContacts.length}}">
+        <view class="public-contact-row" wx:if="{{viewStrategy.showPublicContact && publicContacts.length}}">
             <view
                 class="contact-pill"
                 wx:for="{{publicContacts}}"

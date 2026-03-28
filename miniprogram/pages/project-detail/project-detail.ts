@@ -2,6 +2,7 @@ import { projectApi, applicationApi } from '../../api/index'
 import { getProjectDirectionText, getProjectStatusText } from '../../utils/util'
 import { MsgBizKey } from '../../utils/constants'
 import { requestSubscription } from '../../utils/subscription'
+import { resolveProjectDetailStrategy } from '../../utils/detail-display-strategy'
 import type { components } from '../../api/schema'
 
 type ProjectDetailVO = components['schemas']['ProjectDetailVO']
@@ -15,16 +16,23 @@ type PublicContactItem = {
 Page({
   data: {
     id: 0,
+    scene: 'default',
     project: null as ProjectDetailVO | null,
     loading: true,
     applying: false,
-    isPublicContact: false,
+    viewStrategy: resolveProjectDetailStrategy().strategy,
     publicContacts: [] as PublicContactItem[]
   },
 
   onLoad(options) {
     const id = Number(options.id)
-    this.setData({ isPublicContact: options.contact === 'true' })
+    const { scene, strategy } = resolveProjectDetailStrategy(options.scene)
+
+    this.setData({
+      scene,
+      viewStrategy: strategy
+    })
+
     if (id) {
       this.setData({ id })
       this.loadProject(id)

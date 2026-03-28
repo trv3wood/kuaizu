@@ -5,6 +5,7 @@ import { majorPickerBehavior } from '../../behaviors/majorPicker'
 import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
 import { DEFAULT_MBTI_COLOR, MBTI_COLOR_MAP } from '../../utils/constants'
+import { buildTalentDetailUrl } from '../../utils/detail-display-strategy'
 
 type TalentProfileVO = components['schemas']['TalentProfileVO']
 type TalentCardVO = TalentProfileVO & {
@@ -169,7 +170,7 @@ Page({
     handleTalentTap(e: WechatMiniprogram.TouchEvent) {
         const { id } = e.currentTarget.dataset
         if (id) {
-            wx.navigateTo({ url: `/pages/talent-detail/talent-detail?id=${id}` })
+            wx.navigateTo({ url: buildTalentDetailUrl({ id: Number(id) }) })
         }
     },
 
