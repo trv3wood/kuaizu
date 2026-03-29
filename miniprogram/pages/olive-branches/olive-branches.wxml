@@ -87,9 +87,8 @@
                                     <text class="mbti-label" style="color: {{item.mbtiColor}};">{{item.mbtiLabel}}</text>
                                 </view>
 
-                                <text class="profile-school">{{item.schoolLabel}}</text>
-                                <text class="profile-major">专业：{{item.majorLabel}}</text>
-
+                                <!-- <text class="profile-school">{{item.schoolLabel}}</text>
+                                <text class="profile-major">{{item.majorLabel}}</text> -->
                                 <view class="tag-row ui-tag-list" wx:if="{{item.skillTags.length > 0}}">
                                     <view class="tag-chip ui-tag" wx:for="{{item.skillTags}}" wx:key="*this">
                                         <text>{{item}}</text>
