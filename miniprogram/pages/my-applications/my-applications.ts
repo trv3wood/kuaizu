@@ -3,6 +3,7 @@ import { applicationApi } from '../../api/index'
 import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
 import { buildProjectDetailUrl } from '../../utils/detail-display-strategy'
+import { ApplicationStatus as ApplicationStatusEnum } from '../../utils/enum'
 import ASSETS from '../../assets/urls'
 
 type ProjectApplicationVO = components['schemas']['ProjectApplicationVO']
@@ -13,6 +14,7 @@ Page({
 
     data: {
         assets: ASSETS,
+        applicationStatusEnum: ApplicationStatusEnum,
         // 申请列表（由behavior管理）
         applications: [] as ProjectApplicationVO[],
 
@@ -22,9 +24,9 @@ Page({
         // 状态标签
         statusTabs: [
             { value: null, label: '全部' },
-            { value: 0, label: '待审核' },
-            { value: 1, label: '已通过' },
-            { value: 2, label: '已拒绝' }
+            { value: ApplicationStatusEnum.Pending, label: '待审核' },
+            { value: ApplicationStatusEnum.Approved, label: '已通过' },
+            { value: ApplicationStatusEnum.Rejected, label: '已拒绝' }
         ]
     },
 
@@ -80,9 +82,13 @@ Page({
      * 查看项目详情
      */
     handleViewProject(e: WechatMiniprogram.TouchEvent) {
-        const { projectId } = e.currentTarget.dataset
+        const { projectId, applicationStatus } = e.currentTarget.dataset
         if (projectId) {
-            wx.navigateTo({ url: buildProjectDetailUrl(Number(projectId)) })
+            const scene = Number(applicationStatus) === ApplicationStatusEnum.Approved
+                ? 'olive-branch-contact'
+                : 'default'
+
+            wx.navigateTo({ url: buildProjectDetailUrl(Number(projectId), scene) })
         }
     }
 })

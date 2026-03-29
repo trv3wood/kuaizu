@@ -14,7 +14,7 @@
   <view class="application-list" wx:elif="{{applications.length > 0}}">
     <view class="application-card" wx:for="{{applications}}" wx:key="id">
       <!-- 项目信息 -->
-      <view class="project-info" data-project-id="{{item.projectId}}" bindtap="handleViewProject">
+      <view class="project-info" data-project-id="{{item.projectId}}" data-application-status="{{item.status}}" bindtap="handleViewProject">
         <image class="project-icon" src="{{assets.COMMON.MY_PROJECT_ICON}}" mode="aspectFit" />
         <text class="project-name">{{item.projectName || '未知项目'}}</text>
         <van-icon name="arrow" size="14px" color="#c8ccd4" />
@@ -22,16 +22,16 @@
       <view class="card-footer">
         <!-- 申请状态 -->
         <view class="status-row">
-          <text class="status-text status-text--pending" wx:if="{{item.status === 0}}">待审核</text>
-          <text class="status-text status-text--success" wx:elif="{{item.status === 1}}">已通过</text>
-          <text class="status-text status-text--danger" wx:elif="{{item.status === 2}}">被拒绝</text>
+          <text class="status-text status-text--pending" wx:if="{{item.status === applicationStatusEnum.Pending}}">待审核</text>
+          <text class="status-text status-text--success" wx:elif="{{item.status === applicationStatusEnum.Approved}}">已通过</text>
+          <text class="status-text status-text--danger" wx:elif="{{item.status === applicationStatusEnum.Rejected}}">被拒绝</text>
           <text class="status-text status-text--default" wx:else>未知</text>
           <text class="apply-time">{{item.appliedAt}}</text>
         </view>
-        <text class="approved-hint" wx:if="{{item.status === 1 && item.contact}}">项目联系方式可点击查看</text>
+        <text class="approved-hint" wx:if="{{item.status === applicationStatusEnum.Approved && item.contact}}">项目联系方式可点击查看</text>
       </view>
       <!-- 联系方式（已通过时显示） -->
-      <view class="contact-info" wx:if="{{item.status === 1 && item.contact}}">
+      <view class="contact-info" wx:if="{{item.status === applicationStatusEnum.Approved && item.contact}}">
         <view class="contact-icon-shell">
           <van-icon name="phone-o" size="14px" color="#0cc160" />
         </view>
