@@ -1,58 +1,53 @@
 <!-- pages/my-applications/my-applications.wxml -->
 <view class="my-applications-container">
-    <!-- 状态筛选标签 -->
-    <view class="status-tabs">
-        <view wx:for="{{statusTabs}}" wx:key="value" class="tab-item {{currentStatus === item.value ? 'active' : ''}}" data-value="{{item.value}}" bindtap="handleStatusChange">
-            {{item.label}}
-        </view>
+  <!-- 状态筛选标签 -->
+  <view class="status-tabs">
+    <view wx:for="{{statusTabs}}" wx:key="value" class="tab-item {{currentStatus === item.value ? 'active' : ''}}" data-value="{{item.value}}" bindtap="handleStatusChange">
+      {{item.label}}
     </view>
-    <!-- 加载中 -->
-    <view class="loading-container" wx:if="{{listLoading}}">
-        <van-loading size="24px">加载中...</van-loading>
-    </view>
-    <!-- 申请列表 -->
-    <view class="application-list" wx:elif="{{applications.length > 0}}">
-        <view class="application-card ui-card ui-card--lg ui-card--shadow-sm" wx:for="{{applications}}" wx:key="id">
-            <!-- 项目信息 -->
-            <view class="project-info ui-card ui-card--soft ui-card--md ui-card--button" data-project-id="{{item.projectId}}" bindtap="handleViewProject">
-                <van-icon name="orders-o" size="18px" color="#667eea" />
-                <text class="project-name">{{item.projectName || '未知项目'}}</text>
-                <van-icon name="arrow" size="12px" color="#999" />
-            </view>
-            <!-- 申请状态 -->
-            <view class="status-row">
-                <van-tag wx:if="{{item.status === 0}}" type="warning" plain>待审核</van-tag>
-                <van-tag wx:elif="{{item.status === 1}}" type="success">已通过</van-tag>
-                <van-tag wx:elif="{{item.status === 2}}" type="danger">已拒绝</van-tag>
-                <van-tag wx:else type="default">未知</van-tag>
-                <text class="apply-time">{{item.appliedAt}}</text>
-            </view>
-            <!-- 申请理由 -->
-            <view class="apply-reason ui-card ui-card--soft ui-card--md" wx:if="{{item.applyReason}}">
-                <text class="label">申请理由：</text>
-                <text class="content">{{item.applyReason}}</text>
-            </view>
-            <!-- 队长回复 -->
-            <view class="reply-msg ui-card ui-card--soft ui-card--md" wx:if="{{item.replyMsg}}">
-                <text class="label">队长回复：</text>
-                <text class="content">{{item.replyMsg}}</text>
-            </view>
-            <!-- 联系方式（已通过时显示） -->
-            <view class="contact-info" wx:if="{{item.status === 1 && item.contact}}">
-                <van-icon name="phone-o" size="14px" color="#667eea" />
-                <text class="contact-text">{{item.contact}}</text>
-            </view>
+  </view>
+  <!-- 加载中 -->
+  <view class="loading-container" wx:if="{{listLoading}}">
+    <van-loading size="24px">加载中...</van-loading>
+  </view>
+  <!-- 申请列表 -->
+  <view class="application-list" wx:elif="{{applications.length > 0}}">
+    <view class="application-card" wx:for="{{applications}}" wx:key="id">
+      <!-- 项目信息 -->
+      <view class="project-info" data-project-id="{{item.projectId}}" bindtap="handleViewProject">
+        <image class="project-icon" src="{{assets.COMMON.MY_PROJECT_ICON}}" mode="aspectFit" />
+        <text class="project-name">{{item.projectName || '未知项目'}}</text>
+        <van-icon name="arrow" size="14px" color="#c8ccd4" />
+      </view>
+      <view class="card-footer">
+        <!-- 申请状态 -->
+        <view class="status-row">
+          <text class="status-text status-text--pending" wx:if="{{item.status === 0}}">待审核</text>
+          <text class="status-text status-text--success" wx:elif="{{item.status === 1}}">已通过</text>
+          <text class="status-text status-text--danger" wx:elif="{{item.status === 2}}">被拒绝</text>
+          <text class="status-text status-text--default" wx:else>未知</text>
+          <text class="apply-time">{{item.appliedAt}}</text>
         </view>
-        <!-- 加载更多 -->
-        <view class="load-more" wx:if="{{listLoadingMore}}">
-            <van-loading size="20px">加载中...</van-loading>
+        <text class="approved-hint" wx:if="{{item.status === 1 && item.contact}}">项目联系方式可点击查看</text>
+      </view>
+      <!-- 联系方式（已通过时显示） -->
+      <view class="contact-info" wx:if="{{item.status === 1 && item.contact}}">
+        <view class="contact-icon-shell">
+          <van-icon name="phone-o" size="14px" color="#0cc160" />
         </view>
-        <view class="no-more" wx:elif="{{!listHasMore}}">
-            <text>没有更多了</text>
-        </view>
+        <text class="contact-text">{{item.contact}}</text>
+      </view>
     </view>
-    <!-- 空状态 -->
-    <view class="empty-container" wx:else>
-        <van-empty description="暂无申请记录" />
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{listLoadingMore}}">
+      <van-loading size="20px">加载中...</van-loading>
     </view>
+    <view class="no-more" wx:elif="{{!listHasMore}}">
+      <text>没有更多了</text>
+    </view>
+  </view>
+  <!-- 空状态 -->
+  <view class="empty-container" wx:else>
+    <van-empty description="暂无申请记录" />
+  </view>
 </view>

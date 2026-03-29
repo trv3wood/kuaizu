@@ -1,14 +1,20 @@
 /* pages/my-applications/my-applications.wxss */
+.my-applications-container {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #f7f8fc 0%, #f2f4fa 100%);
+}
+
 /* 状态筛选标签 */
 .status-tabs {
     display: flex;
-    background: var(--card-bg);
-    padding: 20rpx 30rpx;
-    gap: 16rpx;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 22rpx 22rpx 24rpx;
+    gap: 8rpx;
     position: sticky;
     top: 0;
     z-index: 10;
-    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+    box-shadow: 0 8rpx 24rpx rgba(20, 27, 45, 0.06);
+    backdrop-filter: blur(12rpx);
 }
 
 .tab-item {
@@ -16,16 +22,18 @@
     text-align: center;
     padding: 16rpx 0;
     font-size: 28rpx;
-    color: var(--text-gray);
-    background: var(--card-bg);
-    border-radius: 40rpx;
-    transition: all 0.3s ease;
+    line-height: 1.2;
+    color: #8f949d;
+    background: transparent;
+    border-radius: 999rpx;
+    font-weight: 500;
 }
 
 .tab-item.active {
     color: #ffffff;
-    background: var(--primary-color);
-    font-weight: 500;
+    background: linear-gradient(135deg, #6db8ff 0%, #4aa8ff 100%);
+    box-shadow: 0 10rpx 20rpx rgba(74, 168, 255, 0.26);
+    font-weight: 700;
 }
 
 /* 加载状态 */
@@ -38,80 +46,152 @@
 
 /* 申请列表 */
 .application-list {
-    padding: 30rpx;
+    padding: 28rpx 20rpx calc(36rpx + env(safe-area-inset-bottom));
 }
 
 .application-card {
-    padding: 40rpx;
-    margin-bottom: 30rpx;
+    padding: 20rpx;
+    margin-bottom: 28rpx;
+    border-radius: 32rpx;
+    background: #ffffff;
+    box-shadow: 0 10rpx 22rpx rgba(0, 0, 0, 0.12);
 }
 
 /* 项目信息 */
 .project-info {
-    gap: 12rpx;
-    padding: 20rpx 30rpx;
-    margin-bottom: 20rpx;
+    display: flex;
+    align-items: center;
+    gap: 16rpx;
+    padding: 24rpx 22rpx;
+    border-radius: 28rpx;
+    background: linear-gradient(180deg, #f8f9fe 0%, #f3f5fb 100%);
+}
+
+.project-icon {
+    width: 50rpx;
+    height: 50rpx;
 }
 
 .project-name {
     flex: 1;
     font-size: 32rpx;
-    color: var(--text-main);
-    font-weight: 500;
+    line-height: 1.35;
+    color: #111111;
+    font-weight: 700;
+    word-break: break-word;
+}
+
+.card-footer {
+    margin-top: 18rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16rpx;
 }
 
 /* 状态行 */
 .status-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20rpx;
+    gap: 12rpx;
+    min-width: 0;
+}
+
+.status-text {
+    font-size: 24rpx;
+    line-height: 1.2;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.status-text--pending {
+    color: #ffb759;
+}
+
+.status-text--success {
+    color: #0cc160;
+}
+
+.status-text--danger {
+    color: #d81e06;
+}
+
+.status-text--default {
+    color: #9aa1ac;
 }
 
 .apply-time {
     font-size: 24rpx;
-    color: var(--text-gray);
+    color: #b0b5bf;
+    min-width: 0;
+}
+
+.approved-hint {
+    font-size: 24rpx;
+    line-height: 1.3;
+    color: #0cc160;
+    font-weight: 700;
+    text-align: right;
 }
 
 /* 申请理由 */
-.apply-reason,
-.reply-msg {
-    padding: 20rpx 30rpx;
-    margin-bottom: 16rpx;
+.detail-block {
+    margin-top: 18rpx;
+    padding: 20rpx 22rpx;
+    border-radius: 24rpx;
+    background: #f7f8fc;
 }
 
-.apply-reason .label,
-.reply-msg .label {
+.detail-block--reply {
+    background: linear-gradient(180deg, #f7fbff 0%, #eef5ff 100%);
+}
+
+.detail-label {
+    display: block;
+    margin-bottom: 10rpx;
+    font-size: 24rpx;
+    line-height: 1.2;
+    color: #7d8694;
+    font-weight: 700;
+}
+
+.detail-content {
+    display: block;
     font-size: 28rpx;
-    color: var(--text-gray);
-    margin-right: 8rpx;
-}
-
-.apply-reason .content,
-.reply-msg .content {
-    font-size: 28rpx;
-    color: var(--text-main);
-    line-height: 1.6;
-}
-
-.reply-msg {
-    border-left: 4rpx solid var(--primary-color);
+    line-height: 1.65;
+    color: #222222;
+    word-break: break-word;
 }
 
 /* 联系方式 */
 .contact-info {
     display: flex;
     align-items: center;
-    gap: 8rpx;
-    padding: 16rpx 20rpx;
-    background: var(--bg-soft-blue);
-    border-radius: var(--radius-sm);
+    gap: 12rpx;
+    margin-top: 18rpx;
+    padding: 18rpx 20rpx;
+    background: linear-gradient(180deg, #f3fff7 0%, #ebfff2 100%);
+    border-radius: 24rpx;
+}
+
+.contact-icon-shell {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    background: rgba(12, 193, 96, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .contact-text {
-    font-size: 32rpx;
-    color: var(--primary-color);
-    font-weight: 500;
+    min-width: 0;
+    font-size: 28rpx;
+    line-height: 1.5;
+    color: #0aa855;
+    font-weight: 600;
+    word-break: break-all;
 }
 
 /* 加载更多 */
@@ -124,7 +204,7 @@
 
 .no-more text {
     font-size: 28rpx;
-    color: var(--text-gray);
+    color: #97a0ad;
 }
 
 /* 空状态 */
@@ -132,5 +212,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 120rpx 0;
+    padding: 140rpx 0;
 }

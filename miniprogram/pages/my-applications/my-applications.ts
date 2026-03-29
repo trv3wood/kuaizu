@@ -3,6 +3,7 @@ import { applicationApi } from '../../api/index'
 import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagination'
 import type { components } from '../../api/schema'
 import { buildProjectDetailUrl } from '../../utils/detail-display-strategy'
+import ASSETS from '../../assets/urls'
 
 type ProjectApplicationVO = components['schemas']['ProjectApplicationVO']
 type ApplicationStatus = components['schemas']['ApplicationStatus']
@@ -11,6 +12,7 @@ Page({
     behaviors: [listPaginationBehavior],
 
     data: {
+        assets: ASSETS,
         // 申请列表（由behavior管理）
         applications: [] as ProjectApplicationVO[],
 
