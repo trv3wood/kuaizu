@@ -47,7 +47,7 @@
           </view>
           <block wx:elif="{{applications.length > 0}}">
             <view class="applicant-card ui-card ui-card--xl" wx:for="{{applications}}" wx:for-item="app" wx:key="id">
-              <!-- 邮件推广转化标识 -->
+              <!-- 邮件推广转化标识 TODO -->
               <view class="promotion-source" wx:if="{{app.fromPromotion}}">邮件推广转化</view>
               <view class="applicant-main" bindtap="handleAvatarTap" data-id="{{app.talentProfile.id}}" data-user-id="{{app.applicant.id}}">
                 <view class="applicant-left">

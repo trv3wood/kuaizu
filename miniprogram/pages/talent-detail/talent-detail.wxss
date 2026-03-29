@@ -104,47 +104,37 @@
     padding: 0 21rpx;
 }
 
-.public-contact-list {
+.public-contact-row {
     display: flex;
-    flex-direction: column;
     gap: 16rpx;
+    margin-bottom: 24rpx;
+    padding: 0 6rpx;
+    flex-wrap: wrap;
 }
 
-.public-contact-item {
+.contact-pill {
+    min-width: 0;
+    flex: 1 1 200rpx;
+    height: 88rpx;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20rpx;
-    padding: 24rpx 20rpx;
-    border-radius: 28rpx;
-    background: linear-gradient(180deg, #f7fbff 0%, #edf5ff 100%);
+    justify-content: center;
+    gap: 12rpx;
+    padding: 0 24rpx;
+    background: linear-gradient(135deg, #8fc1ff 0%, #6fa6f5 100%);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 8rpx 16rpx rgba(111, 166, 245, 0.22);
+    box-sizing: border-box;
 }
 
-.public-contact-main {
-    flex: 1;
+.contact-pill-text {
     min-width: 0;
-    display: flex;
-    align-items: center;
-    gap: 14rpx;
-}
-
-.public-contact-label {
-    flex-shrink: 0;
-    font-size: 26rpx;
-    line-height: 1.4;
-    color: #4f6f96;
-    font-weight: 700;
-}
-
-.public-contact-value {
-    min-width: 0;
-    font-size: 27rpx;
-    line-height: 1.5;
-    color: #111111;
+    font-size: 24rpx;
     font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .section-card {

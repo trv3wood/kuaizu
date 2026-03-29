@@ -269,13 +269,10 @@ Page({
       return
     }
 
-    const talentId = id === undefined || id === null || id === '' ? undefined : Number(id)
-    const targetUserId = userId === undefined || userId === null || userId === '' ? undefined : Number(userId)
-
     wx.navigateTo({
       url: buildTalentDetailUrl({
-        id: talentId,
-        userId: targetUserId,
+        id: id || 0,
+        userId,
         scene: 'project-application-review'
       })
     })

@@ -305,9 +305,9 @@ Page({
         const mbti = (profile.mbti || '').toUpperCase()
         const gradeLabel = (profile as any).gradeText || (profile as any).gradeLabel || ''
         const publicContacts: PublicContactItem[] = [
-            { type: 'phone', label: '电话', value: (profile as any).phone || '', icon: 'phone-o' },
-            { type: 'email', label: '邮箱', value: (profile as any).email || '', icon: 'envelop-o' },
-            { type: 'wechat', label: '微信', value: (profile as any).wechat || '', icon: 'chat-o' }
+            { type: 'phone', label: '电话', value: profile.phone || '', icon: 'phone-o' },
+            { type: 'email', label: '邮箱', value: profile.email || '', icon: 'envelop-o' },
+            { type: 'wechat', label: '微信', value: profile.wechat || '', icon: 'chat-o' }
         ].filter((item) => !!item.value)
 
         return {

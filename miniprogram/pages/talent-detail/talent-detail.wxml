@@ -46,28 +46,17 @@
             </view>
 
             <view class="content-sections">
-                <view class="section-card ui-card ui-card--xl ui-card--shadow-md" wx:if="{{viewStrategy.showPublicContact && profile.publicContacts.length}}">
-                    <view class="section-title-row">
-                        <view class="title-accent"></view>
-                        <text class="section-title">联系方式</text>
-                    </view>
-
-                    <view class="public-contact-list">
-                        <view
-                            class="public-contact-item"
-                            wx:for="{{profile.publicContacts}}"
-                            wx:key="type"
-                            data-value="{{item.value}}"
-                            data-label="{{item.label}}"
-                            bindtap="handleContactTap"
-                        >
-                            <view class="public-contact-main">
-                                <van-icon name="{{item.icon}}" size="18px" color="#559dfc" />
-                                <text class="public-contact-label">{{item.label}}</text>
-                                <text class="public-contact-value">{{item.value}}</text>
-                            </view>
-                            <van-icon name="arrow" size="14px" color="#b6bdc7" />
-                        </view>
+                <view class="public-contact-row" wx:if="{{viewStrategy.showPublicContact && profile.publicContacts.length}}">
+                    <view
+                        class="contact-pill"
+                        wx:for="{{profile.publicContacts}}"
+                        wx:key="type"
+                        data-value="{{item.value}}"
+                        data-label="{{item.label}}"
+                        bindtap="handleContactTap"
+                    >
+                        <van-icon name="{{item.icon}}" size="20px" color="#ffffff" />
+                        <text class="contact-pill-text">{{item.value}}</text>
                     </view>
                 </view>
 
