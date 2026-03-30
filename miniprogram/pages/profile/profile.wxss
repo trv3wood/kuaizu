@@ -87,18 +87,6 @@
   font-family: 'PingFang SC', sans-serif;
 }
 
-.badge-icon {
-  width: 70rpx;
-  height: 70rpx;
-  flex-shrink: 0;
-}
-
-.badge-icon-success {
-  width: 40rpx;
-  height: 40rpx;
-  flex-shrink: 0;
-}
-
 .school-text {
   display: flex;
   flex-direction: column;

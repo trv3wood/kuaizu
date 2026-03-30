@@ -41,10 +41,7 @@
               <view class="header-left">
                 <view class="name-row">
                   <text class="name">{{displayName}}</text>
-                  <view class="verify-tag {{isVerified ? 'verified' : ''}}">
-                    <van-icon wx:if="{{isVerified}}" name="passed" color="#3e84fa" size="16px" />
-                    <text wx:else class="unverified-text">未认证</text>
-                  </view>
+                  <auth-badge isVerified="{{isVerified}}" size="compact" />
                 </view>
                 <view class="school-row">
                   <view class="divider-line"></view>

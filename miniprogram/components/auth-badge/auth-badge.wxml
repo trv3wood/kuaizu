@@ -1,0 +1,13 @@
+<image
+  wx:if="{{resolvedVerified}}"
+  class="auth-badge auth-badge--verified auth-badge--{{size}}"
+  src="{{assets.PROFILE.VERIFIED_SUCCESS}}"
+  mode="aspectFit"
+/>
+<image
+  wx:else
+  class="auth-badge auth-badge--unverified auth-badge--{{size}} {{clickable ? 'auth-badge--clickable' : ''}}"
+  src="{{assets.PROFILE.UNVERIFIED}}"
+  mode="aspectFit"
+  bindtap="handleTap"
+/>

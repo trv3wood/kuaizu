@@ -59,7 +59,7 @@
                 <view class="applicant-info">
                   <view class="applicant-name-row">
                     <text class="applicant-name">{{app.applicant.nickname}}</text>
-                    <van-icon name="passed" color="#3e84fa" size="12px" wx:if="{{app.talentProfile.isVerified}}" />
+                    <auth-badge authStatus="{{app.applicant.authStatus}}" size="tiny" />
                     <view class="mbti-tag ui-tag ui-tag--pill ui-tag--amber" wx:if="{{app.talentProfile.mbti}}">
                       {{app.talentProfile.mbti}}
                     </view>

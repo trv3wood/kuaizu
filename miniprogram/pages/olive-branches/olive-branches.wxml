@@ -79,13 +79,13 @@
                             </view>
 
                             <view class="profile-body">
-                                <view class="profile-headline">
-                                    <view class="name-wrap">
-                                        <text class="profile-name">{{item.displayName}}</text>
-                                        <van-icon wx:if="{{item.isVerified}}" name="passed" size="12px" color="#3494ff" />
+                                    <view class="profile-headline">
+                                        <view class="name-wrap">
+                                            <text class="profile-name">{{item.displayName}}</text>
+                                            <auth-badge authStatus="{{item.counterpart.authStatus}}" size="tiny" />
+                                        </view>
+                                        <text class="mbti-label" style="color: {{item.mbtiColor}};">{{item.mbtiLabel}}</text>
                                     </view>
-                                    <text class="mbti-label" style="color: {{item.mbtiColor}};">{{item.mbtiLabel}}</text>
-                                </view>
 
                                 <!-- <text class="profile-school">{{item.schoolLabel}}</text>
                                 <text class="profile-major">{{item.majorLabel}}</text> -->

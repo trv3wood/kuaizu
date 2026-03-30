@@ -18,8 +18,7 @@
       <view class="user-info">
         <view class="name-row">
           <text class="name">{{displayName}}</text>
-          <image wx:if="{{isVerified}}" class="badge-icon-success" src="{{assets.PROFILE.VERIFIED_SUCCESS}}" mode="aspectFit" />
-          <image wx:else class="badge-icon" src="{{assets.PROFILE.UNVERIFIED}}" mode="aspectFit" bindtap="handleVerify" />
+          <auth-badge isVerified="{{isVerified}}" clickable="{{true}}" bind:tap="handleVerify" />
         </view>
         <view class="school-text" wx:if="{{user}}">
           <text>{{user.school.schoolName}}</text>
