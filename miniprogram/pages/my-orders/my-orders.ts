@@ -2,11 +2,13 @@
 import { orderApi } from '../../api/index'
 import { getOrderStatusText } from '../../utils/util'
 import type { components } from '../../api/schema'
+import { OrderStatus } from '../../utils/enum'
 
 type OrderVO = components['schemas']['OrderVO']
 
 Page({
     data: {
+        orderStatusEnum: OrderStatus,
         // 订单列表
         orders: [] as OrderVO[],
         // 加载状态
@@ -20,9 +22,9 @@ Page({
         activeTab: 0,  // 0-全部 1-待支付 2-已支付 3-已取消
         tabs: [
             { name: '全部', status: undefined as number | undefined },
-            { name: '待支付', status: 0 },
-            { name: '已支付', status: 1 },
-            { name: '已取消', status: 2 }
+            { name: '待支付', status: OrderStatus.PendingPayment },
+            { name: '已支付', status: OrderStatus.Paid },
+            { name: '已取消', status: OrderStatus.Canceled }
         ]
     },
 

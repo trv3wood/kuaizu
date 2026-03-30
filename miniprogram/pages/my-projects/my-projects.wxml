@@ -21,9 +21,9 @@
         <view class="project-card ui-card ui-card--xl" bindtap="toggleApplications" data-id="{{item.id}}">
           <view class="card-header-row">
             <view class="project-status">
-              <view class="status-dot {{item.status === 1 ? 'active' : ''}}"></view>
+              <view class="status-dot {{item.status === projectStatusEnum.Approved ? 'active' : ''}}"></view>
               <text class="status-text">
-                {{item.status === 1 ? '进行中' : (item.status === 0 ? '待审核' : '已关闭')}}
+                {{item.status === projectStatusEnum.Approved ? '进行中' : (item.status === projectStatusEnum.UnderReview ? '待审核' : '已关闭')}}
               </text>
             </view>
             <van-icon name="edit" size="20px" catchtap="handleEditProject" data-id="{{item.id}}" class="edit-btn" />
@@ -77,12 +77,12 @@
               <view class="applicant-actions">
                 <view class="divider"></view>
                 <view class="action-buttons">
-                  <block wx:if="{{app.status === 0}}">
+                  <block wx:if="{{app.status === applicationStatusEnum.Pending}}">
                     <van-icon name="close" size="28px" color="#ee0a24" catchtap="handleReject" data-app="{{app}}" />
                     <van-icon name="checked" size="28px" color="#35e08e" catchtap="handleApprove" data-app="{{app}}" />
                   </block>
-                  <view wx:else class="status-pill ui-pill ui-pill--status {{app.status === 1 ? 'passed' : 'rejected'}}">
-                    {{app.status === 1 ? '已通过' : '已拒绝'}}
+                  <view wx:else class="status-pill ui-pill ui-pill--status {{app.status === applicationStatusEnum.Approved ? 'passed' : 'rejected'}}">
+                    {{app.status === applicationStatusEnum.Approved ? '已通过' : '已拒绝'}}
                   </view>
                 </view>
               </view>

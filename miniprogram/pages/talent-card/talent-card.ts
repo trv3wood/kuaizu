@@ -3,11 +3,13 @@ import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { userStore } from '../../stores/index'
 import { talentApi } from '../../api/index'
 import type { components } from '../../api/schema'
+import { TalentStatus } from '../../utils/enum'
 
 type TalentProfileDetailVO = components['schemas']['TalentProfileDetailVO']
 
 Page({
     data: {
+        talentStatusEnum: TalentStatus,
         profile: null as TalentProfileDetailVO | null,
         loading: true,
     },

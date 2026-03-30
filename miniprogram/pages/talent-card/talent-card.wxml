@@ -73,8 +73,8 @@
           </view>
         </view>
         <!-- 状态提示 -->
-        <view class="status-tip {{profile.status === 1 ? 'published' : ''}}">
-          <text>{{profile.status === 1 ? '名片已发布人才库' : '名片未发布人才库'}}</text>
+        <view class="status-tip {{profile.status === talentStatusEnum.OnShelf ? 'published' : ''}}">
+          <text>{{profile.status === talentStatusEnum.OnShelf ? '名片已发布人才库' : '名片未发布人才库'}}</text>
         </view>
       </view>
       <!-- 操作按钮 -->

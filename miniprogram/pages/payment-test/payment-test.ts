@@ -1,12 +1,14 @@
 // pages/payment-test/payment-test.ts
 import { productApi, orderApi } from '../../api/index'
 import type { components } from '../../api/schema'
+import { OrderStatus } from '../../utils/enum'
 
 type ProductVO = components['schemas']['ProductVO']
 type OrderVO = components['schemas']['OrderVO']
 
 Page({
     data: {
+        orderStatusEnum: OrderStatus,
         products: [] as ProductVO[],
         loading: true,
         selectedProduct: null as ProductVO | null,
@@ -121,7 +123,7 @@ Page({
             console.log('订单状态:', order)
             this.setData({ currentOrder: order })
 
-            if (order?.status === 1) {
+            if (order?.status === OrderStatus.Paid) {
                 wx.showModal({
                     title: '支付成功',
                     content: `订单 ${orderId} 已支付成功！`,

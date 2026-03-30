@@ -4,6 +4,7 @@ import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagina
 import type { components } from '../../api/schema'
 import Dialog from '@vant/weapp/dialog/dialog'
 import { buildTalentDetailUrl } from '../../utils/detail-display-strategy'
+import { ApplicationStatus, ProjectStatus } from '../../utils/enum'
 
 type ProjectVO = components['schemas']['ProjectVO']
 type ProjectApplicationVO = components['schemas']['ProjectApplicationVO']
@@ -13,6 +14,8 @@ Page({
   behaviors: [listPaginationBehavior],
 
   data: {
+    applicationStatusEnum: ApplicationStatus,
+    projectStatusEnum: ProjectStatus,
     // 项目列表（由behavior管理）
     projects: [] as ProjectVO[],
 
@@ -105,7 +108,7 @@ Page({
       })
 
       wx.showLoading({ title: '处理中...', mask: true })
-      await applicationApi.reviewApplication(app.id!, { status: 1 })
+      await applicationApi.reviewApplication(app.id!, { status: ApplicationStatus.Approved })
       wx.showToast({ title: '已通过', icon: 'success' })
       this.loadApplications(this.data.expandedProjectId!)
     } catch (error) {
@@ -129,7 +132,7 @@ Page({
       })
 
       wx.showLoading({ title: '处理中...', mask: true })
-      await applicationApi.reviewApplication(app.id!, { status: 2 })
+      await applicationApi.reviewApplication(app.id!, { status: ApplicationStatus.Rejected })
       wx.showToast({ title: '已拒绝', icon: 'success' })
       this.loadApplications(this.data.expandedProjectId!)
     } catch (error) {

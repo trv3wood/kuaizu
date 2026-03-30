@@ -3,6 +3,7 @@ import { listPaginationBehavior, ListResponse } from '../../behaviors/listPagina
 import type { components } from '../../api/schema'
 import { DEFAULT_MBTI_COLOR, MBTI_COLOR_MAP } from '../../utils/constants'
 import { buildProjectDetailUrl, buildTalentDetailUrl } from '../../utils/detail-display-strategy'
+import { AuthStatus, OliveBranchStatus as OliveBranchStatusEnum } from '../../utils/enum'
 
 type OliveBranchVO = components['schemas']['OliveBranchVO']
 type OliveBranchStatus = components['schemas']['OliveBranchStatus']
@@ -51,9 +52,9 @@ Page({
     currentStatus: null as OliveBranchStatus | null,
     statusTabs: [
       { value: null, label: '全部' },
-      { value: 0, label: '待处理' },
-      { value: 1, label: '已接受' },
-      { value: 2, label: '已拒绝' }
+      { value: OliveBranchStatusEnum.Pending, label: '待处理' },
+      { value: OliveBranchStatusEnum.Accepted, label: '已接受' },
+      { value: OliveBranchStatusEnum.Rejected, label: '已拒绝' }
     ],
     processingId: null as number | null,
     smsNotifiedMap: {} as Record<number, boolean>
@@ -167,7 +168,9 @@ Page({
         icon: 'success'
       })
 
-      const newStatus = (action === 'ACCEPT' ? 1 : 2) as OliveBranchStatus
+      const newStatus = (
+        action === 'ACCEPT' ? OliveBranchStatusEnum.Accepted : OliveBranchStatusEnum.Rejected
+      ) as OliveBranchStatus
       const branches = this.data.branches.map((item) => {
         if (item.id === id) {
           return this.formatBranchCard({ ...item, status: newStatus }, this.data.viewMode)
@@ -232,7 +235,7 @@ Page({
     const majorLabel = counterpart?.major?.majorName || '专业未填写'
     const schoolLabel = counterpart?.school?.schoolName || '学校未填写'
     const projectLabel = branch.projectName || '研发可快速部署的临时盲道解决方案'
-    const status = branch.status ?? 0
+    const status = branch.status ?? OliveBranchStatusEnum.Pending
     const skillTags = [gradeLabel]
 
     if (viewMode === 'sent' && schoolLabel && schoolLabel !== '学校未填写') {
@@ -259,22 +262,22 @@ Page({
       statusClass: statusMeta.className,
       statusDotClass: statusMeta.dotClassName,
       statusPillClass: statusMeta.pillClassName,
-      isPending: status === 0,
-      isAccepted: status === 1,
-      isRejected: status === 2,
-      isIgnored: status === 3,
+      isPending: status === OliveBranchStatusEnum.Pending,
+      isAccepted: status === OliveBranchStatusEnum.Accepted,
+      isRejected: status === OliveBranchStatusEnum.Rejected,
+      isIgnored: status === OliveBranchStatusEnum.Ignored,
       hasSmsNotice,
-      showSmsAction: viewMode === 'sent' && status === 0,
+      showSmsAction: viewMode === 'sent' && status === OliveBranchStatusEnum.Pending,
       smsActionText: hasSmsNotice ? '已短信通知' : '短信通知ta',
       skillTags: skillTags.slice(0, 4),
       mbtiLabel,
       mbtiColor: MBTI_COLOR_MAP[mbtiLabel] || DEFAULT_MBTI_COLOR,
-      isVerified: counterpart?.authStatus === 1
+      isVerified: counterpart?.authStatus === AuthStatus.Verified
     }
   },
 
   getStatusMeta(status: OliveBranchStatus, viewMode: BranchViewMode) {
-    if (status === 1) {
+    if (status === OliveBranchStatusEnum.Accepted) {
       return {
         text: viewMode === 'received' ? '已通过' : '已接受',
         className: 'status-accepted',
@@ -283,7 +286,7 @@ Page({
       }
     }
 
-    if (status === 2) {
+    if (status === OliveBranchStatusEnum.Rejected) {
       return {
         text: '已拒绝',
         className: 'status-rejected',
@@ -292,7 +295,7 @@ Page({
       }
     }
 
-    if (status === 3) {
+    if (status === OliveBranchStatusEnum.Ignored) {
       return {
         text: '已忽略',
         className: 'status-ignored',

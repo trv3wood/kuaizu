@@ -4,6 +4,7 @@ import { MsgBizKey } from '../../utils/constants'
 import { requestSubscription } from '../../utils/subscription'
 import { resolveProjectDetailStrategy } from '../../utils/detail-display-strategy'
 import type { components } from '../../api/schema'
+import { ProjectStatus } from '../../utils/enum'
 
 type ProjectDetailVO = components['schemas']['ProjectDetailVO']
 type PublicContactItem = {
@@ -15,6 +16,7 @@ type PublicContactItem = {
 
 Page({
   data: {
+    projectStatusEnum: ProjectStatus,
     id: 0,
     scene: 'default',
     project: null as ProjectDetailVO | null,

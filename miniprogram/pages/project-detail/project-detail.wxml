@@ -47,7 +47,7 @@
         </view>
 
         <!-- 底部操作区 -->
-        <view class="bottom-actions" wx:if="{{project.status === 1 && viewStrategy.showApplyAction}}">
+        <view class="bottom-actions" wx:if="{{project.status === projectStatusEnum.Approved && viewStrategy.showApplyAction}}">
             <!-- 投递名片按钮 -->
             <view class="deliver-btn ui-btn ui-btn--block ui-btn--pill ui-btn--lg ui-btn--primary-soft {{applying ? 'disabled' : ''}}" bindtap="handleApply">
                 {{applying ? '提交中...' : '投递名片'}}

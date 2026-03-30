@@ -43,9 +43,9 @@
         </view>
         <view class="info-row">
             <text class="label">状态:</text>
-            <van-tag wx:if="{{currentOrder.status === 0}}" type="warning">待支付</van-tag>
-            <van-tag wx:elif="{{currentOrder.status === 1}}" type="success">已支付</van-tag>
-            <van-tag wx:elif="{{currentOrder.status === 2}}" type="danger">已取消</van-tag>
+            <van-tag wx:if="{{currentOrder.status === orderStatusEnum.PendingPayment}}" type="warning">待支付</van-tag>
+            <van-tag wx:elif="{{currentOrder.status === orderStatusEnum.Paid}}" type="success">已支付</van-tag>
+            <van-tag wx:elif="{{currentOrder.status === orderStatusEnum.Canceled}}" type="danger">已取消</van-tag>
             <van-tag wx:else type="default">未知</van-tag>
         </view>
     </view>
