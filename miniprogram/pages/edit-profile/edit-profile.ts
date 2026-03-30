@@ -5,6 +5,7 @@ import { commonApi, talentApi } from '../../api/index'
 import { schoolPickerBehavior } from '../../behaviors/schoolPicker'
 import { majorPickerBehavior } from '../../behaviors/majorPicker'
 import type { components } from '../../api/schema'
+import { TalentStatus } from '../../utils/enum'
 
 type SchoolVO = components['schemas']['SchoolVO']
 
@@ -306,7 +307,7 @@ Page({
                     selfEvaluation: talentForm.selfEvaluation || '',
                     projectExperience: talentForm.projectExperience || '',
                     mbti: talentForm.mbti || this.data.mbtiArray.join(''),
-                    status: 1
+                    status: TalentStatus.OffShelf
                 })
             }
 

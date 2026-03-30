@@ -22,18 +22,22 @@
 
 /* ===== 加载中 ===== */
 .loading-container {
-  padding: 100rpx 0;
+  padding: 180rpx 0;
   display: flex;
   justify-content: center;
 }
 
+.hero-nav-row {
+  padding: 0 22rpx;
+}
+
 /* ===== 空状态 ===== */
 .empty-state {
-  padding-top: 60rpx;
+  padding-top: 40rpx;
 }
 
 .view-mode {
-  padding-top: 60rpx;
+  padding-top: 40rpx;
 }
 
 .empty-state .create-btn {
@@ -53,6 +57,14 @@
   color: rgba(0, 0, 0, 0.5);
   margin: 12rpx 0 60rpx;
   line-height: 36rpx;
+}
+
+.card-edit-hint {
+  margin: 0 0 34rpx;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.22);
 }
 
 /* ===== 人才卡片 ===== */
@@ -206,7 +218,11 @@
 }
 
 .status-tip.published {
-  color: #3e84fa;
+  color: #55c4a5;
+}
+
+.status-tip.reviewing {
+  color: #6f8ef6;
 }
 
 /* ===== 底部操作区 ===== */
@@ -237,4 +253,15 @@
 .primary-action {
   height: 114rpx;
   box-shadow: 0 8rpx 24rpx rgba(62, 132, 250, 0.3);
+}
+
+.primary-action.disabled {
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.primary-action--light {
+  background: #ffffff;
+  color: #111111;
+  box-shadow: 0 10rpx 28rpx rgba(0, 0, 0, 0.14);
 }

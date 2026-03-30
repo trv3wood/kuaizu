@@ -5,6 +5,7 @@ import { userApi } from '../../api/user'
 import { ASSETS } from '../../assets/urls'
 import { requestSubscription } from '../../utils/subscription'
 import { MsgBizKey } from '../../utils/constants'
+import { buildTalentCardUrl } from '../../utils/detail-display-strategy'
 
 Page({
   data: {
@@ -78,7 +79,7 @@ Page({
    * 跳转到名片页
    */
   handleBusinessCard() {
-    wx.navigateTo({ url: '/pages/talent-card/talent-card' })
+    wx.navigateTo({ url: buildTalentCardUrl() })
   },
 
   /**

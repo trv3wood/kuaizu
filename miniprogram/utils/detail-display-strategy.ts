@@ -8,11 +8,19 @@ type TalentDetailViewStrategy = {
   showPublicContact: boolean
 }
 
+type TalentCardViewStrategy = {
+  showSecondaryActions: boolean
+  showManageApplicationsAction: boolean
+  showShelfAction: boolean
+}
+
 export type ProjectDetailScene = 'default' | 'olive-branch-contact'
 export type TalentDetailScene = 'default' | 'project-application-review'
+export type TalentCardScene = 'default' | 'shelf-control'
 
 const DEFAULT_PROJECT_DETAIL_SCENE: ProjectDetailScene = 'default'
 const DEFAULT_TALENT_DETAIL_SCENE: TalentDetailScene = 'default'
+const DEFAULT_TALENT_CARD_SCENE: TalentCardScene = 'default'
 
 const PROJECT_DETAIL_STRATEGIES: Record<ProjectDetailScene, ProjectDetailViewStrategy> = {
   default: {
@@ -36,6 +44,19 @@ const TALENT_DETAIL_STRATEGIES: Record<TalentDetailScene, TalentDetailViewStrate
   }
 }
 
+const TALENT_CARD_STRATEGIES: Record<TalentCardScene, TalentCardViewStrategy> = {
+  default: {
+    showSecondaryActions: true,
+    showManageApplicationsAction: true,
+    showShelfAction: false
+  },
+  'shelf-control': {
+    showSecondaryActions: false,
+    showManageApplicationsAction: false,
+    showShelfAction: true
+  }
+}
+
 export function resolveProjectDetailStrategy(scene?: string) {
   const currentScene = scene && scene in PROJECT_DETAIL_STRATEGIES
     ? scene as ProjectDetailScene
@@ -55,6 +76,17 @@ export function resolveTalentDetailStrategy(scene?: string) {
   return {
     scene: currentScene,
     strategy: TALENT_DETAIL_STRATEGIES[currentScene]
+  }
+}
+
+export function resolveTalentCardStrategy(scene?: string) {
+  const currentScene = scene && scene in TALENT_CARD_STRATEGIES
+    ? scene as TalentCardScene
+    : DEFAULT_TALENT_CARD_SCENE
+
+  return {
+    scene: currentScene,
+    strategy: TALENT_CARD_STRATEGIES[currentScene]
   }
 }
 
@@ -95,4 +127,16 @@ export function buildTalentDetailUrl(options: BuildTalentDetailUrlOptions) {
   }
 
   return `/pages/talent-detail/talent-detail?${query.join('&')}`
+}
+
+export function buildTalentCardUrl(scene: TalentCardScene = DEFAULT_TALENT_CARD_SCENE) {
+  const query: string[] = []
+
+  if (scene !== DEFAULT_TALENT_CARD_SCENE) {
+    query.push(`scene=${scene}`)
+  }
+
+  return query.length > 0
+    ? `/pages/talent-card/talent-card?${query.join('&')}`
+    : '/pages/talent-card/talent-card'
 }

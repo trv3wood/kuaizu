@@ -28,7 +28,8 @@ export enum ApplicationStatus {
 
 export enum TalentStatus {
   OffShelf = 0,
-  OnShelf = 1
+  OnShelf = 1,
+  UnderReview = 2
 }
 
 export enum OrderStatus {

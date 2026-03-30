@@ -1,4 +1,5 @@
 import ASSETS from '../assets/urls';
+import { buildTalentCardUrl } from '../utils/detail-display-strategy'
 
 // custom-tab-bar/index.ts
 Component({
@@ -70,7 +71,7 @@ Component({
             if (name === '发布项目') {
                 wx.navigateTo({ url: '/pages/edit-project/edit-project' })
             } else if (name === '发布名片') {
-                wx.navigateTo({ url: '/pages/talent-card/talent-card' })
+                wx.navigateTo({ url: buildTalentCardUrl('shelf-control') })
             }
         }
     }

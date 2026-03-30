@@ -1,7 +1,5 @@
 {
-    "navigationBarTitleText": "",
-    "navigationBarBackgroundColor": "#c4f1ff",
-    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
     "usingComponents": {
         "van-icon": "@vant/weapp/icon/index",
         "van-loading": "@vant/weapp/loading/index"
